@@ -1,8 +1,12 @@
 package ladysnake.lightorbs.common.entities;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -20,11 +24,6 @@ public abstract class AbstractLightorb extends EntityCreature {
     }
 
     @Override
-    protected void entityInit() {
-
-    }
-
-    @Override
     public void onUpdate() {
         super.onUpdate();
     }
@@ -33,4 +32,29 @@ public abstract class AbstractLightorb extends EntityCreature {
         return false;
     }
 
+    @Override
+    public boolean hasNoGravity() {
+        return true;
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entityIn) {
+    }
+
+    @Override
+    protected void collideWithNearbyEntities() {
+    }
+
+    @Override
+    public void onCollideWithPlayer(EntityPlayer entityIn) {
+    }
+
+    @Override
+    public boolean doesEntityNotTriggerPressurePlate() {
+        return true;
+    }
 }

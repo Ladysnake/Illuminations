@@ -1,8 +1,7 @@
 package ladysnake.lightorbs.common.entities;
 
 import ladysnake.lightorbs.common.LightOrbs;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,15 +24,15 @@ public class EntityFirefly extends AbstractFlyingInsect {
     }
 
     public EntityFirefly(World worldIn, double x, double y, double z) {
-        super(worldIn);
-        this.scaleModifier = new Random().nextFloat();
-        this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
+        this(worldIn);
         this.setPosition(x, y, z);
     }
 
     public EntityFirefly(World worldIn) {
         super(worldIn);
-        this.scaleModifier = new Random().nextFloat();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.scaleModifier = 0.1F + new Random().nextFloat() * 0.9F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
     }
 
@@ -90,18 +89,6 @@ public class EntityFirefly extends AbstractFlyingInsect {
             motionY = (1 - weight) * ((0.9) * motionY + (0.1) * targetVector.y) + weight * targetVector.y;
             motionZ = (1 - weight) * ((0.9) * motionZ + (0.1) * targetVector.z) - weight * targetVector.x;
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    protected void spawnParticles() {
-        for (double i = 0; i < 9; i++) {
-            double coeff = i / 9.0;
-            LightOrbs.proxy.spawnParticle(getEntityWorld(),
-                    (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff), (float) (prevPosZ + (posZ - prevPosZ) * coeff),    //position
-                    0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f),    //motion
-                    255, 64, 16, 255,    //color
-                    2.0f, 24);
         }
     }
 
