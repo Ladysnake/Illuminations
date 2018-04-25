@@ -1,14 +1,17 @@
 package ladysnake.lightorbs.common.entities;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public abstract class EntityLightOrb extends Entity {
+import java.util.Random;
 
-    public EntityLightOrb(World worldIn) {
+public abstract class AbstractLightorb extends EntityCreature {
+
+    public AbstractLightorb(World worldIn) {
         super(worldIn);
-        this.setSize(1F, 1F);
+        this.setSize(0.5F, 0.5F);
         this.setNoGravity(true);
         this.rotationYaw = (float) (Math.random() * 360.0D);
         this.motionX = (Math.random() * 0.2 - 0.1) * 2.0F;
@@ -18,16 +21,6 @@ public abstract class EntityLightOrb extends Entity {
 
     @Override
     protected void entityInit() {
-
-    }
-
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
-
-    }
-
-    @Override
-    protected void writeEntityToNBT(NBTTagCompound compound) {
 
     }
 

@@ -1,6 +1,7 @@
 package ladysnake.lightorbs.client.renders.entities;
 
 import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.entities.EntityFirefly;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -10,7 +11,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 
@@ -39,6 +39,13 @@ public class RenderFirefly<T extends Entity> extends Render<T> {
             GlStateManager.rotate((float) (this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture(entity);
+            if (entity instanceof EntityFirefly) {
+                float scale = ((EntityFirefly) entity).getScaleModifier();
+                float color = ((EntityFirefly) entity).getColorModifier();
+                GlStateManager.scale(scale, scale, scale);
+                GlStateManager.color(1F, 1F, color);
+            }
+
 
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();

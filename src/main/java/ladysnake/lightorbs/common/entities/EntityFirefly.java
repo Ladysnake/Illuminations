@@ -10,15 +10,31 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
-public class EntityFirefly extends EntityFlyingInsect {
+public class EntityFirefly extends AbstractFlyingInsect {
+    protected float scaleModifier;
+    protected float colorModifier;
+
+    public float getScaleModifier() {
+        return scaleModifier;
+    }
+
+    public float getColorModifier() {
+        return colorModifier;
+    }
+
     public EntityFirefly(World worldIn, double x, double y, double z) {
         super(worldIn);
+        this.scaleModifier = new Random().nextFloat();
+        this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
         this.setPosition(x, y, z);
     }
 
     public EntityFirefly(World worldIn) {
         super(worldIn);
+        this.scaleModifier = new Random().nextFloat();
+        this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
     }
 
     protected BlockPos forcedTarget = BlockPos.ORIGIN;
@@ -50,7 +66,6 @@ public class EntityFirefly extends EntityFlyingInsect {
             this.outOfWorld();
 
         if (!this.world.isRemote && !this.isDead) {
-
             this.targetChangeCooldown -= (this.getPositionVector().squareDistanceTo(lastTickPosX, lastTickPosY, lastTickPosZ) < 0.0125) ? 10 : 1;
 
             // Change the target position regularly to simulate erratic movement

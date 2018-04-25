@@ -2,8 +2,8 @@ package ladysnake.lightorbs.common.entities;
 
 import net.minecraft.world.World;
 
-public abstract class EntityFlyingInsect extends EntityLightOrb {
-    public EntityFlyingInsect(World worldIn) {
+public abstract class AbstractFlyingInsect extends AbstractLightorb {
+    public AbstractFlyingInsect(World worldIn) {
         super(worldIn);
         this.setEntityInvulnerable(false);
         this.isImmuneToFire = false;
