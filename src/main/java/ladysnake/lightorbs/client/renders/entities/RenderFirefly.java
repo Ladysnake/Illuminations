@@ -11,10 +11,12 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
 
 public class RenderFirefly<T extends Entity> extends Render<T> {
+    float alpha = 1F;
 
     public RenderFirefly(RenderManager renderManager) {
         super(renderManager);
@@ -40,12 +42,17 @@ public class RenderFirefly<T extends Entity> extends Render<T> {
 
             this.bindEntityTexture(entity);
             if (entity instanceof EntityFirefly) {
+                boolean isNightTime = (entity.world.getWorldTime()%24000) >= 13000 && (entity.world.getWorldTime()%24000) < 23000;
+                // if night time, increase alpha, else decrease
+                if (isNightTime) this.alpha += 0.001; else this.alpha -= 0.001;
+                this.alpha = Math.min(Math.max(this.alpha, 0), 1);
                 float scale = ((EntityFirefly) entity).getScaleModifier();
                 float color = ((EntityFirefly) entity).getColorModifier();
                 GlStateManager.scale(scale, scale, scale);
-                GlStateManager.color(1F, 1F, color);
+                // if firefly can see sky, acquire group alpha
+                if (entity.world.canSeeSky(entity.getPosition())) GlStateManager.color(1F, 1F, color, this.alpha);
+                else GlStateManager.color(1F, 1F, color);
             }
-
 
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -78,5 +85,4 @@ public class RenderFirefly<T extends Entity> extends Render<T> {
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
         return new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly.png");
     }
-
 }

@@ -1,12 +1,12 @@
 package ladysnake.lightorbs.common.entities;
 
-import ladysnake.lightorbs.common.LightOrbs;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -30,13 +30,15 @@ public class EntityFirefly extends AbstractFlyingInsect {
 
     public EntityFirefly(World worldIn) {
         super(worldIn);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0F);
+        this.setHealth(1.0F);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.9F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
     }
 
     protected BlockPos forcedTarget = BlockPos.ORIGIN;
+    protected BlockPos lightTarget = null;
     protected double xTarget, yTarget, zTarget;
     protected int targetChangeCooldown = 0;
 
@@ -46,14 +48,32 @@ public class EntityFirefly extends AbstractFlyingInsect {
 
     protected void selectBlockTarget() {
         if(this.forcedTarget == BlockPos.ORIGIN) {
-            this.xTarget = this.posX + rand.nextGaussian() * 10;
-            this.yTarget = this.posY + rand.nextGaussian() * 10;
-            this.zTarget = this.posZ + rand.nextGaussian() * 10;
+            if (this.lightTarget == null) {
+                this.xTarget = this.posX + rand.nextGaussian() * 10;
+                this.yTarget = this.posY + rand.nextGaussian() * 10;
+                this.zTarget = this.posZ + rand.nextGaussian() * 10;
+                
+                if (this.world.getLight(this.getPosition(), true) > 5 && this.world.getLight(new BlockPos(this.xTarget, this.yTarget, this.zTarget), true) >= 8 && !this.world.isDaytime())
+                    this.lightTarget = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+
+            } else {
+                this.xTarget = this.lightTarget.getX() + rand.nextGaussian();
+                this.yTarget = this.lightTarget.getY() + rand.nextGaussian();
+                this.zTarget = this.lightTarget.getZ() + rand.nextGaussian();
+
+                BlockPos randBP = new BlockPos(this.posX + rand.nextGaussian() * 10, this.posY + rand.nextGaussian() * 10, this.posZ + rand.nextGaussian() * 10);
+                if (this.world.getLight(randBP, true) > this.world.getLight(this.lightTarget, true))
+                    this.lightTarget = randBP;
+
+                if (this.world.getLight(this.getPosition(), true) <= 5 || this.world.getLight(this.lightTarget, true) < 8 || this.world.isDaytime())
+                    this.lightTarget = null;
+            }
         } else {
-            this.xTarget = forcedTarget.getX() + 0.5;
+            this.xTarget = forcedTarget.getX() + rand.nextGaussian();
             this.yTarget = forcedTarget.getY() + rand.nextGaussian();
-            this.zTarget = forcedTarget.getZ() + 0.5;
+            this.zTarget = forcedTarget.getZ() + rand.nextGaussian();
         }
+
         targetChangeCooldown = rand.nextInt() % 200;
     }
 
@@ -100,6 +120,10 @@ public class EntityFirefly extends AbstractFlyingInsect {
     @Override
     public boolean isCreatureType(@Nonnull EnumCreatureType type, boolean forSpawnCount) {
         return type == EnumCreatureType.AMBIENT;
+    }
+
+    public void setForcedTarget(@Nonnull BlockPos target) {
+        this.forcedTarget = target;
     }
 
 }
