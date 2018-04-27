@@ -4,8 +4,11 @@ import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
 import ladysnake.lightorbs.common.Reference;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -26,11 +29,10 @@ public class ModEntities {
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityEntry> event) {
         IForgeRegistry<EntityEntry> reg = event.getRegistry();
-        registerEntity(reg, EntityFirefly::new, "firefly", 64, true);
-    }
-
-    private static void registerEntity(IForgeRegistry<EntityEntry> reg, Function<World, Entity> factory, String name, int trackingRange, boolean sendsVelocityUpdates) {
-        reg.register(createEntry(factory, name, trackingRange, sendsVelocityUpdates).build());
+        reg.register(createEntry(EntityFirefly::new, "firefly", 64, true)
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .build());
     }
 
     private static EntityEntryBuilder<Entity> createEntry(Function<World, Entity> entityFactory,
