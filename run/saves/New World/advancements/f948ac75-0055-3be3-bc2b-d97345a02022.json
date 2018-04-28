@@ -1,0 +1,17 @@
+{
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2018-04-28 00:45:00 +0200"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest": "2018-04-28 00:42:06 +0200",
+      "swampland": "2018-04-28 00:42:14 +0200",
+      "plains": "2018-04-28 00:41:36 +0200",
+      "river": "2018-04-28 00:44:31 +0200"
+    },
+    "done": false
+  }
+}

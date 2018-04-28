@@ -1,5 +1,6 @@
 package ladysnake.lightorbs.common.entities;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -43,7 +44,7 @@ public class EntityFirefly extends AbstractFlyingInsect {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0F);
         this.setHealth(1.0F);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
-        this.scaleModifier = 0.1F + new Random().nextFloat() * 0.9F;
+        this.scaleModifier = 0.1F + new Random().nextFloat() * 0.4F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
         this.alpha = 1F;
     }
@@ -64,7 +65,7 @@ public class EntityFirefly extends AbstractFlyingInsect {
                 this.yTarget = this.posY + rand.nextGaussian() * 10;
                 this.zTarget = this.posZ + rand.nextGaussian() * 10;
 
-                while (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial().isLiquid()) this.yTarget += 1;
+                while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR)) this.yTarget += 1;
 
                 if (this.world.getLight(this.getPosition(), true) > 8)
                     this.lightTarget = getRandomLitBlockAround();
@@ -161,7 +162,6 @@ public class EntityFirefly extends AbstractFlyingInsect {
             System.out.println(rand);
             for (int i = 0; i < rand; i++)
                 this.world.spawnEntity(new EntityFirefly(this.world, this.posX, this.posY, this.posZ));
-                System.out.println("Spawned");
                 return true;
         } else return false;
     }

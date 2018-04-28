@@ -1,8 +1,10 @@
 package ladysnake.lightorbs.common.init;
 
 import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
+import ladysnake.lightorbs.client.renders.entities.RenderPsiFirefly;
 import ladysnake.lightorbs.common.Reference;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
+import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -29,9 +31,15 @@ public class ModEntities {
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityEntry> event) {
         IForgeRegistry<EntityEntry> reg = event.getRegistry();
+
         reg.register(createEntry(EntityFirefly::new, "firefly", 64, true)
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .build());
+
+        reg.register(createEntry(EntityPsiFirefly::new, "psiFirefly", 64, true)
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.END))
                 .build());
     }
 
@@ -48,6 +56,7 @@ public class ModEntities {
     @SideOnly(Side.CLIENT)
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFirefly.class, RenderFirefly::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityPsiFirefly.class, RenderPsiFirefly::new);
     }
 
 }
