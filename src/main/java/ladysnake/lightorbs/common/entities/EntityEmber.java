@@ -1,9 +1,11 @@
 package ladysnake.lightorbs.common.entities;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -13,18 +15,9 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Random;
 
-public class EntityFirefly extends AbstractLightorb {
+public class EntityEmber extends AbstractLightorb {
     protected float scaleModifier;
     protected float colorModifier;
-    protected float alpha;
-
-    public float getAlpha() {
-        return alpha;
-    }
-
-    public void setAlpha(float alpha) {
-        this.alpha = alpha;
-    }
 
     public float getScaleModifier() {
         return scaleModifier;
@@ -34,19 +27,29 @@ public class EntityFirefly extends AbstractLightorb {
         return colorModifier;
     }
 
-    public EntityFirefly(World worldIn, double x, double y, double z) {
+    public EntityEmber(World worldIn, double x, double y, double z) {
         this(worldIn);
         this.setPosition(x, y, z);
     }
 
-    public EntityFirefly(World worldIn) {
+    public EntityEmber(World worldIn) {
         super(worldIn);
+        this.isImmuneToFire = true;
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0F);
         this.setHealth(1.0F);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.4F;
-        this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
-        this.alpha = 1F;
+        this.colorModifier = new Random().nextFloat() * 0.5F;
+    }
+
+    @Override
+    public void onCollideWithPlayer(EntityPlayer entityIn) {
+        entityIn.setFire(2);
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entityIn) {
+        entityIn.setFire(2);
     }
 
     protected BlockPos forcedTarget = BlockPos.ORIGIN;
@@ -60,29 +63,11 @@ public class EntityFirefly extends AbstractLightorb {
 
     protected void selectBlockTarget() {
         if (this.forcedTarget == BlockPos.ORIGIN) {
-            if (this.lightTarget == null) {
-                this.xTarget = this.posX + rand.nextGaussian() * 10;
-                this.yTarget = this.posY + rand.nextGaussian() * 10;
-                this.zTarget = this.posZ + rand.nextGaussian() * 10;
+            this.xTarget = this.posX + rand.nextGaussian() * 10;
+            this.yTarget = this.posY + rand.nextGaussian() * 10;
+            this.zTarget = this.posZ + rand.nextGaussian() * 10;
 
-                while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR)) this.yTarget += 1;
-
-                if (this.world.getLight(this.getPosition(), true) > 8)
-                    this.lightTarget = getRandomLitBlockAround();
-            } else {
-                this.xTarget = this.lightTarget.getX() + rand.nextGaussian();
-                this.yTarget = this.lightTarget.getY() + rand.nextGaussian();
-                this.zTarget = this.lightTarget.getZ() + rand.nextGaussian();
-
-                if (this.world.getLight(this.getPosition(), true) > 8) {
-                    BlockPos possibleTarget = getRandomLitBlockAround();
-                    if (this.world.getLight(possibleTarget, true) > this.world.getLight(this.lightTarget, true))
-                        this.lightTarget = possibleTarget;
-                }
-
-                if (this.world.getLight(this.getPosition(), true) <= 8 || this.world.isDaytime())
-                    this.lightTarget = null;
-            }
+            while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR)) this.yTarget += 1;
         } else {
             this.xTarget = forcedTarget.getX() + rand.nextGaussian();
             this.yTarget = forcedTarget.getY() + rand.nextGaussian();
@@ -126,7 +111,6 @@ public class EntityFirefly extends AbstractLightorb {
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 
             if (this.isInWater()) this.attackEntityFrom(DamageSource.DROWN, 1);
-            if (this.isInLava()) this.attackEntityFrom(DamageSource.LAVA, 1);
         }
     }
 
@@ -144,25 +128,12 @@ public class EntityFirefly extends AbstractLightorb {
         this.forcedTarget = target;
     }
 
-    public BlockPos getRandomLitBlockAround() {
-        HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
-        for (int i = 0; i < 15; i++) {
-            BlockPos randBP = new BlockPos(this.posX + rand.nextGaussian() * 10, this.posY + rand.nextGaussian() * 10, this.posZ + rand.nextGaussian() * 10);
-            randBlocks.put(randBP, this.world.getLight(randBP, true));
-        }
-        return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
-    }
-
     @Override
     public boolean getCanSpawnHere() {
-        // if night time and superior than sea level
-        // spawn additional fireflies for swarm effect, and avoid Minecraft spawn entity limit
-        if (!this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel()) {
-            int rand = new Random().nextInt(16)+10;
-            for (int i = 0; i < rand; i++)
-                this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
-                return true;
-        } else return false;
+        int rand = new Random().nextInt(16)+10;
+        for (int i = 0; i < rand; i++)
+            this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
+        return true;
     }
 
 }

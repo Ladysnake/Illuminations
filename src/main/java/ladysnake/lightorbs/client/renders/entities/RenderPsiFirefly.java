@@ -1,7 +1,7 @@
 package ladysnake.lightorbs.client.renders.entities;
 
 import ladysnake.lightorbs.common.Reference;
-import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
+import ladysnake.lightorbs.common.entities.EntityFirefly;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -38,11 +38,11 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
             GlStateManager.rotate((float) (this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture(entity);
-            if (entity instanceof EntityPsiFirefly) {
-                float scale = ((EntityPsiFirefly) entity).getScaleModifier();
-                float color = ((EntityPsiFirefly) entity).getColorModifier();
+            if (entity instanceof EntityFirefly) {
+                float scale = ((EntityFirefly) entity).getScaleModifier();
+                float color = ((EntityFirefly) entity).getColorModifier();
                 GlStateManager.scale(scale, scale, scale);
-                GlStateManager.color(color, 0F, 1F, ((EntityPsiFirefly) entity).getAlpha());
+                GlStateManager.color(color, 0F, 1F, ((EntityFirefly) entity).getAlpha());
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -59,7 +59,7 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
             tessellator.draw();
 
             this.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly_overlay.png"));
-            GlStateManager.color(1F, 1F, 1F, ((EntityPsiFirefly) entity).getAlpha());
+            GlStateManager.color(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, -0.25D, 0.0D).tex((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();

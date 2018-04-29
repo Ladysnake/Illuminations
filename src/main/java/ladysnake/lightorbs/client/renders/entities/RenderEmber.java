@@ -1,7 +1,7 @@
 package ladysnake.lightorbs.client.renders.entities;
 
 import ladysnake.lightorbs.common.Reference;
-import ladysnake.lightorbs.common.entities.EntityFirefly;
+import ladysnake.lightorbs.common.entities.EntityEmber;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class RenderFirefly<T extends Entity> extends Render<T> {
-    public RenderFirefly(RenderManager renderManager) {
+public class RenderEmber<T extends Entity> extends Render<T> {
+    public RenderEmber(RenderManager renderManager) {
         super(renderManager);
         this.shadowOpaque = 0;
     }
@@ -38,19 +38,11 @@ public class RenderFirefly<T extends Entity> extends Render<T> {
             GlStateManager.rotate((float) (this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture(entity);
-            if (entity instanceof EntityFirefly) {
-                boolean isNightTime = (entity.world.getWorldTime()%24000) >= 13000 && (entity.world.getWorldTime()%24000) < 23000;
-                float alpha = ((EntityFirefly) entity).getAlpha();
-
-                // if is day and firefly sees the sky, fade out, else fade in
-                if (!isNightTime && entity.world.canSeeSky(entity.getPosition()))
-                    alpha -= 0.01;
-                else alpha += 0.01;
-                float scale = ((EntityFirefly) entity).getScaleModifier();
-                float color = ((EntityFirefly) entity).getColorModifier();
-                ((EntityFirefly) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
+            if (entity instanceof EntityEmber) {
+                float scale = ((EntityEmber) entity).getScaleModifier();
+                float color = ((EntityEmber) entity).getColorModifier();
                 GlStateManager.scale(scale, scale, scale);
-                GlStateManager.color(color, 1F, 0F, ((EntityFirefly) entity).getAlpha());
+                GlStateManager.color(1F, color, 0F);
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -67,7 +59,7 @@ public class RenderFirefly<T extends Entity> extends Render<T> {
             tessellator.draw();
 
             this.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly_overlay.png"));
-            GlStateManager.color(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
+            GlStateManager.color(1F, 1F, 1F);
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, -0.25D, 0.0D).tex((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();

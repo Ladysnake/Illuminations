@@ -1,13 +1,14 @@
 package ladysnake.lightorbs.common.init;
 
+import ladysnake.lightorbs.client.renders.entities.RenderEmber;
 import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
 import ladysnake.lightorbs.client.renders.entities.RenderPsiFirefly;
 import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.entities.EntityEmber;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
@@ -41,6 +42,10 @@ public class ModEntities {
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.END))
                 .build());
+
+        reg.register(createEntry(EntityEmber::new, "ember", 64, true)
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
+                .build());
     }
 
     private static EntityEntryBuilder<Entity> createEntry(Function<World, Entity> entityFactory,
@@ -57,6 +62,7 @@ public class ModEntities {
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFirefly.class, RenderFirefly::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPsiFirefly.class, RenderPsiFirefly::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
     }
 
 }
