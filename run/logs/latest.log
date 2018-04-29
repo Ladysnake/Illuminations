@@ -1,114 +1,114 @@
-[01:33:21] [main/INFO] [GradleStart]: Extra: []
-[01:33:21] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/Cobra/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
-[01:33:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
-[01:33:21] [main/INFO] [FML]: Forge Mod Loader version 14.23.3.2655 for Minecraft 1.12.2 loading
-[01:33:21] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_161, running on Windows 10:amd64:10.0, installed at D:\Programmes\Java\jdk1.8.0_161\jre
-[01:33:21] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[01:33:21] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
-[01:33:21] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
-[01:33:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[01:33:21] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[01:33:21] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[01:33:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[01:33:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[01:33:24] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
-[01:33:24] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[01:33:24] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[01:33:24] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[01:33:24] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[01:33:24] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[01:33:24] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[01:33:25] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player197
-[01:33:31] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[01:33:31] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
-[01:33:33] [main/INFO] [FML]: -- System Details --
+[18:20:01] [main/INFO] [GradleStart]: Extra: []
+[18:20:01] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/Cobra/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[18:20:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:20:01] [main/INFO] [FML]: Forge Mod Loader version 14.23.3.2655 for Minecraft 1.12.2 loading
+[18:20:01] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_161, running on Windows 10:amd64:10.0, installed at D:\Programmes\Java\jdk1.8.0_161\jre
+[18:20:01] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[18:20:01] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[18:20:01] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[18:20:01] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[18:20:01] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[18:20:01] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[18:20:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:20:01] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[18:20:04] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[18:20:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[18:20:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[18:20:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[18:20:04] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[18:20:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[18:20:04] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[18:20:05] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player200
+[18:20:10] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[18:20:11] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
+[18:20:13] [main/INFO] [FML]: -- System Details --
 Details:
 	Minecraft Version: 1.12.2
 	Operating System: Windows 10 (amd64) version 10.0
 	Java Version: 1.8.0_161, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 364315328 bytes (347 MB) / 557318144 bytes (531 MB) up to 1883242496 bytes (1796 MB)
+	Memory: 365760512 bytes (348 MB) / 558366720 bytes (532 MB) up to 1883242496 bytes (1796 MB)
 	JVM Flags: 0 total; 
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
 	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 388.13' Renderer: 'GeForce GTX 980M/PCIe/SSE2'
-[01:33:33] [main/INFO] [FML]: MinecraftForge v14.23.3.2655 Initialized
-[01:33:33] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
-[01:33:33] [main/INFO] [FML]: Replaced 1036 ore ingredients
-[01:33:33] [main/INFO] [FML]: Found 0 mods from the command line. Injecting into mod discoverer
-[01:33:33] [main/INFO] [FML]: Searching C:\Users\Cobra\Desktop\Projects\LightOrbs\run\mods for mods
-[01:33:34] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
-[01:33:35] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 319200926 nanos
-[01:33:35] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, lightorbs] at CLIENT
-[01:33:35] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, lightorbs] at SERVER
-[01:33:36] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LightOrbs
-[01:33:37] [main/INFO] [FML]: Processing ObjectHolder annotations
-[01:33:37] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
-[01:33:37] [main/INFO] [FML]: Identifying ItemStackHolder annotations
-[01:33:37] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
-[01:33:37] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
-[01:33:37] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
-[01:33:37] [main/INFO] [FML]: Applying holder lookups
-[01:33:37] [main/INFO] [FML]: Holder lookups applied
-[01:33:37] [main/INFO] [FML]: Applying holder lookups
-[01:33:37] [main/INFO] [FML]: Holder lookups applied
-[01:33:37] [main/INFO] [FML]: Applying holder lookups
-[01:33:37] [main/INFO] [FML]: Holder lookups applied
-[01:33:37] [main/INFO] [FML]: Applying holder lookups
-[01:33:37] [main/INFO] [FML]: Holder lookups applied
-[01:33:37] [main/INFO] [FML]: Injecting itemstacks
-[01:33:37] [main/INFO] [FML]: Itemstack injection complete
-[01:33:37] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: UP_TO_DATE Target: null
-[01:33:40] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
-[01:33:40] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
-[01:33:40] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[01:33:41] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
-[01:33:41] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
-[01:33:46] [main/INFO] [FML]: Max texture size: 16384
-[01:33:46] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
-[01:33:48] [main/INFO] [FML]: Applying holder lookups
-[01:33:48] [main/INFO] [FML]: Holder lookups applied
-[01:33:48] [main/INFO] [FML]: Injecting itemstacks
-[01:33:48] [main/INFO] [FML]: Itemstack injection complete
-[01:33:48] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
-[01:33:48] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[01:33:48] [main/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
-[01:33:49] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
-[01:33:53] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
-[01:33:53] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
-[01:33:53] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
-[01:33:53] [Server thread/INFO] [FML]: Applying holder lookups
-[01:33:53] [Server thread/INFO] [FML]: Holder lookups applied
-[01:33:53] [Server thread/INFO] [FML]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@7b1d059c)
-[01:33:54] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
-[01:33:54] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@7b1d059c)
-[01:33:54] [Server thread/INFO] [FML]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@7b1d059c)
-[01:33:54] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
-[01:33:55] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 51%
-[01:33:55] [Server thread/INFO] [FML]: Unloading dimension -1
-[01:33:55] [Server thread/INFO] [FML]: Unloading dimension 1
-[01:33:55] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
-[01:33:57] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
-[01:33:57] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
-[01:33:57] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,lightorbs@1.0,FML@8.0.99.99,forge@14.23.3.2655,mcp@9.42
-[01:33:57] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
-[01:33:57] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
-[01:33:57] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@7b1d059c)
-[01:33:57] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player197[local:E:15e2d6d2] logged in with entity id 106 at (79.12310932720757, 68.86808242021895, 20.060676561004648)
-[01:33:57] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player197 joined the game
-[01:33:58] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[01:33:58] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[01:33:59] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
-[01:33:59] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 4 advancements
-[01:33:59] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@36d424cc[id=ccf0c278-c21f-3ec3-a87c-05202673a5dd,name=Player197,properties={},legacy=false]
+[18:20:13] [main/INFO] [FML]: MinecraftForge v14.23.3.2655 Initialized
+[18:20:13] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[18:20:13] [main/INFO] [FML]: Replaced 1036 ore ingredients
+[18:20:13] [main/INFO] [FML]: Found 0 mods from the command line. Injecting into mod discoverer
+[18:20:13] [main/INFO] [FML]: Searching C:\Users\Cobra\Desktop\Projects\LightOrbs\run\mods for mods
+[18:20:14] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
+[18:20:15] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, lightorbs] at CLIENT
+[18:20:15] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, lightorbs] at SERVER
+[18:20:15] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 240238322 nanos
+[18:20:16] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LightOrbs
+[18:20:16] [main/INFO] [FML]: Processing ObjectHolder annotations
+[18:20:16] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
+[18:20:16] [main/INFO] [FML]: Identifying ItemStackHolder annotations
+[18:20:16] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
+[18:20:16] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
+[18:20:16] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[18:20:16] [main/INFO] [FML]: Applying holder lookups
+[18:20:16] [main/INFO] [FML]: Holder lookups applied
+[18:20:16] [main/INFO] [FML]: Applying holder lookups
+[18:20:16] [main/INFO] [FML]: Holder lookups applied
+[18:20:16] [main/INFO] [FML]: Applying holder lookups
+[18:20:16] [main/INFO] [FML]: Holder lookups applied
+[18:20:16] [main/INFO] [FML]: Applying holder lookups
+[18:20:16] [main/INFO] [FML]: Holder lookups applied
+[18:20:16] [main/INFO] [FML]: Injecting itemstacks
+[18:20:16] [main/INFO] [FML]: Itemstack injection complete
+[18:20:17] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: UP_TO_DATE Target: null
+[18:20:25] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[18:20:25] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[18:20:25] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:20:26] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
+[18:20:26] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[18:20:31] [main/INFO] [FML]: Max texture size: 16384
+[18:20:31] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
+[18:20:33] [main/INFO] [FML]: Applying holder lookups
+[18:20:33] [main/INFO] [FML]: Holder lookups applied
+[18:20:33] [main/INFO] [FML]: Injecting itemstacks
+[18:20:33] [main/INFO] [FML]: Itemstack injection complete
+[18:20:33] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
+[18:20:33] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[18:20:33] [main/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
+[18:20:35] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[18:20:37] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[18:20:37] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[18:20:37] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[18:20:38] [Server thread/INFO] [FML]: Applying holder lookups
+[18:20:38] [Server thread/INFO] [FML]: Holder lookups applied
+[18:20:38] [Server thread/INFO] [FML]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@48564b98)
+[18:20:38] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
+[18:20:38] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@48564b98)
+[18:20:38] [Server thread/INFO] [FML]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@48564b98)
+[18:20:38] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[18:20:39] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 43%
+[18:20:40] [Server thread/INFO] [FML]: Unloading dimension -1
+[18:20:40] [Server thread/INFO] [FML]: Unloading dimension 1
+[18:20:40] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
+[18:20:42] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[18:20:42] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[18:20:42] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,lightorbs@1.0,FML@8.0.99.99,forge@14.23.3.2655,mcp@9.42
+[18:20:42] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[18:20:42] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[18:20:42] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@48564b98)
+[18:20:42] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player200[local:E:a3aaec9f] logged in with entity id 97 at (-1265.187590425443, 76.618235175524, 32.83339474461907)
+[18:20:42] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player200 joined the game
+[18:20:44] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[18:20:44] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[18:20:44] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
+[18:20:44] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 4 advancements
+[18:20:44] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@3640461[id=e2f2d8ad-63d3-3d66-8818-3aa1e92fae1a,name=Player200,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
@@ -132,1112 +132,24 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_161]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_161]
 	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_161]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.firefly.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.firefly.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Ender Dragon]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.EnderCrystal.name]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.dyePowder.black]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.dyePowder.black]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Ender Dragon
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.EnderCrystal.name
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.dyePowder.black
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.dyePowder.black
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Wolf]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.tile.rail]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Pig]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.tile.rail]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.tile.rail]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.tile.rail]
-[01:34:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.tile.rail]
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Wolf
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.tile.rail
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Pig
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.tile.rail
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.tile.rail
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.tile.rail
-[01:34:08] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.tile.rail
-[01:34:09] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[01:34:09] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[01:34:09] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
-[01:34:12] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing difficulty to NORMAL, from PEACEFUL
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.porkchopRaw]
-[01:34:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.porkchopRaw]
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.porkchopRaw
-[01:34:13] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.porkchopRaw
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed item.item.enderPearl]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed entity.psiFirefly.name]
-[01:34:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Killed Enderman]
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed item.item.enderPearl
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed entity.psiFirefly.name
-[01:34:14] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Enderman
-[01:34:26] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player197: Object successfully summoned]
-[01:34:26] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Object successfully summoned
-[01:34:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player197 has made the advancement [Remote Getaway]
-[01:34:51] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Player197 has made the advancement [Remote Getaway]
-[01:34:51] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 10 advancements
-[01:35:04] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[01:35:04] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[01:35:04] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
-[01:35:49] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[01:35:49] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[01:35:49] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
+[18:20:55] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player200: Object successfully summoned]
+[18:20:55] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Object successfully summoned
+[18:20:57] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player200: Object successfully summoned]
+[18:20:57] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Object successfully summoned
+[18:20:59] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player200: Object successfully summoned]
+[18:20:59] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Object successfully summoned
+[18:21:16] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[18:21:16] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[18:21:16] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
+[18:21:51] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[18:21:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[18:21:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[18:21:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[18:21:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[18:21:51] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/the_end
+[18:21:51] [Server thread/INFO] [FML]: Unloading dimension 0
+[18:21:51] [Server thread/INFO] [FML]: Unloading dimension 1
+[18:21:51] [Server thread/INFO] [FML]: Applying holder lookups
+[18:21:51] [Server thread/INFO] [FML]: Holder lookups applied
+[18:21:51] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[18:21:51] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com
