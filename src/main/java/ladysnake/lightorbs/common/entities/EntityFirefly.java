@@ -155,12 +155,12 @@ public class EntityFirefly extends AbstractLightorb {
 
     @Override
     public boolean getCanSpawnHere() {
-        // if night time and superior than sea level
+        // if night time, superior than sea level and not raining
         // spawn additional fireflies for swarm effect, and avoid Minecraft spawn entity limit
-        if (!this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel()) {
+        if (!this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel() && !this.world.isRaining()) {
             int rand = new Random().nextInt(16)+10;
             for (int i = 0; i < rand; i++)
-                this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
+                this.world.spawnEntity(new EntityFirefly(this.world, this.posX, this.posY, this.posZ));
                 return true;
         } else return false;
     }
