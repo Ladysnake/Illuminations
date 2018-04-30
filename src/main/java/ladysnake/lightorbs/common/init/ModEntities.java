@@ -2,10 +2,12 @@ package ladysnake.lightorbs.common.init;
 
 import ladysnake.lightorbs.client.renders.entities.RenderEmber;
 import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
+import ladysnake.lightorbs.client.renders.entities.RenderLightningBug;
 import ladysnake.lightorbs.client.renders.entities.RenderPsiFirefly;
 import ladysnake.lightorbs.common.Reference;
 import ladysnake.lightorbs.common.entities.EntityEmber;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
+import ladysnake.lightorbs.common.entities.EntityLightningBug;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -38,9 +41,13 @@ public class ModEntities {
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
-        reg.register(createEntry(EntityPsiFirefly::new, "psiFirefly", 64, true)
+        reg.register(createEntry(EntityPsiFirefly::new, "psi_firefly", 64, true)
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.END))
+                .build());
+
+        reg.register(createEntry(EntityLightningBug::new, "lightning_bug", 64, true)
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, ForgeRegistries.BIOMES)
                 .build());
 
         reg.register(createEntry(EntityEmber::new, "ember", 64, true)
@@ -62,6 +69,7 @@ public class ModEntities {
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFirefly.class, RenderFirefly::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPsiFirefly.class, RenderPsiFirefly::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityLightningBug.class, RenderLightningBug::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
     }
 
