@@ -1,14 +1,8 @@
 package ladysnake.lightorbs.common.init;
 
-import ladysnake.lightorbs.client.renders.entities.RenderEmber;
-import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
-import ladysnake.lightorbs.client.renders.entities.RenderLightningBug;
-import ladysnake.lightorbs.client.renders.entities.RenderPsiFirefly;
+import ladysnake.lightorbs.client.renders.entities.*;
 import ladysnake.lightorbs.common.Reference;
-import ladysnake.lightorbs.common.entities.EntityEmber;
-import ladysnake.lightorbs.common.entities.EntityFirefly;
-import ladysnake.lightorbs.common.entities.EntityLightningBug;
-import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
+import ladysnake.lightorbs.common.entities.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
@@ -20,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -47,7 +40,8 @@ public class ModEntities {
                 .build());
 
         reg.register(createEntry(EntityLightningBug::new, "lightning_bug", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, ForgeRegistries.BIOMES)
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
         reg.register(createEntry(EntityEmber::new, "ember", 64, true)

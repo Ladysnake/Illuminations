@@ -1,5 +1,6 @@
 package ladysnake.lightorbs.common.entities;
 
+import ladysnake.lightorbs.common.config.LightOrbsConfig;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -24,7 +25,7 @@ public class EntityLightningBug extends EntityFirefly {
     @Override
     public boolean getCanSpawnHere() {
         // if night time, superior than sea level and thundering
-        if (!this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel() && this.world.isThundering()) {
+        if (LightOrbsConfig.spawnLightningBugs && !this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel() && this.world.isThundering()) {
             int rand = new Random().nextInt(16)+10;
             for (int i = 0; i < rand; i++)
                 this.world.spawnEntity(new EntityLightningBug(this.world, this.posX, this.posY, this.posZ));

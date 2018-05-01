@@ -1,5 +1,6 @@
 package ladysnake.lightorbs.common.entities;
 
+import ladysnake.lightorbs.common.config.LightOrbsConfig;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -129,10 +130,12 @@ public class EntityEmber extends AbstractLightOrb {
 
     @Override
     public boolean getCanSpawnHere() {
-        int rand = new Random().nextInt(16)+10;
-        for (int i = 0; i < rand; i++)
-            this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
-        return true;
+        if (LightOrbsConfig.spawnEmbers) {
+            int rand = new Random().nextInt(16) + 10;
+            for (int i = 0; i < rand; i++)
+                this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
+            return true;
+        } else return false;
     }
 
 }

@@ -1,0 +1,14 @@
+// Entities
+entity.firefly.name=Firefly
+entity.psi_firefly.name=Firefly
+entity.lightning_bug.name=Lightning bug
+entity.ember.name=Ember
+
+// Creative tab
+itemGroup.LightOrbs=LightOrbs
+
+// Items
+item.lightorbs.glass_jar.name=Glass jar
+item.lightorbs.firefly_in_a_jar.name=Firefly in a jar
+item.lightorbs.psi_firefly_in_a_jar.name=Psi firefly in a jar
+item.lightorbs.lightning_bug_in_a_jar.name=Lightning bug in a jar

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightorbs:glass_jar"
+    ]
+  },
+  "criteria": {
+    "has_glass_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lightorbs:glass_jar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightorbs:glass_jar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_glass_block",
+      "has_the_recipe"
+    ]
+  ]
+}
