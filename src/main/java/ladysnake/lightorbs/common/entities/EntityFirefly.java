@@ -13,10 +13,10 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Random;
 
-public class EntityFirefly extends AbstractLightorb {
-    protected float scaleModifier;
-    protected float colorModifier;
-    protected float alpha;
+public class EntityFirefly extends AbstractLightOrb {
+    private float scaleModifier;
+    float colorModifier;
+    private float alpha;
 
     public float getAlpha() {
         return alpha;
@@ -49,16 +49,16 @@ public class EntityFirefly extends AbstractLightorb {
         this.alpha = 1F;
     }
 
-    protected BlockPos forcedTarget = BlockPos.ORIGIN;
-    protected BlockPos lightTarget = null;
-    protected double xTarget, yTarget, zTarget;
-    protected int targetChangeCooldown = 0;
+    private BlockPos forcedTarget = BlockPos.ORIGIN;
+    private BlockPos lightTarget = null;
+    private double xTarget, yTarget, zTarget;
+    private int targetChangeCooldown = 0;
 
     public BlockPos getTargetPosition() {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
-    protected void selectBlockTarget() {
+    private void selectBlockTarget() {
         if (this.forcedTarget == BlockPos.ORIGIN) {
             if (this.lightTarget == null) {
                 this.xTarget = this.posX + rand.nextGaussian() * 10;
@@ -67,7 +67,7 @@ public class EntityFirefly extends AbstractLightorb {
 
                 while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR)) this.yTarget += 1;
 
-                if (this.world.getLight(this.getPosition(), true) > 8)
+                if (this.world.getLight(this.getPosition(), true) > 8 && !this.world.isDaytime())
                     this.lightTarget = getRandomLitBlockAround();
             } else {
                 this.xTarget = this.lightTarget.getX() + rand.nextGaussian();
@@ -144,7 +144,7 @@ public class EntityFirefly extends AbstractLightorb {
         this.forcedTarget = target;
     }
 
-    public BlockPos getRandomLitBlockAround() {
+    private BlockPos getRandomLitBlockAround() {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++) {
             BlockPos randBP = new BlockPos(this.posX + rand.nextGaussian() * 10, this.posY + rand.nextGaussian() * 10, this.posZ + rand.nextGaussian() * 10);

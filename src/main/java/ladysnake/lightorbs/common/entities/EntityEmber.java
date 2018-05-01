@@ -12,12 +12,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Random;
 
-public class EntityEmber extends AbstractLightorb {
-    protected float scaleModifier;
-    protected float colorModifier;
+public class EntityEmber extends AbstractLightOrb {
+    private float scaleModifier;
+    private float colorModifier;
 
     public float getScaleModifier() {
         return scaleModifier;
@@ -39,7 +38,7 @@ public class EntityEmber extends AbstractLightorb {
         this.setHealth(1.0F);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.4F;
-        this.colorModifier = new Random().nextFloat() * 0.5F;
+        this.colorModifier = 0.25F + new Random().nextFloat() * 0.5F;
     }
 
     @Override
@@ -52,16 +51,16 @@ public class EntityEmber extends AbstractLightorb {
         entityIn.setFire(2);
     }
 
-    protected BlockPos forcedTarget = BlockPos.ORIGIN;
+    private BlockPos forcedTarget = BlockPos.ORIGIN;
     protected BlockPos lightTarget = null;
-    protected double xTarget, yTarget, zTarget;
-    protected int targetChangeCooldown = 0;
+    private double xTarget, yTarget, zTarget;
+    private int targetChangeCooldown = 0;
 
     public BlockPos getTargetPosition() {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
-    protected void selectBlockTarget() {
+    private void selectBlockTarget() {
         if (this.forcedTarget == BlockPos.ORIGIN) {
             this.xTarget = this.posX + rand.nextGaussian() * 10;
             this.yTarget = this.posY + rand.nextGaussian() * 10;

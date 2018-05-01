@@ -59,6 +59,7 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
             tessellator.draw();
 
             this.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly_overlay.png"));
+            //noinspection ConstantConditions
             GlStateManager.color(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();

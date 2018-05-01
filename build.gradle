@@ -10,6 +10,25 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        maven {
+            // location of the maven that hosts JEI files
+            name = "Progwml6 maven"
+            url = "http://dvs1.progwml6.com/files/maven"
+        }
+        maven {
+            // location of a maven mirror for JEI files, as a fallback
+            name = "ModMaven"
+            url = "modmaven.k-4u.nl"
+        }
+    }
+}
+
+dependencies {
+    deobfCompile 'com.github.Pyrofab:Ladylib:47a29ee475'
+}
 
 version = "Alpha 0.1.1"
 group = "ladysnake.lightorbs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html

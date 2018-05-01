@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "lightorbs:items/lightning_bug_in_a_jar"
+    }
+}

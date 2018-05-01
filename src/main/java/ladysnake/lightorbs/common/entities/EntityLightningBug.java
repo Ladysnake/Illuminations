@@ -1,6 +1,5 @@
 package ladysnake.lightorbs.common.entities;
 
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.world.World;
 
 import java.util.Random;
