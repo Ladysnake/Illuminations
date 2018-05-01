@@ -26,11 +26,34 @@ allprojects {
     }
 }
 
-dependencies {
-    deobfCompile 'com.github.Pyrofab:Ladylib:47a29ee475'
+configurations {
+    contained
+    contained.transitive = false
 }
 
-version = "Alpha 0.1.1"
+dependencies {
+    deobfCompile 'com.github.Pyrofab:Ladylib:47a29ee475'
+    contained 'com.github.Pyrofab:Ladylib:47a29ee475'
+}
+
+jar {
+    from sourceSets.api.output
+    from sourceSets.main.output
+
+    from(configurations.contained.files) {
+        include '*'
+    }
+
+    manifest {
+        attributes([
+                'ContainedDeps': configurations.contained.files.collect { it.name }.join(" "),
+                'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}",
+                'Timestamp': System.currentTimeMillis(),
+        ])
+    }
+}
+
+version = "Alpha 0.2.0"
 group = "ladysnake.lightorbs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lightorbs"
 
