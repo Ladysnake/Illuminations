@@ -32,8 +32,8 @@ configurations {
 }
 
 dependencies {
-    deobfCompile 'com.github.Pyrofab:Ladylib:47a29ee475'
-    contained 'com.github.Pyrofab:Ladylib:47a29ee475'
+    deobfCompile 'com.github.Pyrofab:Ladylib:cf9b9f425f'
+    contained 'com.github.Pyrofab:Ladylib:cf9b9f425f'
 }
 
 jar {
@@ -53,7 +53,7 @@ jar {
     }
 }
 
-version = "Alpha 0.2.0"
+version = "Alpha 0.2.1"
 group = "ladysnake.lightorbs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lightorbs"
 

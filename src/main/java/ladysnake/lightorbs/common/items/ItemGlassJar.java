@@ -34,6 +34,7 @@ public class ItemGlassJar extends Item {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         // if light orb inside, releasing it
         if (!this.content.equals("")) {
+            System.out.println("ACTIVATED");
             if (!player.isCreative()) {
                 player.getHeldItem(hand).shrink(1);
                 if (!player.addItemStackToInventory(new ItemStack(ModItems.GLASS_JAR))) player.dropItem(new ItemStack(ModItems.GLASS_JAR), true);
@@ -73,7 +74,7 @@ public class ItemGlassJar extends Item {
                     break;
             }
 
-            if (!playerIn.isCreative() && !playerIn.world.isRemote) {
+            if (!playerIn.isCreative()) {
                 stack.shrink(1);
                 if (!playerIn.addItemStackToInventory(obtainedStack)) playerIn.dropItem(obtainedStack, true);
             }

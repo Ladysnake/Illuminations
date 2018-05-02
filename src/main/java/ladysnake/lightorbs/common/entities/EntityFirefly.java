@@ -54,6 +54,7 @@ public class EntityFirefly extends AbstractLightOrb {
     private BlockPos lightTarget = null;
     private double xTarget, yTarget, zTarget;
     private int targetChangeCooldown = 0;
+    private double groundY = 0;
 
     public BlockPos getTargetPosition() {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
@@ -62,11 +63,20 @@ public class EntityFirefly extends AbstractLightOrb {
     private void selectBlockTarget() {
         if (this.forcedTarget == BlockPos.ORIGIN) {
             if (this.lightTarget == null) {
+                this.groundY = 0;
+                for (int i = 0; i < 20; i++) {
+                    if (!(this.world.getBlockState(new BlockPos(this.posX, this.posY-i, this.posZ)).getMaterial() == Material.AIR))
+                        this.groundY = this.posY - i;
+                    if (this.groundY != 0) break;
+                }
+
                 this.xTarget = this.posX + rand.nextGaussian() * 10;
-                this.yTarget = this.posY + rand.nextGaussian() * 10;
+                this.yTarget = Math.min(Math.max(this.posY + rand.nextGaussian() * 10, this.groundY), this.groundY+4);
                 this.zTarget = this.posZ + rand.nextGaussian() * 10;
 
-                while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR)) this.yTarget += 1;
+                while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR
+                        || !(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.GRASS)))
+                    this.yTarget += 1;
 
                 if (this.world.getLight(this.getPosition(), true) > 8 && !this.world.isDaytime())
                     this.lightTarget = getRandomLitBlockAround();
@@ -90,7 +100,7 @@ public class EntityFirefly extends AbstractLightOrb {
             this.zTarget = forcedTarget.getZ() + rand.nextGaussian();
         }
 
-        targetChangeCooldown = rand.nextInt() % 200;
+        targetChangeCooldown = rand.nextInt() % 100;
     }
 
     @Override
