@@ -7,16 +7,13 @@ import ladysnake.lightorbs.common.init.ModItems;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Mod;
 
 public class ItemGlassJar extends Item {
     private String content;
@@ -34,7 +31,6 @@ public class ItemGlassJar extends Item {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         // if light orb inside, releasing it
         if (!this.content.equals("")) {
-            System.out.println("ACTIVATED");
             if (!player.isCreative()) {
                 player.getHeldItem(hand).shrink(1);
                 if (!player.addItemStackToInventory(new ItemStack(ModItems.GLASS_JAR))) player.dropItem(new ItemStack(ModItems.GLASS_JAR), true);
@@ -80,7 +76,7 @@ public class ItemGlassJar extends Item {
             }
             target.setDead();
         }
-        return true;
+        return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 
 }
