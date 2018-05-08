@@ -1,5 +1,6 @@
 package ladysnake.lightorbs.common.entities;
 
+import ladylib.LadyLib;
 import ladysnake.lightorbs.common.config.LightOrbsConfig;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,6 +19,8 @@ public class EntityFirefly extends AbstractLightOrb {
     private float scaleModifier;
     float colorModifier;
     private float alpha;
+
+    private boolean canDespawn;
 
     public float getAlpha() {
         return alpha;
@@ -48,6 +51,11 @@ public class EntityFirefly extends AbstractLightOrb {
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.4F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
         this.alpha = 1F;
+        this.canDespawn = true;
+    }
+
+    public void setCanDespawn(boolean canDespawnIn) {
+        this.canDespawn = canDespawnIn;
     }
 
     private BlockPos forcedTarget = BlockPos.ORIGIN;
@@ -65,17 +73,16 @@ public class EntityFirefly extends AbstractLightOrb {
             if (this.lightTarget == null) {
                 this.groundY = 0;
                 for (int i = 0; i < 20; i++) {
-                    if (!(this.world.getBlockState(new BlockPos(this.posX, this.posY-i, this.posZ)).getMaterial() == Material.AIR))
+                    if (!this.world.getBlockState(new BlockPos(this.posX, this.posY-i, this.posZ)).getBlock().canSpawnInBlock())
                         this.groundY = this.posY - i;
                     if (this.groundY != 0) break;
                 }
 
                 this.xTarget = this.posX + rand.nextGaussian() * 10;
-                this.yTarget = Math.min(Math.max(this.posY + rand.nextGaussian() * 10, this.groundY), this.groundY+4);
+                this.yTarget = Math.min(Math.max(this.posY + rand.nextGaussian() * 2, this.groundY), this.groundY+4);
                 this.zTarget = this.posZ + rand.nextGaussian() * 10;
 
-                while (!(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.AIR
-                        || !(this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getMaterial() == Material.GRASS)))
+                while (!this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canSpawnInBlock())
                     this.yTarget += 1;
 
                 if (this.world.getLight(this.getPosition(), true) > 8 && !this.world.isDaytime())
@@ -127,14 +134,10 @@ public class EntityFirefly extends AbstractLightOrb {
             final double outerRange = 6;
             // the range at which the wisp will stop approaching its target
             final double innerRange = 1;
-            if (length > innerRange && length < outerRange)
-                weight = 0.25 * ((outerRange - length) / (outerRange - innerRange));
-            else if (length <= innerRange)
-                weight = 1;
-            motionX = (1 - weight) * ((0.9) * motionX + (0.1) * targetVector.x) + weight * targetVector.z;
-            motionY = (1 - weight) * ((0.9) * motionY + (0.1) * targetVector.y) + weight * targetVector.y;
-            motionZ = (1 - weight) * ((0.9) * motionZ + (0.1) * targetVector.z) - weight * targetVector.x;
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            motionX = (0.9) * motionX + (0.1) * targetVector.x;
+            motionY = (0.9) * motionY + (0.1) * targetVector.y;
+            motionZ = (0.9) * motionZ + (0.1) * targetVector.z;
+            if (this.getPosition() != this.getTargetPosition()) this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 
             if (this.isInWater()) this.attackEntityFrom(DamageSource.DROWN, 1);
             if (this.isInLava()) this.attackEntityFrom(DamageSource.LAVA, 1);
@@ -174,6 +177,11 @@ public class EntityFirefly extends AbstractLightOrb {
                 this.world.spawnEntity(new EntityFirefly(this.world, this.posX, this.posY, this.posZ));
                 return true;
         } else return false;
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return this.canDespawn;
     }
 
 }

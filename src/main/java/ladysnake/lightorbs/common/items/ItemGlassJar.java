@@ -37,17 +37,20 @@ public class ItemGlassJar extends Item {
             }
 
             if (!worldIn.isRemote) {
+                EntityFirefly spawnedEntity = new EntityFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
                 switch (this.content) {
                     case "firefly":
-                        worldIn.spawnEntity(new EntityFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ));
+                        spawnedEntity = new EntityFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
                         break;
                     case "psi_firefly":
-                        worldIn.spawnEntity(new EntityPsiFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ));
+                        spawnedEntity = new EntityPsiFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
                         break;
                     case "lightning_bug":
-                        worldIn.spawnEntity(new EntityLightningBug(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ));
+                        spawnedEntity = new EntityLightningBug(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
                         break;
                 }
+                spawnedEntity.setCanDespawn(false);
+                worldIn.spawnEntity(spawnedEntity);
             }
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
