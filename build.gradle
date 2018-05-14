@@ -53,7 +53,7 @@ jar {
     }
 }
 
-version = "Alpha 0.2.1"
+version = "Alpha 0.3.0"
 group = "ladysnake.lightorbs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lightorbs"
 

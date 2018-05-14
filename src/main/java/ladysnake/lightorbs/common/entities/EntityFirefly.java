@@ -1,8 +1,6 @@
 package ladysnake.lightorbs.common.entities;
 
-import ladylib.LadyLib;
 import ladysnake.lightorbs.common.config.LightOrbsConfig;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -34,6 +32,10 @@ public class EntityFirefly extends AbstractLightOrb {
         return scaleModifier;
     }
 
+    public void setScaleModifier(float scaleModifierIn) {
+        this.scaleModifier = scaleModifierIn;
+    }
+
     public float getColorModifier() {
         return colorModifier;
     }
@@ -56,6 +58,11 @@ public class EntityFirefly extends AbstractLightOrb {
 
     public void setCanDespawn(boolean canDespawnIn) {
         this.canDespawn = canDespawnIn;
+    }
+
+    @Override
+    public void setSize(float width, float height) {
+        super.setSize(width, height);
     }
 
     private BlockPos forcedTarget = BlockPos.ORIGIN;
@@ -102,9 +109,9 @@ public class EntityFirefly extends AbstractLightOrb {
                     this.lightTarget = null;
             }
         } else {
-            this.xTarget = forcedTarget.getX() + rand.nextGaussian();
-            this.yTarget = forcedTarget.getY() + rand.nextGaussian();
-            this.zTarget = forcedTarget.getZ() + rand.nextGaussian();
+            this.xTarget = forcedTarget.getX() + 0.5F + rand.nextGaussian()/5;
+            this.yTarget = forcedTarget.getY() + 0.25F + rand.nextGaussian()/5;
+            this.zTarget = forcedTarget.getZ() + 0.5F + rand.nextGaussian()/5;
         }
 
         targetChangeCooldown = rand.nextInt() % 100;
@@ -156,6 +163,10 @@ public class EntityFirefly extends AbstractLightOrb {
 
     public void setForcedTarget(@Nonnull BlockPos target) {
         this.forcedTarget = target;
+    }
+
+    public BlockPos getForcedTarget() {
+        return this.forcedTarget;
     }
 
     private BlockPos getRandomLitBlockAround() {

@@ -3,7 +3,7 @@ package ladysnake.lightorbs.common;
 public class Reference {
     public static final String MOD_ID = "lightorbs";
     public static final String MOD_NAME = "LightOrbs";
-    static final String MOD_VERSION = "0.2.1";
+    static final String MOD_VERSION = "0.3.0";
     static final String MCVERSION = "[1.12]";
 
     static final String CLIENT_PROXY_CLASS = "ladysnake.lightorbs.client.proxy.ClientProxy";

@@ -1,8 +1,10 @@
 package ladysnake.lightorbs.common.items;
 
+import ladylib.LadyLib;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
 import ladysnake.lightorbs.common.entities.EntityLightningBug;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
+import ladysnake.lightorbs.common.init.ModBlocks;
 import ladysnake.lightorbs.common.init.ModItems;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +29,10 @@ public class ItemGlassJar extends Item {
         this.maxStackSize = 16;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         // if light orb inside, releasing it
@@ -37,16 +43,16 @@ public class ItemGlassJar extends Item {
             }
 
             if (!worldIn.isRemote) {
-                EntityFirefly spawnedEntity = new EntityFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
+                EntityFirefly spawnedEntity = new EntityFirefly(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
                 switch (this.content) {
                     case "firefly":
-                        spawnedEntity = new EntityFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
+                        spawnedEntity = new EntityFirefly(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
                         break;
                     case "psi_firefly":
-                        spawnedEntity = new EntityPsiFirefly(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
+                        spawnedEntity = new EntityPsiFirefly(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
                         break;
                     case "lightning_bug":
-                        spawnedEntity = new EntityLightningBug(worldIn, pos.getX()+hitX, pos.getY()+hitY, pos.getZ()+hitZ);
+                        spawnedEntity = new EntityLightningBug(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
                         break;
                 }
                 spawnedEntity.setCanDespawn(false);

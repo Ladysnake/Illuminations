@@ -1,8 +1,14 @@
 package ladysnake.lightorbs.common.init;
 
-import ladysnake.lightorbs.client.renders.entities.*;
+import ladysnake.lightorbs.client.renders.entities.RenderEmber;
+import ladysnake.lightorbs.client.renders.entities.RenderFirefly;
+import ladysnake.lightorbs.client.renders.entities.RenderLightningBug;
+import ladysnake.lightorbs.client.renders.entities.RenderPsiFirefly;
 import ladysnake.lightorbs.common.Reference;
-import ladysnake.lightorbs.common.entities.*;
+import ladysnake.lightorbs.common.entities.EntityEmber;
+import ladysnake.lightorbs.common.entities.EntityFirefly;
+import ladysnake.lightorbs.common.entities.EntityLightningBug;
+import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
