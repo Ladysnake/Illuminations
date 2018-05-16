@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lightorbs:glass_jar"
+      "lightorbs:scorching_flint"
     ]
   },
   "criteria": {
-    "has_glass_block": {
+    "has_flint": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:glass"
+            "item": "minecraft:flint"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lightorbs:glass_jar"
+        "recipe": "lightorbs:scorching_flint"
       }
     }
   },
   "requirements": [
     [
-      "has_glass_block",
+      "has_flint",
       "has_the_recipe"
     ]
   ]

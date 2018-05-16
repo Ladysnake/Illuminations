@@ -4,6 +4,8 @@ import ladysnake.lightorbs.common.config.LightOrbsConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -18,20 +20,16 @@ public class EntityEmber extends EntityFirefly {
     public EntityEmber(World worldIn) {
         super(worldIn);
         this.colorModifier = 0.5F + new Random().nextFloat() * 0.5F;
+        this.setAttractedByLight(false);
     }
 
     @Override
     public boolean getCanSpawnHere() {
-        // if night time, superior than sea level and thundering
-        if (LightOrbsConfig.spawnEmbers) {
-            if (LightOrbsConfig.emberSwarmMinSize > 0 && LightOrbsConfig.emberSwarmMaxSize >= LightOrbsConfig.emberSwarmMinSize) {
-                int swarmSize = new Random().nextInt(LightOrbsConfig.emberSwarmMaxSize - LightOrbsConfig.emberSwarmMinSize) + LightOrbsConfig.emberSwarmMinSize;
-                for (int i = 0; i < swarmSize; i++)
-                    this.world.spawnEntity(new EntityEmber(this.world, this.posX, this.posY, this.posZ));
-                this.setDead();
-                return true;
-            } else return false;
-        } else return false;
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return LightOrbsConfig.spawnEmbers && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
 
     @Override

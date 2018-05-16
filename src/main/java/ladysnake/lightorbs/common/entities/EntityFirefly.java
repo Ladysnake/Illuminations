@@ -18,6 +18,7 @@ public class EntityFirefly extends AbstractLightOrb {
     float colorModifier;
     private float alpha;
     private boolean canDespawn;
+    private boolean isAttractedByLight;
 
     // Constructors
     public EntityFirefly(World world) {
@@ -31,6 +32,7 @@ public class EntityFirefly extends AbstractLightOrb {
 
         this.setSize(this.scaleModifier, this.scaleModifier);
         this.canDespawn = true;
+        this.isAttractedByLight = true;
     }
 
     public EntityFirefly(World world, double x, double y, double z) {
@@ -64,6 +66,14 @@ public class EntityFirefly extends AbstractLightOrb {
         this.canDespawn = canDespawn;
     }
 
+    public boolean isAttractedByLight() {
+        return isAttractedByLight;
+    }
+
+    public void setAttractedByLight(boolean attractedByLight) {
+        isAttractedByLight = attractedByLight;
+    }
+
     // NBT
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
@@ -95,15 +105,8 @@ public class EntityFirefly extends AbstractLightOrb {
     public boolean getCanSpawnHere() {
         // if night time, superior than sea level and not raining
         // spawn a number of fireflies between the config values
-        if (LightOrbsConfig.spawnFireflies && !this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel() && !this.world.isRaining()) {
-            if (LightOrbsConfig.fireflySwarmMinSize > 0 && LightOrbsConfig.fireflySwarmMaxSize >= LightOrbsConfig.fireflySwarmMinSize && new Random().nextInt(10) == 9) {
-                int swarmSize = new Random().nextInt(LightOrbsConfig.fireflySwarmMaxSize - LightOrbsConfig.fireflySwarmMinSize) + LightOrbsConfig.fireflySwarmMinSize;
-                for (int i = 0; i < swarmSize; i++)
-                    this.world.spawnEntity(new EntityFirefly(this.world, this.posX, this.posY, this.posZ));
-                this.setDead();
-                return true;
-            } else return false;
-        } else return false;
+        if (this.getClass() == EntityFirefly.class) return LightOrbsConfig.spawnFireflies && !this.world.isDaytime() && !this.world.isRaining() && super.getCanSpawnHere();
+        else return super.getCanSpawnHere();
     }
 
     // Behaviour
@@ -141,7 +144,7 @@ public class EntityFirefly extends AbstractLightOrb {
     }
 
     private void selectBlockTarget() {
-        if (this.lightTarget == null) {
+        if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
                 if (!this.world.getBlockState(new BlockPos(this.posX, this.posY - i, this.posZ)).getBlock().canSpawnInBlock())

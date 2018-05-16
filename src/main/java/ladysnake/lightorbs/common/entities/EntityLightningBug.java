@@ -21,15 +21,7 @@ public class EntityLightningBug extends EntityFirefly {
     @Override
     public boolean getCanSpawnHere() {
         // if night time, superior than sea level and thundering
-        if (LightOrbsConfig.spawnLightningBugs && !this.world.isDaytime() && this.getPosition().getY() >= this.world.getSeaLevel() && this.world.isThundering()) {
-            if (LightOrbsConfig.lightningBugSwarmMinSize > 0 && LightOrbsConfig.lightningBugSwarmMaxSize >= LightOrbsConfig.lightningBugSwarmMinSize) {
-                int swarmSize = new Random().nextInt(LightOrbsConfig.lightningBugSwarmMaxSize - LightOrbsConfig.lightningBugSwarmMinSize) + LightOrbsConfig.lightningBugSwarmMinSize;
-                for (int i = 0; i < swarmSize; i++)
-                    this.world.spawnEntity(new EntityLightningBug(this.world, this.posX, this.posY, this.posZ));
-                this.setDead();
-                return true;
-            } else return false;
-        } else return false;
+        return LightOrbsConfig.spawnLightningBugs && !this.world.isDaytime() && this.world.isThundering() && super.getCanSpawnHere();
     }
 
     @Override

@@ -1,16 +1,16 @@
 package ladysnake.lightorbs.common.items;
 
-import ladylib.LadyLib;
-import ladysnake.lightorbs.common.entities.*;
-import ladysnake.lightorbs.common.init.ModItems;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
+import ladysnake.lightorbs.common.entities.AbstractCompanionOrb;
+import ladysnake.lightorbs.common.entities.EntitySolarOrb;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemCompanionSummoner extends Item {
     private String pet;
@@ -22,6 +22,12 @@ public class ItemCompanionSummoner extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote) {
+            // getting rid of all previous companion orbs
+            List<Entity> companions = worldIn.getEntities(AbstractCompanionOrb.class, entity -> {
+                return ((AbstractCompanionOrb) entity).getOwner() == playerIn;
+            });
+            companions.forEach(entity -> entity.setDead());
+
             AbstractCompanionOrb spawnedPet = null;
             switch (this.pet) {
                 case "solar_orb":

@@ -30,22 +30,21 @@ public class ModEntities {
         IForgeRegistry<EntityEntry> reg = event.getRegistry();
 
         reg.register(createEntry(EntityFirefly::new, "firefly", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
         reg.register(createEntry(EntityPsiFirefly::new, "psi_firefly", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.END))
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
                 .build());
 
         reg.register(createEntry(EntityLightningBug::new, "lightning_bug", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
         reg.register(createEntry(EntityEmber::new, "ember", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 25, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
+                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
                 .build());
 
         reg.register(createEntry(EntitySolarOrb::new, "solar_orb", 64, true).build());
