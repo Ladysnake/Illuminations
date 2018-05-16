@@ -28,7 +28,7 @@ public class ItemGlassJar extends Item {
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class ItemGlassJar extends Item {
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
         // if empty jar and entity is a firefly, catching it
-        if (content.equals("") && target instanceof EntityFirefly) {
-            ItemStack obtainedStack = new ItemStack(ModItems.GLASS_JAR);
+        if (this.content.equals("") && target instanceof EntityFirefly) {
+            ItemStack obtainedStack = null;
             switch (EntityList.getKey(target.getClass()).toString()) {
                 case "lightorbs:firefly":
                     obtainedStack = new ItemStack(ModItems.FIREFLY_IN_A_JAR);
@@ -80,7 +80,7 @@ public class ItemGlassJar extends Item {
                     break;
             }
 
-            if (!playerIn.isCreative()) {
+            if (!playerIn.isCreative() && obtainedStack != null) {
                 stack.shrink(1);
                 if (!playerIn.addItemStackToInventory(obtainedStack)) playerIn.dropItem(obtainedStack, true);
             }

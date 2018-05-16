@@ -3,7 +3,7 @@ package ladysnake.lightorbs.common.init;
 import ladylib.registration.AutoRegister;
 import ladysnake.lightorbs.common.Reference;
 import ladysnake.lightorbs.common.items.ItemGlassJar;
-import ladysnake.lightorbs.common.items.ItemSolarOrb;
+import ladysnake.lightorbs.common.items.ItemCompanionSummoner;
 
 @AutoRegister(Reference.MOD_ID)
 public class ModItems {
@@ -14,7 +14,6 @@ public class ModItems {
     public static final ItemGlassJar LIGHTNING_BUG_IN_A_JAR = new ItemGlassJar("lightning_bug");
 
     // Test
-    public static final ItemSolarOrb SOLAR_ORB = new ItemSolarOrb("solar_orb", true);
-    public static final ItemSolarOrb EMPTY_SOLAR_ORB = new ItemSolarOrb("solar_orb", false);
+    public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner("solar_orb", true);
 
 }

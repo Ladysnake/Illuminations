@@ -1,6 +1,7 @@
 package ladysnake.lightorbs.common.entities;
 
 import com.google.common.base.Optional;
+import ladylib.LadyLib;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +21,7 @@ import java.util.UUID;
 public abstract class AbstractCompanionOrb extends AbstractLightOrb {
     // Attributes
     private EntityPlayer player;
-    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityTameable.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-
+    private NBTTagCompound entCompound;
 
     // Constructors
     public AbstractCompanionOrb(World world) {
@@ -39,38 +39,31 @@ public abstract class AbstractCompanionOrb extends AbstractLightOrb {
         return player;
     }
 
+    public void setPlayer(EntityPlayer player) {
+        this.player = player;
+    }
+
     // NBT
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-        String s;
 
-        if (compound.hasKey("OwnerUUID", 8)) s = compound.getString("OwnerUUID");
-        else {
-            String s1 = compound.getString("Owner");
-            s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
-        }
-
-        if (!s.isEmpty()) {
+        if (!compound.getString("OwnerUUID").isEmpty()) {
             try {
-                this.setOwnerId(UUID.fromString(s));
-            } catch (Throwable var4) {}
+                this.player = this.world.getPlayerEntityByUUID(UUID.fromString(compound.getString("OwnerUUID")));
+            } catch (Throwable var4) {
+                var4.printStackTrace();
+            }
         }
+
+        this.entCompound = compound;
     }
 
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
 
-        if (this.getOwnerId() == null) compound.setString("OwnerUUID", "");
-        else compound.setString("OwnerUUID", this.getOwnerId().toString());
-    }
-
-    @Nullable
-    public UUID getOwnerId() {
-        return (UUID)((Optional)this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
-    }
-
-    public void setOwnerId(@Nullable UUID p_184754_1_) {
-        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
+        if (this.player != null) {
+            compound.setString("OwnerUUID", this.player.getUniqueID().toString());
+        }
     }
 
     // Properties
@@ -86,7 +79,7 @@ public abstract class AbstractCompanionOrb extends AbstractLightOrb {
 
     @Override
     public boolean isEntityInvulnerable(DamageSource source) {
-        return true;
+        return this.getPlayer() != null;
     }
 
     // Behaviour
@@ -99,31 +92,35 @@ public abstract class AbstractCompanionOrb extends AbstractLightOrb {
     public void onUpdate() {
         super.onUpdate();
 
-        // if too far, teleporting to player
-        if (this.player != null) {
+        // if no player, searching NBT
+        if (this.getPlayer() == null && this.entCompound != null) if (!this.entCompound.getString("OwnerUUID").isEmpty()) {
+            this.setPlayer(this.world.getPlayerEntityByUUID(UUID.fromString(this.entCompound.getString("OwnerUUID"))));
+        }
+
+        if (this.getPlayer() == null) this.setSize(0F, 0F); else this.setSize(0.5F, 0.5F);
+
+        if (!this.world.isRemote && !this.isDead) {
+            // if too far, teleporting to player
             if (this.posX > this.player.posX + 20 || this.posX < this.player.posX - 20
                     || this.posY > this.player.posY + 20 || this.posY < this.player.posY - 20
                     || this.posZ > this.player.posZ + 20 || this.posZ < this.player.posZ - 20)
-                this.setPosition(player.posX, player.posY, player.posZ);
+                this.setPosition(this.player.posX, this.player.posY, this.player.posZ);
 
+            this.targetChangeCooldown -= (this.getPositionVector().squareDistanceTo(lastTickPosX, lastTickPosY, lastTickPosZ) < 0.0125) ? 10 : 1;
 
-            if (!this.world.isRemote && !this.isDead) {
-                this.targetChangeCooldown -= (this.getPositionVector().squareDistanceTo(lastTickPosX, lastTickPosY, lastTickPosZ) < 0.0125) ? 10 : 1;
-
-                if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPosition().distanceSq(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
-                    selectBlockTarget();
-                }
-
-                Vec3d targetVector = new Vec3d(this.xTarget - posX, this.yTarget - posY, this.zTarget - posZ);
-                double length = targetVector.lengthVector();
-                targetVector = targetVector.scale(0.1 / length);
-                motionX = (0.9) * motionX + (0.1) * targetVector.x;
-                motionY = (0.9) * motionY + (0.1) * targetVector.y;
-                motionZ = (0.9) * motionZ + (0.1) * targetVector.z;
-                double speedModifier = this.player.getPositionVector().subtract(this.getPositionVector()).lengthVector();
-                if (this.getPosition() != this.getTargetPosition())
-                    this.move(MoverType.SELF, this.motionX * speedModifier, this.motionY * speedModifier, this.motionZ * speedModifier);
+            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPosition().distanceSq(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+                selectBlockTarget();
             }
+
+            Vec3d targetVector = new Vec3d(this.xTarget - posX, this.yTarget - posY, this.zTarget - posZ);
+            double length = targetVector.lengthVector();
+            targetVector = targetVector.scale(0.1 / length);
+            motionX = (0.9) * motionX + (0.1) * targetVector.x;
+            motionY = (0.9) * motionY + (0.1) * targetVector.y;
+            motionZ = (0.9) * motionZ + (0.1) * targetVector.z;
+            double speedModifier = this.player.getPositionVector().subtract(this.getPositionVector()).lengthVector();
+            if (this.getPosition() != this.getTargetPosition())
+                this.move(MoverType.SELF, this.motionX * speedModifier, this.motionY * speedModifier, this.motionZ * speedModifier);
         }
     }
 
