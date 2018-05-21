@@ -23,6 +23,10 @@ allprojects {
             name = "ModMaven"
             url = "modmaven.k-4u.nl"
         }
+        maven {
+            name = "CurseForge"
+            url = "https://minecraft.curseforge.com/api/maven"
+        }
     }
 }
 
@@ -34,6 +38,7 @@ configurations {
 dependencies {
     deobfCompile 'com.github.Pyrofab:Ladylib:cf9b9f425f'
     contained 'com.github.Pyrofab:Ladylib:cf9b9f425f'
+    deobfCompile "albedo:albedo:0.1.3"
 }
 
 jar {

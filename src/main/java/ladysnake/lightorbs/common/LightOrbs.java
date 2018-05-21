@@ -12,6 +12,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.*;
+
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = Reference.MCVERSION)
 public class LightOrbs {
 
@@ -30,6 +32,15 @@ public class LightOrbs {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         // some example code
+    }
+
+    public static class Utils {
+        public static Color hex2Rgb(String colorStr) {
+            return new Color(
+                    Integer.valueOf( colorStr.substring( 0, 2 ), 16 ),
+                    Integer.valueOf( colorStr.substring( 2, 4 ), 16 ),
+                    Integer.valueOf( colorStr.substring( 4, 6 ), 16 ) );
+        }
     }
 
 }

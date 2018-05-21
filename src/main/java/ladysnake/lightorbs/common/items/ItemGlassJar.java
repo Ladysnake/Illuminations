@@ -1,5 +1,6 @@
 package ladysnake.lightorbs.common.items;
 
+import ladysnake.lightorbs.common.entities.EntityEmber;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
 import ladysnake.lightorbs.common.entities.EntityLightningBug;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
@@ -52,6 +53,9 @@ public class ItemGlassJar extends Item {
                     case "lightning_bug":
                         spawnedFirefly = new EntityLightningBug(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
                         break;
+                    case "ember":
+                        spawnedFirefly = new EntityEmber(worldIn, pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ);
+                        break;
                 }
                 if (spawnedFirefly != null) {
                     spawnedFirefly.setCanDespawn(false);
@@ -77,6 +81,9 @@ public class ItemGlassJar extends Item {
                     break;
                 case "lightorbs:lightning_bug":
                     obtainedStack = new ItemStack(ModItems.LIGHTNING_BUG_IN_A_JAR);
+                    break;
+                case "lightorbs:ember":
+                    obtainedStack = new ItemStack(ModItems.EMBER_IN_A_JAR);
                     break;
             }
 

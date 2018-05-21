@@ -12,6 +12,7 @@ public class ModItems {
     public static final ItemGlassJar FIREFLY_IN_A_JAR = new ItemGlassJar("firefly");
     public static final ItemGlassJar PSI_FIREFLY_IN_A_JAR = new ItemGlassJar("psi_firefly");
     public static final ItemGlassJar LIGHTNING_BUG_IN_A_JAR = new ItemGlassJar("lightning_bug");
+    public static final ItemGlassJar EMBER_IN_A_JAR = new ItemGlassJar("ember");
 
     // Test
     public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner("solar_orb", true);
