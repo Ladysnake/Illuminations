@@ -2,7 +2,7 @@
   "modid": "lightorbs",
   "name": "LightOrbs",
   "description": "A mod that adds various light orbs to the world, like fireflies or Will o' the Wisps.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "mcversion": "1.12.*",
   "url": "",
   "updateUrl": "",
