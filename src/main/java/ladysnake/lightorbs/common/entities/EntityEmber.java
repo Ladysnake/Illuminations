@@ -25,6 +25,7 @@ public class EntityEmber extends EntityFirefly {
         this.colorModifier = 0.5F + new Random().nextFloat() * 0.5F;
 
         this.isAttractedByLight = false;
+        this.despawnOnDaytime = false;
     }
 
     @Override

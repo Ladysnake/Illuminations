@@ -19,6 +19,7 @@ public class EntityFirefly extends AbstractLightOrb {
     private float alpha;
     private boolean canDespawn;
     protected boolean isAttractedByLight;
+    protected boolean despawnOnDaytime;
 
     // Constructors
     public EntityFirefly(World world) {
@@ -33,6 +34,7 @@ public class EntityFirefly extends AbstractLightOrb {
         this.setSize(this.scaleModifier, this.scaleModifier);
         this.canDespawn = true;
         this.isAttractedByLight = true;
+        this.despawnOnDaytime = true;
     }
 
     public EntityFirefly(World world, double x, double y, double z) {
@@ -120,6 +122,9 @@ public class EntityFirefly extends AbstractLightOrb {
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        if (this.world.isDaytime() && this.world.canSeeSky(this.getPosition())) this.alpha -= 0.01; else this.alpha += 0.01;
+        if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.setDead();
 
         if (this.posY > 300) this.outOfWorld();
 

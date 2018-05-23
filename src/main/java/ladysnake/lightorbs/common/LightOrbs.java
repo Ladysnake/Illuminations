@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = LightOrbs.MOD_ID, name = LightOrbs.MOD_NAME, version = LightOrbs.MOD_VERSION, acceptedMinecraftVersions = LightOrbs.MCVERSION)
 public class LightOrbs {
-
+    // References
     public static final String MOD_ID = "lightorbs";
     public static final String MOD_NAME = "LightOrbs";
     static final String MOD_VERSION = "0.3.1";

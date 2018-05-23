@@ -21,8 +21,7 @@ public class EntitySolarOrb extends AbstractCompanionOrb implements ILightProvid
 
     @Override
     public Light provideLight() {
-        Color c = new Color(0xF37E4A);
-        return Light.builder().pos(this).radius(8).color(c.getRed(), c.getGreen(), c.getBlue(), 0.01f).build();
+        return Light.builder().pos(this).radius(8).color(243, 126, 74, 0.01f).build();
     }
 
 }

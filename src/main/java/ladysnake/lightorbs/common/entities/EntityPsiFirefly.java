@@ -12,6 +12,8 @@ public class EntityPsiFirefly extends EntityFirefly {
 
     public EntityPsiFirefly(World worldIn) {
         super(worldIn);
+
+        this.despawnOnDaytime = false;
     }
 
     @Override
