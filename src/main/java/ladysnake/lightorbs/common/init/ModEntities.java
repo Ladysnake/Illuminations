@@ -1,7 +1,7 @@
 package ladysnake.lightorbs.common.init;
 
 import ladysnake.lightorbs.client.renders.entities.*;
-import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.LightOrbs;
 import ladysnake.lightorbs.common.entities.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -20,7 +20,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.function.Function;
 
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+@Mod.EventBusSubscriber(modid = LightOrbs.MOD_ID)
 public class ModEntities {
 
     private static int id = 0;
@@ -55,7 +55,7 @@ public class ModEntities {
         return EntityEntryBuilder.create()
                 .entity(entityFactory.apply(null).getClass())
                 .factory(entityFactory)
-                .id(new ResourceLocation(Reference.MOD_ID, name), id++)
+                .id(new ResourceLocation(LightOrbs.MOD_ID, name), id++)
                 .name(name)
                 .tracker(trackingRange, 1, sendsVelocityUpdates);
     }

@@ -12,14 +12,20 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
-
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = Reference.MCVERSION)
+@Mod(modid = LightOrbs.MOD_ID, name = LightOrbs.MOD_NAME, version = LightOrbs.MOD_VERSION, acceptedMinecraftVersions = LightOrbs.MCVERSION)
 public class LightOrbs {
+
+    public static final String MOD_ID = "lightorbs";
+    public static final String MOD_NAME = "LightOrbs";
+    static final String MOD_VERSION = "0.3.1";
+    static final String MCVERSION = "[1.12]";
+
+    static final String CLIENT_PROXY_CLASS = "ladysnake.lightorbs.client.proxy.ClientProxy";
+    static final String SERVER_PROXY_CLASS = "ladysnake.lightorbs.server.proxy.ServerProxy";
 
     public static final Logger LOGGER = LogManager.getLogger("LightOrbs");
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = LightOrbs.CLIENT_PROXY_CLASS, serverSide = LightOrbs.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @EventHandler

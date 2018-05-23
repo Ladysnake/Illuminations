@@ -1,6 +1,6 @@
 package ladysnake.lightorbs.client.renders.entities;
 
-import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.LightOrbs;
 import ladysnake.lightorbs.common.entities.EntityFirefly;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -58,7 +58,7 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
             bufferbuilder.pos(-0.5D, 0.75D, 0.0D).tex((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).endVertex();
             tessellator.draw();
 
-            this.bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly_overlay.png"));
+            this.bindTexture(new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/firefly_overlay.png"));
             //noinspection ConstantConditions
             GlStateManager.color(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
@@ -84,6 +84,6 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
-        return new ResourceLocation(Reference.MOD_ID, "textures/entities/firefly.png");
+        return new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/firefly.png");
     }
 }

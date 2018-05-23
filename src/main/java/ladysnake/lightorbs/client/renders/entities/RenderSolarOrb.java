@@ -1,6 +1,6 @@
 package ladysnake.lightorbs.client.renders.entities;
 
-import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.LightOrbs;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -69,6 +69,6 @@ public class RenderSolarOrb<T extends Entity> extends Render<T> {
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
-        return new ResourceLocation(Reference.MOD_ID, "textures/entities/solar_orb.png");
+        return new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/solar_orb.png");
     }
 }

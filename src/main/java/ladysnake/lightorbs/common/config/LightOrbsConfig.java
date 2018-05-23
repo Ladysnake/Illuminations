@@ -1,13 +1,13 @@
 package ladysnake.lightorbs.common.config;
 
-import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.LightOrbs;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Config(modid = Reference.MOD_ID)
+@Config(modid = LightOrbs.MOD_ID)
 @Mod.EventBusSubscriber
 public class LightOrbsConfig {
 
@@ -26,8 +26,8 @@ public class LightOrbsConfig {
 
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals(Reference.MOD_ID)) {
-            ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
+        if (event.getModID().equals(LightOrbs.MOD_ID)) {
+            ConfigManager.sync(LightOrbs.MOD_ID, Config.Type.INSTANCE);
         }
     }
 }

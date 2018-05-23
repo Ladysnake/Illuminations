@@ -9,12 +9,15 @@ import java.util.Random;
 public class EntityLightningBug extends EntityFirefly {
 
     public EntityLightningBug(World worldIn, double x, double y, double z) {
-        super(worldIn, x, y, z);
+        this(worldIn);
+        this.setPosition(x, y, z);
+
         this.colorModifier = 0.5F + new Random().nextFloat() * 0.5F;
     }
 
     public EntityLightningBug(World worldIn) {
         super(worldIn);
+
         this.colorModifier = 0.5F + new Random().nextFloat() * 0.5F;
     }
 

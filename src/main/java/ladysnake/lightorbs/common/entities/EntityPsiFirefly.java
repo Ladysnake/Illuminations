@@ -6,7 +6,8 @@ import net.minecraft.world.World;
 public class EntityPsiFirefly extends EntityFirefly {
 
     public EntityPsiFirefly(World worldIn, double x, double y, double z) {
-        super(worldIn, x, y, z);
+        this(worldIn);
+        this.setPosition(x, y, z);
     }
 
     public EntityPsiFirefly(World worldIn) {

@@ -5,6 +5,8 @@ import ladysnake.lightorbs.common.entities.EntityFirefly;
 import ladysnake.lightorbs.common.entities.EntityLightningBug;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import ladysnake.lightorbs.common.init.ModItems;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +16,12 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import javax.xml.soap.Text;
+import java.util.List;
 
 public class ItemGlassJar extends Item {
     private String content;
@@ -38,7 +45,8 @@ public class ItemGlassJar extends Item {
         if (!this.content.equals("")) {
             if (!player.isCreative()) {
                 player.getHeldItem(hand).shrink(1);
-                if (!player.addItemStackToInventory(new ItemStack(ModItems.GLASS_JAR))) player.dropItem(new ItemStack(ModItems.GLASS_JAR), true);
+                if (!player.addItemStackToInventory(new ItemStack(ModItems.GLASS_JAR)))
+                    player.dropItem(new ItemStack(ModItems.GLASS_JAR), true);
             }
 
             if (!worldIn.isRemote) {
@@ -97,5 +105,24 @@ public class ItemGlassJar extends Item {
 
         return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
-
+/*
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        switch (this.content) {
+            case "firefly":
+                tooltip.add(TextFormatting.GREEN + I18n.format("item.lightorbs.firefly_in_a_jar.tooltip"));
+                break;
+            case "psi_firefly":
+                tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("item.lightorbs.psi_firefly_in_a_jar.tooltip"));
+                break;
+            case "lightning_bug":
+                tooltip.add(TextFormatting.AQUA + I18n.format("item.lightorbs.lightning_bug_in_a_jar.tooltip"));
+                break;
+            case "ember":
+                tooltip.add(TextFormatting.YELLOW + I18n.format("item.lightorbs.ember_in_a_jar.tooltip"));
+                break;
+        }
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+*/
 }

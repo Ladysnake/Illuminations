@@ -2,7 +2,6 @@ package ladysnake.lightorbs.common.entities;
 
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
-import ladysnake.lightorbs.common.LightOrbs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;

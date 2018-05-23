@@ -18,7 +18,7 @@ public class EntityFirefly extends AbstractLightOrb {
     float colorModifier;
     private float alpha;
     private boolean canDespawn;
-    private boolean isAttractedByLight;
+    protected boolean isAttractedByLight;
 
     // Constructors
     public EntityFirefly(World world) {

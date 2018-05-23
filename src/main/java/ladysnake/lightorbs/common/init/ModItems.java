@@ -1,11 +1,11 @@
 package ladysnake.lightorbs.common.init;
 
 import ladylib.registration.AutoRegister;
-import ladysnake.lightorbs.common.Reference;
+import ladysnake.lightorbs.common.LightOrbs;
 import ladysnake.lightorbs.common.items.ItemCompanionSummoner;
 import ladysnake.lightorbs.common.items.ItemGlassJar;
 
-@AutoRegister(Reference.MOD_ID)
+@AutoRegister(LightOrbs.MOD_ID)
 public class ModItems {
 
     public static final ItemGlassJar GLASS_JAR = new ItemGlassJar();
