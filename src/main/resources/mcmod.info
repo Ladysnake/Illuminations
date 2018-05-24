@@ -6,8 +6,8 @@
   "mcversion": "1.12.*",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Riviathan", "Pyrofab"],
-  "credits": "JannisX11 for making Blockbench, damn that editor's amazing, go check it out: https://blockbench.net/",
+  "authorList": ["River Leviathan"],
+  "credits": "Thanks to JannisX11 for making Blockbench: https://blockbench.net/ and Pyrofab for the original code and regular help he provides.\nTranslations: V972 (Russian, Ukrainian)",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

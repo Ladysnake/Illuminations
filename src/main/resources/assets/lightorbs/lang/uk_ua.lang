@@ -1,0 +1,21 @@
+// Entities
+entity.firefly.name=Світлячок
+entity.psi_firefly.name=Псі-Світлячок
+entity.lightning_bug.name=Світло-жук
+entity.ember.name=Іскорка
+entity.solar_orb.name=Сонячний Світляк
+
+// Creative tab
+itemGroup.LightOrbs=Вогники
+
+// Items
+item.lightorbs.glass_jar.name=Скляна колба
+item.lightorbs.firefly_in_a_jar.name=Світлячок у колбі
+item.lightorbs.psi_firefly_in_a_jar.name=Псі-Світлячок у колбі
+item.lightorbs.lightning_bug_in_a_jar.name=Світло-жук у колбі
+item.lightorbs.ember_in_a_jar.name=Іскорка у колбі
+item.lightorbs.scorching_flint.name=Вогняний Кремінь
+
+// Item tooltips
+item.lightorbs.companion_summoner.tooltip=[Shift right-click] Щоб позбавитися світляка-компаньона.
+item.lightorbs.solar_orb_summoner.tooltip=іскристий камінь для призову сонячного світляка
