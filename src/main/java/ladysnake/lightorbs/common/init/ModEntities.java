@@ -48,6 +48,8 @@ public class ModEntities {
                 .build());
 
         reg.register(createEntry(EntitySolarOrb::new, "solar_orb", 64, true).build());
+
+        reg.register(createEntry(EntityWillOWisp::new, "will_o_wisp", 64, true).build());
     }
 
     private static EntityEntryBuilder<Entity> createEntry(Function<World, Entity> entityFactory,
@@ -68,6 +70,8 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntitySolarOrb.class, RenderSolarOrb::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityWillOWisp.class, RenderWillOWisp::new);
     }
 
 }
