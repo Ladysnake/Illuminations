@@ -23,6 +23,44 @@ import java.util.function.Function;
 @Mod.EventBusSubscriber(modid = LightOrbs.MOD_ID)
 public class ModEntities {
 
+    public enum Companions {
+        SOLAR_ORB ("solar_orb", 243, 126, 74, 8),
+        THUNDERBALL ("thunderball", 204, 234, 255, 8);
+
+        // properties
+        private String name;
+        private int lightingR;
+        private int lightingG;
+        private int lightingB;
+        private int lightingRadius;
+
+        // constructor
+        Companions(String name, int lightingR, int lightingG, int lightingB, int lightingRadius){
+            this.name = name;
+        }
+
+        // getters
+        public String getName() {
+            return name;
+        }
+
+        public int getLightingR() {
+            return lightingR;
+        }
+
+        public int getLightingG() {
+            return lightingB;
+        }
+
+        public int getLightingB() {
+            return lightingB;
+        }
+
+        public int getLightingRadius() {
+            return lightingRadius;
+        }
+    }
+
     private static int id = 0;
 
     @SubscribeEvent
@@ -47,7 +85,7 @@ public class ModEntities {
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
                 .build());
 
-        reg.register(createEntry(EntitySolarOrb::new, "solar_orb", 64, true).build());
+        reg.register(createEntry(EntityCompanionOrb::new, "companion_orb", 64, true).build());
 
         reg.register(createEntry(EntityWillOWisp::new, "will_o_wisp", 64, true).build());
     }
@@ -69,7 +107,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityLightningBug.class, RenderLightningBug::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(EntitySolarOrb.class, RenderSolarOrb::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCompanionOrb.class, RenderCompanionOrb::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityWillOWisp.class, RenderWillOWisp::new);
     }

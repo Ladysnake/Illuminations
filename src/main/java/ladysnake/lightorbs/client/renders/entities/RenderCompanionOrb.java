@@ -1,6 +1,7 @@
 package ladysnake.lightorbs.client.renders.entities;
 
 import ladysnake.lightorbs.common.LightOrbs;
+import ladysnake.lightorbs.common.entities.EntityCompanionOrb;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -13,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class RenderSolarOrb<T extends Entity> extends Render<T> {
-    public RenderSolarOrb(RenderManager renderManager) {
+public class RenderCompanionOrb<T extends Entity> extends Render<T> {
+    public RenderCompanionOrb(RenderManager renderManager) {
         super(renderManager);
         this.shadowOpaque = 0;
     }
@@ -69,6 +70,6 @@ public class RenderSolarOrb<T extends Entity> extends Render<T> {
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
-        return new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/solar_orb.png");
+        return new ResourceLocation(LightOrbs.MOD_ID, ((EntityCompanionOrb) entity).getEntityTexture());
     }
 }

@@ -15,6 +15,6 @@ public class ModItems {
     public static final ItemGlassJar EMBER_IN_A_JAR = new ItemGlassJar("ember");
 
     // Test
-    public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner("solar_orb", true);
+    public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner("solar_orb");
 
 }
