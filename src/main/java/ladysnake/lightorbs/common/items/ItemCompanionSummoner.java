@@ -1,6 +1,7 @@
 package ladysnake.lightorbs.common.items;
 
 import ladysnake.lightorbs.common.entities.EntityCompanionOrb;
+import ladysnake.lightorbs.common.init.ModEntities;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -15,10 +16,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemCompanionSummoner extends Item {
-    private String pet;
+    private ModEntities.Companion companion;
 
-    public ItemCompanionSummoner(String pet) {
-        this.pet = pet;
+    public ItemCompanionSummoner(ModEntities.Companion companion) {
+        this.companion = companion;
     }
 
     @Override
@@ -31,10 +32,9 @@ public class ItemCompanionSummoner extends Item {
 
         // if sneaking, removing pets
         if (!playerIn.isSneaking()) {
-            EntityCompanionOrb spawnedPet = new EntityCompanionOrb(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.getUniqueID());
+            EntityCompanionOrb spawnedPet = new EntityCompanionOrb(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.getUniqueID(), ModEntities.Companion.valueOf(this.companion.toString()));
             if (playerIn.getHeldItem(handIn).hasDisplayName()) spawnedPet.setCustomNameTag(playerIn.getHeldItem(handIn).getDisplayName());
-            else spawnedPet.setCustomNameTag(I18n.format(this.pet));
-            spawnedPet.setProperties(this.pet, 243, 126, 74, 8);
+            else spawnedPet.setCustomNameTag(I18n.format(this.companion.toString()));
             if (!worldIn.isRemote) worldIn.spawnEntity(spawnedPet);
         }
 
@@ -43,7 +43,7 @@ public class ItemCompanionSummoner extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(I18n.format("item.lightorbs."+this.pet+"_summoner.tooltip"));
+        tooltip.add(I18n.format("item.lightorbs."+this.companion +"_summoner.tooltip"));
         tooltip.add(I18n.format("item.lightorbs.companion_summoner.tooltip"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }

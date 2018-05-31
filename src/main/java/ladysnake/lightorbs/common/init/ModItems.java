@@ -14,7 +14,7 @@ public class ModItems {
     public static final ItemGlassJar LIGHTNING_BUG_IN_A_JAR = new ItemGlassJar("lightning_bug");
     public static final ItemGlassJar EMBER_IN_A_JAR = new ItemGlassJar("ember");
 
-    // Test
-    public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner("solar_orb");
+    public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner(ModEntities.Companion.SOLAR_ORB);
+    public static final ItemCompanionSummoner SPARKLING_FLINT = new ItemCompanionSummoner(ModEntities.Companion.THUNDERBALL);
 
 }

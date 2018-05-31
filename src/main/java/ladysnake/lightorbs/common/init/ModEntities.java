@@ -23,7 +23,7 @@ import java.util.function.Function;
 @Mod.EventBusSubscriber(modid = LightOrbs.MOD_ID)
 public class ModEntities {
 
-    public enum Companions {
+    public enum Companion {
         SOLAR_ORB ("solar_orb", 243, 126, 74, 8),
         THUNDERBALL ("thunderball", 204, 234, 255, 8);
 
@@ -35,8 +35,12 @@ public class ModEntities {
         private int lightingRadius;
 
         // constructor
-        Companions(String name, int lightingR, int lightingG, int lightingB, int lightingRadius){
+        Companion(String name, int lightingR, int lightingG, int lightingB, int lightingRadius){
             this.name = name;
+            this.lightingR = lightingR;
+            this.lightingG = lightingG;
+            this.lightingB = lightingB;
+            this.lightingRadius = lightingRadius;
         }
 
         // getters
@@ -49,7 +53,7 @@ public class ModEntities {
         }
 
         public int getLightingG() {
-            return lightingB;
+            return lightingG;
         }
 
         public int getLightingB() {
@@ -67,6 +71,7 @@ public class ModEntities {
     public static void register(RegistryEvent.Register<EntityEntry> event) {
         IForgeRegistry<EntityEntry> reg = event.getRegistry();
 
+        // FIREFLIES
         reg.register(createEntry(EntityFirefly::new, "firefly", 64, true)
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
@@ -85,8 +90,10 @@ public class ModEntities {
                 .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
                 .build());
 
+        // COMPANION ORBS
         reg.register(createEntry(EntityCompanionOrb::new, "companion_orb", 64, true).build());
 
+        // EXPERIMENTAL
         reg.register(createEntry(EntityWillOWisp::new, "will_o_wisp", 64, true).build());
     }
 
@@ -102,13 +109,16 @@ public class ModEntities {
 
     @SideOnly(Side.CLIENT)
     public static void registerRenders() {
+        // FIREFLIES
         RenderingRegistry.registerEntityRenderingHandler(EntityFirefly.class, RenderFirefly::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPsiFirefly.class, RenderPsiFirefly::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityLightningBug.class, RenderLightningBug::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
 
+        // COMPANION ORBS
         RenderingRegistry.registerEntityRenderingHandler(EntityCompanionOrb.class, RenderCompanionOrb::new);
 
+        // EXPERIMENTAL
         RenderingRegistry.registerEntityRenderingHandler(EntityWillOWisp.class, RenderWillOWisp::new);
     }
 

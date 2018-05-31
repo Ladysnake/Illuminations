@@ -70,6 +70,7 @@ public class RenderCompanionOrb<T extends Entity> extends Render<T> {
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
-        return new ResourceLocation(LightOrbs.MOD_ID, ((EntityCompanionOrb) entity).getEntityTexture());
+        return ((EntityCompanionOrb) entity).getEntityTexture();
     }
+
 }

@@ -2,6 +2,9 @@ package ladysnake.lightorbs.common.entities;
 
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
+import ladylib.LadyLib;
+import ladysnake.lightorbs.common.LightOrbs;
+import ladysnake.lightorbs.common.init.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +13,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -22,31 +26,24 @@ import java.util.UUID;
 public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvider {
     // Attributes
     private UUID ownerUUID;
-    private static final DataParameter<String> TYPE = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.STRING);
-    private static final DataParameter<Integer> LIGHTINGR = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> LIGHTINGG = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> LIGHTINGB = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> LIGHTINGRADIUS = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityCompanionOrb.class, DataSerializers.VARINT);
 
     // Constructors
     public EntityCompanionOrb(World world) {
         super(world);
     }
 
-    public EntityCompanionOrb(World world, double x, double y, double z, UUID ownerUUID) {
+    public EntityCompanionOrb(World world, double x, double y, double z, UUID ownerUUID, ModEntities.Companion type) {
         this(world);
         this.setPosition(x, y, z);
         this.ownerUUID = ownerUUID;
+        this.getDataManager().set(TYPE, type.ordinal());
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.getDataManager().register(TYPE, "");
-        this.getDataManager().register(LIGHTINGR, 0);
-        this.getDataManager().register(LIGHTINGG, 0);
-        this.getDataManager().register(LIGHTINGB, 0);
-        this.getDataManager().register(LIGHTINGRADIUS, 0);
+        this.getDataManager().register(TYPE, 0);
     }
 
     // Getters & setters
@@ -58,20 +55,8 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
         }
     }
 
-    public String getType() {
-        return this.getDataManager().get(TYPE);
-    }
-
-    public void setProperties(String type, int lightingR, int lightingG, int lightingB, int lightingRadius) {
-        this.getDataManager().set(TYPE, type);
-        this.getDataManager().set(LIGHTINGR, lightingR);
-        this.getDataManager().set(LIGHTINGG, lightingG);
-        this.getDataManager().set(LIGHTINGB, lightingB);
-        this.getDataManager().set(LIGHTINGRADIUS, lightingRadius);
-    }
-
-    public String getEntityTexture() {
-        return "textures/entities/"+this.getDataManager().get(TYPE)+".png";
+    public ResourceLocation getEntityTexture() {
+        return new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/"+ModEntities.Companion.values()[this.dataManager.get(TYPE)].getName()+".png");
     }
 
     // NBT
@@ -79,22 +64,14 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
         super.readFromNBT(compound);
 
         this.ownerUUID = compound.getUniqueId("ownerUUID");
-        this.getDataManager().set(TYPE, compound.getString("type"));
-        this.getDataManager().set(LIGHTINGR, compound.getInteger("lightingR"));
-        this.getDataManager().set(LIGHTINGG, compound.getInteger("lightingG"));
-        this.getDataManager().set(LIGHTINGB, compound.getInteger("lightingB"));
-        this.getDataManager().set(LIGHTINGRADIUS, compound.getInteger("lightingRadius"));
+        this.getDataManager().set(TYPE, compound.getInteger("type"));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         if (this.ownerUUID != null) compound.setUniqueId("ownerUUID", this.ownerUUID);
-        compound.setString("type", this.getDataManager().get(TYPE));
-        compound.setInteger("lightingR", this.getDataManager().get(LIGHTINGR));
-        compound.setInteger("lightingG", this.getDataManager().get(LIGHTINGG));
-        compound.setInteger("lightingB", this.getDataManager().get(LIGHTINGB));
-        compound.setInteger("lightingRadius", this.getDataManager().get(LIGHTINGRADIUS));
+        compound.setInteger("type", this.getDataManager().get(TYPE));
 
         return compound;
     }
@@ -145,7 +122,7 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
             motionX = (0.9) * motionX + (0.1) * targetVector.x;
             motionY = (0.9) * motionY + (0.1) * targetVector.y;
             motionZ = (0.9) * motionZ + (0.1) * targetVector.z;
-            double speedModifier = (this.getOwner().getPositionVector().subtract(this.getPositionVector()).lengthVector()-2)*10;
+            double speedModifier = Math.max(this.getOwner().getPositionVector().subtract(this.getPositionVector()).lengthVector()-2, 0)*10;
             if (this.getPosition() != this.getTargetPosition())
                 this.move(MoverType.SELF, this.motionX * speedModifier, this.motionY * speedModifier, this.motionZ * speedModifier);
         }
@@ -172,11 +149,9 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
 
     @Override
     public Light provideLight() {
-        return Light.builder().pos(this)
-                .radius(this.getDataManager().get(LIGHTINGRADIUS))
-                .color(this.getDataManager().get(LIGHTINGR),
-                        this.getDataManager().get(LIGHTINGG),
-                        this.getDataManager().get(LIGHTINGB), 0.01f).build();
+        ModEntities.Companion type = ModEntities.Companion.values()[this.getDataManager().get(TYPE)];
+        LadyLib.debug(type.getLightingR());
+        return Light.builder().pos(this).radius(type.getLightingRadius()).color(type.getLightingR(), type.getLightingG(), type.getLightingB(), 0.01f).build();
     }
 
 }
