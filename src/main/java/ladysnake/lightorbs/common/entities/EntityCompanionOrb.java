@@ -2,7 +2,6 @@ package ladysnake.lightorbs.common.entities;
 
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
-import ladylib.LadyLib;
 import ladysnake.lightorbs.common.LightOrbs;
 import ladysnake.lightorbs.common.init.ModEntities;
 import net.minecraft.entity.Entity;
@@ -150,7 +149,6 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
     @Override
     public Light provideLight() {
         ModEntities.Companion type = ModEntities.Companion.values()[this.getDataManager().get(TYPE)];
-        LadyLib.debug(type.getLightingR());
         return Light.builder().pos(this).radius(type.getLightingRadius()).color(type.getLightingR(), type.getLightingG(), type.getLightingB(), 0.01f).build();
     }
 

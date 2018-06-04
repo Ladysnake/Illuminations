@@ -5,8 +5,6 @@ import ladysnake.lightorbs.common.entities.EntityFirefly;
 import ladysnake.lightorbs.common.entities.EntityLightningBug;
 import ladysnake.lightorbs.common.entities.EntityPsiFirefly;
 import ladysnake.lightorbs.common.init.ModItems;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,12 +14,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import javax.xml.soap.Text;
-import java.util.List;
 
 public class ItemGlassJar extends Item {
     private String content;

@@ -13,8 +13,8 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class RenderCompanionOrb<T extends Entity> extends Render<T> {
-    public RenderCompanionOrb(RenderManager renderManager) {
+public class RenderCompanionOrbAnimated<T extends Entity> extends Render<T> {
+    public RenderCompanionOrbAnimated(RenderManager renderManager) {
         super(renderManager);
         this.shadowOpaque = 0;
     }
@@ -33,19 +33,20 @@ public class RenderCompanionOrb<T extends Entity> extends Render<T> {
 
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
 
+            float alpha = 1f;
+            GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
             GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate((float) (this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture(entity);
-            GlStateManager.scale(0.5F, 0.5F, 0.5F);
-            GlStateManager.color(1F, 1F, 1F, 1F);
 
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
-            float minU = 0;
-            float minV = 0;
-            float maxU = 1;
-            float maxV = 1;
+            int i = entity.ticksExisted % 34 / 2;
+            float minU = (i / 5 * 16) / 80f;
+            float minV = (i % 4 * 16) / 80f;
+            float maxU = (i / 5 * 16 + 16) / 80f;
+            float maxV = (i % 4 * 16 + 16) / 80f;
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, -0.25D, 0.0D).tex((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();

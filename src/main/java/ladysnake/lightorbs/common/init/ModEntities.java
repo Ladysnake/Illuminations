@@ -24,8 +24,9 @@ import java.util.function.Function;
 public class ModEntities {
 
     public enum Companion {
-        SOLAR_ORB ("solar_orb", 243, 126, 74, 8),
-        THUNDERBALL ("thunderball", 204, 234, 255, 8);
+        SOLAR_ORB ("solar_orb", 243, 126, 74, 8, false),
+        THUNDERBALL ("thunderball", 204, 234, 255, 8, false),
+        SPLINTER ("splinter", 220, 220, 220, 8, true);
 
         // properties
         private String name;
@@ -33,14 +34,16 @@ public class ModEntities {
         private int lightingG;
         private int lightingB;
         private int lightingRadius;
+        private boolean isAnimated;
 
         // constructor
-        Companion(String name, int lightingR, int lightingG, int lightingB, int lightingRadius){
+        Companion(String name, int lightingR, int lightingG, int lightingB, int lightingRadius, boolean isAnimated){
             this.name = name;
             this.lightingR = lightingR;
             this.lightingG = lightingG;
             this.lightingB = lightingB;
             this.lightingRadius = lightingRadius;
+            this.isAnimated = isAnimated;
         }
 
         // getters
@@ -63,6 +66,10 @@ public class ModEntities {
         public int getLightingRadius() {
             return lightingRadius;
         }
+
+        public boolean isAnimated() {
+            return isAnimated;
+        }
     }
 
     private static int id = 0;
@@ -73,28 +80,39 @@ public class ModEntities {
 
         // FIREFLIES
         reg.register(createEntry(EntityFirefly::new, "firefly", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .spawn(EnumCreatureType.AMBIENT, 50, 0, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 0, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
         reg.register(createEntry(EntityPsiFirefly::new, "psi_firefly", 64, true)
-                .spawn(EnumCreatureType.CREATURE, 50, 1, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
+                .spawn(EnumCreatureType.CREATURE, 50, 0, 1, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
                 .build());
 
         reg.register(createEntry(EntityLightningBug::new, "lightning_bug", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
+                .spawn(EnumCreatureType.AMBIENT, 50, 0, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.WET))
+                .spawn(EnumCreatureType.AMBIENT, 50, 0, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
                 .build());
 
         reg.register(createEntry(EntityEmber::new, "ember", 64, true)
-                .spawn(EnumCreatureType.AMBIENT, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
+                .spawn(EnumCreatureType.AMBIENT, 50, 0, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER))
                 .build());
 
         // COMPANION ORBS
         reg.register(createEntry(EntityCompanionOrb::new, "companion_orb", 64, true).build());
+        reg.register(createEntry(EntityCompanionOrbAnimated::new, "companion_orb_a", 64, true).build());
 
         // EXPERIMENTAL
-        reg.register(createEntry(EntityWillOWisp::new, "will_o_wisp", 64, true).build());
+        reg.register(createEntry(EntityWillOWisp::new, "will_o_wisp", 64, true)
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP))
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY))
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.DEAD))
+                .build());
+
+        reg.register(createEntry(EntityFaerie::new, "faerie", 64, true)
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.DENSE))
+                .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
+                .build());
+
     }
 
     private static EntityEntryBuilder<Entity> createEntry(Function<World, Entity> entityFactory,
@@ -117,9 +135,11 @@ public class ModEntities {
 
         // COMPANION ORBS
         RenderingRegistry.registerEntityRenderingHandler(EntityCompanionOrb.class, RenderCompanionOrb::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCompanionOrbAnimated.class, RenderCompanionOrbAnimated::new);
 
         // EXPERIMENTAL
         RenderingRegistry.registerEntityRenderingHandler(EntityWillOWisp.class, RenderWillOWisp::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFaerie.class, RenderFaerie::new);
     }
 
 }

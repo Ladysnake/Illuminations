@@ -1,6 +1,7 @@
 package ladysnake.lightorbs.common.items;
 
 import ladysnake.lightorbs.common.entities.EntityCompanionOrb;
+import ladysnake.lightorbs.common.entities.EntityCompanionOrbAnimated;
 import ladysnake.lightorbs.common.init.ModEntities;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -32,7 +33,9 @@ public class ItemCompanionSummoner extends Item {
 
         // if sneaking, removing pets
         if (!playerIn.isSneaking()) {
-            EntityCompanionOrb spawnedPet = new EntityCompanionOrb(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.getUniqueID(), ModEntities.Companion.valueOf(this.companion.toString()));
+            EntityCompanionOrb spawnedPet;
+            if (this.companion.isAnimated()) spawnedPet = new EntityCompanionOrbAnimated(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.getUniqueID(), ModEntities.Companion.valueOf(this.companion.toString()));
+            else spawnedPet = new EntityCompanionOrb(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.getUniqueID(), ModEntities.Companion.valueOf(this.companion.toString()));
             if (playerIn.getHeldItem(handIn).hasDisplayName()) spawnedPet.setCustomNameTag(playerIn.getHeldItem(handIn).getDisplayName());
             else spawnedPet.setCustomNameTag(I18n.format(this.companion.toString()));
             if (!worldIn.isRemote) worldIn.spawnEntity(spawnedPet);
@@ -43,7 +46,7 @@ public class ItemCompanionSummoner extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(I18n.format("item.lightorbs."+this.companion +"_summoner.tooltip"));
+        tooltip.add(I18n.format("item.lightorbs."+this.companion.toString().toLowerCase()+"_summoner.tooltip"));
         tooltip.add(I18n.format("item.lightorbs.companion_summoner.tooltip"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }

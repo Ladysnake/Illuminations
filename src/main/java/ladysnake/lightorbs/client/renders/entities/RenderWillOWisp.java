@@ -71,6 +71,7 @@ public class RenderWillOWisp<T extends Entity> extends Render<T> {
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull T entity) {
+
         return new ResourceLocation(LightOrbs.MOD_ID, "textures/entities/will_o_wisp.png");
     }
 

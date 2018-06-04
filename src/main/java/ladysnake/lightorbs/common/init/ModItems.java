@@ -16,5 +16,6 @@ public class ModItems {
 
     public static final ItemCompanionSummoner SCORCHING_FLINT = new ItemCompanionSummoner(ModEntities.Companion.SOLAR_ORB);
     public static final ItemCompanionSummoner SPARKLING_FLINT = new ItemCompanionSummoner(ModEntities.Companion.THUNDERBALL);
+    public static final ItemCompanionSummoner RAT_HAMMOCK = new ItemCompanionSummoner(ModEntities.Companion.SPLINTER);
 
 }

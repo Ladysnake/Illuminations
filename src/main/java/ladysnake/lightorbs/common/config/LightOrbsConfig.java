@@ -24,6 +24,12 @@ public class LightOrbsConfig {
     @Config.Comment("Enable ember spawn")
     public static boolean spawnEmbers = true;
 
+    @Config.Comment("Enable will o' wisp spawn")
+    public static boolean spawnWillOWisps = true;
+
+    @Config.Comment("Enable faerie spawn")
+    public static boolean spawnFaeries = true;
+
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(LightOrbs.MOD_ID)) {
