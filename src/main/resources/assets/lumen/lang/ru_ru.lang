@@ -1,0 +1,21 @@
+// Entities
+entity.firefly.name=���������
+entity.psi_firefly.name=���-���������
+entity.lightning_bug.name=�����-���
+entity.ember.name=�������
+entity.solar_orb.name=��������� �������
+
+// Creative tab
+itemGroup.Lumen=�������
+
+// Items
+item.lumen.glass_jar.name=���������� �����
+item.lumen.firefly_in_a_jar.name=��������� � �����
+item.lumen.psi_firefly_in_a_jar.name=���-��������� � �����
+item.lumen.lightning_bug_in_a_jar.name=�����-��� � �����
+item.lumen.ember_in_a_jar.name=������� � �����
+item.lumen.scorching_flint.name=�������� �������
+
+// Item tooltips
+item.lumen.companion_summoner.tooltip=[Shift right-click] ����� ��������� �� ��������-����������.
+item.lumen.solar_orb_summoner.tooltip=�������� ������ ��� ������� ���������� ��������

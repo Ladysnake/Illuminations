@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "lumen:items/ember_in_a_jar"
+    }
+}

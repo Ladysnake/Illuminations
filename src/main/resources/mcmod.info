@@ -1,8 +1,8 @@
 [{
-  "modid": "lightorbs",
-  "name": "LightOrbs",
+  "modid": "lumen",
+  "name": "Lumen",
   "description": "A mod that adds various light orbs to the world, like fireflies or Will o' the Wisps.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "mcversion": "1.12.*",
   "url": "",
   "updateUrl": "",

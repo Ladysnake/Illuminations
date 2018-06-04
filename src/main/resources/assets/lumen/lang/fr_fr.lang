@@ -1,0 +1,21 @@
+// Entities
+entity.firefly.name=Luciole
+entity.psi_firefly.name=Luciole psionique
+entity.lightning_bug.name=Luciorage
+entity.ember.name=Braise
+entity.solar_orb.name=Orbe solaire
+
+// Creative tab
+itemGroup.Lumen=Lumen
+
+// Items
+item.lumen.glass_jar.name=Bocal en verre
+item.lumen.firefly_in_a_jar.name=Luciole dans un bocal
+item.lumen.psi_firefly_in_a_jar.name=Luciole psionique dans un bocal
+item.lumen.lightning_bug_in_a_jar.name=Luciorage dans un bocal
+item.lumen.ember_in_a_jar.name=Braise dans un bocal
+item.lumen.scorching_flint.name=Silex brûlant
+
+// Item tooltips
+item.lumen.companion_summoner.tooltip=[Shift right-click] Se débarasser de l'orbe qui vous accompagne.
+item.lumen.solar_orb_summoner.tooltip=Une pierre brûlante pour invoquer un orbe solaire.
