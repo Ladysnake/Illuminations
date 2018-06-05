@@ -113,6 +113,8 @@ public class ModEntities {
                 .spawn(EnumCreatureType.CREATURE, 50, 1, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL))
                 .build());
 
+        reg.register(createEntry(EntityRadFlame::new, "rad_flame", 64, true).build());
+
     }
 
     private static EntityEntryBuilder<Entity> createEntry(Function<World, Entity> entityFactory,
@@ -140,6 +142,7 @@ public class ModEntities {
         // EXPERIMENTAL
         RenderingRegistry.registerEntityRenderingHandler(EntityWillOWisp.class, RenderWillOWisp::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFaerie.class, RenderFaerie::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityRadFlame.class, RenderRadFlame::new);
     }
 
 }
