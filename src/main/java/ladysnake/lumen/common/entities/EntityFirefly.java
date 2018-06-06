@@ -123,7 +123,6 @@ public class EntityFirefly extends AbstractLightOrb {
     public void onUpdate() {
         super.onUpdate();
 
-        if (this.world.isDaytime() && this.world.canSeeSky(this.getPosition())) this.alpha -= 0.01; else this.alpha += 0.01;
         if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.setDead();
 
         if (this.posY > 300) this.outOfWorld();

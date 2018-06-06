@@ -60,7 +60,7 @@ public class RenderPsiFirefly<T extends Entity> extends Render<T> {
 
             this.bindTexture(new ResourceLocation(Lumen.MOD_ID, "textures/entities/firefly_overlay.png"));
             //noinspection ConstantConditions
-            GlStateManager.color(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
+            GlStateManager.color(1F, 1F, 1F);
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, -0.25D, 0.0D).tex((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).endVertex();

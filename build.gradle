@@ -58,7 +58,7 @@ jar {
     }
 }
 
-version = "Alpha 0.4.0"
+version = "Beta 0.4.0"
 group = "ladysnake.lumen" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lumen"
 
