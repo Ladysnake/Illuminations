@@ -1,21 +1,25 @@
 // Entities
-entity.firefly.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-entity.psi_firefly.name=пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-entity.lightning_bug.name=пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅ
-entity.ember.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-entity.solar_orb.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+entity.firefly.name=Светлячок
+entity.psi_firefly.name=ѕси-светлячок
+entity.lightning_bug.name=Свето-жук
+entity.ember.name=Искорка
+entity.solar_orb.name=Солнечный светляк
 
 // Creative tab
-itemGroup.Lumen=пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+itemGroup.Lumen=Люмен
 
 // Items
-item.lumen.glass_jar.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-item.lumen.firefly_in_a_jar.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-item.lumen.psi_firefly_in_a_jar.name=пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-item.lumen.lightning_bug_in_a_jar.name=пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-item.lumen.ember_in_a_jar.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-item.lumen.scorching_flint.name=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+item.lumen.glass_jar.name=Стеклянная колба
+item.lumen.firefly_in_a_jar.name=Светлячок в колбе
+item.lumen.psi_firefly_in_a_jar.name=ѕси-Светлячок в колбе
+item.lumen.lightning_bug_in_a_jar.name=Свето-жук в колбе
+item.lumen.ember_in_a_jar.name=Искорка в колбе
+item.lumen.scorching_flint.name=Жгучий кремень
+item.lumen.sparkling_flint.name=Искрящий кремень
+item.lumen.rat_hammock.name=Крысиный гамак
 
 // Item tooltips
-item.lumen.companion_summoner.tooltip=[Shift right-click] пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
-item.lumen.solar_orb_summoner.tooltip=пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+item.lumen.companion_summoner.tooltip=[Shift right-click] Чтобы избавится от светляка-компаньона.
+item.lumen.solar_orb_summoner.tooltip=Яркий пламенный камень для призыва солнечного светляка.
+item.lumen.thunderball_summoner.tooltip=Громом пораженный.
+item.lumen.splinter_summoner.tooltip=Ты был ангелом среди крыс. Да найдёшь ты путь обратно на небеса. Покойся с миром.

@@ -1,0 +1,27 @@
+#####By Xesar_Zk#####
+#
+// Entities
+entity.firefly.name=Luciernaga
+entity.psi_firefly.name=Luciernaga Psi
+entity.lightning_bug.name=Bicho Relampago
+entity.ember.name=Ascua
+entity.solar_orb.name=Orbe Solar
+
+// Creative tab
+itemGroup.Lumen=Lumen
+
+// Items
+item.lumen.glass_jar.name=Jarra de Vidrio
+item.lumen.firefly_in_a_jar.name=Luciernaga en Jarra
+item.lumen.psi_firefly_in_a_jar.name=Luciernaga Psi en Jarra
+item.lumen.lightning_bug_in_a_jar.name=Bicho Relampago en Jarra
+item.lumen.ember_in_a_jar.name=Ascua en Jarra
+item.lumen.scorching_flint.name=Pedernal Abrasador
+item.lumen.sparkling_flint.name=Pedernal Chispeante
+item.lumen.rat_hammock.name=Hamaca de Rata
+
+// Item tooltips
+item.lumen.companion_summoner.tooltip=[Shift + Click derecho] Deshazte de tu amigo orbe.
+item.lumen.solar_orb_summoner.tooltip=Una piedra ardiente para convocar a un orbe solar.
+item.lumen.thunderball_summoner.tooltip=Shock.
+item.lumen.splinter_summoner.tooltip=Eras un angel entre las ratas. Que encuentres tu camino de regreso al cielo. Descansa en paz mi amigito.
