@@ -1,0 +1,25 @@
+﻿// Entities
+entity.firefly.name=萤火虫
+entity.psi_firefly.name=灵能萤火虫
+entity.lightning_bug.name=闪电虫
+entity.ember.name=余烬
+entity.solar_orb.name=日耀球
+
+// Creative tab
+itemGroup.Lumen=流明
+
+// Items
+item.lumen.glass_jar.name=玻璃罐
+item.lumen.firefly_in_a_jar.name=罐中的萤火虫
+item.lumen.psi_firefly_in_a_jar.name=罐中的灵能萤火虫
+item.lumen.lightning_bug_in_a_jar.name=罐中的闪电虫
+item.lumen.ember_in_a_jar.name=罐中的余烬
+item.lumen.scorching_flint.name=炙热燧石
+item.lumen.sparkling_flint.name=蓝耀燧石
+item.lumen.rat_hammock.name=温鼠床
+
+// Item tooltips
+item.lumen.companion_summoner.tooltip=Shift+右键单击，摆脱你所召唤的萤火虫.
+item.lumen.solar_orb_summoner.tooltip=召唤日耀球的炽石
+item.lumen.thunderball_summoner.tooltip=雷霆万钧！
+item.lumen.splinter_summoner.tooltip=你是老鼠中的一位天使。愿你找到你回到天堂的路。安息吧，我的温鼠。
