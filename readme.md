@@ -1,7 +1,3 @@
-![lumen-will-o-wisps](assets/lumen-will-o-wisps.png)
-
-![lumen-solar-orb](assets/lumen-solar-orb.png)
-
 ![logo-font-rainbow](assets/logo-font-rainbow.png)
 
 
