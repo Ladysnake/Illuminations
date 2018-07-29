@@ -10,6 +10,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
+import javax.annotation.Nonnull;
+
 @Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo", striprefs = true)
 public class EntityWillOWisp extends AbstractLightOrb implements ILightProvider {
     // Constructors
@@ -46,7 +48,7 @@ public class EntityWillOWisp extends AbstractLightOrb implements ILightProvider 
     }
 
     @Override
-    public boolean isEntityInvulnerable(DamageSource source) {
+    public boolean isEntityInvulnerable(@Nonnull DamageSource source) {
         return !source.isUnblockable();
     }
 
@@ -71,7 +73,7 @@ public class EntityWillOWisp extends AbstractLightOrb implements ILightProvider 
             }
 
             Vec3d targetVector = new Vec3d(this.xTarget - posX, this.yTarget - posY, this.zTarget - posZ);
-            double length = targetVector.lengthVector();
+            double length = targetVector.length();
             targetVector = targetVector.scale(0.1 / length);
             motionX = (0.9) * motionX + (0.1) * targetVector.x;
             motionY = (0.9) * motionY + (0.1) * targetVector.y;

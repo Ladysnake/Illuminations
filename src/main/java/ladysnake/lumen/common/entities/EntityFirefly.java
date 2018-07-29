@@ -9,7 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class EntityFirefly extends AbstractLightOrb {
@@ -135,7 +137,7 @@ public class EntityFirefly extends AbstractLightOrb {
             }
 
             Vec3d targetVector = new Vec3d(this.xTarget - posX, this.yTarget - posY, this.zTarget - posZ);
-            double length = targetVector.lengthVector();
+            double length = targetVector.length();
             targetVector = targetVector.scale(0.1 / length);
             motionX = (0.9) * motionX + (0.1) * targetVector.x;
             motionY = (0.9) * motionY + (0.1) * targetVector.y;
@@ -205,7 +207,7 @@ public class EntityFirefly extends AbstractLightOrb {
             BlockPos randBP = new BlockPos(this.posX + rand.nextGaussian() * 10, this.posY + rand.nextGaussian() * 10, this.posZ + rand.nextGaussian() * 10);
             randBlocks.put(randBP, this.world.getLight(randBP, true));
         }
-        return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+        return randBlocks.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).map(Map.Entry::getKey).orElse(new BlockPos(this));
     }
 
 }

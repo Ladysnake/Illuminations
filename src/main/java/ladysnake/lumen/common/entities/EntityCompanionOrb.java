@@ -18,6 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +67,7 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
         this.getDataManager().set(TYPE, compound.getInteger("type"));
     }
 
+    @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
@@ -87,7 +89,7 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
     }
 
     @Override
-    public boolean isEntityInvulnerable(DamageSource source) {
+    public boolean isEntityInvulnerable(@Nonnull DamageSource source) {
         return this.getOwner() != null;
     }
 
@@ -116,12 +118,12 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
             }
 
             Vec3d targetVector = new Vec3d(this.xTarget - posX, this.yTarget - posY, this.zTarget - posZ);
-            double length = targetVector.lengthVector();
+            double length = targetVector.length();
             targetVector = targetVector.scale(0.1 / length);
             motionX = (0.9) * motionX + (0.1) * targetVector.x;
             motionY = (0.9) * motionY + (0.1) * targetVector.y;
             motionZ = (0.9) * motionZ + (0.1) * targetVector.z;
-            double speedModifier = Math.max(this.getOwner().getPositionVector().subtract(this.getPositionVector()).lengthVector()-2, 0)*10;
+            double speedModifier = Math.max(this.getOwner().getPositionVector().subtract(this.getPositionVector()).length()-2, 0)*10;
             if (this.getPosition() != this.getTargetPosition())
                 this.move(MoverType.SELF, this.motionX * speedModifier, this.motionY * speedModifier, this.motionZ * speedModifier);
         }
@@ -140,9 +142,7 @@ public class EntityCompanionOrb extends AbstractLightOrb implements ILightProvid
     }
 
     public void verifyIfOnlyCompanion() {
-        List<Entity> companions = this.world.getEntities(EntityCompanionOrb.class, entity -> {
-            return ((EntityCompanionOrb) entity).getOwner() == this.getOwner();
-        });
+        List<Entity> companions = this.world.getEntities(EntityCompanionOrb.class, entity -> ((EntityCompanionOrb) entity).getOwner() == this.getOwner());
         if (companions.size() > 1) this.setDead();
     }
 
