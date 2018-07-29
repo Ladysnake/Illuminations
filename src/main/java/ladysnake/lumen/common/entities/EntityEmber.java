@@ -2,12 +2,13 @@ package ladysnake.lumen.common.entities;
 
 import ladysnake.lumen.common.config.LumenConfig;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Random;
 
 public class EntityEmber extends EntityFirefly {
@@ -38,7 +39,7 @@ public class EntityEmber extends EntityFirefly {
     }
 
     @Override
-    public boolean isEntityInvulnerable(DamageSource source) {
+    public boolean isEntityInvulnerable(@Nonnull DamageSource source) {
         return source == DamageSource.LAVA || source == DamageSource.IN_FIRE || source == DamageSource.ON_FIRE || source == DamageSource.HOT_FLOOR;
     }
 
@@ -48,13 +49,17 @@ public class EntityEmber extends EntityFirefly {
     }
 
     @Override
-    public void onCollideWithPlayer(EntityPlayer entityIn) {
-        entityIn.setFire(2);
-    }
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getHealth() > 0.0F) {
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox());
 
-    @Override
-    protected void collideWithEntity(Entity entityIn) {
-        entityIn.setFire(2);
+            for (Entity entity : list) {
+                if (!entity.isDead) {
+                    entity.setFire(2);
+                }
+            }
+        }
     }
 
 
