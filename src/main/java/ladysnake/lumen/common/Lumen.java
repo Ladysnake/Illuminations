@@ -18,7 +18,7 @@ public class Lumen {
     // References
     public static final String MOD_ID = "lumen";
     public static final String MOD_NAME = "Lumen";
-    static final String MOD_VERSION = "0.4.0";
+    static final String MOD_VERSION = "0.4.1";
     static final String MCVERSION = "[1.12]";
     static final String DEPENDENCIES = "required-after:ladylib;";
 

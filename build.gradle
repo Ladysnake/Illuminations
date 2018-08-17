@@ -37,6 +37,7 @@ jar {
 
     from(configurations.contained.files) {
         include '*'
+        into 'META-INF/libraries'
     }
 
     manifest {
@@ -87,4 +88,12 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+apply from: 'update_json.gradle'
+build.finalizedBy updateJson
+
+updateJson {
+    curseforgeURL = "https://minecraft.curseforge.com/projects/lumen"
+    beta = true
 }
