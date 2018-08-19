@@ -1,7 +1,7 @@
 {
     "homepage": "https://minecraft.curseforge.com/projects/lumen",
     "promos": {
-        "1.12.2-latest": "0.4.1"
+        "1.12.2-latest": "0.4.0"
     },
     "1.12.2": {
         "0.1.0": "Initial Alpha version of the mod, introducing fireflies that spawn in swamps and forests, \nalong with psi fireflies appearing in the End and magical type biomes.",
