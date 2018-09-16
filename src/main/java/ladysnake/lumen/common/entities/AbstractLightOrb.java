@@ -1,11 +1,14 @@
 package ladysnake.lumen.common.entities;
 
+import ladylib.client.lighting.MutableCheapLight;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public abstract class AbstractLightOrb extends EntityCreature {
 
@@ -53,6 +56,12 @@ public abstract class AbstractLightOrb extends EntityCreature {
     @Override
     public boolean doesEntityNotTriggerPressurePlate() {
         return true;
+    }
+
+    @Nullable
+    public MutableCheapLight createLight() {
+        return null;
+//        return new SimpleCheapLight(this.getPositionVector(), radius, new Color(r, g, b, a));
     }
 
 }
