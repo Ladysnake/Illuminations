@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "lightorbs:scorching_flint"
+  },
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "lightorbs:ember_in_a_jar"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    }
+  ]
+}

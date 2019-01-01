@@ -1,0 +1,21 @@
+// Entities
+entity.firefly.name=Firefly
+entity.psi_firefly.name=Psi firefly
+entity.lightning_bug.name=Lightning bug
+entity.ember.name=Ember
+entity.solar_orb.name=Solar orb
+
+// Creative tab
+itemGroup.LightOrbs=LightOrbs
+
+// Items
+item.lightorbs.glass_jar.name=Glass jar
+item.lightorbs.firefly_in_a_jar.name=Firefly in a jar
+item.lightorbs.psi_firefly_in_a_jar.name=Psi firefly in a jar
+item.lightorbs.lightning_bug_in_a_jar.name=Lightning bug in a jar
+item.lightorbs.ember_in_a_jar.name=Ember in a jar
+item.lightorbs.scorching_flint.name=Scorching flint
+
+// Item tooltips
+item.lightorbs.companion_summoner.tooltip=[Shift right-click] Get rid of your companion orb.
+item.lightorbs.solar_orb_summoner.tooltip=A blazing stone to summon a solar orb.
