@@ -86,12 +86,12 @@ public class EntityFirefly extends AbstractLightOrb {
     }
 
     @Override
-    protected void readCustomDataFromTag(CompoundTag compoundTag) {
+    public void readCustomDataFromTag(CompoundTag compoundTag) {
 
     }
 
     @Override
-    protected void writeCustomDataToTag(CompoundTag compoundTag) {
+    public void writeCustomDataToTag(CompoundTag compoundTag) {
 
     }
 
@@ -207,11 +207,6 @@ public class EntityFirefly extends AbstractLightOrb {
             randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
         }
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
-    }
-
-    @Override
-    protected void initDataTracker() {
-
     }
 
 }

@@ -12,7 +12,7 @@ public class IlluminationsEntities {
     public static EntityType<EntityFirefly> FIREFLY;
 
     public static void init() {
-        FIREFLY = Registry.register(Registry.ENTITY_TYPE, "illuminations:firefly", FabricEntityTypeBuilder.create(EntityFirefly.class, EntityFirefly::new).build());
+        FIREFLY = Registry.register(Registry.ENTITY_TYPE, "illuminations:firefly", FabricEntityTypeBuilder.create(EntityFirefly.class, EntityFirefly::new).trackable(64, 1, true).build());
     }
 
     public static void registerRenders() {
