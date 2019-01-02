@@ -1,9 +1,13 @@
 package ladysnake.illuminations.common.entities;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.sortme.Living;
+import net.minecraft.item.block.BlockItem;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class AbstractLightOrb extends MobEntityWithAi implements Living {
@@ -33,13 +37,20 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
     }
 
     @Override
-    public boolean doesCollide() {
-        return false;
+    protected void method_5623(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
-//
-//    @Override
-//    public boolean doesEntityNotTriggerPressurePlate() {
-//        return true;
-//    }
+
+    @Override
+    public void pushAway(Entity entityIn) {
+    }
+
+    @Override
+    public void pushAwayFrom(Entity entityIn) {
+    }
+
+    @Override
+    public boolean canAvoidTraps() {
+        return true;
+    }
 
 }
