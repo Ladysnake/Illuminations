@@ -31,22 +31,11 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
     public boolean isUnaffectedByGravity() {
         return true;
     }
-//
-//    @Override
-//    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-//    }
-//
-//    @Override
-//    protected void collideWithEntity(Entity entityIn) {
-//    }
-//
-//    @Override
-//    protected void collideWithNearbyEntities() {
-//    }
-//
-//    @Override
-//    public void onCollideWithPlayer(EntityPlayer entityIn) {
-//    }
+
+    @Override
+    public boolean doesCollide() {
+        return false;
+    }
 //
 //    @Override
 //    public boolean doesEntityNotTriggerPressurePlate() {

@@ -1,5 +1,6 @@
 package ladysnake.illuminations.client.renders.entities;
 
+import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.entities.EntityFirefly;
@@ -10,6 +11,9 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
+import org.lwjgl.opengl.GL11;
+
+import static com.mojang.blaze3d.platform.GLX.GL_TEXTURE1;
 
 
 public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
@@ -30,7 +34,7 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
             GlStateManager.blendFunc(GlStateManager.SrcBlendFactor.SRC_ALPHA, GlStateManager.DstBlendFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.disableLighting();
 
-//            GLX.texture(OpenGlHelper.lightmapTexUnit, 240f, 240f);
+            GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240f, 240f);
 
             GlStateManager.rotatef(180.0F - this.renderManager.field_4679, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotatef((float) (this.renderManager.settings.field_1850 == 2 ? -1 : 1) * -this.renderManager.field_4677, 1.0F, 0.0F, 0.0F);
@@ -41,9 +45,9 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
                 float alpha = ((EntityFirefly) entity).getAlpha();
 
                 // if is day and firefly sees the sky, fade out, else fade in
-                if (!isNightTime && entity.world.getSkyLightLevel(entity.getPos()))
-                    alpha -= 0.01;
-                else alpha += 0.01;
+//                if (!isNightTime && entity.world.getSkyLightLevel(entity.getPos()))
+//                    alpha -= 0.01;
+//                else alpha += 0.01;
                 float scale = ((EntityFirefly) entity).getScaleModifier();
                 float color = ((EntityFirefly) entity).getColorModifier();
                 ((EntityFirefly) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
@@ -57,21 +61,21 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
             float minV = 0;
             float maxU = 1;
             float maxV = 1;
-            bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
-            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).end();
+            bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
+            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
             tessellator.draw();
 
             this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entities/firefly_overlay.png"));
             //noinspection ConstantConditions
             GlStateManager.color4f(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
-            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).end();
-            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).end();
+            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
+            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
             tessellator.draw();
 
             GlStateManager.disableAlphaTest();
