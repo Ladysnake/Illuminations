@@ -1,13 +1,15 @@
 package ladysnake.illuminations.common.entities;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.sortme.Living;
-import net.minecraft.item.block.BlockItem;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public abstract class AbstractLightOrb extends MobEntityWithAi implements Living {
@@ -27,9 +29,9 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
         super.update();
     }
 
-    protected boolean canTriggerWalking() {
-        return false;
-    }
+//    protected boolean canTriggerWalking() {
+//        return false;
+//    }
 
     @Override
     public boolean isUnaffectedByGravity() {
@@ -51,6 +53,17 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
     @Override
     public boolean canAvoidTraps() {
         return true;
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public boolean shouldRenderAtDistance(double double_1) {
+        return true;
+    }
+
+    @Override
+    public boolean method_5658() {
+        return false;
     }
 
 }

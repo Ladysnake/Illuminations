@@ -13,8 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
-import static com.mojang.blaze3d.platform.GLX.GL_TEXTURE1;
-
 
 public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
     public RenderFirefly(EntityRenderDispatcher renderManager) {
