@@ -1,10 +1,12 @@
 package ladysnake.illuminations.common.entities;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntityWithAi;
+import net.minecraft.entity.sortme.Living;
 import net.minecraft.world.World;
 
-public abstract class AbstractLightOrb extends MobEntityWithAi {
+public abstract class AbstractLightOrb extends MobEntityWithAi implements Living {
 
     public AbstractLightOrb(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
