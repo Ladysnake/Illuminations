@@ -8,34 +8,25 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static net.minecraft.world.biome.Biome.Category.*;
 
 public class IlluminationsEntities {
 
     public static EntityType<EntityFirefly> FIREFLY;
 
     public static void init() {
+        // Firefly + firefly spawns
         FIREFLY = Registry.register(Registry.ENTITY_TYPE, "illuminations:firefly", FabricEntityTypeBuilder.create(EntityFirefly.class, EntityFirefly::new).trackable(64, 1, true).build());
-        Biome.SpawnEntry fireflySpawnEntry = new Biome.SpawnEntry(FIREFLY, 10, 6, 24);
-        Biomes.PLAINS.getEntitySpawnList(EntityCategory.CREATURE).add(fireflySpawnEntry);
-        Biomes.SUNFLOWER_PLAINS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.SWAMP.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.SWAMP_HILLS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.FOREST.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.BIRCH_FOREST.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.DARK_FOREST.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.FLOWER_FOREST.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.TALL_BIRCH_FOREST.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.BIRCH_FOREST_HILLS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.DARK_FOREST_HILLS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.RIVER.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.JUNGLE.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.JUNGLE_EDGE.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.JUNGLE_HILLS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.BAMBOO_JUNGLE.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.BAMBOO_JUNGLE_HILLS.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.MODIFIED_JUNGLE.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
-        Biomes.MODIFIED_JUNGLE_EDGE.getEntitySpawnList(EntityCategory.AMBIENT).add(fireflySpawnEntry);
+        List<Biome.Category> acceptableCategories = Arrays.asList(PLAINS, SWAMP, FOREST, JUNGLE, SAVANNA, RIVER);
+        for (Biome biome : Registry.BIOME) {
+            if (acceptableCategories.contains(biome.getCategory())) {
+                biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(FIREFLY, 40, 6, 24));
+            }
+        }
     }
 
     public static void registerRenders() {

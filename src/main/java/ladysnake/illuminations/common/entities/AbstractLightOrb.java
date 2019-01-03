@@ -5,11 +5,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.sortme.Living;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public abstract class AbstractLightOrb extends MobEntityWithAi implements Living {
@@ -28,10 +26,6 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
     public void update() {
         super.update();
     }
-
-//    protected boolean canTriggerWalking() {
-//        return false;
-//    }
 
     @Override
     public boolean isUnaffectedByGravity() {

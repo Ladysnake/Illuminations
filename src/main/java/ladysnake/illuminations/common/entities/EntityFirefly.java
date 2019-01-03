@@ -19,7 +19,6 @@ public class EntityFirefly extends AbstractLightOrb {
     // Attributes
     private float scaleModifier;
     float colorModifier;
-    private float alpha;
     private boolean canDespawn;
     protected boolean isAttractedByLight;
     protected boolean despawnOnDaytime;
@@ -30,7 +29,6 @@ public class EntityFirefly extends AbstractLightOrb {
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
-        this.alpha = 1F;
 
         this.setSize(this.scaleModifier, this.scaleModifier);
         this.canDespawn = true;
@@ -52,29 +50,8 @@ public class EntityFirefly extends AbstractLightOrb {
         return colorModifier;
     }
 
-    public float getAlpha() {
-        return alpha;
-    }
-
-    public void setAlpha(float alpha) {
-        this.alpha = alpha;
-    }
-//
-//    @Override
-//    protected boolean canDespawn() {
-//        return this.canDespawn;
-//    }
-
-    public void setCanDespawn(boolean canDespawn) {
-        this.canDespawn = canDespawn;
-    }
-
     public boolean isAttractedByLight() {
         return isAttractedByLight;
-    }
-
-    public void setAttractedByLight(boolean attractedByLight) {
-        isAttractedByLight = attractedByLight;
     }
 
     // NBT
@@ -84,7 +61,6 @@ public class EntityFirefly extends AbstractLightOrb {
 
         this.scaleModifier = compound.getFloat("scaleModifier");
         this.colorModifier = compound.getFloat("colorModifier");
-        this.alpha = compound.getFloat("alpha");
         this.canDespawn = compound.getBoolean("canDespawn");
     }
 
@@ -102,7 +78,6 @@ public class EntityFirefly extends AbstractLightOrb {
     public CompoundTag toTag(CompoundTag compound) {
         compound.putFloat("scaleModifier", this.scaleModifier);
         compound.putFloat("colorModifier", this.colorModifier);
-        compound.putFloat("alpha", this.alpha);
         compound.putBoolean("canDespawn", this.canDespawn);
 
         return super.toTag(compound);
@@ -125,9 +100,6 @@ public class EntityFirefly extends AbstractLightOrb {
     @Override
     public void update() {
         super.update();
-
-//        if (this.world.isDaylight() && this.world.getSkyLightLevel(this.getPos())) this.alpha -= 0.01; else this.alpha += 0.01;
-        if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
 
         if (this.y > 300) this.kill();
 
@@ -191,18 +163,6 @@ public class EntityFirefly extends AbstractLightOrb {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
-    private void detectGroundLevel() {
-        for (int i = 0; i < 20; i++) {
-            double groundTmp = 0;
-            if (!this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock().canMobSpawnInside())
-                groundTmp = this.y - i;
-            if (groundTmp != 0) {
-                this.groundLevel = groundTmp;
-                break;
-            }
-        }
-    }
-
     private BlockPos getRandomLitBlockAround() {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++) {
@@ -214,7 +174,12 @@ public class EntityFirefly extends AbstractLightOrb {
 
     @Override
     public boolean canSpawn(IWorld world, SpawnType spawnType) {
-        return true;
+        return !this.world.isDaylight() && !this.world.isThundering();
+    }
+
+    @Override
+    public boolean isInvulnerable() {
+        return true; // most likely temporary, I just hate hearing them crashing into blocks
     }
 
 }

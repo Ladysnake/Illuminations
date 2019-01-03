@@ -39,18 +39,10 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
 
             this.bindEntityTexture((T) entity);
             if (entity instanceof EntityFirefly) {
-                boolean isNightTime = (entity.world.getTime()%24000) >= 13000 && (entity.world.getTime()%24000) < 23000;
-                float alpha = ((EntityFirefly) entity).getAlpha();
 
-                // if is day and firefly sees the sky, fade out, else fade in
-//                if (!isNightTime && entity.world.getSkyLightLevel(entity.getPos()))
-//                    alpha -= 0.01;
-//                else alpha += 0.01;
                 float scale = ((EntityFirefly) entity).getScaleModifier();
                 float color = ((EntityFirefly) entity).getColorModifier();
-                ((EntityFirefly) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
                 GlStateManager.scalef(scale, scale, scale);
-                GlStateManager.color4f(color, 1F, 0F, ((EntityFirefly) entity).getAlpha());
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -68,7 +60,6 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
 
             this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entities/firefly_overlay.png"));
             //noinspection ConstantConditions
-            GlStateManager.color4f(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
@@ -84,10 +75,6 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
             super.render((T) entity, x, y, z, entityYaw, partialTicks);
         }
     }
-
-//    @Override
-//    public void renderShadow(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
-//    }
 
     @Override
     protected Identifier getTexture( T entity) {
