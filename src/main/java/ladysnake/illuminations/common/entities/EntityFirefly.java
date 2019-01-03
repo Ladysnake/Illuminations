@@ -17,7 +17,7 @@ import java.util.Random;
 public class EntityFirefly extends AbstractLightOrb {
     // Attributes
     private float scaleModifier;
-    private float colorModifier;
+    protected float colorModifier;
     private float alpha;
     private boolean canDespawn;
     protected boolean isAttractedByLight;
@@ -140,8 +140,8 @@ public class EntityFirefly extends AbstractLightOrb {
             velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
             if (this.getPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
 
-            if (this.isInsideWater()) this.damage(DamageSource.DROWN, 1);
-            if (this.isTouchingLava()) this.damage(DamageSource.LAVA, 1);
+//            if (this.isInsideWater()) this.damage(DamageSource.DROWN, 1);
+//            if (this.isTouchingLava()) this.damage(DamageSource.LAVA, 1);
         }
     }
 
