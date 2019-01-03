@@ -13,6 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Random;
+
 
 public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
     public RenderFirefly(EntityRenderDispatcher renderManager) {
@@ -39,10 +41,24 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
 
             this.bindEntityTexture((T) entity);
             if (entity instanceof EntityFirefly) {
-
+                float alpha = ((EntityFirefly) entity).getAlpha();
                 float scale = ((EntityFirefly) entity).getScaleModifier();
                 float color = ((EntityFirefly) entity).getColorModifier();
+                Float nextAlphaGoal = ((EntityFirefly) entity).getNextAlphaGoal();
+
+                if (nextAlphaGoal == null || nextAlphaGoal.equals(round(alpha, 1))) {
+                    ((EntityFirefly) entity).setNextAlphaGoal(new Random().nextInt(11) / 10.0F);
+                } else {
+                    if (nextAlphaGoal > alpha) {
+                        alpha += 0.05F;
+                    } else if (nextAlphaGoal < alpha) {
+                        alpha -= 0.05F;
+                    }
+                }
+
+                ((EntityFirefly) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
                 GlStateManager.scalef(scale, scale, scale);
+                GlStateManager.color4f(color, 1F, 0F, ((EntityFirefly) entity).getAlpha());
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -60,6 +76,7 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
 
             this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entities/firefly_overlay.png"));
             //noinspection ConstantConditions
+            GlStateManager.color4f(1F, 1F, 1F, ((EntityFirefly) entity).getAlpha());
             bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
@@ -76,9 +93,19 @@ public class RenderFirefly<T extends Entity> extends EntityRenderer<T> {
         }
     }
 
+//    @Override
+//    public void renderShadow(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
+//    }
+
     @Override
     protected Identifier getTexture( T entity) {
         return new Identifier(Illuminations.MOD_ID, "textures/entities/firefly.png");
+    }
+
+    // Useful method
+    private static float round(float value, int precision) {
+        int scale = (int) Math.pow(10, precision);
+        return (float) Math.round(value * scale) / scale;
     }
 
 }

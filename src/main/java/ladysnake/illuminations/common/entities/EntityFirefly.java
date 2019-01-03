@@ -1,7 +1,6 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.damage.DamageSource;
@@ -18,10 +17,12 @@ import java.util.Random;
 public class EntityFirefly extends AbstractLightOrb {
     // Attributes
     private float scaleModifier;
-    float colorModifier;
+    private float colorModifier;
+    private float alpha;
     private boolean canDespawn;
     protected boolean isAttractedByLight;
     protected boolean despawnOnDaytime;
+    private Float nextAlphaGoal;
 
     // Constructors
     public EntityFirefly(World world) {
@@ -29,6 +30,7 @@ public class EntityFirefly extends AbstractLightOrb {
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
+        this.alpha = 1F;
 
         this.setSize(this.scaleModifier, this.scaleModifier);
         this.canDespawn = true;
@@ -50,6 +52,22 @@ public class EntityFirefly extends AbstractLightOrb {
         return colorModifier;
     }
 
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+    }
+
+    public Float getNextAlphaGoal() {
+        return nextAlphaGoal;
+    }
+
+    public void setNextAlphaGoal(Float nextAlphaGoal) {
+        this.nextAlphaGoal = nextAlphaGoal;
+    }
+
     public boolean isAttractedByLight() {
         return isAttractedByLight;
     }
@@ -61,6 +79,7 @@ public class EntityFirefly extends AbstractLightOrb {
 
         this.scaleModifier = compound.getFloat("scaleModifier");
         this.colorModifier = compound.getFloat("colorModifier");
+        this.alpha = compound.getFloat("alpha");
         this.canDespawn = compound.getBoolean("canDespawn");
     }
 
@@ -78,6 +97,7 @@ public class EntityFirefly extends AbstractLightOrb {
     public CompoundTag toTag(CompoundTag compound) {
         compound.putFloat("scaleModifier", this.scaleModifier);
         compound.putFloat("colorModifier", this.colorModifier);
+        compound.putFloat("alpha", this.alpha);
         compound.putBoolean("canDespawn", this.canDespawn);
 
         return super.toTag(compound);
@@ -100,6 +120,8 @@ public class EntityFirefly extends AbstractLightOrb {
     @Override
     public void update() {
         super.update();
+
+        if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
 
         if (this.y > 300) this.kill();
 
@@ -179,7 +201,7 @@ public class EntityFirefly extends AbstractLightOrb {
 
     @Override
     public boolean isInvulnerable() {
-        return true; // most likely temporary, I just hate hearing them crashing into blocks
+        return true; // most likely temporary, I just can't stand to keep hearing them crash into blocks
     }
 
 }
