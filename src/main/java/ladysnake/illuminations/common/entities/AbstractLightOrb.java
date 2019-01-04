@@ -5,8 +5,11 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.sortme.Living;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -58,6 +61,16 @@ public abstract class AbstractLightOrb extends MobEntityWithAi implements Living
     @Override
     public boolean method_5658() {
         return false;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource_1) {
+        return null;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
     }
 
 }
