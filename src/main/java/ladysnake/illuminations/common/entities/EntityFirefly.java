@@ -1,9 +1,9 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -16,17 +16,17 @@ import java.util.Random;
 
 public class EntityFirefly extends AbstractLightOrb {
     // Attributes
-    private float scaleModifier;
+    protected float scaleModifier;
     protected float colorModifier;
-    private float alpha;
-    private boolean canDespawn;
+    protected float alpha;
+    protected boolean canDespawn;
     protected boolean isAttractedByLight;
     protected boolean despawnOnDaytime;
     private Float nextAlphaGoal;
 
     // Constructors
     public EntityFirefly(World world) {
-        super(IlluminationsEntities.FIREFLY, world);
+        this(IlluminationsEntities.FIREFLY, world);
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
@@ -36,6 +36,10 @@ public class EntityFirefly extends AbstractLightOrb {
         this.canDespawn = true;
         this.isAttractedByLight = true;
         this.despawnOnDaytime = true;
+    }
+
+    public EntityFirefly(EntityType entityType, World world) {
+        super(entityType, world);
     }
 
     public EntityFirefly(World world, double x, double y, double z) {
