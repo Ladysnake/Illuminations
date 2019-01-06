@@ -203,9 +203,4 @@ public class EntityFirefly extends AbstractLightOrb {
         return !this.world.isDaylight() && !this.world.isThundering();
     }
 
-    @Override
-    public boolean isInvulnerable() {
-        return true; // most likely temporary, I just can't stand to keep hearing them crash into blocks
-    }
-
 }

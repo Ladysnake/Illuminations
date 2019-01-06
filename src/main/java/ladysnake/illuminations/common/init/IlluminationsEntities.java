@@ -2,8 +2,10 @@ package ladysnake.illuminations.common.init;
 
 import ladysnake.illuminations.client.renders.entities.RenderFirefly;
 import ladysnake.illuminations.client.renders.entities.RenderLightningBug;
+import ladysnake.illuminations.client.renders.entities.RenderWillOWisp;
 import ladysnake.illuminations.common.entities.EntityFirefly;
 import ladysnake.illuminations.common.entities.EntityLightningBug;
+import ladysnake.illuminations.common.entities.EntityWillOWisp;
 import net.fabricmc.fabric.client.render.EntityRendererRegistry;
 import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -20,6 +22,7 @@ public class IlluminationsEntities {
 
     public static EntityType<EntityFirefly> FIREFLY;
     public static EntityType<EntityLightningBug> LIGHTNING_BUG;
+    public static EntityType<EntityWillOWisp> WILL_O_WISP;
 
     public static void init() {
         // Firefly + firefly spawns
@@ -37,11 +40,19 @@ public class IlluminationsEntities {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(LIGHTNING_BUG, 40, 6, 24));
             }
         }
+        // WoW + WoW spawns
+        WILL_O_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:will_o_wisp", FabricEntityTypeBuilder.create(EntityWillOWisp.class, EntityWillOWisp::new).trackable(64, 1, true).build());
+        for (Biome biome : Registry.BIOME) {
+            if (biome.getCategory() == Biome.Category.SWAMP) {
+                biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(WILL_O_WISP, 20, 1, 1));
+            }
+        }
     }
 
     public static void registerRenders() {
         EntityRendererRegistry.INSTANCE.register(EntityFirefly.class, (manager, context) -> new RenderFirefly(manager));
         EntityRendererRegistry.INSTANCE.register(EntityLightningBug.class, (manager, context) -> new RenderLightningBug(manager));
+        EntityRendererRegistry.INSTANCE.register(EntityWillOWisp.class, (manager, context) -> new RenderWillOWisp<>(manager));
     }
 
 }
