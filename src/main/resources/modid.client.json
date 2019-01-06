@@ -2,9 +2,6 @@
   "required": true,
   "package": "net.fabricmc.example.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "ExampleMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   }

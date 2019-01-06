@@ -5,8 +5,8 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-archivesBaseName = "illumination"
-version = "1.0.0"
+archivesBaseName = "Illuminations"
+version = "0.1.0"
 
 minecraft {
 }
