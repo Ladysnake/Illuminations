@@ -165,20 +165,20 @@ public class EntityFirefly extends AbstractLightOrb {
             while (!this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canMobSpawnInside())
                 this.yTarget += 1;
 
-            if (this.world.getLightLevel(LightType.SKY, this.getPos()) > 8 && !this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.SKY_LIGHT, this.getPos()) > 8 && !this.world.isDaylight())
                 this.lightTarget = getRandomLitBlockAround();
         } else {
             this.xTarget = this.lightTarget.getX() + random.nextGaussian();
             this.yTarget = this.lightTarget.getY() + random.nextGaussian();
             this.zTarget = this.lightTarget.getZ() + random.nextGaussian();
 
-            if (this.world.getLightLevel(LightType.BLOCK, this.getPos()) > 8) {
+            if (this.world.getLightLevel(LightType.BLOCK_LIGHT, this.getPos()) > 8) {
                 BlockPos possibleTarget = getRandomLitBlockAround();
-                if (this.world.getLightLevel(LightType.BLOCK, possibleTarget) > this.world.getLightLevel(LightType.BLOCK, this.lightTarget))
+                if (this.world.getLightLevel(LightType.BLOCK_LIGHT, possibleTarget) > this.world.getLightLevel(LightType.BLOCK_LIGHT, this.lightTarget))
                     this.lightTarget = possibleTarget;
             }
 
-            if (this.world.getLightLevel(LightType.BLOCK, this.getPos()) <= 8 || this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.BLOCK_LIGHT, this.getPos()) <= 8 || this.world.isDaylight())
                 this.lightTarget = null;
         }
 
@@ -193,7 +193,7 @@ public class EntityFirefly extends AbstractLightOrb {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++) {
             BlockPos randBP = new BlockPos(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
-            randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
+            randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK_LIGHT, randBP));
         }
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
     }
