@@ -6,8 +6,11 @@ import ladysnake.illuminations.client.renders.entities.RenderWillOWisp;
 import ladysnake.illuminations.common.entities.EntityFirefly;
 import ladysnake.illuminations.common.entities.EntityLightningBug;
 import ladysnake.illuminations.common.entities.EntityWillOWisp;
+import ladysnake.illuminations.common.entities.EntityWillOWispThrown;
 import net.fabricmc.fabric.client.render.EntityRendererRegistry;
+import net.fabricmc.fabric.entity.EntityTrackingRegistry;
 import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.network.packet.EntitySpawnClientPacket;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.registry.Registry;
@@ -23,6 +26,7 @@ public class IlluminationsEntities {
     public static EntityType<EntityFirefly> FIREFLY;
     public static EntityType<EntityLightningBug> LIGHTNING_BUG;
     public static EntityType<EntityWillOWisp> WILL_O_WISP;
+    public static EntityType<EntityWillOWispThrown> THROWN_WILL_O_WISP;
 
     public static void init() {
         // Firefly + firefly spawns
@@ -40,8 +44,10 @@ public class IlluminationsEntities {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(LIGHTNING_BUG, 40, 6, 24));
             }
         }
-        // WoW + WoW spawns
+        // WoW + thrown WoW + WoW spawns
         WILL_O_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:will_o_wisp", FabricEntityTypeBuilder.create(EntityWillOWisp.class, EntityWillOWisp::new).trackable(64, 1, true).build());
+        THROWN_WILL_O_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:thrown_will_o_wisp", FabricEntityTypeBuilder.create(EntityWillOWispThrown.class, EntityWillOWispThrown::new).trackable(64, 1, true).build());
+        EntityTrackingRegistry.INSTANCE.registerSpawnPacketProvider(THROWN_WILL_O_WISP, entity -> new EntitySpawnClientPacket(entity, Registry.ENTITY_TYPE.getRawId(THROWN_WILL_O_WISP)));
         for (Biome biome : Registry.BIOME) {
             if (biome.getCategory() == Biome.Category.SWAMP) {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(WILL_O_WISP, 20, 1, 1));

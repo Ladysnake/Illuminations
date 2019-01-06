@@ -7,10 +7,7 @@ import net.minecraft.entity.SpawnType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.LightType;
 import net.minecraft.world.World;
-
-import java.util.HashMap;
 
 public class EntityWillOWisp extends AbstractLightOrb {
 

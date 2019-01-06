@@ -3,7 +3,6 @@ package ladysnake.illuminations.client.renders.entities;
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import ladysnake.illuminations.common.Illuminations;
-import ladysnake.illuminations.common.entities.EntityFirefly;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
@@ -12,8 +11,6 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
-
-import java.util.Random;
 
 
 public class RenderWillOWisp<T extends Entity> extends EntityRenderer<T> {
