@@ -25,9 +25,11 @@ public class WillOWispItem extends Item {
         }
 
         world_1.playSound((PlayerEntity)null, playerEntity_1.x, playerEntity_1.y, playerEntity_1.z, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        ThrownWillOWispEntity wispThrown = new ThrownWillOWispEntity(world_1, playerEntity_1);
-        wispThrown.calculateVelocity(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
-        world_1.spawnEntity(wispThrown);
+        if (!world_1.isClient) {
+            ThrownWillOWispEntity wispThrown = new ThrownWillOWispEntity(world_1, playerEntity_1);
+            wispThrown.calculateVelocity(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
+            world_1.spawnEntity(wispThrown);
+        }
 
         playerEntity_1.incrementStat(Stats.USED.method_14956(this));
         return new TypedActionResult(ActionResult.SUCCESS, itemStack_1);
