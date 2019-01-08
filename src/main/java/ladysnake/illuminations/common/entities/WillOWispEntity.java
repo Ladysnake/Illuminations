@@ -9,13 +9,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class EntityWillOWisp extends AbstractLightOrb {
+public class WillOWispEntity extends AbstractLightOrbEntity {
 
-    public EntityWillOWisp(World world) {
+    public WillOWispEntity(World world) {
         this(IlluminationsEntities.WILL_O_WISP, world);
     }
 
-    public EntityWillOWisp(EntityType entityType, World worldIn) {
+    public WillOWispEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
     }
 

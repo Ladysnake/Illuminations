@@ -13,8 +13,8 @@ import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
 
-public class RenderWillOWisp<T extends Entity> extends EntityRenderer<T> {
-    public RenderWillOWisp(EntityRenderDispatcher renderManager) {
+public class WillOWispRender<T extends Entity> extends EntityRenderer<T> {
+    public WillOWispRender(EntityRenderDispatcher renderManager) {
         super(renderManager);
         this.field_4672 = 0;
     }
@@ -67,7 +67,7 @@ public class RenderWillOWisp<T extends Entity> extends EntityRenderer<T> {
 
     @Override
     protected Identifier getTexture( T entity) {
-        return new Identifier(Illuminations.MOD_ID, "textures/entities/will_o_wisp.png");
+        return new Identifier(Illuminations.MOD_ID, "textures/entity/will_o_wisp.png");
     }
 
 }

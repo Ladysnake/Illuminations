@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class EntityLightningBug extends EntityFirefly {
+public class LightningBugEntity extends FireflyEntity {
 
-    public EntityLightningBug(World world) {
+    public LightningBugEntity(World world) {
         super(IlluminationsEntities.LIGHTNING_BUG, world);
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;

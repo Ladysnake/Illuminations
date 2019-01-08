@@ -3,7 +3,7 @@ package ladysnake.illuminations.client.renders.entities;
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import ladysnake.illuminations.common.Illuminations;
-import ladysnake.illuminations.common.entities.EntityLightningBug;
+import ladysnake.illuminations.common.entities.LightningBugEntity;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
@@ -16,8 +16,8 @@ import org.lwjgl.opengl.GL11;
 import java.util.Random;
 
 
-public class RenderLightningBug<T extends Entity> extends EntityRenderer<T> {
-    public RenderLightningBug(EntityRenderDispatcher renderManager) {
+public class LightningBugRender<T extends Entity> extends EntityRenderer<T> {
+    public LightningBugRender(EntityRenderDispatcher renderManager) {
         super(renderManager);
         this.field_4672 = 0;
     }
@@ -40,14 +40,14 @@ public class RenderLightningBug<T extends Entity> extends EntityRenderer<T> {
             GlStateManager.rotatef((float) (this.renderManager.settings.field_1850 == 2 ? -1 : 1) * -this.renderManager.field_4677, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture((T) entity);
-            if (entity instanceof EntityLightningBug) {
-                float alpha = ((EntityLightningBug) entity).getAlpha();
-                float scale = ((EntityLightningBug) entity).getScaleModifier();
-                float color = ((EntityLightningBug) entity).getColorModifier();
-                Float nextAlphaGoal = ((EntityLightningBug) entity).getNextAlphaGoal();
+            if (entity instanceof LightningBugEntity) {
+                float alpha = ((LightningBugEntity) entity).getAlpha();
+                float scale = ((LightningBugEntity) entity).getScaleModifier();
+                float color = ((LightningBugEntity) entity).getColorModifier();
+                Float nextAlphaGoal = ((LightningBugEntity) entity).getNextAlphaGoal();
 
                 if (nextAlphaGoal == null || nextAlphaGoal.equals(round(alpha, 1))) {
-                    ((EntityLightningBug) entity).setNextAlphaGoal(new Random().nextInt(11) / 10.0F);
+                    ((LightningBugEntity) entity).setNextAlphaGoal(new Random().nextInt(11) / 10.0F);
                 } else {
                     if (nextAlphaGoal > alpha) {
                         alpha += 0.05F;
@@ -56,9 +56,9 @@ public class RenderLightningBug<T extends Entity> extends EntityRenderer<T> {
                     }
                 }
 
-                ((EntityLightningBug) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
+                ((LightningBugEntity) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
                 GlStateManager.scalef(scale, scale, scale);
-                GlStateManager.color4f(0F, color, 1F, ((EntityLightningBug) entity).getAlpha());
+                GlStateManager.color4f(0F, color, 1F, ((LightningBugEntity) entity).getAlpha());
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -74,9 +74,9 @@ public class RenderLightningBug<T extends Entity> extends EntityRenderer<T> {
             bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
             tessellator.draw();
 
-            this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entities/firefly_overlay.png"));
+            this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png"));
             //noinspection ConstantConditions
-            GlStateManager.color4f(1F, 1F, 1F, ((EntityLightningBug) entity).getAlpha());
+            GlStateManager.color4f(1F, 1F, 1F, ((LightningBugEntity) entity).getAlpha());
             bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
@@ -99,7 +99,7 @@ public class RenderLightningBug<T extends Entity> extends EntityRenderer<T> {
 
     @Override
     protected Identifier getTexture( T entity) {
-        return new Identifier(Illuminations.MOD_ID, "textures/entities/firefly.png");
+        return new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
     }
 
     // Useful method

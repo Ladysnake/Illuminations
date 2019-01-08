@@ -12,9 +12,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class AbstractLightOrb extends MobEntityWithAi implements Living {
+public abstract class AbstractLightOrbEntity extends MobEntityWithAi implements Living {
 
-    public AbstractLightOrb(EntityType entityType, World worldIn) {
+    public AbstractLightOrbEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
         this.setSize(0.5F, 0.5F);
         this.setUnaffectedByGravity(true);

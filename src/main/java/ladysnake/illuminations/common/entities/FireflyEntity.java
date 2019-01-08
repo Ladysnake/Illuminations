@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Random;
 
-public class EntityFirefly extends AbstractLightOrb {
+public class FireflyEntity extends AbstractLightOrbEntity {
     // Attributes
     protected float scaleModifier;
     protected float colorModifier;
@@ -25,7 +25,7 @@ public class EntityFirefly extends AbstractLightOrb {
     private Float nextAlphaGoal;
 
     // Constructors
-    public EntityFirefly(World world) {
+    public FireflyEntity(World world) {
         this(IlluminationsEntities.FIREFLY, world);
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
@@ -38,11 +38,11 @@ public class EntityFirefly extends AbstractLightOrb {
         this.despawnOnDaytime = true;
     }
 
-    public EntityFirefly(EntityType entityType, World world) {
+    public FireflyEntity(EntityType entityType, World world) {
         super(entityType, world);
     }
 
-    public EntityFirefly(World world, double x, double y, double z) {
+    public FireflyEntity(World world, double x, double y, double z) {
         this(world);
         this.setPosition(x, y, z);
     }
