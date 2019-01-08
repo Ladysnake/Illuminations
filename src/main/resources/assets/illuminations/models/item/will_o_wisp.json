@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "illuminations:items/will_o_wisp"
+        "layer0": "illuminations:item/will_o_wisp"
     }
 }
