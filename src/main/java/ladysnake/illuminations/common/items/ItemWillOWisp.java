@@ -2,7 +2,6 @@ package ladysnake.illuminations.common.items;
 
 import ladysnake.illuminations.common.entities.EntityWillOWispThrown;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;

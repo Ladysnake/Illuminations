@@ -1,13 +1,9 @@
 package ladysnake.illuminations.common.init;
 
-import ladysnake.illuminations.client.renders.entities.RenderFirefly;
-import ladysnake.illuminations.client.renders.entities.RenderLightningBug;
-import ladysnake.illuminations.client.renders.entities.RenderWillOWisp;
 import ladysnake.illuminations.common.entities.EntityFirefly;
 import ladysnake.illuminations.common.entities.EntityLightningBug;
 import ladysnake.illuminations.common.entities.EntityWillOWisp;
 import ladysnake.illuminations.common.entities.EntityWillOWispThrown;
-import net.fabricmc.fabric.client.render.EntityRendererRegistry;
 import net.fabricmc.fabric.entity.EntityTrackingRegistry;
 import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.network.packet.EntitySpawnClientPacket;
@@ -53,12 +49,6 @@ public class IlluminationsEntities {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(WILL_O_WISP, 20, 1, 1));
             }
         }
-    }
-
-    public static void registerRenders() {
-        EntityRendererRegistry.INSTANCE.register(EntityFirefly.class, (manager, context) -> new RenderFirefly(manager));
-        EntityRendererRegistry.INSTANCE.register(EntityLightningBug.class, (manager, context) -> new RenderLightningBug(manager));
-        EntityRendererRegistry.INSTANCE.register(EntityWillOWisp.class, (manager, context) -> new RenderWillOWisp<>(manager));
     }
 
 }
