@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Random;
 
-public class FireflyEntity extends AbstractLightOrbEntity {
+public class FireflyEntity extends LightOrbEntity {
     // Attributes
     protected float scaleModifier;
     protected float colorModifier;

@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class WillOWispEntity extends AbstractLightOrbEntity {
+public class WillOWispEntity extends LightOrbEntity {
 
     public WillOWispEntity(World world) {
         this(IlluminationsEntities.WILL_O_WISP, world);
