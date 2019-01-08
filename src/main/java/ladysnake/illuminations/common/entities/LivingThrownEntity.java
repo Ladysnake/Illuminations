@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.sortme.Living;
 import net.minecraft.entity.sortme.Projectile;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 // An exact copy of ThrownEntity extending MobEntityWithAi and implementing Living
-public abstract class LivingThrownEntity extends MobEntityWithAi implements Projectile, Living {
+public abstract class LivingThrownEntity extends MobEntity implements Projectile, Living {
     private int blockX;
     private int blockY;
     private int blockZ;
