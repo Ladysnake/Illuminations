@@ -6,7 +6,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "Illuminations"
-version = "0.1.0"
+version = "0.1.1"
 
 minecraft {
 }
