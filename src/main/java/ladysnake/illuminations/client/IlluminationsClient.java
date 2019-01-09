@@ -5,7 +5,6 @@ import ladysnake.illuminations.client.renders.entities.LightningBugRender;
 import ladysnake.illuminations.client.renders.entities.WillOWispRender;
 import ladysnake.illuminations.common.entities.FireflyEntity;
 import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.ThrownWillOWispEntity;
 import ladysnake.illuminations.common.entities.WillOWispEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -24,7 +23,6 @@ public class IlluminationsClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(FireflyEntity.class, (manager, context) -> new FireflyRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(LightningBugEntity.class, (manager, context) -> new LightningBugRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(WillOWispEntity.class, (manager, context) -> new WillOWispRender<>(manager));
-        EntityRendererRegistry.INSTANCE.register(ThrownWillOWispEntity.class, (manager, context) -> new WillOWispRender<>(manager));
     }
 
 }

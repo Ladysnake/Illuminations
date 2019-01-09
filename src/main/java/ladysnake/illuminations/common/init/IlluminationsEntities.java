@@ -2,7 +2,6 @@ package ladysnake.illuminations.common.init;
 
 import ladysnake.illuminations.common.entities.FireflyEntity;
 import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.ThrownWillOWispEntity;
 import ladysnake.illuminations.common.entities.WillOWispEntity;
 import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -20,7 +19,6 @@ public class IlluminationsEntities {
     public static EntityType<FireflyEntity> FIREFLY;
     public static EntityType<LightningBugEntity> LIGHTNING_BUG;
     public static EntityType<WillOWispEntity> WILL_O_WISP;
-    public static EntityType<ThrownWillOWispEntity> THROWN_WILL_O_WISP;
 
     public static void init() {
         // Firefly + firefly spawns
@@ -40,8 +38,6 @@ public class IlluminationsEntities {
         }
         // WoW + thrown WoW + WoW spawns
         WILL_O_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:will_o_wisp", FabricEntityTypeBuilder.create(WillOWispEntity.class, WillOWispEntity::new).trackable(64, 1, true).build());
-        THROWN_WILL_O_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:thrown_will_o_wisp", FabricEntityTypeBuilder.create(ThrownWillOWispEntity.class, ThrownWillOWispEntity::new).trackable(64, 1, true).build());
-//        EntityTrackingRegistry.INSTANCE.registerSpawnPacketProvider(THROWN_WILL_O_WISP, entity -> new EntitySpawnClientPacket(entity, Registry.ENTITY_TYPE.getRawId(THROWN_WILL_O_WISP)));
         for (Biome biome : Registry.BIOME) {
             if (biome.getCategory() == Biome.Category.SWAMP) {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(WILL_O_WISP, 20, 1, 1));

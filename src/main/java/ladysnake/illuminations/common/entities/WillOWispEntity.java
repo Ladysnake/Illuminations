@@ -2,14 +2,17 @@ package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.util.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class WillOWispEntity extends LightOrbEntity {
+public class WillOWispEntity extends ThrownLightOrbEntity {
 
     public WillOWispEntity(World world) {
         this(IlluminationsEntities.WILL_O_WISP, world);
@@ -17,6 +20,10 @@ public class WillOWispEntity extends LightOrbEntity {
 
     public WillOWispEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
+    }
+
+    public WillOWispEntity(World world, LivingEntity livingEntity) {
+        super(IlluminationsEntities.WILL_O_WISP, livingEntity, world);
     }
 
     // Behaviour
@@ -79,6 +86,20 @@ public class WillOWispEntity extends LightOrbEntity {
     @Override
     public boolean isInvulnerable() {
         return true;
+    }
+
+    @Override
+    protected void onCollision(HitResult hitResult) {
+        if (hitResult.entity != null) {
+            int int_1 = 0;
+            hitResult.entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)int_1);
+        }
+
+        if (!this.world.isClient) {
+            this.world.createExplosion(this, this.x, this.y, this.z, 2f, true);
+            this.beingThrown = false;
+            this.invalidate();
+        }
     }
 
 }
