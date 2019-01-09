@@ -1,11 +1,16 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import ladysnake.illuminations.common.init.IlluminationsItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -100,6 +105,13 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
             this.beingThrown = false;
             this.invalidate();
         }
+    }
+
+    @Override
+    public ActionResult interactAt(PlayerEntity playerEntity, Vec3d vec3d, Hand hand) {
+        this.invalidate();
+        playerEntity.inventory.insertStack(new ItemStack(IlluminationsItems.WILL_O_WISP));
+        return super.interactAt(playerEntity, vec3d, hand);
     }
 
 }
