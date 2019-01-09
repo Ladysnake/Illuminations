@@ -44,7 +44,9 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
         super.update();
 
         // particles
-        this.world.addParticle(ParticleTypes.FLAME, 1, 1, 1, 1, 1, 1);
+        if (this.world.isClient) {
+            this.world.addParticle(ParticleTypes.FLAME, this.x, this.y+0.5, this.z, 0, 0.1, 0);
+        }
 
         if (!beingThrown) {
             if (this.y > 300) this.invalidate();
