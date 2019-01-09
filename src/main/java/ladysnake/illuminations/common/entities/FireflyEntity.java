@@ -127,7 +127,7 @@ public class FireflyEntity extends LightOrbEntity {
 
         if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
 
-        if (this.y > 300) this.kill();
+        if (this.y > 300) this.invalidate();
 
         if (!this.world.isClient && !this.method_5686()) {
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;

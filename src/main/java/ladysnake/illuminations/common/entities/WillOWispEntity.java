@@ -9,6 +9,7 @@ import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HitResult;
@@ -42,22 +43,28 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
     public void update() {
         super.update();
 
-        if (this.y > 300) this.kill();
+        // particles
+        this.world.addParticle(ParticleTypes.FLAME, 1, 1, 1, 1, 1, 1);
 
-        if (!this.world.isClient && !this.method_5686()) {
-            this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
+        if (!beingThrown) {
+            if (this.y > 300) this.invalidate();
 
-            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
-                selectBlockTarget();
+            if (!this.world.isClient && !this.method_5686()) {
+                this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
+
+                if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+                    selectBlockTarget();
+                }
+
+                Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
+                double length = targetVector.length();
+                targetVector = targetVector.multiply(0.5 / length);
+                velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+                velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
+                velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+                if (this.getPos() != this.getTargetPosition())
+                    this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
             }
-
-            Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
-            double length = targetVector.length();
-            targetVector = targetVector.multiply(0.5 / length);
-            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-            velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
-            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-            if (this.getPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
         }
     }
 

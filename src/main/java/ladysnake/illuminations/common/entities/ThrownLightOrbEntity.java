@@ -282,5 +282,5 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
     public boolean isUnaffectedByGravity() {
         return !beingThrown;
     }
-    
+
 }
