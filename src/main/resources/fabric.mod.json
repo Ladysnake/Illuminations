@@ -2,8 +2,8 @@
   "id": "illuminations",
   "name": "Illuminations",
   "description": "Fireflies and other light orbs to make your world more enjoyable in darkness.",
-  "version": "0.1.1",
-  "side": "universal",
+  "version": "0.1.2",
+  "side": "univeral",
   "initializers": [
     "ladysnake.illuminations.common.Illuminations",
     "ladysnake.illuminations.client.IlluminationsClient"
