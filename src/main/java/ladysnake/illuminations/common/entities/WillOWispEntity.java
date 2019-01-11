@@ -1,15 +1,24 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import ladysnake.illuminations.common.init.IlluminationsItems;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class WillOWispEntity extends LightOrbEntity {
+public class WillOWispEntity extends ThrownLightOrbEntity {
 
     public WillOWispEntity(World world) {
         this(IlluminationsEntities.WILL_O_WISP, world);
@@ -17,6 +26,10 @@ public class WillOWispEntity extends LightOrbEntity {
 
     public WillOWispEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
+    }
+
+    public WillOWispEntity(World world, LivingEntity livingEntity) {
+        super(IlluminationsEntities.WILL_O_WISP, livingEntity, world);
     }
 
     // Behaviour
@@ -30,22 +43,30 @@ public class WillOWispEntity extends LightOrbEntity {
     public void update() {
         super.update();
 
-        if (this.y > 300) this.kill();
+        // particles
+        if (this.world.isClient) {
+            this.world.addParticle(ParticleTypes.FLAME, this.x, this.y+0.5, this.z, 0, 0.1, 0);
+        }
 
-        if (!this.world.isClient && !this.method_5686()) {
-            this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
+        if (!beingThrown) {
+            if (this.y > 300) this.invalidate();
 
-            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
-                selectBlockTarget();
+            if (!this.world.isClient && !this.method_5686()) {
+                this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
+
+                if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+                    selectBlockTarget();
+                }
+
+                Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
+                double length = targetVector.length();
+                targetVector = targetVector.multiply(0.5 / length);
+                velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+                velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
+                velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+                if (this.getPos() != this.getTargetPosition())
+                    this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
             }
-
-            Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
-            double length = targetVector.length();
-            targetVector = targetVector.multiply(0.5 / length);
-            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-            velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
-            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-            if (this.getPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
         }
     }
 
@@ -79,6 +100,27 @@ public class WillOWispEntity extends LightOrbEntity {
     @Override
     public boolean isInvulnerable() {
         return true;
+    }
+
+    @Override
+    protected void onCollision(HitResult hitResult) {
+        if (hitResult.entity != null) {
+            int int_1 = 0;
+            hitResult.entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)int_1);
+        }
+
+        if (!this.world.isClient) {
+            this.world.createExplosion(this, this.x, this.y, this.z, 2f, true);
+            this.beingThrown = false;
+            this.invalidate();
+        }
+    }
+
+    @Override
+    public ActionResult interactAt(PlayerEntity playerEntity, Vec3d vec3d, Hand hand) {
+        this.invalidate();
+        playerEntity.inventory.insertStack(new ItemStack(IlluminationsItems.WILL_O_WISP));
+        return super.interactAt(playerEntity, vec3d, hand);
     }
 
 }

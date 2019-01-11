@@ -1,6 +1,6 @@
 package ladysnake.illuminations.common.items;
 
-import ladysnake.illuminations.common.entities.ThrownWillOWispEntity;
+import ladysnake.illuminations.common.entities.WillOWispEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,9 +25,12 @@ public class WillOWispItem extends Item {
         }
 
         world_1.playSound((PlayerEntity)null, playerEntity_1.x, playerEntity_1.y, playerEntity_1.z, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        ThrownWillOWispEntity wispThrown = new ThrownWillOWispEntity(world_1, playerEntity_1);
-        wispThrown.calculateVelocity(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
-        world_1.spawnEntity(wispThrown);
+        if (!world_1.isClient) {
+            WillOWispEntity wispThrown = new WillOWispEntity(world_1, playerEntity_1);
+            wispThrown.beingThrown = true;
+            wispThrown.calculateVelocity(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
+            world_1.spawnEntity(wispThrown);
+        }
 
         playerEntity_1.incrementStat(Stats.USED.method_14956(this));
         return new TypedActionResult(ActionResult.SUCCESS, itemStack_1);

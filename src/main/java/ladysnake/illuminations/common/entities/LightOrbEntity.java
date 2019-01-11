@@ -17,11 +17,11 @@ public abstract class LightOrbEntity extends MobEntityWithAi implements Living {
     public LightOrbEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
         this.setSize(0.5F, 0.5F);
-        this.setUnaffectedByGravity(true);
-        this.yaw = (float) (Math.random() * 360.0D);
-        this.velocityX = (Math.random() * 0.2 - 0.1) * 2.0F;
-        this.velocityY = (Math.random() * 0.2) * 2.0F;
-        this.velocityZ = (Math.random() * 0.2 - 0.1) * 2.0F;
+//        this.setUnaffectedByGravity(true);
+//        this.yaw = (float) (Math.random() * 360.0D);
+//        this.velocityX = (Math.random() * 0.2 - 0.1) * 2.0F;
+//        this.velocityY = (Math.random() * 0.2) * 2.0F;
+//        this.velocityZ = (Math.random() * 0.2 - 0.1) * 2.0F;
     }
 
     @Override
