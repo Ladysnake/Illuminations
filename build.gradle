@@ -6,16 +6,16 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "Illuminations"
-version = "0.1.2"
+version = "0.2.0"
 
 minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w02a"
-	mappings "net.fabricmc:yarn:19w02a.13"
-	modCompile "net.fabricmc:fabric-loader:0.3.2.92"
+	minecraft "com.mojang:minecraft:19w04b"
+	mappings "net.fabricmc:yarn:19w04b.1"
+	modCompile "net.fabricmc:fabric-loader:0.3.3.99"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc:fabric:0.1.4.71"
+	modCompile "net.fabricmc:fabric:0.1.4.79"
 }
