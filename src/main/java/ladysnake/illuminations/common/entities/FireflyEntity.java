@@ -129,7 +129,7 @@ public class FireflyEntity extends LightOrbEntity {
 
         if (this.y > 300) this.invalidate();
 
-        if (!this.world.isClient && !this.method_5686()) {
+        if (!this.world.isClient && !this.dead) {
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
             if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {

@@ -22,6 +22,11 @@ public class LightningBugEntity extends FireflyEntity {
         this.despawnOnDaytime = true;
     }
 
+    public LightningBugEntity(World world, double x, double y, double z) {
+        this(world);
+        this.setPosition(x, y, z);
+    }
+
     @Override
     public boolean canSpawn(IWorld world, SpawnType spawnType) {
         return !this.world.isDaylight() && this.world.isThundering();

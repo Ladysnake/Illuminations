@@ -31,7 +31,7 @@ public class LightningBugRender<T extends Entity> extends EntityRenderer<T> {
 
             GlStateManager.enableAlphaTest();
             GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SrcBlendFactor.SRC_ALPHA, GlStateManager.DstBlendFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.disableLighting();
 
             GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240f, 240f);

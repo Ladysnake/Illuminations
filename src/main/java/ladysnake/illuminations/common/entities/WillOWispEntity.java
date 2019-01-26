@@ -2,17 +2,15 @@ package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import ladysnake.illuminations.common.init.IlluminationsItems;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.HitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
@@ -46,7 +44,7 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
         if (!beingThrown) {
             if (this.y > 300) this.invalidate();
 
-            if (!this.world.isClient && !this.method_5686()) {
+            if (!this.world.isClient && !this.dead) {
                 this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
                 if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
@@ -99,15 +97,14 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
 
     @Override
     protected void onCollision(HitResult hitResult) {
-        if (hitResult.entity != null) {
-            int int_1 = 0;
-            hitResult.entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)int_1);
+        if (hitResult.getType() == HitResult.Type.ENTITY) {
+            Entity entity_1 = ((EntityHitResult)hitResult).getEntity();
+            int int_1 = entity_1 instanceof BlazeEntity ? 3 : 0;
+            entity_1.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)int_1);
         }
 
         if (!this.world.isClient) {
-            this.world.createExplosion(this, this.x, this.y, this.z, 2f, true);
             this.beingThrown = false;
-            this.invalidate();
         }
     }
 

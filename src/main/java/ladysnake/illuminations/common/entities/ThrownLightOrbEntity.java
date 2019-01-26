@@ -11,15 +11,18 @@ import net.minecraft.entity.sortme.Projectile;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.HitResult;
-import net.minecraft.util.HitResult.Type;
 import net.minecraft.util.TagHelper;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BoundingBox;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 // An exact copy of ThrownEntity extending MobEntityWithAi and implementing Living
@@ -126,18 +129,18 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
 
             if (this.inGround) {
                 this.inGround = false;
-                this.velocityX *= (double) (this.random.nextFloat() * 0.2F);
-                this.velocityY *= (double) (this.random.nextFloat() * 0.2F);
-                this.velocityZ *= (double) (this.random.nextFloat() * 0.2F);
+                this.velocityX *= (double)(this.random.nextFloat() * 0.2F);
+                this.velocityY *= (double)(this.random.nextFloat() * 0.2F);
+                this.velocityZ *= (double)(this.random.nextFloat() * 0.2F);
             }
 
             Vec3d vec3d_1 = new Vec3d(this.x, this.y, this.z);
             Vec3d vec3d_2 = new Vec3d(this.x + this.velocityX, this.y + this.velocityY, this.z + this.velocityZ);
-            HitResult hitResult_1 = this.world.rayTrace(vec3d_1, vec3d_2);
+            HitResult hitResult_1 = this.world.rayTrace(new RayTraceContext(vec3d_1, vec3d_2, RayTraceContext.ShapeType.OUTLINE, RayTraceContext.FluidHandling.NONE, this));
             vec3d_1 = new Vec3d(this.x, this.y, this.z);
             vec3d_2 = new Vec3d(this.x + this.velocityX, this.y + this.velocityY, this.z + this.velocityZ);
-            if (hitResult_1 != null) {
-                vec3d_2 = new Vec3d(hitResult_1.pos.x, hitResult_1.pos.y, hitResult_1.pos.z);
+            if (((HitResult)hitResult_1).getType() != HitResult.Type.NONE) {
+                vec3d_2 = ((HitResult)hitResult_1).getPos();
             }
 
             Entity entity_1 = null;
@@ -145,8 +148,8 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             double double_1 = 0.0D;
             boolean boolean_1 = false;
 
-            for (int int_1 = 0; int_1 < list_1.size(); ++int_1) {
-                Entity entity_2 = (Entity) list_1.get(int_1);
+            for(int int_1 = 0; int_1 < list_1.size(); ++int_1) {
+                Entity entity_2 = (Entity)list_1.get(int_1);
                 if (entity_2.doesCollide()) {
                     if (entity_2 == this.field_7637) {
                         boolean_1 = true;
@@ -156,9 +159,9 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                     } else {
                         boolean_1 = false;
                         BoundingBox boundingBox_1 = entity_2.getBoundingBox().expand(0.30000001192092896D);
-                        HitResult hitResult_2 = boundingBox_1.rayTrace(vec3d_1, vec3d_2);
-                        if (hitResult_2 != null) {
-                            double double_2 = vec3d_1.squaredDistanceTo(hitResult_2.pos);
+                        Optional<Vec3d> optional_1 = boundingBox_1.rayTrace(vec3d_1, vec3d_2);
+                        if (optional_1.isPresent()) {
+                            double double_2 = vec3d_1.squaredDistanceTo((Vec3d)optional_1.get());
                             if (double_2 < double_1 || double_1 == 0.0D) {
                                 entity_1 = entity_2;
                                 double_1 = double_2;
@@ -177,14 +180,14 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             }
 
             if (entity_1 != null) {
-                hitResult_1 = new HitResult(entity_1);
+                hitResult_1 = new EntityHitResult(entity_1);
             }
 
-            if (hitResult_1 != null) {
-                if (hitResult_1.type == Type.BLOCK && this.world.getBlockState(hitResult_1.getBlockPos()).getBlock() == Blocks.NETHER_PORTAL) {
-                    this.setInPortal(hitResult_1.getBlockPos());
+            if (((HitResult)hitResult_1).getType() != HitResult.Type.NONE) {
+                if (((HitResult)hitResult_1).getType() == HitResult.Type.BLOCK && this.world.getBlockState(((BlockHitResult)hitResult_1).getBlockPos()).getBlock() == Blocks.NETHER_PORTAL) {
+                    this.setInPortal(((BlockHitResult)hitResult_1).getBlockPos());
                 } else {
-                    this.onCollision(hitResult_1);
+                    this.onCollision((HitResult)hitResult_1);
                 }
             }
 
@@ -192,21 +195,21 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             this.y += this.velocityY;
             this.z += this.velocityZ;
             float float_1 = MathHelper.sqrt(this.velocityX * this.velocityX + this.velocityZ * this.velocityZ);
-            this.yaw = (float) (MathHelper.atan2(this.velocityX, this.velocityZ) * 57.2957763671875D);
+            this.yaw = (float)(MathHelper.atan2(this.velocityX, this.velocityZ) * 57.2957763671875D);
 
-            for (this.pitch = (float) (MathHelper.atan2(this.velocityY, (double) float_1) * 57.2957763671875D); this.pitch - this.prevPitch < -180.0F; this.prevPitch -= 360.0F) {
+            for(this.pitch = (float)(MathHelper.atan2(this.velocityY, (double)float_1) * 57.2957763671875D); this.pitch - this.prevPitch < -180.0F; this.prevPitch -= 360.0F) {
                 ;
             }
 
-            while (this.pitch - this.prevPitch >= 180.0F) {
+            while(this.pitch - this.prevPitch >= 180.0F) {
                 this.prevPitch += 360.0F;
             }
 
-            while (this.yaw - this.prevYaw < -180.0F) {
+            while(this.yaw - this.prevYaw < -180.0F) {
                 this.prevYaw -= 360.0F;
             }
 
-            while (this.yaw - this.prevYaw >= 180.0F) {
+            while(this.yaw - this.prevYaw >= 180.0F) {
                 this.prevYaw += 360.0F;
             }
 
@@ -215,7 +218,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             float float_2 = 0.99F;
             float float_3 = this.getGravity();
             if (this.isInsideWater()) {
-                for (int int_2 = 0; int_2 < 4; ++int_2) {
+                for(int int_2 = 0; int_2 < 4; ++int_2) {
                     float float_4 = 0.25F;
                     this.world.addParticle(ParticleTypes.BUBBLE, this.x - this.velocityX * 0.25D, this.y - this.velocityY * 0.25D, this.z - this.velocityZ * 0.25D, this.velocityX, this.velocityY, this.velocityZ);
                 }
@@ -223,11 +226,11 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                 float_2 = 0.8F;
             }
 
-            this.velocityX *= (double) float_2;
-            this.velocityY *= (double) float_2;
-            this.velocityZ *= (double) float_2;
+            this.velocityX *= (double)float_2;
+            this.velocityY *= (double)float_2;
+            this.velocityZ *= (double)float_2;
             if (!this.isUnaffectedByGravity()) {
-                this.velocityY -= (double) float_3;
+                this.velocityY -= (double)float_3;
             }
 
             this.setPosition(this.x, this.y, this.z);

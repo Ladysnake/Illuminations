@@ -32,7 +32,6 @@ public class WillOWispItem extends Item {
             world_1.spawnEntity(wispThrown);
         }
 
-        playerEntity_1.incrementStat(Stats.USED.method_14956(this));
         return new TypedActionResult(ActionResult.SUCCESS, itemStack_1);
     }
 
