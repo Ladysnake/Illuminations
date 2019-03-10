@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -28,7 +27,7 @@ public class WillOWispItem extends Item {
         if (!world_1.isClient) {
             WillOWispEntity wispThrown = new WillOWispEntity(world_1, playerEntity_1);
             wispThrown.beingThrown = true;
-            wispThrown.calculateVelocity(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
+            wispThrown.method_7474(playerEntity_1, playerEntity_1.pitch, playerEntity_1.yaw, 0.0F, 1.5F, 1.0F);
             world_1.spawnEntity(wispThrown);
         }
 

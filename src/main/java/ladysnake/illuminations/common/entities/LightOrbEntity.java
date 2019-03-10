@@ -7,16 +7,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntityWithAi;
-import net.minecraft.entity.sortme.Living;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class LightOrbEntity extends MobEntityWithAi implements Living {
+public abstract class LightOrbEntity extends MobEntityWithAi {
 
     public LightOrbEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
-        this.setSize(0.5F, 0.5F);
 //        this.setUnaffectedByGravity(true);
 //        this.yaw = (float) (Math.random() * 360.0D);
 //        this.velocityX = (Math.random() * 0.2 - 0.1) * 2.0F;

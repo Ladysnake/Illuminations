@@ -18,10 +18,6 @@ import net.minecraft.world.World;
 
 public class WillOWispEntity extends ThrownLightOrbEntity {
 
-    public WillOWispEntity(World world) {
-        this(IlluminationsEntities.WILL_O_WISP, world);
-    }
-
     public WillOWispEntity(EntityType entityType, World worldIn) {
         super(entityType, worldIn);
     }
@@ -54,11 +50,13 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
                 Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
                 double length = targetVector.length();
                 targetVector = targetVector.multiply(0.5 / length);
-                velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-                velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
-                velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+                this.setVelocity(
+                        (0.9) * getVelocity().x + (0.1) * targetVector.x,
+                        (0.9) * getVelocity().y + (0.1) * targetVector.y,
+                        (0.9) * getVelocity().z + (0.1) * targetVector.z
+                );
                 if (this.getPos() != this.getTargetPosition())
-                    this.move(MovementType.SELF, this.velocityX, this.velocityY, this.velocityZ);
+                    this.move(MovementType.SELF, this.getVelocity());
             }
         }
     }
