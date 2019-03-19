@@ -1,9 +1,9 @@
 # Illuminations - Changelog
 
-### Illuminations 0.2.0 - 19w04b
+### Illuminations 0.1.3 - 19w11b
 
 + Add firefly and lightning bug nests: acts as a spawner for fireflies and lightning bugs during night
-+ Update to Minecraft snapshot 19w04b
++ Update to Minecraft snapshot 19w11b (thanks Fab!)
 
 ### Illuminations 0.1.2 - 19w02a
 
