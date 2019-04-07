@@ -23,17 +23,12 @@ public abstract class LightOrbEntity extends MobEntityWithAi {
     }
 
     @Override
-    public void update() {
-        super.update();
-    }
-
-    @Override
     public boolean isUnaffectedByGravity() {
         return true;
     }
 
     @Override
-    protected void method_5623(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+    protected void fall(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
     @Override
@@ -56,7 +51,7 @@ public abstract class LightOrbEntity extends MobEntityWithAi {
     }
 
     @Override
-    public boolean method_5658() {
+    public boolean canClimb() {
         return false;
     }
 

@@ -121,17 +121,17 @@ public class FireflyEntity extends LightOrbEntity {
     private int targetChangeCooldown = 0;
 
     @Override
-    public void update() {
-        super.update();
+    public void tick() {
+        super.tick();
 
         if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
 
-        if (this.y > 300) this.invalidate();
+        if (this.y > 300) this.kill();
 
         if (!this.world.isClient && !this.dead) {
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
-            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
                 selectBlockTarget();
             }
 
@@ -143,7 +143,7 @@ public class FireflyEntity extends LightOrbEntity {
                     (0.9) * getVelocity().y + (0.1) * targetVector.y,
                     (0.9) * getVelocity().z + (0.1) * targetVector.z
             );
-            if (this.getPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.getVelocity());
+            if (this.getBlockPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.getVelocity());
 
 //            if (this.isInsideWater()) this.damage(DamageSource.DROWN, 1);
 //            if (this.isTouchingLava()) this.damage(DamageSource.LAVA, 1);
@@ -166,20 +166,20 @@ public class FireflyEntity extends LightOrbEntity {
             while (!this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canMobSpawnInside())
                 this.yTarget += 1;
 
-            if (this.world.getLightLevel(LightType.SKY, this.getPos()) > 8 && !this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.SKY, this.getBlockPos()) > 8 && !this.world.isDaylight())
                 this.lightTarget = getRandomLitBlockAround();
         } else {
             this.xTarget = this.lightTarget.getX() + random.nextGaussian();
             this.yTarget = this.lightTarget.getY() + random.nextGaussian();
             this.zTarget = this.lightTarget.getZ() + random.nextGaussian();
 
-            if (this.world.getLightLevel(LightType.BLOCK, this.getPos()) > 8) {
+            if (this.world.getLightLevel(LightType.BLOCK, this.getBlockPos()) > 8) {
                 BlockPos possibleTarget = getRandomLitBlockAround();
                 if (this.world.getLightLevel(LightType.BLOCK, possibleTarget) > this.world.getLightLevel(LightType.BLOCK, this.lightTarget))
                     this.lightTarget = possibleTarget;
             }
 
-            if (this.world.getLightLevel(LightType.BLOCK, this.getPos()) <= 8 || this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.BLOCK, this.getBlockPos()) <= 8 || this.world.isDaylight())
                 this.lightTarget = null;
         }
 

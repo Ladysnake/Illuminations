@@ -3,11 +3,11 @@ package ladysnake.illuminations.common.entities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_1675;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.sortme.Projectile;
+import net.minecraft.entity.ProjectileUtil;
+import net.minecraft.entity.projectile.Projectile;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -98,12 +98,12 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
 
     }
 
-    public void update() {
+    public void tick() {
         if (beingThrown) {
             this.prevRenderX = this.x;
             this.prevRenderY = this.y;
             this.prevRenderZ = this.z;
-            super.update();
+            super.tick();
             if (this.shake > 0) {
                 --this.shake;
             }
@@ -113,7 +113,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                 this.setVelocity(this.getVelocity().multiply((double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F)));
             }
 
-            BoundingBox boundingBox_1 = this.getBoundingBox().method_18804(this.getVelocity()).expand(1.0D);
+            BoundingBox boundingBox_1 = this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D);
             Iterator var2 = this.world.getEntities(this, boundingBox_1, (entity_1x) -> !entity_1x.isSpectator() && entity_1x.doesCollide()).iterator();
 
             while (var2.hasNext()) {
@@ -130,7 +130,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                 }
             }
 
-            HitResult hitResult_1 = class_1675.method_18074(this, boundingBox_1, (entity_1x) -> {
+            HitResult hitResult_1 = ProjectileUtil.getCollision(this, boundingBox_1, (entity_1x) -> {
                 return !entity_1x.isSpectator() && entity_1x.doesCollide() && entity_1x != this.field_7637;
             }, RayTraceContext.ShapeType.OUTLINE, true);
             if (this.field_7637 != null && this.field_7638-- <= 0) {
@@ -189,7 +189,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
 
             this.setPosition(this.x, this.y, this.z);
         } else {
-            super.update();
+            super.tick();
         }
     }
 

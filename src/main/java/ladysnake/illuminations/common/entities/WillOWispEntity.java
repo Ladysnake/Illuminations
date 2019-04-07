@@ -34,16 +34,16 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
     private int targetChangeCooldown = 0;
 
     @Override
-    public void update() {
-        super.update();
+    public void tick() {
+        super.tick();
 
         if (!beingThrown) {
-            if (this.y > 300) this.invalidate();
+            if (this.y > 300) this.kill();
 
             if (!this.world.isClient && !this.dead) {
                 this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
-                if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceToCenter(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+                if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
                     selectBlockTarget();
                 }
 
@@ -55,7 +55,7 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
                         (0.9) * getVelocity().y + (0.1) * targetVector.y,
                         (0.9) * getVelocity().z + (0.1) * targetVector.z
                 );
-                if (this.getPos() != this.getTargetPosition())
+                if (this.getBlockPos() != this.getTargetPosition())
                     this.move(MovementType.SELF, this.getVelocity());
             }
         }
@@ -108,7 +108,7 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
 
     @Override
     public ActionResult interactAt(PlayerEntity playerEntity, Vec3d vec3d, Hand hand) {
-        this.invalidate();
+        this.kill();
         playerEntity.inventory.insertStack(new ItemStack(IlluminationsItems.WILL_O_WISP));
         return super.interactAt(playerEntity, vec3d, hand);
     }

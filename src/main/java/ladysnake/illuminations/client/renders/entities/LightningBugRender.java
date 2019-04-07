@@ -36,8 +36,8 @@ public class LightningBugRender<T extends Entity> extends EntityRenderer<T> {
 
             GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240f, 240f);
 
-            GlStateManager.rotatef(180.0F - this.renderManager.field_4679, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotatef((float) (this.renderManager.settings.perspective == 2 ? -1 : 1) * -this.renderManager.field_4677, 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotatef(180.0F - this.renderManager.cameraYaw, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotatef((float) (this.renderManager.gameOptions.perspective == 2 ? -1 : 1) * -this.renderManager.cameraPitch, 1.0F, 0.0F, 0.0F);
 
             this.bindEntityTexture((T) entity);
             if (entity instanceof LightningBugEntity) {
