@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
@@ -108,7 +109,8 @@ public class FireflyEntity extends LightOrbEntity {
         return true;
     }
 
-    public float method_17825() {
+    @Override
+    public float getScaleFactor() {
         return this.scaleModifier;
     }
 
@@ -154,7 +156,7 @@ public class FireflyEntity extends LightOrbEntity {
         if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
-                if (!this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock().canMobSpawnInside())
+                if (this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock() != Blocks.AIR)
                     this.groundLevel = this.y - i;
                 if (this.groundLevel != 0) break;
             }
@@ -163,7 +165,7 @@ public class FireflyEntity extends LightOrbEntity {
             this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
             this.zTarget = this.z + random.nextGaussian() * 10;
 
-            while (!this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canMobSpawnInside())
+            while (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock() != Blocks.AIR)
                 this.yTarget += 1;
 
             if (this.world.getLightLevel(LightType.SKY, this.getBlockPos()) > 8 && !this.world.isDaylight())

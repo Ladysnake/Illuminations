@@ -114,7 +114,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             }
 
             BoundingBox boundingBox_1 = this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D);
-            Iterator var2 = this.world.getEntities(this, boundingBox_1, (entity_1x) -> !entity_1x.isSpectator() && entity_1x.doesCollide()).iterator();
+            Iterator var2 = this.world.getEntities(this, boundingBox_1, (entity_1x) -> !entity_1x.isSpectator() && entity_1x.collides()).iterator();
 
             while (var2.hasNext()) {
                 Entity entity_1 = (Entity) var2.next();
@@ -131,7 +131,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             }
 
             HitResult hitResult_1 = ProjectileUtil.getCollision(this, boundingBox_1, (entity_1x) -> {
-                return !entity_1x.isSpectator() && entity_1x.doesCollide() && entity_1x != this.field_7637;
+                return !entity_1x.isSpectator() && entity_1x.collides() && entity_1x != this.field_7637;
             }, RayTraceContext.ShapeType.OUTLINE, true);
             if (this.field_7637 != null && this.field_7638-- <= 0) {
                 this.field_7637 = null;

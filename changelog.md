@@ -1,5 +1,9 @@
 # Illuminations - Changelog
 
+### Illuminations 0.1.5 - 1.14
+
++ Update to Minecraft 1.14
+
 ### Illuminations 0.1.4 - 19w14b
 
 + Update to Minecraft snapshot 19w14b

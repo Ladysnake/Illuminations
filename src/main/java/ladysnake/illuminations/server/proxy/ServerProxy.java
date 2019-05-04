@@ -1,7 +1,6 @@
 package ladysnake.illuminations.server.proxy;
 
 import ladysnake.illuminations.common.init.CommonProxy;
-import net.fabricmc.loader.ModInfo;
 
 public class ServerProxy extends CommonProxy {
 
@@ -18,11 +17,6 @@ public class ServerProxy extends CommonProxy {
     @Override
     public void postInit() {
         super.postInit();
-    }
-
-    @Override
-    public ModInfo.Side getSide() {
-        return ModInfo.Side.SERVER;
     }
 
 }
