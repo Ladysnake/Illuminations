@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -140,15 +141,18 @@ public class FireflyEntity extends LightOrbEntity {
             Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
             double length = targetVector.length();
             targetVector = targetVector.multiply(0.1 / length);
-            this.setVelocity(
+
+
+            if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+                this.setVelocity((0.9) * getVelocity().x + (0.1) * targetVector.x,
+                            0.05,
+                        (0.9) * getVelocity().z + (0.1) * targetVector.z);
+            } else this.setVelocity(
                     (0.9) * getVelocity().x + (0.1) * targetVector.x,
                     (0.9) * getVelocity().y + (0.1) * targetVector.y,
                     (0.9) * getVelocity().z + (0.1) * targetVector.z
             );
             if (this.getBlockPos() != this.getTargetPosition()) this.move(MovementType.SELF, this.getVelocity());
-
-//            if (this.isInsideWater()) this.damage(DamageSource.DROWN, 1);
-//            if (this.isTouchingLava()) this.damage(DamageSource.LAVA, 1);
         }
     }
 
@@ -165,7 +169,7 @@ public class FireflyEntity extends LightOrbEntity {
             this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
             this.zTarget = this.z + random.nextGaussian() * 10;
 
-            while (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock() != Blocks.AIR)
+            if (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canMobSpawnInside())
                 this.yTarget += 1;
 
             if (this.world.getLightLevel(LightType.SKY, this.getBlockPos()) > 8 && !this.world.isDaylight())
