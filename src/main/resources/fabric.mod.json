@@ -1,6 +1,7 @@
 {
   "id": "illuminations",
   "name": "Illuminations",
+  "icon": "assets/illuminations/illuminations.png",
   "description": "Fireflies and other light orbs to make your world more enjoyable in darkness.",
   "version": "${version}",
   "side": "universal",

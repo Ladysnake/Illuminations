@@ -145,8 +145,8 @@ public class FireflyEntity extends LightOrbEntity {
 
             if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
                 this.setVelocity((0.9) * getVelocity().x + (0.1) * targetVector.x,
-                            0.05,
-                        (0.9) * getVelocity().z + (0.1) * targetVector.z);
+                    0.05,
+                    (0.9) * getVelocity().z + (0.1) * targetVector.z);
             } else this.setVelocity(
                     (0.9) * getVelocity().x + (0.1) * targetVector.x,
                     (0.9) * getVelocity().y + (0.1) * targetVector.y,
