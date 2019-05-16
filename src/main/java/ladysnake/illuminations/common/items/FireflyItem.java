@@ -16,7 +16,7 @@ public class FireflyItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
-        world.spawnEntity(new FireflyEntity(world, playerEntity.x, playerEntity.y, playerEntity.z));
+        world.spawnEntity(new FireflyEntity(world, playerEntity.x, playerEntity.y+1, playerEntity.z));
         if (!playerEntity.isCreative()) {
             playerEntity.getStackInHand(hand).subtractAmount(1);
         }
