@@ -1,7 +1,6 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;

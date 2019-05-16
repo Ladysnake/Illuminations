@@ -1,6 +1,5 @@
 package ladysnake.illuminations.common.blocks;
 
-import ladysnake.illuminations.common.entities.FireflyEntity;
 import ladysnake.illuminations.common.entities.LightningBugEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
