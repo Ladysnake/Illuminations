@@ -210,4 +210,8 @@ public class FireflyEntity extends LightOrbEntity {
         return !this.world.isDaylight() && !this.world.isThundering();
     }
 
+    @Override
+    public void kill() {
+        super.kill();
+    }
 }
