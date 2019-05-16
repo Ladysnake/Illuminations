@@ -15,7 +15,7 @@ public class IlluminationsItems {
     public static Item FIREFLY;
 
     public static void init() {
-        WILL_O_WISP = registerItem(new WillOWispItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "will_o_wisp");
+        WILL_O_WISP = registerItem(new WillOWispItem((new Item.Settings())), "will_o_wisp");
         BUG_NET = registerItem(new BugNetItem((new Item.Settings()).itemGroup(ItemGroup.TOOLS)), "bug_net");
         FIREFLY = registerItem(new FireflyItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "firefly");
     }
