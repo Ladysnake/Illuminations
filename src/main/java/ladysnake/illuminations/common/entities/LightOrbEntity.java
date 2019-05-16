@@ -23,7 +23,7 @@ public abstract class LightOrbEntity extends MobEntityWithAi {
     }
 
     @Override
-    public boolean isUnaffectedByGravity() {
+    public boolean hasNoGravity() {
         return true;
     }
 

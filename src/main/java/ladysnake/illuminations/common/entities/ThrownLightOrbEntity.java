@@ -137,7 +137,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                 this.field_7637 = null;
             }
 
-            if (hitResult_1.getType() != HitResult.Type.NONE) {
+            if (hitResult_1.getType() != HitResult.Type.MISS) {
                 if (hitResult_1.getType() == HitResult.Type.BLOCK && this.world.getBlockState(((BlockHitResult) hitResult_1).getBlockPos()).getBlock() == Blocks.NETHER_PORTAL) {
                     this.setInPortal(((BlockHitResult) hitResult_1).getBlockPos());
                 } else {
@@ -182,7 +182,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
             }
 
             this.setVelocity(vec3d_1.multiply((double) float_4));
-            if (!this.isUnaffectedByGravity()) {
+            if (!this.hasNoGravity()) {
                 Vec3d vec3d_2 = this.getVelocity();
                 this.setVelocity(vec3d_2.x, vec3d_2.y - (double) this.getGravity(), vec3d_2.z);
             }
@@ -239,7 +239,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
     }
 
     @Override
-    public boolean isUnaffectedByGravity() {
+    public boolean hasNoGravity() {
         return !this.beingThrown;
     }
 }

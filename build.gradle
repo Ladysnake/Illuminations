@@ -14,9 +14,9 @@ minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.14"
-	mappings "net.fabricmc:yarn:1.14+build.7"
-	modCompile "net.fabricmc:fabric-loader:0.4.6+build.141"
+	minecraft "com.mojang:minecraft:1.14.1 Pre-Release 2"
+	mappings "net.fabricmc:yarn:1.14.1 Pre-Release 2+build.2"
+	modCompile "net.fabricmc:fabric-loader:0.4.6+build.143"
 
 	//Fabric api
 	modCompile "net.fabricmc:fabric:0.2.7+build.127"

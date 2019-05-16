@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "hanging=true": { "model": "illuminations:block/hanging_firefly_lantern"},
+        "hanging=false": { "model": "illuminations:block/firefly_lantern"}
+  }
+}

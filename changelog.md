@@ -1,5 +1,10 @@
 # Illuminations - Changelog
 
+### Illuminations 0.1.6 - 1.14.1
+
++ Add Firefly Lanterns
++ Update to Minecraft 1.14.1
+
 ### Illuminations 0.1.5 - 1.14
 
 + Update to Minecraft 1.14
