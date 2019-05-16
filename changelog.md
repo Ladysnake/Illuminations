@@ -3,6 +3,8 @@
 ### Illuminations 0.1.6 - 1.14.1
 
 + Add Firefly Lanterns
++ Add Bug Net
+    - Can be used to capture Fireflies by attacking them
 + Update to Minecraft 1.14.1
 
 ### Illuminations 0.1.5 - 1.14
