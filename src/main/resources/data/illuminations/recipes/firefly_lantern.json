@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "III",
-    "IFI",
-    "III"
+    "GGG",
+    "GFG",
+    "GGG"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_nugget"
+    "G": {
+      "item": "minecraft:glass_pane"
     },
     "F": {
       "item": "illuminations:firefly"
