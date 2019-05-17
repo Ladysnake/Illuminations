@@ -2,9 +2,10 @@
 
 ### Illuminations 0.1.6 - 1.14.1
 
-+ Add Firefly Lanterns
++ Add Firefly in a bottle
 + Add Bug Net
-    - Can be used to capture Fireflies by attacking them
+    + Can be used to capture Fireflies by attacking them
++ Add Firefly item
 + Removed experimental items (nests, throwable Will o' Wisp...) from the creative inventory
 + Update to Minecraft 1.14.1
 

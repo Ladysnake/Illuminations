@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "illuminations:firefly_lantern"
+          "name": "illuminations:firefly_in_a_bottle"
         }
       ],
       "conditions": [
