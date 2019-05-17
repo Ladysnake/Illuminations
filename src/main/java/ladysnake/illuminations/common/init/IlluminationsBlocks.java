@@ -18,12 +18,14 @@ public class IlluminationsBlocks {
     public static Block FIREFLY_NEST;
     public static Block LIGHTNING_BUG_NEST;
     public static Block FIREFLY_LANTERN;
+    public static Block GLOWWORM;
 
 
     public static void init() {
         FIREFLY_NEST = registerBlock(new FireflyNestBlock(Block.Settings.of(Material.WOOD).strength(0.5F, 1.5F)), "firefly_nest", false);
         LIGHTNING_BUG_NEST = registerBlock(new LightningBugNestBlock(Block.Settings.of(Material.WOOD).strength(0.5F, 1.5F)), "lightning_bug_nest", false);
         FIREFLY_LANTERN = registerBlock(new LanternBlock(FabricBlockSettings.of(Material.METAL).strength(3.5F, 3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel(10).build()), "firefly_lantern");
+//        GLOWWORM = registerBlock(new GlowwormBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.SLIME).lightLevel(5).build()), "glowworm");
     }
 
     private static Block registerBlock(Block block, String name) {
