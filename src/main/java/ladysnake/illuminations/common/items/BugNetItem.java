@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class BugNetItem extends Item {
     public BugNetItem(Settings settings) {
@@ -18,11 +18,12 @@ public class BugNetItem extends Item {
         if (targetEntity instanceof FireflyEntity) {
             targetEntity.remove();
             if (player instanceof PlayerEntity) {
-                player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
+//                player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
+                bugNet.applyDamage(1, player.getRand(), (ServerPlayerEntity) player);
                 ((PlayerEntity) player).inventory.insertStack(new ItemStack(IlluminationsItems.FIREFLY));
             }
         }
 
-        return false;
+        return true;
     }
 }
