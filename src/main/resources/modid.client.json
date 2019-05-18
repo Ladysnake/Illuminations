@@ -1,8 +1,0 @@
-{
-  "required": true,
-  "package": "net.fabricmc.example.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "injectors": {
-    "defaultRequire": 1
-  }
-}
