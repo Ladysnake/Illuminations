@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"all": "illuminations:block/firefly_in_a_bottle",
-		"particle": "illuminations:block/firefly_in_a_bottle"
+		"particle": "block/glass"
 	},
 	"elements": [
 		{
