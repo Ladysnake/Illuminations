@@ -16,7 +16,7 @@ public class IlluminationsBlocks {
 //    public static Block FIREFLY_NEST;
 //    public static Block LIGHTNING_BUG_NEST;
     public static Block FIREFLY_IN_A_BOTTLE;
-    public static Block GLOWWORM;
+//    public static Block GLOWWORM;
 
 
     public static void init() {
