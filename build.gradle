@@ -16,10 +16,10 @@ minecraft {
 dependencies {
 	minecraft "com.mojang:minecraft:1.14.1"
 	mappings "net.fabricmc:yarn:1.14.1+build.10"
-	modCompile "net.fabricmc:fabric-loader:0.4.7+build.147"
+	modCompile "net.fabricmc:fabric-loader:0.4.8+build.154"
 
 	//Fabric api
-	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.164"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.167"
 
 	compileOnly "org.jetbrains:annotations:${jb_annotations_version}"
 	compileOnly "com.google.code.findbugs:jsr305:${findbugs_version}"

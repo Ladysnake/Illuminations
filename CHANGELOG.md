@@ -1,5 +1,10 @@
 # Illuminations - Changelog
 
+### Illuminations 0.1.7 - 1.14.1
+
++ Fix the bug where mip map levels wouldn't work
++ Completely remove the experimental items
+
 ### Illuminations 0.1.6 - 1.14.1
 
 + Add Firefly in a bottle
