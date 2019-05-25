@@ -21,7 +21,7 @@ public class WillOWispRender<T extends Entity> extends EntityRenderer<T> {
 
     @Override
     public void render(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        if (!this.field_4674) {
+        if (!this.renderOutlines) {
             GlStateManager.pushMatrix();
 
             GlStateManager.translatef((float) x, (float) y + 0.1f, (float) z);
