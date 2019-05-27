@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -128,7 +129,11 @@ public class FireflyEntity extends LightOrbEntity {
 
         if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
 
-        if (this.y > 300) this.kill();
+        if (this.y > 300) this.remove();
+        if (!this.world.isClient) {
+            boolean arePlayersNear = world.isPlayerInRange(this.x, this.y, this.z, 48);
+            if (!arePlayersNear) this.remove();
+        }
 
         if (!this.world.isClient && !this.dead) {
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
@@ -159,8 +164,10 @@ public class FireflyEntity extends LightOrbEntity {
         if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
-                if (this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock() != Blocks.AIR)
+                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
+                if (!checkedBlock.getBlock().canMobSpawnInside()) {
                     this.groundLevel = this.y - i;
+                }
                 if (this.groundLevel != 0) break;
             }
 
