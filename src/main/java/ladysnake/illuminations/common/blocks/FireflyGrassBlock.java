@@ -35,7 +35,7 @@ public class FireflyGrassBlock extends FernBlock {
 
     @Override
     public void onRandomTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
-        if (!world.isClient) {
+        if (!world.isClient && !world.isDaylight()) {
             boolean arePlayersNear = world.isPlayerInRange((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32);
             List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new BoundingBox(blockPos).expand(32));
 

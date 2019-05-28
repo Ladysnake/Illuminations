@@ -2,8 +2,15 @@
 
 ### Illuminations 0.2.0 - 1.14.2
 
-+ Added Firefly grass (and Firefly tall grass) that will generate in the world in specific biomes
-+ Fireflies no longer spawn randomly, but now spawn from Firefly grass
++ Added Firefly grass (and Firefly tall grass)
+    + Generates in the world in specific biomes
+    + Acts exactly like normal grass and tall grass
+    + Can be crafted from one Grass and one Firefly
++ Completely change Firefly spawning mechanics
+    + Fireflies no longer spawn randomly, but now spawn from Firefly grass during night
+    + Fireflies are now very common to see in the right biomes
++ Optimize firefly spawns and despawns, greatly decreasing the lag caused by the mod
++ Fireflies now despawn on daytime
 + Update to Minecraft 1.14.2
 
 ### Illuminations 0.1.7 - 1.14.1
