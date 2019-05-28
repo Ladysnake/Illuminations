@@ -1,5 +1,11 @@
 # Illuminations - Changelog
 
+### Illuminations 0.2.0 - 1.14.2
+
++ Added Firefly grass (and Firefly tall grass) that will generate in the world in specific biomes
++ Fireflies no longer spawn randomly, but now spawn from Firefly grass
++ Update to Minecraft 1.14.2
+
 ### Illuminations 0.1.7 - 1.14.1
 
 + Fix the bug where mip map levels wouldn't work
