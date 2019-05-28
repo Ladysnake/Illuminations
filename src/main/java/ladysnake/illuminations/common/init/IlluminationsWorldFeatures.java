@@ -16,7 +16,7 @@ public class IlluminationsWorldFeatures {
     public static void init() {
         FIREFLY_PLANT = Registry.register(Registry.FEATURE, Illuminations.MOD_ID + ":firefly_plant", new FireflyPlantFeature(ProbabilityConfig::deserialize));
         for (Biome biome : Registry.BIOME) {
-            biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(FIREFLY_PLANT, new ProbabilityConfig(100F), Decorator.COUNT_RANGE, new RangeDecoratorConfig(90, 0, 0, 250)));
+            biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(FIREFLY_PLANT, new ProbabilityConfig(10F), Decorator.COUNT_RANGE, new RangeDecoratorConfig(90, 0, 0, 250)));
         }
     }
 

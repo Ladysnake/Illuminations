@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.features;
 
 import com.mojang.datafixers.Dynamic;
+import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import net.minecraft.block.*;
 import net.minecraft.tag.BlockTags;
@@ -30,8 +31,7 @@ public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
         BlockPos.Mutable blockPos$Mutable_1 = new BlockPos.Mutable(blockPos);
         BlockPos.Mutable blockPos$Mutable_2 = new BlockPos.Mutable(blockPos);
         if (iWorld.isAir(blockPos$Mutable_1)) {
-            if (Blocks.BAMBOO.getDefaultState().canPlaceAt(iWorld, blockPos$Mutable_1)) {
-                int int_2 = random.nextInt(12) + 5;
+            if (IlluminationsBlocks.FIREFLY_GRASS.getDefaultState().canPlaceAt(iWorld, blockPos$Mutable_1)) {
                 int int_3;
                 if (random.nextFloat() < probabilityConfig.probability) {
                     int_3 = random.nextInt(4) + 1;
@@ -54,17 +54,6 @@ public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
                             }
                         }
                     }
-                }
-
-                for(int_3 = 0; int_3 < int_2 && iWorld.isAir(blockPos$Mutable_1); ++int_3) {
-                    iWorld.setBlockState(blockPos$Mutable_1, Blocks.CAKE.getDefaultState(), 2);
-                    blockPos$Mutable_1.setOffset(Direction.UP, 1);
-                }
-
-                if (blockPos$Mutable_1.getY() - blockPos.getY() >= 3) {
-                    iWorld.setBlockState(blockPos$Mutable_1, Blocks.CAKE.getDefaultState(), 2);
-                    iWorld.setBlockState(blockPos$Mutable_1.setOffset(Direction.DOWN, 1), Blocks.CAKE.getDefaultState(), 2);
-                    iWorld.setBlockState(blockPos$Mutable_1.setOffset(Direction.DOWN, 1), Blocks.CAKE.getDefaultState(), 2);
                 }
             }
 

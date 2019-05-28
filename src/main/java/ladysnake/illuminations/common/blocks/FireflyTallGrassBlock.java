@@ -1,14 +1,9 @@
 package ladysnake.illuminations.common.blocks;
 
 import ladysnake.illuminations.common.entities.FireflyEntity;
-import ladysnake.illuminations.common.init.IlluminationsEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BoundingBox;
 import net.minecraft.world.ViewableWorld;
@@ -38,10 +33,9 @@ public class FireflyTallGrassBlock extends TallPlantBlock {
 
     @Override
     public void onRandomTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
-        if (!world.isClient) {
+        if (!world.isClient && !world.isDaylight()) {
             boolean arePlayersNear = world.isPlayerInRange((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32);
-            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class,
-                    new BoundingBox((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32, 32, 32));
+            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new BoundingBox(blockPos).expand(32));
 
             if (arePlayersNear) {
                 int firefliesToSpawn = 0;
