@@ -136,6 +136,11 @@ public class FireflyEntity extends LightOrbEntity {
                 this.remove();
             }
 
+            // die in fire
+            if (this.isOnFire()) {
+                this.remove();
+            }
+
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
             if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
