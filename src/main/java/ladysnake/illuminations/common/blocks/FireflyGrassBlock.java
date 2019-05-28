@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.blocks;
 
 import ladysnake.illuminations.common.entities.FireflyEntity;
+import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FernBlock;
 import net.minecraft.block.TallPlantBlock;
@@ -36,8 +37,7 @@ public class FireflyGrassBlock extends FernBlock {
     public void onRandomTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
         if (!world.isClient) {
             boolean arePlayersNear = world.isPlayerInRange((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32);
-            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class,
-                    new BoundingBox((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32, 32, 32));
+            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new BoundingBox(blockPos).expand(32));
 
             if (arePlayersNear) {
                 int firefliesToSpawn = 0;
@@ -52,5 +52,10 @@ public class FireflyGrassBlock extends FernBlock {
                 }
             }
         }
+    }
+
+    @Override
+    public void grow(World world_1, Random random_1, BlockPos blockPos_1, BlockState blockState_1) {
+        ((TallPlantBlock) IlluminationsBlocks.FIREFLY_TALL_GRASS).placeAt(world_1, blockPos_1, 2);
     }
 }

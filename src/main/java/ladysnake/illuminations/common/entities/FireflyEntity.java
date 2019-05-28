@@ -23,7 +23,6 @@ public class FireflyEntity extends LightOrbEntity {
     protected float alpha;
     protected boolean canDespawn;
     protected boolean isAttractedByLight;
-    protected boolean despawnOnDaytime;
     private Float nextAlphaGoal;
 
     // Constructors
@@ -36,7 +35,6 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
-        this.despawnOnDaytime = true;
     }
 
     public FireflyEntity(World world, double x, double y, double z) {
@@ -127,15 +125,17 @@ public class FireflyEntity extends LightOrbEntity {
     public void tick() {
         super.tick();
 
-        if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
-
-        if (this.y > 300) this.remove();
-        if (!this.world.isClient) {
+        if (!this.world.isClient && !this.dead) {
+            // despawn if players are too far away
             boolean arePlayersNear = world.isPlayerInRange(this.x, this.y, this.z, 48);
             if (!arePlayersNear) this.remove();
-        }
 
-        if (!this.world.isClient && !this.dead) {
+            // despawn on daytime
+            float tod = this.world.getLevelProperties().getTimeOfDay();
+            if (tod >= 1010 && tod < 12990) {
+                this.remove();
+            }
+
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
             if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {

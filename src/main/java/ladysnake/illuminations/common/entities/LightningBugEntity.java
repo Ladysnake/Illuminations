@@ -19,7 +19,6 @@ public class LightningBugEntity extends FireflyEntity {
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
-        this.despawnOnDaytime = true;
     }
 
     public LightningBugEntity(World world, double x, double y, double z) {
