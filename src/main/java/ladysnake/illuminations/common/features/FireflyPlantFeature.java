@@ -1,12 +1,10 @@
 package ladysnake.illuminations.common.features;
 
 import com.mojang.datafixers.Dynamic;
-import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.TallPlantBlock;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ProbabilityConfig;
