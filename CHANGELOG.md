@@ -1,5 +1,22 @@
 # Illuminations - Changelog
 
+### Illuminations 0.2.0 - 1.14.2
+
++ Added Firefly grass (and Firefly tall grass)
+    + Generates in the world in plain, swamp, forest, jungle, savanna and river biomes
+    + Acts exactly like normal grass and tall grass
+    + Has a luminosity of 1
+    + Can be crafted from one Grass and one Firefly
++ Completely change Firefly spawning mechanics
+    + Fireflies no longer spawn randomly, but now spawn from Firefly grass during night
+    + Fireflies are now very common to see in their habitat biomes
++ Optimize firefly spawns and despawns, greatly decreasing the lag caused by the mod
++ Fireflies now disappear on daytime
++ Added trail particles to Will o' Wisps
++ Reduced Firefly health to 1
++ Add french localization
++ Update to Minecraft 1.14.2
+
 ### Illuminations 0.1.7 - 1.14.1
 
 + Fix the bug where mip map levels wouldn't work

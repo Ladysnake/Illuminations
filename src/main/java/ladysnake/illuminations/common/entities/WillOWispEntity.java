@@ -7,6 +7,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
@@ -36,6 +37,8 @@ public class WillOWispEntity extends ThrownLightOrbEntity {
     @Override
     public void tick() {
         super.tick();
+
+        this.world.addParticle(ParticleTypes.END_ROD, this.x, this.y+0.3, this.z, 0D, 0D, 0D);
 
         if (!beingThrown) {
             if (this.y > 300) this.kill();

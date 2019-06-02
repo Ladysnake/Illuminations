@@ -3,6 +3,7 @@ package ladysnake.illuminations.common;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import ladysnake.illuminations.common.init.IlluminationsItems;
+import ladysnake.illuminations.common.init.IlluminationsWorldFeatures;
 import net.fabricmc.api.ModInitializer;
 
 public class Illuminations implements ModInitializer {
@@ -13,6 +14,8 @@ public class Illuminations implements ModInitializer {
         IlluminationsEntities.init();
         IlluminationsItems.init();
         IlluminationsBlocks.init();
+        IlluminationsWorldFeatures.init();
+
     }
 }
 

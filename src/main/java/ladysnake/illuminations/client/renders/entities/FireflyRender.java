@@ -23,7 +23,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
     }
 
     @Override
-    public void render(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void render(Entity entity, double x, double y, double z, float entityYaw, float tickDelta) {
         if (!this.renderOutlines) {
             GlStateManager.pushMatrix();
 
@@ -45,6 +45,17 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
                 float scale = ((FireflyEntity) entity).getScaleModifier();
                 float color = ((FireflyEntity) entity).getColorModifier();
                 Float nextAlphaGoal = ((FireflyEntity) entity).getNextAlphaGoal();
+
+                // if just spawned
+                if (entity.age < 50) {
+                    alpha = 0;
+                }
+
+                // if day
+                float tod = entity.world.getLevelProperties().getTimeOfDay();
+                if (tod >= 1000 && tod < 13000) {
+                    nextAlphaGoal = 0.0F;
+                }
 
                 if (nextAlphaGoal == null || nextAlphaGoal.equals(round(alpha, 1))) {
                     ((FireflyEntity) entity).setNextAlphaGoal(new Random().nextInt(11) / 10.0F);
@@ -89,7 +100,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             GlStateManager.disableRescaleNormal();
             GlStateManager.enableLighting();
             GlStateManager.popMatrix();
-            super.render((T) entity, x, y, z, entityYaw, partialTicks);
+            super.render((T) entity, x, y, z, entityYaw, tickDelta);
         }
     }
 

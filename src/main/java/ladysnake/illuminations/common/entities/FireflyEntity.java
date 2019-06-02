@@ -1,10 +1,11 @@
 package ladysnake.illuminations.common.entities;
 
 import ladysnake.illuminations.common.init.IlluminationsEntities;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -22,7 +23,6 @@ public class FireflyEntity extends LightOrbEntity {
     protected float alpha;
     protected boolean canDespawn;
     protected boolean isAttractedByLight;
-    protected boolean despawnOnDaytime;
     private Float nextAlphaGoal;
 
     // Constructors
@@ -35,7 +35,8 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
-        this.despawnOnDaytime = true;
+
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0D);
     }
 
     public FireflyEntity(World world, double x, double y, double z) {
@@ -126,11 +127,22 @@ public class FireflyEntity extends LightOrbEntity {
     public void tick() {
         super.tick();
 
-        if (this.despawnOnDaytime && this.canDespawn && this.alpha <= 0) this.kill();
-
-        if (this.y > 300) this.kill();
-
         if (!this.world.isClient && !this.dead) {
+            // despawn if players are too far away
+            boolean arePlayersNear = world.isPlayerInRange(this.x, this.y, this.z, 48);
+            if (!arePlayersNear) this.remove();
+
+            // despawn on daytime
+            float tod = this.world.getLevelProperties().getTimeOfDay();
+            if (tod >= 1010 && tod < 12990) {
+                this.remove();
+            }
+
+            // die in fire
+            if (this.isOnFire()) {
+                this.remove();
+            }
+
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
             if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
@@ -159,8 +171,10 @@ public class FireflyEntity extends LightOrbEntity {
         if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
-                if (this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock() != Blocks.AIR)
+                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
+                if (!checkedBlock.getBlock().canMobSpawnInside()) {
                     this.groundLevel = this.y - i;
+                }
                 if (this.groundLevel != 0) break;
             }
 
