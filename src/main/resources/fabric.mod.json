@@ -18,7 +18,7 @@
   },
 
   "license": "ARR",
-  "icon": "assets/illuminations/icon.png",
+  "icon": "assets/illuminations/illuminations.png",
 
   "environment": "*",
   "entrypoints": {

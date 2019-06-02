@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -34,6 +35,8 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
+
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0D);
     }
 
     public FireflyEntity(World world, double x, double y, double z) {
