@@ -25,7 +25,7 @@ public class ThrownPouchEntity extends ThrownItemEntity {
     protected void onCollision(HitResult hitResult) {
         if (!this.world.isClient) {
             for (int i = 0; i < 7; i++) {
-                FireflyEntity firefly = new FireflyEntity(this.world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+                FireflyEntity firefly = new BloodbeetleEntity(this.world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
                 this.world.spawnEntity(firefly);
             }
             this.world.spawnEntity(new ItemEntity(this.world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z, new ItemStack(Items.LEATHER)));

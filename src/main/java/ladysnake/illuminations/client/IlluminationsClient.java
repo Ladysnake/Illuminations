@@ -1,12 +1,10 @@
 package ladysnake.illuminations.client;
 
+import ladysnake.illuminations.client.renders.entities.BloodbeetleRender;
 import ladysnake.illuminations.client.renders.entities.FireflyRender;
 import ladysnake.illuminations.client.renders.entities.LightningBugRender;
 import ladysnake.illuminations.client.renders.entities.WillOWispRender;
-import ladysnake.illuminations.common.entities.FireflyEntity;
-import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.ThrownPouchEntity;
-import ladysnake.illuminations.common.entities.WillOWispEntity;
+import ladysnake.illuminations.common.entities.*;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -16,7 +14,6 @@ import net.fabricmc.fabric.api.client.render.EntityRendererRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class IlluminationsClient implements ClientModInitializer {
@@ -29,6 +26,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     public static void registerRenders() {
         EntityRendererRegistry.INSTANCE.register(FireflyEntity.class, (manager, context) -> new FireflyRender<>(manager));
+        EntityRendererRegistry.INSTANCE.register(BloodbeetleEntity.class, (manager, context) -> new BloodbeetleRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(LightningBugEntity.class, (manager, context) -> new LightningBugRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(WillOWispEntity.class, (manager, context) -> new WillOWispRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(ThrownPouchEntity.class, (manager, context) -> new FlyingItemEntityRenderer<>(manager, context.getItemRenderer()));

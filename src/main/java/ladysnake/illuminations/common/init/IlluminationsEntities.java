@@ -1,9 +1,6 @@
 package ladysnake.illuminations.common.init;
 
-import ladysnake.illuminations.common.entities.FireflyEntity;
-import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.ThrownPouchEntity;
-import ladysnake.illuminations.common.entities.WillOWispEntity;
+import ladysnake.illuminations.common.entities.*;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntitySize;
@@ -17,9 +14,9 @@ public class IlluminationsEntities {
     public static EntityType<LightningBugEntity> LIGHTNING_BUG;
     public static EntityType<WillOWispEntity> WILL_O_WISP;
     public static EntityType<ThrownPouchEntity> THROWN_POUCH;
+    public static EntityType<BloodbeetleEntity> BLOODBEETLE;
 
     public static void init() {
-        // Firefly + firefly spawns
         FIREFLY = Registry.register(Registry.ENTITY_TYPE, "illuminations:firefly", FabricEntityTypeBuilder.<FireflyEntity>create(EntityCategory.AMBIENT, FireflyEntity::new).size(EntitySize.resizeable(1.0f, 1.0f)).trackable(64, 1, true).build());
 
         // LB + LB spawns
@@ -38,7 +35,9 @@ public class IlluminationsEntities {
             }
         }
 
-        THROWN_POUCH = Registry.register(Registry.ENTITY_TYPE, "illuminations:thrown_jar", FabricEntityTypeBuilder.<ThrownPouchEntity>create(EntityCategory.MISC).size(0.25F, 0.25F).build());
+        THROWN_POUCH = Registry.register(Registry.ENTITY_TYPE, "illuminations:thrown_pouch", FabricEntityTypeBuilder.<ThrownPouchEntity>create(EntityCategory.MISC).size(0.25F, 0.25F).build());
+
+        BLOODBEETLE = Registry.register(Registry.ENTITY_TYPE, "illuminations:bloodbeetle", FabricEntityTypeBuilder.<BloodbeetleEntity>create(EntityCategory.AMBIENT, BloodbeetleEntity::new).size(EntitySize.resizeable(1.0f, 1.0f)).trackable(64, 1, true).build());
     }
 
 }

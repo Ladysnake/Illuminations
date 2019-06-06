@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -116,12 +117,12 @@ public class FireflyEntity extends LightOrbEntity {
     }
 
     // Behaviour
-    private double groundLevel;
-    private BlockPos lightTarget;
-    private double xTarget;
-    private double yTarget;
-    private double zTarget;
-    private int targetChangeCooldown = 0;
+    protected double groundLevel;
+    protected BlockPos lightTarget;
+    protected double xTarget;
+    protected double yTarget;
+    protected double zTarget;
+    protected int targetChangeCooldown = 0;
 
     @Override
     public void tick() {
@@ -167,7 +168,7 @@ public class FireflyEntity extends LightOrbEntity {
         }
     }
 
-    private void selectBlockTarget() {
+    protected void selectBlockTarget() {
         if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
@@ -209,6 +210,12 @@ public class FireflyEntity extends LightOrbEntity {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
+    public void setTarget(double x, double y, double z) {
+        this.xTarget = x;
+        this.yTarget = y;
+        this.zTarget = z;
+    }
+
     private BlockPos getRandomLitBlockAround() {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++) {
@@ -225,6 +232,12 @@ public class FireflyEntity extends LightOrbEntity {
 
     @Override
     public void kill() {
-        super.kill();
+        super.remove();
     }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        return damageSource == DamageSource.CRAMMING;
+    }
+
 }
