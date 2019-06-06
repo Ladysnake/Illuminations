@@ -2,7 +2,6 @@ package ladysnake.illuminations.common.init;
 
 import ladysnake.illuminations.common.entities.FireflyEntity;
 import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.ThrownPouchEntity;
 import ladysnake.illuminations.common.entities.WillOWispEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -16,7 +15,6 @@ public class IlluminationsEntities {
     public static EntityType<FireflyEntity> FIREFLY;
     public static EntityType<LightningBugEntity> LIGHTNING_BUG;
     public static EntityType<WillOWispEntity> WILL_O_WISP;
-    public static EntityType<ThrownPouchEntity> THROWN_POUCH;
 
     public static void init() {
         // Firefly + firefly spawns
@@ -37,8 +35,6 @@ public class IlluminationsEntities {
                 biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(WILL_O_WISP, 20, 1, 1));
             }
         }
-
-        THROWN_POUCH = Registry.register(Registry.ENTITY_TYPE, "illuminations:thrown_jar", FabricEntityTypeBuilder.<ThrownPouchEntity>create(EntityCategory.MISC).size(0.25F, 0.25F).build());
     }
 
 }
