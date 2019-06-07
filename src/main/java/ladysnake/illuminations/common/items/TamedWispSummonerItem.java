@@ -21,6 +21,7 @@ public class TamedWispSummonerItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
         TamedWispEntity wisp = new TamedWispEntity(world, playerEntity.x, playerEntity.y, playerEntity.z);
         wisp.setWispType(this.wispType);
+        wisp.setOwnerUuid(playerEntity.getUuid());
         world.spawnEntity(wisp);
 
         return new TypedActionResult(ActionResult.PASS, playerEntity.getStackInHand(hand));
