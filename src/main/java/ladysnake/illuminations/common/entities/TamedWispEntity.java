@@ -101,15 +101,25 @@ public class TamedWispEntity extends LightOrbEntity {
                     this.yTarget = owner.y + owner.getHeight()/1.25;
                     this.zTarget = owner.z;
 
+                    // if too far away, teleport to the player
+                    if (this.x > owner.x + 20 || this.x < owner.x - 20
+                            || this.y > owner.y + 20 || this.y < owner.y - 20
+                            || this.z > owner.z + 20 || this.z < owner.z - 20)
+                        this.setPosition(owner.x, owner.y, owner.z);
+
                     Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
                     double length = targetVector.length();
                     targetVector = targetVector.multiply(0.1 / length);
 
                     double velX = 0;
-                    if (this.xTarget - x > 0.5 || this.xTarget - x < -0.5) velX = (0.9) * getVelocity().x + (0.6) * targetVector.x;
+                    if (this.xTarget - x > 0.5 || this.xTarget - x < -0.5) {
+                        velX = (0.9) * getVelocity().x + (0.6) * targetVector.x;
+                    }
                     double velY = (0.9) * getVelocity().y + (0.4) * targetVector.y;
                     double velZ = 0;
-                    if (this.zTarget - z > 0.5 || this.zTarget - z < -0.5) velZ = (0.9) * getVelocity().z + (0.6) * targetVector.z;
+                    if (this.zTarget - z > 0.5 || this.zTarget - z < -0.5) {
+                        velZ = (0.9) * getVelocity().z + (0.6) * targetVector.z;
+                    }
 
                     this.setVelocity(velX, velY, velZ);
 
