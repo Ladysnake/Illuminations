@@ -38,7 +38,7 @@ public class IlluminationsEntities {
             }
         }
 
-        TAMED_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:tamed_wisp", FabricEntityTypeBuilder.<TamedWispEntity>create(EntityCategory.MISC, TamedWispEntity::new).size(EntitySize.resizeable(0.25f, 0.25f)).trackable(64, 1, true).build());
+//        TAMED_WISP = Registry.register(Registry.ENTITY_TYPE, "illuminations:tamed_wisp", FabricEntityTypeBuilder.<TamedWispEntity>create(EntityCategory.MISC, TamedWispEntity::new).size(EntitySize.resizeable(0.25f, 0.25f)).trackable(64, 1, true).build());
 
     }
 
