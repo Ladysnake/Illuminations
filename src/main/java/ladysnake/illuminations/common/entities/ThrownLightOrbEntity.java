@@ -14,7 +14,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.TagHelper;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BoundingBox;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
@@ -113,7 +113,7 @@ public abstract class ThrownLightOrbEntity extends LightOrbEntity implements Pro
                 this.setVelocity(this.getVelocity().multiply((double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F)));
             }
 
-            BoundingBox boundingBox_1 = this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D);
+            Box boundingBox_1 = this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D);
             Iterator var2 = this.world.getEntities(this, boundingBox_1, (entity_1x) -> !entity_1x.isSpectator() && entity_1x.collides()).iterator();
 
             while (var2.hasNext()) {

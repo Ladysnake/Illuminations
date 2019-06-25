@@ -17,9 +17,9 @@ public class IlluminationsItems {
 
     public static void init() {
         WILL_O_WISP = registerItem(new WillOWispItem((new Item.Settings())), "will_o_wisp");
-        BUG_NET = registerItem(new BugNetItem((new Item.Settings()).durability(238).itemGroup(ItemGroup.TOOLS)), "bug_net");
-        FIREFLY = registerItem(new FireflyItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "firefly");
-        GLOW_MEAL = registerItem(new GlowMealItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "glow_meal");
+        BUG_NET = registerItem(new BugNetItem((new Item.Settings()).maxDamage(238).group(ItemGroup.TOOLS)), "bug_net");
+        FIREFLY = registerItem(new FireflyItem((new Item.Settings()).group(ItemGroup.MISC)), "firefly");
+        GLOW_MEAL = registerItem(new GlowMealItem((new Item.Settings()).group(ItemGroup.MISC)), "glow_meal");
 //        TAMED_WISP_SUMMONER = registerItem(new TamedWispSummonerItem((new Item.Settings()).itemGroup(ItemGroup.MISC), "tamed_wisp"), "tamed_wisp_summoner");
 //        GOLDEN_WILL_SUMMONER = registerItem(new TamedWispSummonerItem((new Item.Settings()).itemGroup(ItemGroup.MISC), "golden_will"), "golden_will_summoner");
     }

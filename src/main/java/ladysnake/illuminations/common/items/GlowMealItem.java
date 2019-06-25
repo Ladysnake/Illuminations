@@ -33,8 +33,8 @@ public class GlowMealItem extends Item {
     public ActionResult useOnBlock(ItemUsageContext itemUsageContext_1) {
         World world_1 = itemUsageContext_1.getWorld();
         BlockPos blockPos_1 = itemUsageContext_1.getBlockPos();
-        BlockPos blockPos_2 = blockPos_1.offset(itemUsageContext_1.getFacing());
-        if (useOnFertilizable(itemUsageContext_1.getItemStack(), world_1, blockPos_1)) {
+        BlockPos blockPos_2 = blockPos_1.offset(itemUsageContext_1.getPlayerFacing());
+        if (useOnFertilizable(itemUsageContext_1.getStack(), world_1, blockPos_1)) {
             if (!world_1.isClient) {
                 world_1.playLevelEvent(2005, blockPos_1, 0);
             }
@@ -42,8 +42,8 @@ public class GlowMealItem extends Item {
             return ActionResult.SUCCESS;
         } else {
             BlockState blockState_1 = world_1.getBlockState(blockPos_1);
-            boolean boolean_1 = Block.isSolidFullSquare(blockState_1, world_1, blockPos_1, itemUsageContext_1.getFacing());
-            if (boolean_1 && useOnGround(itemUsageContext_1.getItemStack(), world_1, blockPos_2, itemUsageContext_1.getFacing())) {
+            boolean boolean_1 = Block.isSolidFullSquare(blockState_1, world_1, blockPos_1, itemUsageContext_1.getPlayerFacing());
+            if (boolean_1 && useOnGround(itemUsageContext_1.getStack(), world_1, blockPos_2, itemUsageContext_1.getPlayerFacing())) {
                 if (!world_1.isClient) {
                     world_1.playLevelEvent(2005, blockPos_2, 0);
                 }
@@ -99,10 +99,10 @@ public class GlowMealItem extends Item {
         BlockState blockState_1 = iWorld_1.getBlockState(blockPos_1);
         if (!blockState_1.isAir()) {
             for(int int_2 = 0; int_2 < int_1; ++int_2) {
-                double double_1 = random.nextGaussian() * 0.02D;
-                double double_2 = random.nextGaussian() * 0.02D;
-                double double_3 = random.nextGaussian() * 0.02D;
-                iWorld_1.addParticle(ParticleTypes.HAPPY_VILLAGER, (double)((float)blockPos_1.getX() + random.nextFloat()), (double)blockPos_1.getY() + (double)random.nextFloat() * blockState_1.getOutlineShape(iWorld_1, blockPos_1).getMaximum(Direction.Axis.Y), (double)((float)blockPos_1.getZ() + random.nextFloat()), double_1, double_2, double_3);
+                double double_1 = iWorld_1.getRandom().nextGaussian() * 0.02D;
+                double double_2 = iWorld_1.getRandom().nextGaussian() * 0.02D;
+                double double_3 = iWorld_1.getRandom().nextGaussian() * 0.02D;
+                iWorld_1.addParticle(ParticleTypes.HAPPY_VILLAGER, (double)((float)blockPos_1.getX() + iWorld_1.getRandom().nextFloat()), (double)blockPos_1.getY() + (double)iWorld_1.getRandom().nextFloat() * blockState_1.getOutlineShape(iWorld_1, blockPos_1).getMaximum(Direction.Axis.Y), (double)((float)blockPos_1.getZ() + iWorld_1.getRandom().nextFloat()), double_1, double_2, double_3);
             }
 
         }

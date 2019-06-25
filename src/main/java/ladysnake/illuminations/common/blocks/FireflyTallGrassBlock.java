@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BoundingBox;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.ViewableWorld;
 import net.minecraft.world.World;
 
@@ -35,7 +35,7 @@ public class FireflyTallGrassBlock extends TallPlantBlock {
     public void onRandomTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
         if (!world.isClient && !world.isDaylight()) {
             boolean arePlayersNear = world.isPlayerInRange((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32);
-            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new BoundingBox(blockPos).expand(32));
+            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new Box(blockPos).expand(32));
 
             if (arePlayersNear) {
                 int firefliesToSpawn = 0;

@@ -20,10 +20,10 @@ public class WillOWispItem extends Item {
     public TypedActionResult<ItemStack> use(World world_1, PlayerEntity playerEntity_1, Hand hand_1) {
         ItemStack itemStack_1 = playerEntity_1.getStackInHand(hand_1);
         if (!playerEntity_1.abilities.creativeMode) {
-            itemStack_1.subtractAmount(1);
+            itemStack_1.decrement(1);
         }
 
-        world_1.playSound((PlayerEntity)null, playerEntity_1.x, playerEntity_1.y, playerEntity_1.z, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        world_1.playSound((PlayerEntity)null, playerEntity_1.x, playerEntity_1.y, playerEntity_1.z, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world_1.random.nextFloat() * 0.4F + 0.8F));
         if (!world_1.isClient) {
             WillOWispEntity wispThrown = new WillOWispEntity(world_1, playerEntity_1);
             wispThrown.beingThrown = true;

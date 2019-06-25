@@ -36,8 +36,8 @@ public class IlluminationsBlocks {
         Registry.register(Registry.BLOCK, Illuminations.MOD_ID + ":" + name, block);
 
         if (doItem) {
-            BlockItem item = new BlockItem(block, new Item.Settings().itemGroup(ItemGroup.DECORATIONS));
-            item.registerBlockItemMap(Item.BLOCK_ITEM_MAP, item);
+            BlockItem item = new BlockItem(block, new Item.Settings().group(ItemGroup.DECORATIONS));
+            item.appendBlocks(Item.BLOCK_ITEMS, item);
             IlluminationsItems.registerItem(item, name);
         }
 
