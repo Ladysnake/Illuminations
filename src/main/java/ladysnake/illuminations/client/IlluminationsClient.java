@@ -1,13 +1,7 @@
 package ladysnake.illuminations.client;
 
-import ladysnake.illuminations.client.renders.entities.FireflyRender;
-import ladysnake.illuminations.client.renders.entities.LightningBugRender;
-import ladysnake.illuminations.client.renders.entities.TamedWispRender;
-import ladysnake.illuminations.client.renders.entities.WillOWispRender;
-import ladysnake.illuminations.common.entities.FireflyEntity;
-import ladysnake.illuminations.common.entities.LightningBugEntity;
-import ladysnake.illuminations.common.entities.TamedWispEntity;
-import ladysnake.illuminations.common.entities.WillOWispEntity;
+import ladysnake.illuminations.client.renders.entities.*;
+import ladysnake.illuminations.common.entities.*;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -29,6 +23,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static void registerRenders() {
         EntityRendererRegistry.INSTANCE.register(FireflyEntity.class, (manager, context) -> new FireflyRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(LightningBugEntity.class, (manager, context) -> new LightningBugRender<>(manager));
+        EntityRendererRegistry.INSTANCE.register(FairyEntity.class, (manager, context) -> new FairyRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(WillOWispEntity.class, (manager, context) -> new WillOWispRender<>(manager));
         EntityRendererRegistry.INSTANCE.register(TamedWispEntity.class, (manager, context) -> new TamedWispRender<>(manager));
     }

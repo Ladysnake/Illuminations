@@ -78,7 +78,7 @@ public class FireflyEntity extends LightOrbEntity {
     public void fromTag(CompoundTag compound) {
         super.fromTag(compound);
 
-        this.scaleModifier = compound.getFloat("scaleModifier");
+        this.scaleModifier = compound.getFloat("scale");
         this.colorModifier = compound.getFloat("colorModifier");
         this.alpha = compound.getFloat("alpha");
         this.canDespawn = compound.getBoolean("canDespawn");
@@ -96,7 +96,7 @@ public class FireflyEntity extends LightOrbEntity {
 
     @Override
     public CompoundTag toTag(CompoundTag compound) {
-        compound.putFloat("scaleModifier", this.scaleModifier);
+        compound.putFloat("scale", this.scaleModifier);
         compound.putFloat("colorModifier", this.colorModifier);
         compound.putFloat("alpha", this.alpha);
         compound.putBoolean("canDespawn", this.canDespawn);
@@ -225,6 +225,6 @@ public class FireflyEntity extends LightOrbEntity {
 
     @Override
     public void kill() {
-        super.kill();
+        super.remove();
     }
 }
