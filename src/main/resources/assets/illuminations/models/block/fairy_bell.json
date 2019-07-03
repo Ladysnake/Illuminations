@@ -28,8 +28,8 @@
 			"shade": false,
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [0, 0, 8]},
 			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#fan"},
-				"down": {"uv": [0, 16, 16, 0], "texture": "#fan"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#fan", "tintindex": 0}
 			}
 		},
 		{
@@ -39,8 +39,8 @@
 			"shade": false,
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 0, 0]},
 			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#fan"},
-				"down": {"uv": [0, 16, 16, 0], "rotation": 270, "texture": "#fan"}
+				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "rotation": 270, "texture": "#fan", "tintindex": 0}
 			}
 		},
 		{
@@ -50,8 +50,8 @@
 			"shade": false,
 			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 0, 0]},
 			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#fan"},
-				"down": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#fan"}
+				"up": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#fan", "tintindex": 0}
 			}
 		},
 		{
@@ -61,34 +61,26 @@
 			"shade": false,
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0, 8]},
 			"faces": {
-				"up": {"uv": [16, 16, 0, 0], "texture": "#fan"},
-				"down": {"uv": [16, 0, 0, 16], "texture": "#fan"}
+				"up": {"uv": [16, 16, 0, 0], "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#fan", "tintindex": 0}
 			}
 		},
 		{
 			"name": "vine",
-			"from": [4, 0, 8],
-			"to": [12, 14, 8],
+			"from": [5, 0, 8],
+			"to": [11, 6, 8],
 			"faces": {
-				"north": {"uv": [0, 0, 8, 14], "texture": "#cross"},
-				"east": {"uv": [0, 0, 0, 14], "texture": "#missing"},
-				"south": {"uv": [0, 0, 8, 14], "texture": "#cross"},
-				"west": {"uv": [0, 0, 0, 14], "texture": "#missing"},
-				"up": {"uv": [0, 0, 0, 8], "rotation": 270, "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 8], "rotation": 90, "texture": "#missing"}
+				"north": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0},
+				"south": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0}
 			}
 		},
 		{
 			"name": "vine",
-			"from": [8, 0, 4],
-			"to": [8, 14, 12],
+			"from": [8, 0, 5],
+			"to": [8, 6, 11],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 14], "texture": "#missing"},
-				"east": {"uv": [0, 0, 8, 14], "texture": "#cross"},
-				"south": {"uv": [0, 0, 0, 14], "texture": "#missing"},
-				"west": {"uv": [0, 0, 8, 14], "texture": "#cross"},
-				"up": {"uv": [0, 0, 0, 8], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 8], "texture": "#missing"}
+				"east": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0},
+				"west": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0}
 			}
 		}
 	],

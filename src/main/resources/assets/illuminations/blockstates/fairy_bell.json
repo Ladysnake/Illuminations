@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "state=closed": { "model": "illuminations:block/fairy_bell" },
+        "state=open": { "model": "illuminations:block/fairy_bell_open" },
+        "state=empty": { "model": "illuminations:block/fairy_bell_empty" }
+    }
+}

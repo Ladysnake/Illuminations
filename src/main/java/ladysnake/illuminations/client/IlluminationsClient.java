@@ -37,6 +37,10 @@ public class IlluminationsClient implements ClientModInitializer {
             BlockColorProvider provider = ColorProviderRegistry.BLOCK.get(Blocks.GRASS);
             return provider == null ? -1 : provider.getColor(block, pos, world, layer);
         }, IlluminationsBlocks.FIREFLY_TALL_GRASS);
+        ColorProviderRegistry.BLOCK.register((block, pos, world, layer) -> {
+            BlockColorProvider provider = ColorProviderRegistry.BLOCK.get(Blocks.GRASS);
+            return provider == null ? -1 : provider.getColor(block, pos, world, layer);
+        }, IlluminationsBlocks.FAIRY_BELL);
     }
 
 }
