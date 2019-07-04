@@ -28,23 +28,7 @@ public class FairyEntity extends LightOrbEntity {
     public FairyEntity(EntityType entityType, World world) {
         super(entityType, world);
 
-        // Fairy color
-        float r = 0;
-        float g = 0;
-        float b = 0;
-        int colorToIgnore = new Random().nextInt(3);
-        if (colorToIgnore != 0) {
-            r = new Random().nextFloat();
-        }
-        if (colorToIgnore != 1) {
-            g = new Random().nextFloat();
-        }
-        if (colorToIgnore != 2) {
-            b = new Random().nextFloat();
-        }
-        this.setColor(new Color(r, g, b).getRGB());
-        System.out.println(this.getColor());
-
+        this.setColor(randomDualTone());
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
@@ -60,6 +44,14 @@ public class FairyEntity extends LightOrbEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(COLOR, 0);
+    }
+
+    @Override
+    public void onTrackedDataSet(TrackedData<?> key) {
+        if (COLOR.equals(key)) {
+            System.out.println("Color got synchronized !");
+        }
+        super.onTrackedDataSet(key);
     }
 
 
@@ -102,6 +94,10 @@ public class FairyEntity extends LightOrbEntity {
     @Override
     public void tick() {
         super.tick();
+
+        if (this.getColor() == 0) {
+            this.setColor(randomDualTone());
+        }
 
         if (!this.world.isClient && !this.dead) {
             // die in fire
@@ -176,5 +172,22 @@ public class FairyEntity extends LightOrbEntity {
 
     static {
         COLOR = DataTracker.registerData(FairyEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    }
+
+    public int randomDualTone() {
+        float r = 0;
+        float g = 0;
+        float b = 0;
+        int colorToIgnore = new Random().nextInt(3);
+        if (colorToIgnore != 0) {
+            r = new Random().nextFloat();
+        }
+        if (colorToIgnore != 1) {
+            g = new Random().nextFloat();
+        }
+        if (colorToIgnore != 2) {
+            b = new Random().nextFloat();
+        }
+        return new Color(r, g, b).getRGB();
     }
 }
