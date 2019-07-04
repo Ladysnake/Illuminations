@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
+import java.awt.*;
 
 
 public class FairyRender<T extends Entity> extends EntityRenderer<T> {
@@ -41,11 +41,8 @@ public class FairyRender<T extends Entity> extends EntityRenderer<T> {
 
             this.bindEntityTexture((T) entity);
             if (entity instanceof FairyEntity) {
-                float r = ((FairyEntity) entity).getColorModifierR();
-                float g = ((FairyEntity) entity).getColorModifierG();
-                float b = ((FairyEntity) entity).getColorModifierB();
-
-                GlStateManager.color4f(r, g, b, 1F);
+                Color color = new Color(((FairyEntity) entity).getColor());
+                GlStateManager.color4f(color.getRed(), color.getGreen(), color.getBlue(), 1F);
                 GlStateManager.scalef(0.4f, 0.4f, 0.4f);
             }
 

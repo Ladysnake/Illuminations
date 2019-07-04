@@ -1,6 +1,7 @@
 package ladysnake.illuminations.common.init;
 
 import ladysnake.illuminations.common.Illuminations;
+import ladysnake.illuminations.common.blocks.FairyBellBlock;
 import ladysnake.illuminations.common.blocks.FireflyGrassBlock;
 import ladysnake.illuminations.common.blocks.FireflyTallGrassBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -26,7 +27,7 @@ public class IlluminationsBlocks {
         // registering firefly grass flammability
         ((FireBlock)Blocks.FIRE).registerFlammableBlock(FIREFLY_GRASS, 60, 100);
         ((FireBlock)Blocks.FIRE).registerFlammableBlock(FIREFLY_TALL_GRASS, 60, 100);
-        FAIRY_BELL = registerBlock(new FlowerBlock(StatusEffects.INSTANT_HEALTH, 1, FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()), "fairy_bell");
+        FAIRY_BELL = registerBlock(new FairyBellBlock(StatusEffects.INSTANT_HEALTH, 1, FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()), "fairy_bell");
 
 //      GLOWWORM = registerBlock(new GlowwormBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.SLIME).lightLevel(5).build()), "glowworm");
     }

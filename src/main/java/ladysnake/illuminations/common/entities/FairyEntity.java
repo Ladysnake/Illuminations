@@ -1,43 +1,49 @@
 package ladysnake.illuminations.common.entities;
 
+import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.Random;
 
 public class FairyEntity extends LightOrbEntity {
     // Attributes
-    protected float colorModifierR;
-    protected float colorModifierG;
-    protected float colorModifierB;
+    private static final TrackedData<Integer> COLOR;
+    protected BlockPos bellPos;
 
     // Constructors
     public FairyEntity(EntityType entityType, World world) {
         super(entityType, world);
 
         // Fairy color
-        this.colorModifierR = 0;
-        this.colorModifierG = 0;
-        this.colorModifierB = 0;
+        float r = 0;
+        float g = 0;
+        float b = 0;
         int colorToIgnore = new Random().nextInt(3);
         if (colorToIgnore != 0) {
-            this.colorModifierR = new Random().nextFloat();
+            r = new Random().nextFloat();
         }
         if (colorToIgnore != 1) {
-            this.colorModifierG = new Random().nextFloat();
+            g = new Random().nextFloat();
         }
         if (colorToIgnore != 2) {
-            this.colorModifierB = new Random().nextFloat();
+            b = new Random().nextFloat();
         }
+        this.setColor(new Color(r, g, b).getRGB());
+        System.out.println(this.getColor());
 
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
@@ -45,48 +51,39 @@ public class FairyEntity extends LightOrbEntity {
     public FairyEntity(World world, double x, double y, double z) {
         this(IlluminationsEntities.FAIRY, world);
         this.setPosition(x, y, z);
+        BlockPos bp = new BlockPos(x, y, z);
+        if (world.getBlockState(bp).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
+            this.bellPos = bp;
+        }
     }
+
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(COLOR, 0);
+    }
+
 
     // Getters & setters
-    public float getColorModifierR() {
-        return colorModifierR;
+    public int getColor() {
+        return this.dataTracker.get(COLOR);
     }
 
-    public float getColorModifierG() {
-        return colorModifierG;
+    public void setColor(int color) {
+        this.dataTracker.set(COLOR, color);
     }
 
-    public float getColorModifierB() {
-        return colorModifierB;
-    }
 
     // NBT
     @Override
-    public void fromTag(CompoundTag compound) {
-        super.fromTag(compound);
-
-        this.colorModifierR = compound.getFloat("colorModifierR");
-        this.colorModifierG = compound.getFloat("colorModifierG");
-        this.colorModifierB = compound.getFloat("colorModifierB");
+    public void writeCustomDataToTag(CompoundTag compoundTag) {
+        super.writeCustomDataToTag(compoundTag);
+        compoundTag.putInt("color", this.getColor());
     }
 
     @Override
     public void readCustomDataFromTag(CompoundTag compoundTag) {
-
-    }
-
-    @Override
-    public void writeCustomDataToTag(CompoundTag compoundTag) {
-
-    }
-
-    @Override
-    public CompoundTag toTag(CompoundTag compound) {
-        compound.putFloat("colorModifierR", this.colorModifierR);
-        compound.putFloat("colorModifierG", this.colorModifierG);
-        compound.putFloat("colorModifierB", this.colorModifierB);
-
-        return super.toTag(compound);
+        super.readCustomDataFromTag(compoundTag);
+        this.setColor(compoundTag.getInt("color"));
     }
 
     // Properties
@@ -107,10 +104,6 @@ public class FairyEntity extends LightOrbEntity {
         super.tick();
 
         if (!this.world.isClient && !this.dead) {
-            // despawn if players are too far away
-//            boolean arePlayersNear = world.isPlayerInRange(this.x, this.y, this.z, 48);
-//            if (!arePlayersNear) this.remove();
-
             // die in fire
             if (this.isOnFire()) {
                 this.remove();
@@ -121,6 +114,13 @@ public class FairyEntity extends LightOrbEntity {
             if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
                 selectBlockTarget();
             }
+
+            // go to fairy bell at night
+//            if ((!world.isDaylight() || world.isRaining()) && world.getBlockState(bellPos).getBlock() ==  IlluminationsBlocks.FAIRY_BELL) {
+//                this.xTarget = bellPos.getX();
+//                this.yTarget = bellPos.getY();
+//                this.zTarget = bellPos.getZ();
+//            }
 
             Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
             double length = targetVector.length();
@@ -172,5 +172,9 @@ public class FairyEntity extends LightOrbEntity {
     @Override
     public void kill() {
         super.remove();
+    }
+
+    static {
+        COLOR = DataTracker.registerData(FairyEntity.class, TrackedDataHandlerRegistry.INTEGER);
     }
 }
