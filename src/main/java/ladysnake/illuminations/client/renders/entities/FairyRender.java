@@ -42,7 +42,7 @@ public class FairyRender<T extends Entity> extends EntityRenderer<T> {
             this.bindEntityTexture((T) entity);
             if (entity instanceof FairyEntity) {
                 Color color = new Color(((FairyEntity) entity).getColor());
-                GlStateManager.color4f(color.getRed(), color.getGreen(), color.getBlue(), 1F);
+                GlStateManager.color3f(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f);
                 GlStateManager.scalef(0.4f, 0.4f, 0.4f);
             }
 
@@ -61,7 +61,7 @@ public class FairyRender<T extends Entity> extends EntityRenderer<T> {
 
             this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entity/fairy_overlay.png"));
             //noinspection ConstantConditions
-            GlStateManager.color4f(1F, 1F, 1F, 1F);
+            GlStateManager.color3f(1F, 1F, 1F);
             bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();

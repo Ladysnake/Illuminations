@@ -22,38 +22,25 @@ import java.util.Random;
 public class FairyEntity extends LightOrbEntity {
     // Attributes
     private static final TrackedData<Integer> COLOR;
-    protected BlockPos bellPos;
 
     // Constructors
     public FairyEntity(EntityType entityType, World world) {
         super(entityType, world);
 
         this.setColor(randomDualTone());
+        System.out.println(this.getColor());
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
     public FairyEntity(World world, double x, double y, double z) {
         this(IlluminationsEntities.FAIRY, world);
         this.setPosition(x, y, z);
-        BlockPos bp = new BlockPos(x, y, z);
-        if (world.getBlockState(bp).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
-            this.bellPos = bp;
-        }
     }
 
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(COLOR, 0);
     }
-
-    @Override
-    public void onTrackedDataSet(TrackedData<?> key) {
-        if (COLOR.equals(key)) {
-            System.out.println("Color got synchronized !");
-        }
-        super.onTrackedDataSet(key);
-    }
-
 
     // Getters & setters
     public int getColor() {
@@ -75,7 +62,9 @@ public class FairyEntity extends LightOrbEntity {
     @Override
     public void readCustomDataFromTag(CompoundTag compoundTag) {
         super.readCustomDataFromTag(compoundTag);
-        this.setColor(compoundTag.getInt("color"));
+        if (compoundTag.getInt("color") != 0) {
+            this.setColor(compoundTag.getInt("color"));
+        }
     }
 
     // Properties
@@ -94,10 +83,6 @@ public class FairyEntity extends LightOrbEntity {
     @Override
     public void tick() {
         super.tick();
-
-        if (this.getColor() == 0) {
-            this.setColor(randomDualTone());
-        }
 
         if (!this.world.isClient && !this.dead) {
             // die in fire
