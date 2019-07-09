@@ -21,6 +21,10 @@ public class FairyBellBlockEntity extends BlockEntity {
         this.fairyColor = color;
     }
 
+    public int getFairyColor() {
+        return this.fairyColor;
+    }
+
     // NBT
     @Override
     public CompoundTag toTag(CompoundTag compoundTag) {

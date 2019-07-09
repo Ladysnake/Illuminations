@@ -8,12 +8,9 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class FairyBellBlock extends FlowerBlock implements BlockEntityProvider {
     public static final EnumProperty<State> STATE = EnumProperty.of("state", State.class);
@@ -47,7 +44,7 @@ public class FairyBellBlock extends FlowerBlock implements BlockEntityProvider {
         return new FairyBellBlockEntity();
     }
 
-    enum State implements StringIdentifiable {
+    public enum State implements StringIdentifiable {
         OPEN("open"),
         CLOSED("closed"),
         EMPTY("empty");

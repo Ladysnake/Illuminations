@@ -1,11 +1,14 @@
 package ladysnake.illuminations.common.entities;
 
+import ladysnake.illuminations.common.blocks.FairyBellBlock;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -17,7 +20,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class FairyEntity extends LightOrbEntity {
     // Attributes
@@ -28,7 +34,6 @@ public class FairyEntity extends LightOrbEntity {
         super(entityType, world);
 
         this.setColor(randomDualTone());
-        System.out.println(this.getColor());
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
@@ -79,6 +84,8 @@ public class FairyEntity extends LightOrbEntity {
     private double yTarget;
     private double zTarget;
     private int targetChangeCooldown = 0;
+    private BlockPos closestBell;
+    private int enterTimer = 4;
 
     @Override
     public void tick() {
@@ -92,16 +99,74 @@ public class FairyEntity extends LightOrbEntity {
 
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
-            if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
+            // go to fairy bell at night
+            if (!world.isDaylight() || world.isRaining()) {
+                if (world.getTime() % 5 == 0) {
+                    if (closestBell != null) {
+                        // verifying the bell still exists and is open
+                        if (world.getBlockState(closestBell).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
+                            FairyBellBlock.State bellState = world.getBlockState(closestBell).get(FairyBellBlock.STATE);
+                            if (bellState == FairyBellBlock.State.CLOSED) {
+                                closestBell = null;
+                            }
+                        } else {
+                            closestBell = null;
+                        }
+                        // if on same block, start timer to get inside, else reset it
+                        if (closestBell != null && this.getBlockPos().equals(closestBell)) {
+                            enterTimer--;
+                        } else {
+                            enterTimer = 4;
+                        }
+                        // if timer reaches 0, enter
+                        if (enterTimer <= 0) {
+                            world.setBlockState(closestBell,
+                                    IlluminationsBlocks.FAIRY_BELL.getDefaultState().with(FairyBellBlock.STATE, FairyBellBlock.State.CLOSED));
+                            this.remove();
+                        }
+                    }
+
+                    Set<BlockPos> bePositions = world.getChunk(this.getBlockPos()).getBlockEntityPositions();
+                    ArrayList<BlockPos> fairyBellPositions = new ArrayList<>();
+                    // detect block entities that are fairy bells
+                    bePositions.forEach(blockPos -> {
+                        if (world.getBlockEntity(blockPos) instanceof FairyBellBlockEntity) {
+                            if (world.getBlockState(blockPos).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
+                                FairyBellBlock.State bellState = world.getBlockState(blockPos).get(FairyBellBlock.STATE);
+                                if (bellState == FairyBellBlock.State.EMPTY || bellState == FairyBellBlock.State.OPEN) {
+                                    fairyBellPositions.add(blockPos);
+                                }
+                            }
+                        }
+                    });
+                    // if no fairy bell, random block target
+                    if (fairyBellPositions.size() > 0) {
+                        if (closestBell == null) {
+                            closestBell = fairyBellPositions.get(0);
+                        }
+                        // find the closest fairy bell
+                        fairyBellPositions.forEach(blockPos -> {
+                            if (closestBell != null) {
+                                double distanceToClosest = this.getBlockPos().getSquaredDistance((double) closestBell.getX(), (double) closestBell.getY(), (double) closestBell.getZ(), true);
+                                double distanceToBlockpos = this.getBlockPos().getSquaredDistance((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), true);
+                                if (distanceToBlockpos < distanceToClosest) {
+                                    closestBell = blockPos;
+                                }
+                            } else {
+                                closestBell = blockPos;
+                            }
+                        });
+                        // once found, set target
+                        this.xTarget = closestBell.getX() + .5;
+                        this.yTarget = closestBell.getY() + .5;
+                        this.zTarget = closestBell.getZ() + .5;
+                    } else if (closestBell == null) {
+                        selectBlockTarget();
+                    }
+                }
+            } else if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
                 selectBlockTarget();
             }
-
-            // go to fairy bell at night
-//            if ((!world.isDaylight() || world.isRaining()) && world.getBlockState(bellPos).getBlock() ==  IlluminationsBlocks.FAIRY_BELL) {
-//                this.xTarget = bellPos.getX();
-//                this.yTarget = bellPos.getY();
-//                this.zTarget = bellPos.getZ();
-//            }
 
             Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
             double length = targetVector.length();
