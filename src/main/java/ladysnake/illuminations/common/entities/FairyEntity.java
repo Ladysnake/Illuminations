@@ -126,43 +126,35 @@ public class FairyEntity extends LightOrbEntity {
                 }
 
                 if (world.getTime() % 5 == 0 && closestBell == null) {
-                    // detect block entities that are fairy bells
-                    ArrayList<BlockPos> fairyBellPositions = new ArrayList<>();
+                    // detect block entities that are fairy bells and in 32 blocks radius
                     world.blockEntities.forEach(blockEntity -> {
-                        if (blockEntity instanceof FairyBellBlockEntity) {
+                        if (this.getBlockPos().getSquaredDistance(blockEntity.getPos()) <= 32 && blockEntity instanceof FairyBellBlockEntity) {
                             FairyBellBlock.State bellState = world.getBlockState(blockEntity.getPos()).get(FairyBellBlock.STATE);
                             if (bellState == FairyBellBlock.State.EMPTY || bellState == FairyBellBlock.State.OPEN) {
-                                fairyBellPositions.add(blockEntity.getPos());
+                                if (closestBell != null) {
+                                    double distanceToClosest = this.getBlockPos().getSquaredDistance((double) closestBell.getX(), (double) closestBell.getY(), (double) closestBell.getZ(), true);
+                                    double distanceToBlockpos = this.getBlockPos().getSquaredDistance((double) blockEntity.getPos().getX(), (double) blockEntity.getPos().getY(), (double) blockEntity.getPos().getZ(), true);
+                                    if (distanceToBlockpos < distanceToClosest) {
+                                        closestBell = blockEntity.getPos();
+                                    }
+                                } else {
+                                    closestBell = blockEntity.getPos();
+                                }
                             }
                         }
                     });
-                    // if no fairy bell, random block target
-                    if (fairyBellPositions.size() > 0) {
-                        if (closestBell == null) {
-                            closestBell = fairyBellPositions.get(0);
-                        }
-                        // find the closest fairy bell
-                        fairyBellPositions.forEach(blockPos -> {
-                            if (closestBell != null) {
-                                double distanceToClosest = this.getBlockPos().getSquaredDistance((double) closestBell.getX(), (double) closestBell.getY(), (double) closestBell.getZ(), true);
-                                double distanceToBlockpos = this.getBlockPos().getSquaredDistance((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), true);
-                                if (distanceToBlockpos < distanceToClosest) {
-                                    closestBell = blockPos;
-                                }
-                            } else {
-                                closestBell = blockPos;
-                            }
-                        });
-                        // once found, set target
+                    // if a bell is found, set target
+                    if (closestBell != null) {
                         this.xTarget = closestBell.getX() + .5;
                         this.yTarget = closestBell.getY() + .5;
                         this.zTarget = closestBell.getZ() + .5;
-                    } else if (closestBell == null) {
+                    } else { // if not, random classic block target
                         selectBlockTarget();
                     }
                 }
             } else if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0) {
                 selectBlockTarget();
+                closestBell = null;
             }
 
             Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
