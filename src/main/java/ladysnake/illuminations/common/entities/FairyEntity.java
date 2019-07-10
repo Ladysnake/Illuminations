@@ -99,43 +99,40 @@ public class FairyEntity extends LightOrbEntity {
 
             this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
-            // go to fairy bell at night
+            // searching for the closest bell
             if (!world.isDaylight() || world.isRaining()) {
-                if (world.getTime() % 5 == 0) {
-                    if (closestBell != null) {
-                        // verifying the bell still exists and is open
-                        if (world.getBlockState(closestBell).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
-                            FairyBellBlock.State bellState = world.getBlockState(closestBell).get(FairyBellBlock.STATE);
-                            if (bellState == FairyBellBlock.State.CLOSED) {
-                                closestBell = null;
-                            }
-                        } else {
+                if (closestBell != null) {
+                    // verifying the bell still exists and is open
+                    if (world.getBlockState(closestBell).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
+                        FairyBellBlock.State bellState = world.getBlockState(closestBell).get(FairyBellBlock.STATE);
+                        if (bellState == FairyBellBlock.State.CLOSED) {
                             closestBell = null;
                         }
-                        // if on same block, start timer to get inside, else reset it
-                        if (closestBell != null && this.getBlockPos().equals(closestBell)) {
-                            enterTimer--;
-                        } else {
-                            enterTimer = 4;
-                        }
-                        // if timer reaches 0, enter
-                        if (enterTimer <= 0) {
-                            world.setBlockState(closestBell,
-                                    IlluminationsBlocks.FAIRY_BELL.getDefaultState().with(FairyBellBlock.STATE, FairyBellBlock.State.CLOSED));
-                            this.remove();
-                        }
+                    } else {
+                        closestBell = null;
                     }
+                    // if on same block, start timer to get inside, else reset it
+                    if (closestBell != null && this.getBlockPos().equals(closestBell)) {
+                        enterTimer--;
+                    } else {
+                        enterTimer = 4;
+                    }
+                    // if timer reaches 0, enter
+                    if (enterTimer <= 0) {
+                        world.setBlockState(closestBell,
+                                IlluminationsBlocks.FAIRY_BELL.getDefaultState().with(FairyBellBlock.STATE, FairyBellBlock.State.CLOSED));
+                        this.remove();
+                    }
+                }
 
-                    Set<BlockPos> bePositions = world.getChunk(this.getBlockPos()).getBlockEntityPositions();
-                    ArrayList<BlockPos> fairyBellPositions = new ArrayList<>();
+                if (world.getTime() % 5 == 0 && closestBell == null) {
                     // detect block entities that are fairy bells
-                    bePositions.forEach(blockPos -> {
-                        if (world.getBlockEntity(blockPos) instanceof FairyBellBlockEntity) {
-                            if (world.getBlockState(blockPos).getBlock() == IlluminationsBlocks.FAIRY_BELL) {
-                                FairyBellBlock.State bellState = world.getBlockState(blockPos).get(FairyBellBlock.STATE);
-                                if (bellState == FairyBellBlock.State.EMPTY || bellState == FairyBellBlock.State.OPEN) {
-                                    fairyBellPositions.add(blockPos);
-                                }
+                    ArrayList<BlockPos> fairyBellPositions = new ArrayList<>();
+                    world.blockEntities.forEach(blockEntity -> {
+                        if (blockEntity instanceof FairyBellBlockEntity) {
+                            FairyBellBlock.State bellState = world.getBlockState(blockEntity.getPos()).get(FairyBellBlock.STATE);
+                            if (bellState == FairyBellBlock.State.EMPTY || bellState == FairyBellBlock.State.OPEN) {
+                                fairyBellPositions.add(blockEntity.getPos());
                             }
                         }
                     });
