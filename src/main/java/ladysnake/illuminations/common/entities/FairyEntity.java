@@ -42,6 +42,11 @@ public class FairyEntity extends LightOrbEntity {
         this.setPosition(x, y, z);
     }
 
+    public FairyEntity(World world, double x, double y, double z, int color) {
+        this(world, x, y, z);
+        this.setColor(color);
+    }
+
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(COLOR, 0);
@@ -117,10 +122,11 @@ public class FairyEntity extends LightOrbEntity {
                     } else {
                         enterTimer = 4;
                     }
-                    // if timer reaches 0, enter
+                    // if timer reaches 0, enter, set the bell's fairy color
                     if (enterTimer <= 0) {
                         world.setBlockState(closestBell,
                                 IlluminationsBlocks.FAIRY_BELL.getDefaultState().with(FairyBellBlock.STATE, FairyBellBlock.State.CLOSED));
+                        ((FairyBellBlockEntity)world.getBlockEntity(closestBell)).setFairyColor(this.getColor());
                         this.remove();
                     }
                 }

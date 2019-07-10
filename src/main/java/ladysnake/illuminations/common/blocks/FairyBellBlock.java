@@ -1,10 +1,12 @@
 package ladysnake.illuminations.common.blocks;
 
 import ladysnake.illuminations.common.entities.FairyBellBlockEntity;
+import ladysnake.illuminations.common.entities.FairyEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.EnumProperty;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -53,6 +56,17 @@ public class FairyBellBlock extends FlowerBlock implements BlockEntityProvider {
     public VoxelShape getOutlineShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, EntityContext entityContext_1) {
         Vec3d offset = blockState_1.getOffsetPos(blockView_1, blockPos_1);
         return this.HITBOX.offset(offset.x, offset.y, offset.z);
+    }
+
+    @Override
+    public void onBreak(World world, BlockPos blockPos, BlockState blockState, PlayerEntity playerEntity) {
+        super.onBreak(world, blockPos, blockState, playerEntity);
+
+        if (blockState.get(STATE) == State.CLOSED) {
+            FairyBellBlockEntity blockEntity = (FairyBellBlockEntity) world.getBlockEntity(blockPos);
+            FairyEntity spawnedFairy = new FairyEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockEntity.getFairyColor());
+            world.spawnEntity(spawnedFairy);
+        }
     }
 
     public enum State implements StringIdentifiable {
