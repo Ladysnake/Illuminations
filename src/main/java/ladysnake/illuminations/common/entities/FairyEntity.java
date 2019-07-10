@@ -128,7 +128,7 @@ public class FairyEntity extends LightOrbEntity {
                 if (world.getTime() % 5 == 0 && closestBell == null) {
                     // detect block entities that are fairy bells and in 32 blocks radius
                     world.blockEntities.forEach(blockEntity -> {
-                        if (this.getBlockPos().getSquaredDistance(blockEntity.getPos()) <= 32 && blockEntity instanceof FairyBellBlockEntity) {
+                        if (Math.sqrt(this.getBlockPos().getSquaredDistance(blockEntity.getPos())) <= 32 && blockEntity instanceof FairyBellBlockEntity) {
                             FairyBellBlock.State bellState = world.getBlockState(blockEntity.getPos()).get(FairyBellBlock.STATE);
                             if (bellState == FairyBellBlock.State.EMPTY || bellState == FairyBellBlock.State.OPEN) {
                                 if (closestBell != null) {
