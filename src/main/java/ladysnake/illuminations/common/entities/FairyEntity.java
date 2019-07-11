@@ -151,9 +151,11 @@ public class FairyEntity extends LightOrbEntity {
                     });
                     // if a bell is found, set target
                     if (closestBell != null) {
-                        this.xTarget = closestBell.getX() + .5;
-                        this.yTarget = closestBell.getY() + .5;
-                        this.zTarget = closestBell.getZ() + .5;
+                        Vec3d offset = world.getBlockState(closestBell).getOffsetPos(world, closestBell);
+                        System.out.println(offset);
+                        this.xTarget = closestBell.getX() + offset.x+.5;
+                        this.yTarget = closestBell.getY() + offset.y+.5;
+                        this.zTarget = closestBell.getZ() + offset.z+.5;
                     } else { // if not, random classic block target
                         selectBlockTarget();
                     }

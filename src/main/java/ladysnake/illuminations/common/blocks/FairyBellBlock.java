@@ -61,10 +61,11 @@ public class FairyBellBlock extends FlowerBlock implements BlockEntityProvider {
     @Override
     public void onBreak(World world, BlockPos blockPos, BlockState blockState, PlayerEntity playerEntity) {
         super.onBreak(world, blockPos, blockState, playerEntity);
-
+        // if closed, release a fairy
         if (blockState.get(STATE) == State.CLOSED) {
             FairyBellBlockEntity blockEntity = (FairyBellBlockEntity) world.getBlockEntity(blockPos);
-            FairyEntity spawnedFairy = new FairyEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockEntity.getFairyColor());
+            Vec3d offset = blockState.getOffsetPos(world, blockPos);
+            FairyEntity spawnedFairy = new FairyEntity(world, blockPos.getX()+offset.x+.5, blockPos.getY()+offset.y+.5, blockPos.getZ()+offset.z+.5, blockEntity.getFairyColor());
             world.spawnEntity(spawnedFairy);
         }
     }
