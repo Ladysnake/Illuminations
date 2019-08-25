@@ -1,0 +1,25 @@
+// Entities
+entity.firefly.name=Świetlik
+entity.psi_firefly.name=Świetlik psi
+entity.lightning_bug.name=Piorunowy świetlik
+entity.ember.name=Żar
+entity.solar_orb.name=Słoneczna kula
+
+// Creative tab
+itemGroup.Lumen=Lumen
+
+// Items
+item.lumen.glass_jar.name=Słoik
+item.lumen.firefly_in_a_jar.name=Świetlik w słoiku
+item.lumen.psi_firefly_in_a_jar.name=Świetlik psi w słoiku
+item.lumen.lightning_bug_in_a_jar.name=Piorunowy świetlik w słoiku
+item.lumen.ember_in_a_jar.name=Żar w słoiku
+item.lumen.scorching_flint.name=Palące krzesiwo
+item.lumen.sparkling_flint.name=Iskrzące krzesiwo
+item.lumen.rat_hammock.name=Hamak dla szczurów
+
+// Item tooltips
+item.lumen.companion_summoner.tooltip=[Shift + LPM] Pozbądź się swojego towarzyszącego świetlika.
+item.lumen.solar_orb_summoner.tooltip=Płonący kamień do przyzwania słonecznej kuli.
+item.lumen.thunderball_summoner.tooltip=Oszołomienie.
+item.lumen.splinter_summoner.tooltip=Byłeś aniołem wśród szczurów. Obyś mógł wrócić do nieba. Spoczywaj w pokoju, mój mały towarzyszu.
