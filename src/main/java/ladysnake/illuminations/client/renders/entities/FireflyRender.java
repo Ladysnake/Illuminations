@@ -83,7 +83,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png"));
             //noinspection ConstantConditions
             GlStateManager.color4f(1F, 1F, 1F, ((FireflyEntity) entity).getAlpha());
-            bufferbuilder.begin(7, VertexFormats.POSITION_UV_NORMAL);
+            bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
