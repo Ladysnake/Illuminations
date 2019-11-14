@@ -17,13 +17,15 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class FireflyEntity extends LightOrbEntity {
+    public static final int ALPHA_MAX = 20;
+
     // Attributes
     protected float scaleModifier;
     protected float colorModifier;
-    protected float alpha;
+    protected int alpha;
     protected boolean canDespawn;
     protected boolean isAttractedByLight;
-    private Float nextAlphaGoal;
+    protected int nextAlphaGoal;
 
     // Constructors
     public FireflyEntity(EntityType entityType, World world) {
@@ -31,7 +33,7 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
-        this.alpha = 1F;
+        this.alpha = 100;
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
@@ -53,19 +55,19 @@ public class FireflyEntity extends LightOrbEntity {
         return colorModifier;
     }
 
-    public float getAlpha() {
+    public int getAlpha() {
         return alpha;
     }
 
-    public void setAlpha(float alpha) {
+    public void setAlpha(int alpha) {
         this.alpha = alpha;
     }
 
-    public Float getNextAlphaGoal() {
+    public int getNextAlphaGoal() {
         return nextAlphaGoal;
     }
 
-    public void setNextAlphaGoal(Float nextAlphaGoal) {
+    public void setNextAlphaGoal(int nextAlphaGoal) {
         this.nextAlphaGoal = nextAlphaGoal;
     }
 
@@ -80,7 +82,7 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.scaleModifier = compound.getFloat("scale");
         this.colorModifier = compound.getFloat("colorModifier");
-        this.alpha = compound.getFloat("alpha");
+        this.alpha = compound.getInt("alpha");
         this.canDespawn = compound.getBoolean("canDespawn");
     }
 
@@ -98,7 +100,7 @@ public class FireflyEntity extends LightOrbEntity {
     public CompoundTag toTag(CompoundTag compound) {
         compound.putFloat("scale", this.scaleModifier);
         compound.putFloat("colorModifier", this.colorModifier);
-        compound.putFloat("alpha", this.alpha);
+        compound.putInt("alpha", this.alpha);
         compound.putBoolean("canDespawn", this.canDespawn);
 
         return super.toTag(compound);

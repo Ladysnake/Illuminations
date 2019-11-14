@@ -13,8 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
-
 
 public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
     public static final Identifier FIREFLY_TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
@@ -44,30 +42,33 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
 
             this.bindEntityTexture(entity);
             if (entity instanceof FireflyEntity) {
-                float alpha = ((FireflyEntity) entity).getAlpha();
-                float scale = ((FireflyEntity) entity).getScaleModifier();
-                float color = ((FireflyEntity) entity).getColorModifier();
-                Float nextAlphaGoal = ((FireflyEntity) entity).getNextAlphaGoal();
+                FireflyEntity firefly = (FireflyEntity) entity;
+
+                int alpha = firefly.getAlpha();
+                float scale = firefly.getScaleModifier();
+                float color = firefly.getColorModifier();
+                int nextAlphaGoal = firefly.getNextAlphaGoal();
 
                 // if day
                 float tod = entity.world.getLevelProperties().getTimeOfDay();
                 if (tod >= 1000 && tod < 13000) {
-                    nextAlphaGoal = 0.0F;
+                    nextAlphaGoal = 0;
                 }
 
-                if (nextAlphaGoal == null || nextAlphaGoal.equals(round(alpha, 1))) {
-                    ((FireflyEntity) entity).setNextAlphaGoal(new Random().nextInt(11) / 10.0F);
+                // select next alpha goal
+                if (nextAlphaGoal == alpha) {
+                    firefly.setNextAlphaGoal(firefly.getRand().nextInt(FireflyEntity.ALPHA_MAX + 1));
                 } else {
                     if (nextAlphaGoal > alpha) {
-                        alpha += 0.05F;
-                    } else if (nextAlphaGoal < alpha) {
-                        alpha -= 0.05F;
+                        alpha += 1;
+                    } else {
+                        alpha -= 1;
                     }
                 }
 
-                ((FireflyEntity) entity).setAlpha(Math.min(Math.max(alpha, 0), 1));
+                firefly.setAlpha(Math.min(Math.max(alpha, 0), FireflyEntity.ALPHA_MAX));
                 GlStateManager.scalef(scale, scale, scale);
-                GlStateManager.color4f(color, 1F, 0F, ((FireflyEntity) entity).getAlpha());
+                GlStateManager.color4f(color, 1F, 0F, firefly.getAlpha() / (float) FireflyEntity.ALPHA_MAX);
             }
 
             Tessellator tessellator = Tessellator.getInstance();
@@ -84,7 +85,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             tessellator.draw();
 
             this.bindTexture(FIREFLY_OVERLAY_TEXTURE);
-            GlStateManager.color4f(1F, 1F, 1F, ((FireflyEntity) entity).getAlpha());
+            GlStateManager.color4f(1F, 1F, 1F, ((FireflyEntity) entity).getAlpha() / (float) FireflyEntity.ALPHA_MAX);
             bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
             bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
@@ -97,19 +98,13 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             GlStateManager.disableRescaleNormal();
             GlStateManager.enableLighting();
             GlStateManager.popMatrix();
-            super.render((T) entity, x, y, z, entityYaw, tickDelta);
+            super.render(entity, x, y, z, entityYaw, tickDelta);
         }
     }
 
     @Override
     protected Identifier getTexture(T entity) {
         return FIREFLY_TEXTURE;
-    }
-
-    // Useful method
-    private static float round(float value, int precision) {
-        int scale = (int) Math.pow(10, precision);
-        return (float) Math.round(value * scale) / scale;
     }
 
 }
