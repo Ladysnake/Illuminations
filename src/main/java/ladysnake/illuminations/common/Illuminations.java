@@ -15,7 +15,6 @@ public class Illuminations implements ModInitializer {
         IlluminationsBlocks.init();
         IlluminationsEntities.init();
         IlluminationsWorldFeatures.init();
-
     }
 }
 
