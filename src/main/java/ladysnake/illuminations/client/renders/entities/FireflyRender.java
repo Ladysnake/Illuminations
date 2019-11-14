@@ -17,13 +17,16 @@ import java.util.Random;
 
 
 public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
+    public static final Identifier FIREFLY_TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
+    public static final Identifier FIREFLY_OVERLAY_TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
+
     public FireflyRender(EntityRenderDispatcher renderManager) {
         super(renderManager);
         this.field_4672 = 0;
     }
 
     @Override
-    public void render(Entity entity, double x, double y, double z, float entityYaw, float tickDelta) {
+    public void render(T entity, double x, double y, double z, float entityYaw, float tickDelta) {
         if (!this.renderOutlines) {
             GlStateManager.pushMatrix();
 
@@ -39,7 +42,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             GlStateManager.rotatef(180.0F - this.renderManager.cameraYaw, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotatef((float) (this.renderManager.gameOptions.perspective == 2 ? -1 : 1) * -this.renderManager.cameraPitch, 1.0F, 0.0F, 0.0F);
 
-            this.bindEntityTexture((T) entity);
+            this.bindEntityTexture(entity);
             if (entity instanceof FireflyEntity) {
                 float alpha = ((FireflyEntity) entity).getAlpha();
                 float scale = ((FireflyEntity) entity).getScaleModifier();
@@ -80,8 +83,7 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
             bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
             tessellator.draw();
 
-            this.bindTexture(new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png"));
-            //noinspection ConstantConditions
+            this.bindTexture(FIREFLY_OVERLAY_TEXTURE);
             GlStateManager.color4f(1F, 1F, 1F, ((FireflyEntity) entity).getAlpha());
             bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
             bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
@@ -99,13 +101,9 @@ public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
         }
     }
 
-//    @Override
-//    public void renderShadow(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
-//    }
-
     @Override
-    protected Identifier getTexture( T entity) {
-        return new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
+    protected Identifier getTexture(T entity) {
+        return FIREFLY_TEXTURE;
     }
 
     // Useful method
