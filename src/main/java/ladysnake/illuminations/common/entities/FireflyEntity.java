@@ -26,6 +26,7 @@ public class FireflyEntity extends LightOrbEntity {
     protected boolean canDespawn;
     protected boolean isAttractedByLight;
     protected int nextAlphaGoal;
+    protected int offset;
 
     // Constructors
     public FireflyEntity(EntityType entityType, World world) {
@@ -37,6 +38,8 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
+
+        this.offset = this.getRand().nextInt(20);
 
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0D);
     }
@@ -130,9 +133,10 @@ public class FireflyEntity extends LightOrbEntity {
         super.tick();
 
         if (!this.world.isClient && !this.dead) {
-            // despawn if players are too far away
-            boolean arePlayersNear = world.isPlayerInRange(this.x, this.y, this.z, 48);
-            if (!arePlayersNear) this.remove();
+            // despawn if players are too far away (check every second + offset)
+            if (((this.world.getTime() + this.offset) % 20 == 0) && !world.isPlayerInRange(this.x, this.y, this.z, 48)) {
+                this.remove();
+            }
 
             // despawn on daytime
             float tod = this.world.getLevelProperties().getTimeOfDay();
