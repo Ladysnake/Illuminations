@@ -1,10 +1,10 @@
 {
-  "item.illuminations.bug_net": "Bug Net",
-  "item.illuminations.firefly": "Firefly",
-  "block.illuminations.firefly_in_a_bottle": "Firefly in a Bottle",
-  "block.illuminations.firefly_grass": "Firefly Grass",
-  "block.illuminations.firefly_tall_grass": "Firefly Tall Grass",
-  "entity.illuminations.firefly": "Firefly",
-  "entity.illuminations.lightning_bug": "Lightning Bug",
-  "entity.illuminations.will_o_wisp": "Will O'Wisp"
+  "item.illuminations.bug_net": "Rede de mosquitos",
+  "item.illuminations.firefly": "Vaga-lume",
+  "block.illuminations.firefly_in_a_bottle": "Vaga-lume num pote",
+  "block.illuminations.firefly_grass": "Grama de Vaga-lume",
+  "block.illuminations.firefly_tall_grass": "Grama alta de Vaga-lume",
+  "entity.illuminations.firefly": "Vaga-lume",
+  "entity.illuminations.lightning_bug": "Vaga-lume",
+  "entity.illuminations.will_o_wisp": "Fogo-fátuo"
 }
