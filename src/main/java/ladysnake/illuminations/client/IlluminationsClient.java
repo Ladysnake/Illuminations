@@ -41,6 +41,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static void registerCutouts() {
         BlockRenderLayerMap.INSTANCE.putBlock(IlluminationsBlocks.FIREFLY_GRASS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(IlluminationsBlocks.FIREFLY_TALL_GRASS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(IlluminationsBlocks.FIREFLY_IN_A_BOTTLE, RenderLayer.getCutout());
     }
 
 }
