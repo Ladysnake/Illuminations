@@ -1,12 +1,17 @@
 package ladysnake.illuminations.common.entities;
 
+import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.init.IlluminationsEntities;
+import ladysnake.illuminations.common.init.IlluminationsItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
@@ -230,5 +235,12 @@ public class FireflyEntity extends LightOrbEntity {
     @Override
     public void kill() {
         super.remove();
+    }
+
+    @Override
+    protected boolean interactMob(PlayerEntity player, Hand hand) {
+        player.inventory.insertStack(new ItemStack(IlluminationsItems.FIREFLY));
+        this.remove();
+        return super.interactMob(player, hand);
     }
 }
