@@ -23,7 +23,7 @@ public class IlluminationsWorldFeatures {
         List<Biome.Category> fireflyBiomes = Arrays.asList(PLAINS, SWAMP, FOREST, JUNGLE, SAVANNA, RIVER);
         for (Biome biome : Registry.BIOME) {
             if (fireflyBiomes.contains(biome.getCategory())) {
-                biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(FIREFLY_PLANT, new ProbabilityConfig(10F), Decorator.COUNT_RANGE, new RangeDecoratorConfig(90, 0, 0, 250)));
+                biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, FIREFLY_PLANT.configure(new ProbabilityConfig(10F)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(90, 0, 0, 250))));
             }
         }
     }

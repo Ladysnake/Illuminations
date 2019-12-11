@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class FireflyEntity extends LightOrbEntity {
-    public static final int ALPHA_MAX = 20;
-
     // Attributes
     protected float scaleModifier;
     protected float colorModifier;
@@ -34,12 +32,12 @@ public class FireflyEntity extends LightOrbEntity {
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
-        this.alpha = 100;
+        this.alpha = 255;
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
 
-        this.offset = this.getRand().nextInt(20);
+        this.offset = this.getRandom().nextInt(20);
 
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0D);
     }
@@ -134,7 +132,7 @@ public class FireflyEntity extends LightOrbEntity {
 
         if (!this.world.isClient && !this.dead) {
             // despawn if players are too far away (check every second + offset)
-            if (((this.world.getTime() + this.offset) % 20 == 0) && !world.isPlayerInRange(this.x, this.y, this.z, 48)) {
+            if (((this.world.getTime() + this.offset) % 20 == 0) && !world.isPlayerInRange(this.getX(), this.getY(), this.getZ(), 48)) {
                 this.remove();
             }
 
@@ -155,12 +153,12 @@ public class FireflyEntity extends LightOrbEntity {
                 selectBlockTarget();
             }
 
-            Vec3d targetVector = new Vec3d(this.xTarget - x, this.yTarget - y, this.zTarget - z);
+            Vec3d targetVector = new Vec3d(this.xTarget - this.getX(), this.yTarget - this.getY(), this.zTarget - this.getZ());
             double length = targetVector.length();
             targetVector = targetVector.multiply(0.1 / length);
 
 
-            if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+            if (!this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.1, this.getZ())).getBlock().canMobSpawnInside()) {
                 this.setVelocity((0.9) * getVelocity().x + (0.1) * targetVector.x,
                     0.05,
                     (0.9) * getVelocity().z + (0.1) * targetVector.z);
@@ -177,21 +175,21 @@ public class FireflyEntity extends LightOrbEntity {
         if (this.lightTarget == null || !this.isAttractedByLight()) {
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++) {
-                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
+                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - i, this.getZ()));
                 if (!checkedBlock.getBlock().canMobSpawnInside()) {
-                    this.groundLevel = this.y - i;
+                    this.groundLevel = this.getY() - i;
                 }
                 if (this.groundLevel != 0) break;
             }
 
-            this.xTarget = this.x + random.nextGaussian() * 10;
-            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
-            this.zTarget = this.z + random.nextGaussian() * 10;
+            this.xTarget = this.getX() + random.nextGaussian() * 10;
+            this.yTarget = Math.min(Math.max(this.getY() + random.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
+            this.zTarget = this.getZ() + random.nextGaussian() * 10;
 
             if (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canMobSpawnInside())
                 this.yTarget += 1;
 
-            if (this.world.getLightLevel(LightType.SKY, this.getBlockPos()) > 8 && !this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.SKY, this.getBlockPos()) > 8 && !this.world.isDay())
                 this.lightTarget = getRandomLitBlockAround();
         } else {
             this.xTarget = this.lightTarget.getX() + random.nextGaussian();
@@ -204,7 +202,7 @@ public class FireflyEntity extends LightOrbEntity {
                     this.lightTarget = possibleTarget;
             }
 
-            if (this.world.getLightLevel(LightType.BLOCK, this.getBlockPos()) <= 8 || this.world.isDaylight())
+            if (this.world.getLightLevel(LightType.BLOCK, this.getBlockPos()) <= 8 || this.world.isDay())
                 this.lightTarget = null;
         }
 
@@ -218,7 +216,7 @@ public class FireflyEntity extends LightOrbEntity {
     private BlockPos getRandomLitBlockAround() {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++) {
-            BlockPos randBP = new BlockPos(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
+            BlockPos randBP = new BlockPos(this.getX() + random.nextGaussian() * 10, this.getY() + random.nextGaussian() * 10, this.getZ() + random.nextGaussian() * 10);
             randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
         }
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
@@ -226,7 +224,7 @@ public class FireflyEntity extends LightOrbEntity {
 
     @Override
     public boolean canSpawn(IWorld world, SpawnType spawnType) {
-        return !this.world.isDaylight() && !this.world.isThundering();
+        return !this.world.isDay() && !this.world.isThundering();
     }
 
     @Override

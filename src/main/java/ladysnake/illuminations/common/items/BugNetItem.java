@@ -19,7 +19,7 @@ public class BugNetItem extends Item {
             targetEntity.remove();
             if (player instanceof PlayerEntity) {
 //                player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
-                bugNet.damage(1, player.getRand(), (ServerPlayerEntity) player);
+                bugNet.damage(1, player.getRandom(), (ServerPlayerEntity) player);
                 ((PlayerEntity) player).inventory.insertStack(new ItemStack(IlluminationsItems.FIREFLY));
             }
         }

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -37,7 +38,7 @@ public class GlowMealItem extends Item {
             return ActionResult.SUCCESS;
         } else {
             BlockState blockState_1 = world_1.getBlockState(blockPos_1);
-            boolean boolean_1 = Block.isSolidFullSquare(blockState_1, world_1, blockPos_1, itemUsageContext_1.getPlayerFacing());
+            boolean boolean_1 = Block.isSideSolidFullSquare(blockState_1, world_1, blockPos_1, itemUsageContext_1.getPlayerFacing());
             if (boolean_1 && useOnGround(itemUsageContext_1.getStack(), world_1, blockPos_2, itemUsageContext_1.getPlayerFacing())) {
                 if (!world_1.isClient) {
                     world_1.playLevelEvent(2005, blockPos_2, 0);
@@ -67,8 +68,8 @@ public class GlowMealItem extends Item {
                 }
 
                 BlockState blockState_3 = world.getBlockState(blockPos);
-                if (blockState_3.getBlock() == blockState_2.getBlock() && random.nextInt(10) == 0) {
-                    ((Fertilizable)blockState_2.getBlock()).grow(world, random, blockPos, blockState_3);
+                if (blockState_3.getBlock() == blockState_2.getBlock() && random.nextInt(10) == 0 && world instanceof ServerWorld) {
+                    ((Fertilizable)blockState_2.getBlock()).grow((ServerWorld) world, random, blockPos, blockState_3);
                 }
 
                 if (blockState_3.isAir()) {

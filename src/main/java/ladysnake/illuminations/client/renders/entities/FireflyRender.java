@@ -1,110 +1,104 @@
 package ladysnake.illuminations.client.renders.entities;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.entities.FireflyEntity;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.util.math.Matrix3f;
+import net.minecraft.client.util.math.Matrix4f;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.util.math.MathHelper;
 
 
-public class FireflyRender<T extends Entity> extends EntityRenderer<T> {
-    public static final Identifier FIREFLY_TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
-    public static final Identifier FIREFLY_OVERLAY_TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
+public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
+    private static final Identifier TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
+    private static final Identifier OVERLAY = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
+    private static final RenderLayer TEXTURE_LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
+    private static final RenderLayer OVERLAY_LAYER = RenderLayer.getEntityTranslucent(OVERLAY);
 
-    public FireflyRender(EntityRenderDispatcher renderManager) {
-        super(renderManager);
-        this.field_4672 = 0;
+    public FireflyRender(EntityRenderDispatcher entityRenderDispatcher) {
+        super(entityRenderDispatcher);
+        this.shadowSize = 0F;
+        this.shadowDarkness = 0F;
     }
 
-    @Override
-    public void render(T entity, double x, double y, double z, float entityYaw, float tickDelta) {
-        if (!this.renderOutlines) {
-            GlStateManager.pushMatrix();
+    protected int getBlockLight(T firefly, float f) {
+        return MathHelper.clamp(super.getBlockLight(firefly, f) + 7, 0, 15);
+    }
 
-            GlStateManager.translatef((float) x, (float) y + 0.1f, (float) z);
+    public void render(T firefly, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        matrixStack.push();
+        float ux = 0;
+        float uy = 1;
+        float vx = 0;
+        float vy = 1;
+        int red = (int) (firefly.getColorModifier() * 255);
+        float scale = firefly.getScaleFactor();
+        matrixStack.translate(0, 0, 0);
+        matrixStack.multiply(this.renderManager.getRotation());
+        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+        matrixStack.scale(scale, scale, scale);
 
-            GlStateManager.enableAlphaTest();
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.disableLighting();
+        int alpha = firefly.getAlpha();
+        int nextAlphaGoal = firefly.getNextAlphaGoal();
 
-            GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240f, 240f);
-
-            GlStateManager.rotatef(180.0F - this.renderManager.cameraYaw, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotatef((float) (this.renderManager.gameOptions.perspective == 2 ? -1 : 1) * -this.renderManager.cameraPitch, 1.0F, 0.0F, 0.0F);
-
-            this.bindEntityTexture(entity);
-            if (entity instanceof FireflyEntity) {
-                FireflyEntity firefly = (FireflyEntity) entity;
-
-                int alpha = firefly.getAlpha();
-                float scale = firefly.getScaleModifier();
-                float color = firefly.getColorModifier();
-                int nextAlphaGoal = firefly.getNextAlphaGoal();
-
-                // if day
-                float tod = entity.world.getLevelProperties().getTimeOfDay();
-                if (tod >= 1000 && tod < 13000) {
-                    nextAlphaGoal = 0;
-                }
-
-                // select next alpha goal
-                if (nextAlphaGoal == alpha) {
-                    firefly.setNextAlphaGoal(firefly.getRand().nextInt(FireflyEntity.ALPHA_MAX + 1));
-                } else {
-                    if (nextAlphaGoal > alpha) {
-                        alpha += 1;
-                    } else {
-                        alpha -= 1;
-                    }
-                }
-
-                firefly.setAlpha(Math.min(Math.max(alpha, 0), FireflyEntity.ALPHA_MAX));
-                GlStateManager.scalef(scale, scale, scale);
-                GlStateManager.color4f(color, 1F, 0F, firefly.getAlpha() / (float) FireflyEntity.ALPHA_MAX);
+        // if just spawned
+        if (firefly.age < 50) {
+            alpha = 0;
+        } else {
+            // if day
+            float tod = firefly.world.getLevelProperties().getTimeOfDay();
+            if (tod >= 1000 && tod < 13000) {
+                nextAlphaGoal = 0;
             }
 
-            Tessellator tessellator = Tessellator.getInstance();
-            BufferBuilder bufferbuilder = tessellator.getBufferBuilder();
-            float minU = 0;
-            float minV = 0;
-            float maxU = 1;
-            float maxV = 1;
-            bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
-            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
-            tessellator.draw();
-
-            this.bindTexture(FIREFLY_OVERLAY_TEXTURE);
-            GlStateManager.color4f(1F, 1F, 1F, ((FireflyEntity) entity).getAlpha() / (float) FireflyEntity.ALPHA_MAX);
-            bufferbuilder.begin(GL11.GL_QUADS, VertexFormats.POSITION_UV_NORMAL);
-            bufferbuilder.vertex(-0.5D, -0.25D, 0.0D).texture((double) maxU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(0.5D, -0.25D, 0.0D).texture((double) minU, (double) maxV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(0.5D, 0.75D, 0.0D).texture((double) minU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
-            bufferbuilder.vertex(-0.5D, 0.75D, 0.0D).texture((double) maxU, (double) minV).normal(0.0F, 1.0F, 0.0F).next();
-            tessellator.draw();
-
-            GlStateManager.disableAlphaTest();
-            GlStateManager.disableBlend();
-            GlStateManager.disableRescaleNormal();
-            GlStateManager.enableLighting();
-            GlStateManager.popMatrix();
-            super.render(entity, x, y, z, entityYaw, tickDelta);
+            if (alpha > nextAlphaGoal - 10 && alpha < nextAlphaGoal + 10) {
+                firefly.setNextAlphaGoal(firefly.getRandom().nextInt(256));
+            } else {
+                if (nextAlphaGoal > alpha) {
+                    alpha += 10;
+                } else if (nextAlphaGoal < alpha) {
+                    alpha -= 10;
+                }
+            }
         }
+
+        firefly.setAlpha(Math.min(Math.max(alpha, 0), 255));
+        alpha = firefly.getAlpha();
+
+        // firefly
+        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(TEXTURE_LAYER);
+        MatrixStack.Entry entry = matrixStack.peek();
+        Matrix4f matrix4f = entry.getModel();
+        Matrix3f matrix3f = entry.getNormal();
+        method_23171(vertexConsumer, matrix4f, matrix3f, -0.5F, -0.25F, red, 0, alpha, ux, vy);
+        method_23171(vertexConsumer, matrix4f, matrix3f, 0.5F, -0.25F, red, 0, alpha, uy, vy);
+        method_23171(vertexConsumer, matrix4f, matrix3f, 0.5F, 0.75F, red, 0, alpha, uy, vx);
+        method_23171(vertexConsumer, matrix4f, matrix3f, -0.5F, 0.75F, red, 0, alpha, ux, vx);
+
+        // firefly overlay
+        vertexConsumer = vertexConsumerProvider.getBuffer(OVERLAY_LAYER);
+        method_23171(vertexConsumer, matrix4f, matrix3f, -0.5F, -0.25F, 255, 255, alpha, ux, vy);
+        method_23171(vertexConsumer, matrix4f, matrix3f, 0.5F, -0.25F, 255, 255, alpha, uy, vy);
+        method_23171(vertexConsumer, matrix4f, matrix3f, 0.5F, 0.75F, 255, 255, alpha, uy, vx);
+        method_23171(vertexConsumer, matrix4f, matrix3f, -0.5F, 0.75F, 255, 255, alpha, ux, vx);
+
+        matrixStack.pop();
+        super.render(firefly, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    @Override
-    protected Identifier getTexture(T entity) {
-        return FIREFLY_TEXTURE;
+    private static void method_23171(VertexConsumer vertexConsumer, Matrix4f matrix4f, Matrix3f matrix3f, float x, float y, int red, int blue, int alpha, float u, float v) {
+        vertexConsumer.vertex(matrix4f, x, y, 0.0F).color(red, 255, blue, alpha).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(matrix3f, 0.0F, 1.0F, 0.0F).next();
+    }
+
+    public Identifier getTexture(T firefly) {
+        return TEXTURE;
     }
 
 }
