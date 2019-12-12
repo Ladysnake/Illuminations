@@ -2,6 +2,7 @@ package ladysnake.illuminations.client.renders.entities;
 
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.entities.FireflyEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -69,6 +70,9 @@ public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
             }
         }
 
+        if (MinecraftClient.getInstance().isPaused()) {
+            alpha = firefly.getAlpha();
+        }
         firefly.setAlpha(Math.min(Math.max(alpha, 0), 255));
         alpha = firefly.getAlpha();
 
