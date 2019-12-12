@@ -18,7 +18,7 @@ public class IlluminationsBlocks {
     public static Block FIREFLY_TALL_GRASS;
 
     public static void init() {
-        FIREFLY_IN_A_BOTTLE = registerBlock(new LanternBlock(FabricBlockSettings.of(Material.GLASS).strength(0.3F, 0.3F).sounds(BlockSoundGroup.GLASS).lightLevel(10).build()), "firefly_in_a_bottle");
+        FIREFLY_IN_A_BOTTLE = registerBlock(new LanternBlock(FabricBlockSettings.of(Material.GLASS).strength(0.3F, 0.3F).sounds(BlockSoundGroup.GLASS).lightLevel(15).build()), "firefly_in_a_bottle");
         FIREFLY_GRASS = registerBlock(new FireflyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1).build()), "firefly_grass");
         FIREFLY_TALL_GRASS = registerBlock(new FireflyTallGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1).build()), "firefly_tall_grass");
 
