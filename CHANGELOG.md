@@ -1,11 +1,22 @@
 # Illuminations - Changelog
 
+### Illuminations 0.4.0 - 1.15.1
+
+- Reduced firefly AI tasks (light checking, despawn checking)
+- Removed firefly render distance limit
+- Removed the bug net
+- Fireflies are now catchable by hand
+- Firefly flickering animations are now paused when the game is paused
+- Increased firefly in a bottle light strength from 10 to 15 (now equivalent to a lantern)
+
+- Updated to Minecraft 1.15.1
+
 ### Illuminations 0.3.0 - 1.14.3
 
 + Added glow meal
 	+ Crafted from a lime dye, bone meal and glowstone dust
 	+ When used on grass, grows firefly grass
-+ Update to Minecraft 1.14.3
++ Updated to Minecraft 1.14.3
 
 ### Illuminations 0.2.0 - 1.14.2
 
@@ -21,41 +32,41 @@
 + Fireflies now disappear on daytime
 + Added trail particles to Will o' Wisps
 + Reduced Firefly health to 1
-+ Add french localization
-+ Update to Minecraft 1.14.2
++ Added french localization
++ Updated to Minecraft 1.14.2
 
 ### Illuminations 0.1.7 - 1.14.1
 
-+ Fix the bug where mip map levels wouldn't work
-+ Completely remove the experimental items
++ Fixed the bug where mip map levels wouldn't work
++ Completely removeed the experimental items
 
 ### Illuminations 0.1.6 - 1.14.1
 
-+ Add Firefly in a bottle
-+ Add Bug Net (can be used to capture Fireflies by attacking them)
-+ Add Firefly item
-+ Remove experimental items (nests, throwable Will o' Wisp...) from the creative inventory
-+ Update to Minecraft 1.14.1
++ Added Firefly in a bottle
++ Added Bug Net (can be used to capture Fireflies by attacking them)
++ Added Firefly item
++ Removed experimental items (nests, throwable Will o' Wisp...) from the creative inventory
++ Updated to Minecraft 1.14.1
 
 ### Illuminations 0.1.5 - 1.14
 
-+ Update to Minecraft 1.14
++ Updated to Minecraft 1.14
 
 ### Illuminations 0.1.4 - 19w14b
 
-+ Update to Minecraft snapshot 19w14b
++ Updated to Minecraft snapshot 19w14b
 
 ### Illuminations 0.1.3 - 19w11b
 
-+ Add firefly and lightning bug nests: acts as a spawner for fireflies and lightning bugs during night
-+ Update to Minecraft snapshot 19w11b (thanks Fab!)
++ Added firefly and lightning bug nests: acts as a spawner for fireflies and lightning bugs during night
++ Updated to Minecraft snapshot 19w11b (thanks Fab!)
 
 ### Illuminations 0.1.2 - 19w02a
 
-+ Implement Will o' Wisps, flaming spirits spawning in swamps at night (experimental)
++ Implemented Will o' Wisps, flaming spirits spawning in swamps at night (experimental)
 	+ Will o' Wisps are catchable
 	+ Will o' Wisps (in a player's hand) can be thrown
-+ Update to Minecraft snapshot 19w02a
++ Updated to Minecraft snapshot 19w02a
 
 ### Illuminations 0.1.1 - 18w50a
 
@@ -66,4 +77,4 @@
 + Ported to Fabric mod loader (only fireflies and lightning bugs)
 + Corrected firefly spawn rates
 + Fireflies now flicker
-+ Name change
++ Changed the name of the mod from Lumen to Illuminations.

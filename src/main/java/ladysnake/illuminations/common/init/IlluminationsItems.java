@@ -13,8 +13,8 @@ public class IlluminationsItems {
     public static Item GLOW_MEAL;
 
     public static void init() {
-        FIREFLY = registerItem(new FireflyItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "firefly");
-        GLOW_MEAL = registerItem(new GlowMealItem((new Item.Settings()).itemGroup(ItemGroup.MISC)), "glow_meal");
+        FIREFLY = registerItem(new FireflyItem((new Item.Settings()).group(ItemGroup.MISC)), "firefly");
+        GLOW_MEAL = registerItem(new GlowMealItem((new Item.Settings()).group(ItemGroup.MISC)), "glow_meal");
     }
 
     public static Item registerItem(Item item, String name) {
