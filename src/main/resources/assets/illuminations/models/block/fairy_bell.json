@@ -1,0 +1,97 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"2": "illuminations:block/fairy_bell",
+		"fan": "illuminations:block/fairy_bell_fan",
+		"cross": "illuminations:block/fairy_bell_vine",
+		"particle": "illuminations:block/fairy_bell_vine"
+	},
+	"elements": [
+		{
+			"name": "bell",
+			"from": [5, 6, 5],
+			"to": [11, 13, 11],
+			"faces": {
+				"north": {"uv": [0, 6, 6, 13], "texture": "#2"},
+				"east": {"uv": [0, 6, 6, 13], "texture": "#2"},
+				"south": {"uv": [0, 6, 6, 13], "texture": "#2"},
+				"west": {"uv": [0, 6, 6, 13], "texture": "#2"},
+				"up": {"uv": [0, 0, 6, 6], "texture": "#2"},
+				"down": {"uv": [0, 0, 6, 6], "texture": "#2"}
+			}
+		},
+		{
+			"name": "grass",
+			"from": [0, 0, -8],
+			"to": [16, 0, 8],
+			"shade": false,
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [0, 0, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#fan", "tintindex": 0}
+			}
+		},
+		{
+			"name": "grass",
+			"from": [8, 0, 0],
+			"to": [24, 0, 16],
+			"shade": false,
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 0, 0]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "rotation": 270, "texture": "#fan", "tintindex": 0}
+			}
+		},
+		{
+			"name": "grass",
+			"from": [-8, 0, 0],
+			"to": [8, 0, 16],
+			"shade": false,
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 0, 0]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#fan", "tintindex": 0}
+			}
+		},
+		{
+			"name": "grass",
+			"from": [0, 0, 8],
+			"to": [16, 0, 24],
+			"shade": false,
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0, 8]},
+			"faces": {
+				"up": {"uv": [16, 16, 0, 0], "texture": "#fan", "tintindex": 0},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#fan", "tintindex": 0}
+			}
+		},
+		{
+			"name": "vine",
+			"from": [5, 0, 8],
+			"to": [11, 6, 8],
+			"faces": {
+				"north": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0},
+				"south": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0}
+			}
+		},
+		{
+			"name": "vine",
+			"from": [8, 0, 5],
+			"to": [8, 6, 11],
+			"faces": {
+				"east": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0},
+				"west": {"uv": [0, 0, 6, 6], "texture": "#cross", "tintindex": 0}
+			}
+		}
+	],
+	"groups": [0,
+		{
+			"name": "fan",
+			"children": [1, 2, 3, 4]
+		},
+		{
+			"name": "center",
+			"children": [5, 6]
+		}
+	]
+}

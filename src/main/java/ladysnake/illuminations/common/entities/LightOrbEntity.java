@@ -46,7 +46,7 @@ public abstract class LightOrbEntity extends MobEntityWithAi {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public boolean shouldRenderAtDistance(double double_1) {
+    public boolean shouldRender(double distance) {
         return true;
     }
 
