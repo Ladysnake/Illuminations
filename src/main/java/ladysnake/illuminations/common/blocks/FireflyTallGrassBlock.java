@@ -4,10 +4,10 @@ import ladysnake.illuminations.common.entities.FireflyEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BoundingBox;
-import net.minecraft.world.ViewableWorld;
-import net.minecraft.world.World;
+import net.minecraft.util.math.Box;
+import net.minecraft.world.WorldView;
 
 import java.util.List;
 import java.util.Random;
@@ -27,15 +27,15 @@ public class FireflyTallGrassBlock extends TallPlantBlock {
     }
 
     @Override
-    public int getTickRate(ViewableWorld viewableWorld_1) {
+    public int getTickRate(WorldView worldView) {
         return 1;
     }
 
     @Override
-    public void onRandomTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
-        if (!world.isClient && !world.isDaylight()) {
-            boolean arePlayersNear = world.isPlayerInRange((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), 32);
-            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new BoundingBox(blockPos).expand(32));
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!world.isClient && !world.isDay()) {
+            boolean arePlayersNear = world.isPlayerInRange((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), 32);
+            List<FireflyEntity> firefliesInRadius = world.getEntities(FireflyEntity.class, new Box(pos).expand(32), e -> true);
 
             if (arePlayersNear) {
                 int firefliesToSpawn = 0;
@@ -45,7 +45,7 @@ public class FireflyTallGrassBlock extends TallPlantBlock {
                     firefliesToSpawn = 1;
                 }
                 for (int i = 0; i < firefliesToSpawn; i++) {
-                    Entity firefly = new FireflyEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    Entity firefly = new FireflyEntity(world, pos.getX(), pos.getY(), pos.getZ());
                     world.spawnEntity(firefly);
                 }
             }

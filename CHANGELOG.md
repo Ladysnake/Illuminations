@@ -1,5 +1,12 @@
 # Illuminations - Changelog
 
+### Illuminations 0.3.0 - 1.14.3
+
++ Added glow meal
+	+ Crafted from a lime dye, bone meal and glowstone dust
+	+ When used on grass, grows firefly grass
++ Update to Minecraft 1.14.3
+
 ### Illuminations 0.2.0 - 1.14.2
 
 + Added Firefly grass (and Firefly tall grass)

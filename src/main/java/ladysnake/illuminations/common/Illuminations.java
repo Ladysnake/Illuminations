@@ -11,11 +11,10 @@ public class Illuminations implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        IlluminationsEntities.init();
         IlluminationsItems.init();
         IlluminationsBlocks.init();
+        IlluminationsEntities.init();
         IlluminationsWorldFeatures.init();
-
     }
 }
 
