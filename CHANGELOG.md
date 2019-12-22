@@ -8,7 +8,8 @@
 - Fireflies are now catchable by hand
 - Firefly flickering animations are now paused when the game is paused
 - Increased firefly in a bottle light strength from 10 to 15 (now equivalent to a lantern)
-
+- Recipes for firefly grass (short and tall) and firefly in a bottle now unlocks upon getting a firefly for the first time
+- Recipe for glow meal now unlocks upon getting lime dye, glowstone dust or bone meal
 - Updated to Minecraft 1.15.1
 
 ### Illuminations 0.3.0 - 1.14.3
