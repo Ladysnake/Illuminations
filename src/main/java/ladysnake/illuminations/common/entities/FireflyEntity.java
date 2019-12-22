@@ -142,7 +142,7 @@ public class FireflyEntity extends LightOrbEntity {
             }
 
             // despawn on daytime
-            float tod = this.world.getLevelProperties().getTimeOfDay();
+            float tod = this.world.getLevelProperties().getTimeOfDay() % 24000;
             if (tod >= 1010 && tod < 12990) {
                 this.remove();
             }

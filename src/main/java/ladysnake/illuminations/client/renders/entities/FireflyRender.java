@@ -54,7 +54,7 @@ public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
             alpha = 0;
         } else {
             // if day
-            float tod = firefly.world.getLevelProperties().getTimeOfDay();
+            float tod = firefly.world.getLevelProperties().getTimeOfDay() % 24000;
             if (tod >= 1000 && tod < 13000) {
                 nextAlphaGoal = 0;
             }
