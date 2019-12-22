@@ -16,7 +16,6 @@ import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-
 public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
     private static final Identifier TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
     private static final Identifier OVERLAY = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
