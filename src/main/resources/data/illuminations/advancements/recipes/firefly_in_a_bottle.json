@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "illuminations:firefly_in_a_bottle"
+    ]
+  },
+  "criteria": {
+    "has_firefly": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "illuminations:firefly"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firefly"
+    ]
+  ]
+}

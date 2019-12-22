@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "illuminations:firefly_grass"
+    ]
+  },
+  "criteria": {
+    "has_firefly": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "illuminations:firefly"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firefly"
+    ]
+  ]
+}
