@@ -19,7 +19,7 @@
     "sources": "https://github.com/Ladysnake/Illuminations"
   },
 
-  "license": "ARR",
+  "license": "CC-BY-NC-SA 4.0",
   "icon": "assets/illuminations/illuminations.png",
 
   "environment": "*",
