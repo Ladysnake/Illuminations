@@ -4,7 +4,9 @@ import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.blocks.FireflyGrassBlock;
 import ladysnake.illuminations.common.blocks.FireflyTallGrassBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.LanternBlock;
+import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -23,8 +25,8 @@ public class IlluminationsBlocks {
         FIREFLY_TALL_GRASS = registerBlock(new FireflyTallGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1).build()), "firefly_tall_grass");
 
         // registering firefly grass flammability
-        ((FireBlock)Blocks.FIRE).registerFlammableBlock(FIREFLY_GRASS, 60, 100);
-        ((FireBlock)Blocks.FIRE).registerFlammableBlock(FIREFLY_TALL_GRASS, 60, 100);
+//        ((FireBlock) Blocks.FIRE).registerFlammableBlock(FIREFLY_GRASS, 60, 100);
+//        ((FireBlock) Blocks.FIRE).registerFlammableBlock(FIREFLY_TALL_GRASS, 60, 100);
     }
 
     private static Block registerBlock(Block block, String name) {

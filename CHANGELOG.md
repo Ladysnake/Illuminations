@@ -1,5 +1,9 @@
 # Illuminations - Changelog
 
+### Illuminations 0.5 - 20w06a
+
+- Updated to Minecraft snapshot 20w06a
+
 ### Illuminations 0.4.0 - 1.15.1
 
 - Reduced firefly AI tasks (light checking, despawn checking)

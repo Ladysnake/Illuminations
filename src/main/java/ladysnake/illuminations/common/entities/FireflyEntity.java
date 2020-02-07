@@ -49,7 +49,7 @@ public class FireflyEntity extends LightOrbEntity {
 
     public FireflyEntity(World world, double x, double y, double z) {
         this(IlluminationsEntities.FIREFLY, world);
-        this.setPosition(x, y, z);
+        this.updatePosition(x, y, z);
     }
 
     // Getters & setters
