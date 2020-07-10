@@ -20,6 +20,6 @@ public class FireflyItem extends Item {
         if (!playerEntity.isCreative()) {
             playerEntity.getStackInHand(hand).decrement(1);
         }
-        return new TypedActionResult(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
+        return new TypedActionResult<ItemStack>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
     }
 }

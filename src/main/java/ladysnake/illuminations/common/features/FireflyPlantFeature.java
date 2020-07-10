@@ -1,30 +1,31 @@
 package ladysnake.illuminations.common.features;
 
 import com.google.common.collect.Lists;
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
+
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.Function;
 
 
 public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
 
-    public FireflyPlantFeature(Function<Dynamic<?>, ? extends ProbabilityConfig> configFactoryIn) {
+    public FireflyPlantFeature(Codec<ProbabilityConfig> configFactoryIn) {
         super(configFactoryIn);
     }
 
     @Override
-    public boolean generate(IWorld iWorld, ChunkGenerator<? extends ChunkGeneratorConfig> chunkGenerator, Random random, BlockPos blockPos, ProbabilityConfig probabilityConfig) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator generator,
+			Random random, BlockPos blockPos, ProbabilityConfig config) {
         int i = 0;
 
         ArrayList<BlockPos> grass_batch = Lists.newArrayList();
@@ -50,12 +51,12 @@ public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
             // this enhances the probability of not spawning grass
             BlockPos blockpos = blockPos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
 
-            if (!iWorld.isAir(blockpos))
+            if (!world.isAir(blockpos))
                 continue;
 
             // check to see if the random chosen block can hold our grass. if not, skip.
             // this enhances the probability of not spawning grass
-            if (!IlluminationsBlocks.FIREFLY_GRASS.getDefaultState().canPlaceAt(iWorld, blockpos))
+            if (!IlluminationsBlocks.FIREFLY_GRASS.getDefaultState().canPlaceAt(world, blockpos))
                 continue;
 
             while (grass_batch.size() < batch_size) {
@@ -70,7 +71,7 @@ public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
                 // select a random position near the center pos
                 // note : use WORLD_SURFACE_WG (WG stands for world gen) to get the correct
                 // world height, ignoring any biome specific generation like grass or flowers
-                BlockPos heightFix = new BlockPos(blockPosX, iWorld.getTopY(Heightmap.Type.WORLD_SURFACE_WG, blockPosX, blockPosZ), blockPosZ);
+                BlockPos heightFix = new BlockPos(blockPosX, world.getTopY(Heightmap.Type.WORLD_SURFACE_WG, blockPosX, blockPosZ), blockPosZ);
 
                 // if the position was already added, re iterate and make a new one until we get
                 // batch_size number of unique positions
@@ -84,13 +85,13 @@ public class FireflyPlantFeature extends Feature<ProbabilityConfig> {
 
                 // if the position is below build height and grass can be placed here (same
                 // logic as minecraft bush blocks)
-                if (to_gen_pos.getY() < 255 && IlluminationsBlocks.FIREFLY_GRASS.getDefaultState().canPlaceAt(iWorld, to_gen_pos)) {
+                if (to_gen_pos.getY() < 255 && IlluminationsBlocks.FIREFLY_GRASS.getDefaultState().canPlaceAt(world, to_gen_pos)) {
 
                     // one chance in two to spawn big grass
                     if (random.nextBoolean())
-                        ((TallPlantBlock) IlluminationsBlocks.FIREFLY_TALL_GRASS).placeAt(iWorld, to_gen_pos, 2);
+                        ((TallPlantBlock) IlluminationsBlocks.FIREFLY_TALL_GRASS).placeAt(world, to_gen_pos, 2);
                     else
-                        iWorld.setBlockState(to_gen_pos, IlluminationsBlocks.FIREFLY_GRASS.getDefaultState(), 2);
+                    	world.setBlockState(to_gen_pos, IlluminationsBlocks.FIREFLY_GRASS.getDefaultState(), 2);
                     ++i;
                 }
             }

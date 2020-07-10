@@ -3,7 +3,7 @@ package ladysnake.illuminations.common.init;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.blocks.FireflyGrassBlock;
 import ladysnake.illuminations.common.blocks.FireflyTallGrassBlock;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.LanternBlock;
 import net.minecraft.block.Material;
@@ -20,9 +20,9 @@ public class IlluminationsBlocks {
     public static Block FIREFLY_TALL_GRASS;
 
     public static void init() {
-        FIREFLY_IN_A_BOTTLE = registerBlock(new LanternBlock(FabricBlockSettings.of(Material.GLASS).strength(0.3F, 0.3F).sounds(BlockSoundGroup.GLASS).lightLevel(15).build()), "firefly_in_a_bottle");
-        FIREFLY_GRASS = registerBlock(new FireflyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1).build()), "firefly_grass");
-        FIREFLY_TALL_GRASS = registerBlock(new FireflyTallGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1).build()), "firefly_tall_grass");
+        FIREFLY_IN_A_BOTTLE = registerBlock(new LanternBlock(FabricBlockSettings.of(Material.GLASS).strength(0.3F, 0.3F).sounds(BlockSoundGroup.GLASS).lightLevel(15)), "firefly_in_a_bottle");
+        FIREFLY_GRASS = registerBlock(new FireflyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1)), "firefly_grass");
+        FIREFLY_TALL_GRASS = registerBlock(new FireflyTallGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).lightLevel(1)), "firefly_tall_grass");
 
         // registering firefly grass flammability
 //        ((FireBlock) Blocks.FIRE).registerFlammableBlock(FIREFLY_GRASS, 60, 100);

@@ -1,22 +1,25 @@
 package ladysnake.illuminations.common.entities;
 
-import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.init.IlluminationsEntities;
 import ladysnake.illuminations.common.init.IlluminationsItems;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -30,39 +33,54 @@ public class FireflyEntity extends LightOrbEntity {
     protected boolean isAttractedByLight;
     protected int nextAlphaGoal;
     protected int offset;
+    
+    private AttributeContainer attributes;
 
     // Constructors
-    public FireflyEntity(EntityType entityType, World world) {
+    public <T extends LightOrbEntity> FireflyEntity(EntityType<T> entityType, World world) {
         super(entityType, world);
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
         this.colorModifier = 0.25F + new Random().nextFloat() * 0.75F;
-        this.alpha = 255;
-
-        this.canDespawn = true;
-        this.isAttractedByLight = true;
-
         this.offset = this.getRandom().nextInt(20);
-
-        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0D);
+        this.isAttractedByLight = true;
+        this.canDespawn = true;
+        this.alpha = 255;
     }
 
     public FireflyEntity(World world, double x, double y, double z) {
         this(IlluminationsEntities.FIREFLY, world);
         this.updatePosition(x, y, z);
     }
-
+    
+    private DefaultAttributeContainer initAttributes() {
+    	return MobEntity.createMobAttributes()
+						.add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
+						.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.6)
+						.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+						.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
+						.build();
+    }
+    
+    @Override
+    public AttributeContainer getAttributes() {
+    	if (attributes == null) {
+    		this.attributes = new AttributeContainer(this.initAttributes());
+    	}
+    	return this.attributes;
+    }
+    
     // Getters & setters
     public float getScaleModifier() {
-        return scaleModifier;
+        return this.scaleModifier;
     }
 
     public float getColorModifier() {
-        return colorModifier;
+        return this.colorModifier;
     }
 
     public int getAlpha() {
-        return alpha;
+        return this.alpha;
     }
 
     public void setAlpha(int alpha) {
@@ -70,7 +88,7 @@ public class FireflyEntity extends LightOrbEntity {
     }
 
     public int getNextAlphaGoal() {
-        return nextAlphaGoal;
+        return this.nextAlphaGoal;
     }
 
     public void setNextAlphaGoal(int nextAlphaGoal) {
@@ -152,7 +170,7 @@ public class FireflyEntity extends LightOrbEntity {
                 this.remove();
             }
 
-            this.targetChangeCooldown -= (this.getPosVector().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
+            this.targetChangeCooldown -= (this.getPos().squaredDistanceTo(prevX, prevY, prevZ) < 0.0125) ? 10 : 1;
 
             if (((this.world.getTime() + this.offset) % 20 == 0) && ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPos().squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0)) {
                 selectBlockTarget();
@@ -228,7 +246,7 @@ public class FireflyEntity extends LightOrbEntity {
     }
 
     @Override
-    public boolean canSpawn(IWorld world, SpawnType spawnType) {
+    public boolean canSpawn(WorldView world) {
         return !this.world.isDay() && !this.world.isThundering();
     }
 
@@ -238,7 +256,7 @@ public class FireflyEntity extends LightOrbEntity {
     }
 
     @Override
-    protected boolean interactMob(PlayerEntity player, Hand hand) {
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         player.inventory.insertStack(new ItemStack(IlluminationsItems.FIREFLY));
         this.remove();
         return super.interactMob(player, hand);
