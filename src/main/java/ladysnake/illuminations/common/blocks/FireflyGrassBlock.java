@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.BlockView;
 
 import java.util.List;
 import java.util.Random;
@@ -27,11 +26,6 @@ public class FireflyGrassBlock extends FernBlock {
     @Override
     public boolean hasRandomTicks(BlockState blockState_1) {
         return true;
-    }
-
-    @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-    	return false;
     }
 
     @Override
