@@ -37,7 +37,7 @@ public class FireflyEntity extends LightOrbEntity {
     private AttributeContainer attributes;
 
     // Constructors
-    public <T extends LightOrbEntity> FireflyEntity(EntityType<T> entityType, World world) {
+    public FireflyEntity(EntityType<? extends FireflyEntity> entityType, World world) {
         super(entityType, world);
 
         this.scaleModifier = 0.1F + new Random().nextFloat() * 0.15F;
