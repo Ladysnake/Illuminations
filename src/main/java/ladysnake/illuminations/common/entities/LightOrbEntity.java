@@ -6,14 +6,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntityWithAi;
+import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class LightOrbEntity extends MobEntityWithAi {
+public abstract class LightOrbEntity extends FlyingEntity {
 
-    public LightOrbEntity(EntityType entityType, World worldIn) {
+    public LightOrbEntity(EntityType<? extends LightOrbEntity> entityType, World worldIn) {
         super(entityType, worldIn);
 //        this.setUnaffectedByGravity(true);
 //        this.yaw = (float) (Math.random() * 360.0D);

@@ -9,12 +9,12 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.util.math.Matrix3f;
-import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Matrix3f;
+import net.minecraft.util.math.Matrix4f;
 
 public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
     private static final Identifier TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
@@ -24,12 +24,12 @@ public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
 
     public FireflyRender(EntityRenderDispatcher entityRenderDispatcher) {
         super(entityRenderDispatcher);
-        this.shadowSize = 0F;
-        this.shadowDarkness = 0F;
+        this.shadowRadius = 0F;
+        this.shadowOpacity = 0F;
     }
 
     protected int getBlockLight(T firefly, float f) {
-        return MathHelper.clamp(super.getBlockLight(firefly, f) + 7, 0, 15);
+        return MathHelper.clamp(super.getLight(firefly, f) + 7, 0, 15);
     }
 
     public void render(T firefly, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
@@ -41,7 +41,7 @@ public class FireflyRender<T extends FireflyEntity> extends EntityRenderer<T> {
         int red = (int) (firefly.getColorModifier() * 255);
         float scale = firefly.getScaleFactor();
         matrixStack.translate(0, 0, 0);
-        matrixStack.multiply(this.renderManager.getRotation());
+        matrixStack.multiply(this.dispatcher.getRotation());
         matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
         matrixStack.scale(scale, scale, scale);
 

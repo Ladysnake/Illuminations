@@ -2,6 +2,7 @@ package ladysnake.illuminations.common.blocks;
 
 import ladysnake.illuminations.common.entities.FireflyEntity;
 import ladysnake.illuminations.common.init.IlluminationsBlocks;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FernBlock;
 import net.minecraft.block.TallPlantBlock;
@@ -9,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.WorldView;
 
 import java.util.List;
 import java.util.Random;
@@ -26,11 +26,6 @@ public class FireflyGrassBlock extends FernBlock {
     @Override
     public boolean hasRandomTicks(BlockState blockState_1) {
         return true;
-    }
-
-    @Override
-    public int getTickRate(WorldView worldView) {
-        return 1;
     }
 
     @Override

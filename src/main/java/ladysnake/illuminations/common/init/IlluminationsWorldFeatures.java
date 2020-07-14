@@ -19,7 +19,7 @@ public class IlluminationsWorldFeatures {
     public static Feature<ProbabilityConfig> FIREFLY_PLANT;
 
     public static void init() {
-        FIREFLY_PLANT = Registry.register(Registry.FEATURE, Illuminations.MOD_ID + ":firefly_plant", new FireflyPlantFeature(ProbabilityConfig::deserialize));
+        FIREFLY_PLANT = Registry.register(Registry.FEATURE, Illuminations.MOD_ID + ":firefly_plant", new FireflyPlantFeature(ProbabilityConfig.CODEC));
         List<Biome.Category> fireflyBiomes = Arrays.asList(PLAINS, SWAMP, FOREST, JUNGLE, SAVANNA, RIVER);
         for (Biome biome : Registry.BIOME) {
             if (fireflyBiomes.contains(biome.getCategory())) {

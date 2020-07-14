@@ -15,7 +15,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -32,7 +32,7 @@ public class GlowMealItem extends Item {
         BlockPos blockPos_2 = blockPos_1.offset(itemUsageContext_1.getPlayerFacing());
         if (useOnFertilizable(itemUsageContext_1.getStack(), world_1, blockPos_1)) {
             if (!world_1.isClient) {
-                world_1.playLevelEvent(2005, blockPos_1, 0);
+                world_1.syncWorldEvent(2005, blockPos_1, 0);
             }
 
             return ActionResult.SUCCESS;
@@ -41,7 +41,7 @@ public class GlowMealItem extends Item {
             boolean boolean_1 = Block.isSideSolidFullSquare(blockState_1, world_1, blockPos_1, itemUsageContext_1.getPlayerFacing());
             if (boolean_1 && useOnGround(itemUsageContext_1.getStack(), world_1, blockPos_2, itemUsageContext_1.getPlayerFacing())) {
                 if (!world_1.isClient) {
-                    world_1.playLevelEvent(2005, blockPos_2, 0);
+                    world_1.syncWorldEvent(2005, blockPos_2, 0);
                 }
 
                 return ActionResult.SUCCESS;
@@ -87,7 +87,7 @@ public class GlowMealItem extends Item {
     }
 
     @Environment(EnvType.CLIENT)
-    public static void playEffects(IWorld iWorld_1, BlockPos blockPos_1, int int_1) {
+    public static void playEffects(WorldAccess iWorld_1, BlockPos blockPos_1, int int_1) {
         if (int_1 == 0) {
             int_1 = 15;
         }
@@ -98,7 +98,7 @@ public class GlowMealItem extends Item {
                 double double_1 = iWorld_1.getRandom().nextGaussian() * 0.02D;
                 double double_2 = iWorld_1.getRandom().nextGaussian() * 0.02D;
                 double double_3 = iWorld_1.getRandom().nextGaussian() * 0.02D;
-                iWorld_1.addParticle(ParticleTypes.HAPPY_VILLAGER, (double)((float)blockPos_1.getX() + iWorld_1.getRandom().nextFloat()), (double)blockPos_1.getY() + (double)iWorld_1.getRandom().nextFloat() * blockState_1.getOutlineShape(iWorld_1, blockPos_1).getMaximum(Direction.Axis.Y), (double)((float)blockPos_1.getZ() + iWorld_1.getRandom().nextFloat()), double_1, double_2, double_3);
+                iWorld_1.addParticle(ParticleTypes.HAPPY_VILLAGER, (double)((float)blockPos_1.getX() + iWorld_1.getRandom().nextFloat()), (double)blockPos_1.getY() + (double)iWorld_1.getRandom().nextFloat() * blockState_1.getOutlineShape(iWorld_1, blockPos_1).getMax(Direction.Axis.Y), (double)((float)blockPos_1.getZ() + iWorld_1.getRandom().nextFloat()), double_1, double_2, double_3);
             }
 
         }

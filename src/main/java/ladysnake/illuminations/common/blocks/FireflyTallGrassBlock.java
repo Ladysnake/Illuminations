@@ -7,15 +7,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.WorldView;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyTallGrassBlock extends TallPlantBlock {
-    public static final int MIN_FIREFLIES = FireflyTallGrassBlock.MIN_FIREFLIES;
-    public static final int MAX_FIREFLIES = FireflyTallGrassBlock.MAX_FIREFLIES;
+    public static final int MIN_FIREFLIES = FireflyGrassBlock.MIN_FIREFLIES;
+    public static final int MAX_FIREFLIES = FireflyGrassBlock.MAX_FIREFLIES;
 
     public FireflyTallGrassBlock(Settings block$Settings_1) {
         super(block$Settings_1);
@@ -24,11 +23,6 @@ public class FireflyTallGrassBlock extends TallPlantBlock {
     @Override
     public boolean hasRandomTicks(BlockState blockState_1) {
         return true;
-    }
-
-    @Override
-    public int getTickRate(WorldView worldView) {
-        return 1;
     }
 
     @Override
