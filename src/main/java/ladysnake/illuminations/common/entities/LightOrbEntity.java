@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public abstract class LightOrbEntity extends FlyingEntity {
 
-    public <T extends FlyingEntity> LightOrbEntity(EntityType<T> entityType, World worldIn) {
+    public LightOrbEntity(EntityType<? extends LightOrbEntity> entityType, World worldIn) {
         super(entityType, worldIn);
 //        this.setUnaffectedByGravity(true);
 //        this.yaw = (float) (Math.random() * 360.0D);
