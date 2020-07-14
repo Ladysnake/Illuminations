@@ -18,7 +18,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class GlowMealItem extends Item {
@@ -82,7 +81,7 @@ public class GlowMealItem extends Item {
         } else return false;
     }
 
-    public static boolean useOnGround(ItemStack itemStack_1, World world_1, BlockPos blockPos_1, @Nullable Direction direction_1) {
+    public static boolean useOnGround(ItemStack itemStack_1, World world_1, BlockPos blockPos_1, Direction direction_1) {
         return false;
     }
 

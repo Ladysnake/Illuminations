@@ -52,24 +52,7 @@ public class FireflyEntity extends LightOrbEntity {
         this(IlluminationsEntities.FIREFLY, world);
         this.updatePosition(x, y, z);
     }
-    
-    private DefaultAttributeContainer initAttributes() {
-    	return MobEntity.createMobAttributes()
-						.add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-						.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.6)
-						.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-						.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
-						.build();
-    }
-    
-    @Override
-    public AttributeContainer getAttributes() {
-    	if (attributes == null) {
-    		this.attributes = new AttributeContainer(this.initAttributes());
-    	}
-    	return this.attributes;
-    }
-    
+
     // Getters & setters
     public float getScaleModifier() {
         return this.scaleModifier;
