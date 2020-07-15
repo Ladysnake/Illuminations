@@ -17,11 +17,12 @@ import net.minecraft.world.LightType;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
-    private static final int FIREFLY_BLINK_STEP = 5;
-    protected int alpha = 0;
-    protected int nextAlphaGoal = 0;
+    private static final float FIREFLY_BLINK_STEP = 0.05f;
+    protected float alpha = 0f;
+    protected float nextAlphaGoal = 0f;
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
@@ -30,14 +31,15 @@ public class FireflyParticle extends SpriteBillboardParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
-        this.scale *= 0.25F + new Random().nextFloat() * 0.50F;
-        this.maxAge = 99999999;
+        this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
+        this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
+        this.maxHeight = ThreadLocalRandom.current().nextInt(2, 7); // maximum venturing height between 2 and 6
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = (0.25F + new Random().nextFloat() * 0.50F) * 255;
-        this.colorGreen = 1;
-        this.colorBlue = 0;
+        this.colorRed = 0.25f + new Random().nextFloat() * 0.50f;
+        this.colorGreen = 1f;
+        this.colorBlue = 0f;
     }
 
     @Override
@@ -71,19 +73,20 @@ public class FireflyParticle extends SpriteBillboardParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
-        int light = 15728880;
+        int l = 15728880;
+        float a = Math.min(1f, Math.max(0f, this.alpha));
 
         // firefly
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
 
         // firefly overlay
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -109,21 +112,24 @@ public class FireflyParticle extends SpriteBillboardParticle {
     private double zTarget;
     private int targetChangeCooldown = 0;
     private boolean isAttractedByLight = false;
+    private int maxHeight;
 
     public void tick() {
-        super.tick();
+        this.prevPosX = this.x;
+        this.prevPosY = this.y;
+        this.prevPosZ = this.z;
 
-        // fade and die on daytime
-        if (world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) {
-            nextAlphaGoal = 0;
-            if (alpha <= 0) {
+        // fade and die on daytime or if old enough
+        if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
+            nextAlphaGoal = -FIREFLY_BLINK_STEP;
+            if (alpha < 0f) {
                 this.markDead();
             }
         }
 
         // blinking
         if (alpha > nextAlphaGoal - FIREFLY_BLINK_STEP && alpha < nextAlphaGoal + FIREFLY_BLINK_STEP) {
-            nextAlphaGoal = new Random().nextInt(256);
+            nextAlphaGoal = new Random().nextFloat();
         } else {
             if (nextAlphaGoal > alpha) {
                 alpha += FIREFLY_BLINK_STEP;
@@ -170,7 +176,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             }
 
             this.xTarget = this.x + random.nextGaussian() * 10;
-            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, groundLevel), groundLevel + 4);
+            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, groundLevel), groundLevel + maxHeight);
             this.zTarget = this.z + random.nextGaussian() * 10;
 
             BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);

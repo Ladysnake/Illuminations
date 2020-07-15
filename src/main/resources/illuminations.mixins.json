@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "ladysnake.illuminations.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ClientWorldMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

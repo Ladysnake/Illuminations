@@ -31,6 +31,9 @@
       "ladysnake.illuminations.client.IlluminationsClient"
     ]
   },
+  "mixins": [
+    "illuminations.mixins.json"
+  ],
 
   "depends": {
     "fabricloader": ">=0.4.0",
