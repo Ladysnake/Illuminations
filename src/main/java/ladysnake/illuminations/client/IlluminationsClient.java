@@ -21,14 +21,15 @@ public class IlluminationsClient implements ClientModInitializer {
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY, FireflyParticle.DefaultFactory::new);
 
-        float chance = 0.00005F;
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, IlluminationData>builder()
-                .put(Biome.Category.JUNGLE, new IlluminationData(FIREFLY, chance))
-                .put(Biome.Category.PLAINS, new IlluminationData(FIREFLY, chance))
-                .put(Biome.Category.SAVANNA, new IlluminationData(FIREFLY, chance))
-                .put(Biome.Category.FOREST, new IlluminationData(FIREFLY, chance))
-                .put(Biome.Category.RIVER, new IlluminationData(FIREFLY, chance))
-                .put(Biome.Category.SWAMP, new IlluminationData(FIREFLY, chance)).build();
+                .put(Biome.Category.JUNGLE, new IlluminationData(FIREFLY, 0.00002F)) // few
+                .put(Biome.Category.PLAINS, new IlluminationData(FIREFLY, 0.00002F)) // few
+                .put(Biome.Category.SAVANNA, new IlluminationData(FIREFLY, 0.00002F)) // few
+                .put(Biome.Category.TAIGA, new IlluminationData(FIREFLY, 0.00002F)) // few
+                .put(Biome.Category.FOREST, new IlluminationData(FIREFLY, 0.00010F)) // some
+                .put(Biome.Category.RIVER, new IlluminationData(FIREFLY, 0.00010F)) // some
+                .put(Biome.Category.SWAMP, new IlluminationData(FIREFLY, 0.00025F)) // many
+                .build();
     }
 
 }

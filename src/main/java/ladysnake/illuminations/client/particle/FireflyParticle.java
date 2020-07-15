@@ -33,7 +33,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
         this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
         this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
-        this.maxHeight = ThreadLocalRandom.current().nextInt(2, 7); // maximum venturing height between 2 and 6
+        this.maxHeight = 4;
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
 
