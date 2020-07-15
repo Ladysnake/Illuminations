@@ -13,7 +13,7 @@ public class Illuminations implements ModInitializer {
     public void onInitialize() {
         IlluminationsItems.init();
         IlluminationsBlocks.init();
-        IlluminationsEntities.init();
+//        IlluminationsEntities.init();
         IlluminationsWorldFeatures.init();
     }
 }
