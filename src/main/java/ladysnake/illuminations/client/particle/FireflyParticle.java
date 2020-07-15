@@ -1,44 +1,46 @@
 package ladysnake.illuminations.client.particle;
 
+import ladysnake.illuminations.common.Illuminations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.*;
 import net.minecraft.world.LightType;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class FireflyParticle extends SpriteBillboardParticle {
+    private static final Identifier TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
+    private static final Identifier OVERLAY = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
+    private static final RenderLayer TEXTURE_LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
+    private static final RenderLayer OVERLAY_LAYER = RenderLayer.getEntityTranslucent(OVERLAY);
+
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
 
     private FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, 0.5D - RANDOM.nextDouble(), velocityY, 0.5D - RANDOM.nextDouble());
+        super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
-        this.velocityY *= 0.20000000298023224D;
-        if (velocityX == 0.0D && velocityZ == 0.0D) {
-            this.velocityX *= 0.10000000149011612D;
-            this.velocityZ *= 0.10000000149011612D;
-        }
 
         this.scale *= 0.25F + new Random().nextFloat() * 0.75F;
         this.maxAge = 99999999;
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = 0.25F + new Random().nextFloat() * 0.75F;
+        this.colorRed = (0.25F + new Random().nextFloat() * 0.75F) * 255;
         this.colorGreen = 1;
-        this.colorBlue = 0.25F + new Random().nextFloat() * 0.75F;
+        this.colorBlue = 0;
     }
 
     int alpha = 0;
@@ -93,15 +95,23 @@ public class FireflyParticle extends SpriteBillboardParticle {
             vector3f2.add(f, g, h);
         }
 
-        float l = this.getMinU();
-        float m = this.getMaxU();
-        float n = this.getMinV();
-        float o = this.getMaxV();
-        int p = 15728880;
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(m, o).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(m, n).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(l, n).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(l, o).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(p).next();
+        float minU = this.getMinU();
+        float maxU = this.getMaxU();
+        float minV = this.getMinV();
+        float maxV = this.getMaxV();
+        int light = 15728880;
+
+        // firefly
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+
+        // firefly overlay
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(this.colorRed, this.colorGreen, this.colorBlue, alpha).light(light).next();
     }
 
     public ParticleTextureSheet getType() {
