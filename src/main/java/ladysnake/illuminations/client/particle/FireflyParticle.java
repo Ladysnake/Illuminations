@@ -1,19 +1,14 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.common.Illuminations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
 import net.minecraft.world.LightType;
 
@@ -21,10 +16,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class FireflyParticle extends SpriteBillboardParticle {
-    private static final Identifier TEXTURE = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly.png");
-    private static final Identifier OVERLAY = new Identifier(Illuminations.MOD_ID, "textures/entity/firefly_overlay.png");
-    private static final RenderLayer TEXTURE_LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
-    private static final RenderLayer OVERLAY_LAYER = RenderLayer.getEntityTranslucent(OVERLAY);
+    private static final int FIREFLY_BLINK_STEP = 5;
+    protected int alpha = 0;
+    protected int nextAlphaGoal = 0;
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
@@ -33,43 +27,18 @@ public class FireflyParticle extends SpriteBillboardParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
-        this.scale *= 0.25F + new Random().nextFloat() * 0.75F;
+        this.scale *= 0.25F + new Random().nextFloat() * 0.50F;
         this.maxAge = 99999999;
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = (0.25F + new Random().nextFloat() * 0.75F) * 255;
+        this.colorRed = (0.25F + new Random().nextFloat() * 0.50F) * 255;
         this.colorGreen = 1;
         this.colorBlue = 0;
     }
 
-    int alpha = 0;
-    int nextAlphaGoal = 0;
-
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        // alpha calculations
-        if (age < 50) {
-            // if just spawned
-            alpha = 0;
-        } else {
-            // if day
-            float tod = world.getLevelProperties().getTimeOfDay() % 24000;
-            if (tod >= 1000 && tod < 13000) {
-                nextAlphaGoal = 0;
-            }
-
-            if (alpha > nextAlphaGoal - 10 && alpha < nextAlphaGoal + 10) {
-                nextAlphaGoal = new Random().nextInt(256);
-            } else {
-                if (nextAlphaGoal > alpha) {
-                    alpha += 10;
-                } else if (nextAlphaGoal < alpha) {
-                    alpha -= 10;
-                }
-            }
-        }
-
         Vec3d vec3d = camera.getPos();
         float f = (float)(MathHelper.lerp((double)tickDelta, this.prevPosX, this.x) - vec3d.getX());
         float g = (float)(MathHelper.lerp((double)tickDelta, this.prevPosY, this.y) - vec3d.getY());
@@ -130,9 +99,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             return new FireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
-    
-    // Behaviour
-    private double groundLevel;
+
     private BlockPos lightTarget;
     private double xTarget;
     private double yTarget;
@@ -143,11 +110,24 @@ public class FireflyParticle extends SpriteBillboardParticle {
     public void tick() {
         super.tick();
 
-        // despawn on daytime
-//            float tod = this.world.getLevelProperties().getTimeOfDay() % 24000;
-//            if (tod >= 1010 && tod < 12990) {
-//                this.markDead();
-//            }
+        // fade and die on daytime
+        if (world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) {
+            nextAlphaGoal = 0;
+            if (alpha <= 0) {
+                this.markDead();
+            }
+        }
+
+        // blinking
+        if (alpha > nextAlphaGoal - FIREFLY_BLINK_STEP && alpha < nextAlphaGoal + FIREFLY_BLINK_STEP) {
+            nextAlphaGoal = new Random().nextInt(256);
+        } else {
+            if (nextAlphaGoal > alpha) {
+                alpha += FIREFLY_BLINK_STEP;
+            } else if (nextAlphaGoal < alpha) {
+                alpha -= FIREFLY_BLINK_STEP;
+            }
+        }
 
         this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
 
@@ -176,17 +156,18 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
     private void selectBlockTarget() {
         if (this.lightTarget == null || !this.isAttractedByLight) {
-            this.groundLevel = 0;
+            // Behaviour
+            double groundLevel = 0;
             for (int i = 0; i < 20; i++) {
                 BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
                 if (!checkedBlock.getBlock().canMobSpawnInside()) {
-                    this.groundLevel = this.y - i;
+                    groundLevel = this.y - i;
                 }
-                if (this.groundLevel != 0) break;
+                if (groundLevel != 0) break;
             }
 
             this.xTarget = this.x + random.nextGaussian() * 10;
-            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
+            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, groundLevel), groundLevel + 4);
             this.zTarget = this.z + random.nextGaussian() * 10;
 
             BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
