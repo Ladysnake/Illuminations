@@ -12,9 +12,9 @@ public class Illuminations implements ModInitializer {
     @Override
     public void onInitialize() {
         IlluminationsItems.init();
-        IlluminationsBlocks.init();
+//        IlluminationsBlocks.init();
 //        IlluminationsEntities.init();
-        IlluminationsWorldFeatures.init();
+//        IlluminationsWorldFeatures.init();
     }
 }
 

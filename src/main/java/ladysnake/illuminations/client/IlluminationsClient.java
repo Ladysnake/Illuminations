@@ -28,11 +28,11 @@ public class IlluminationsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        registerRenders();
-        registerColors();
-        registerCutouts();
+//        registerRenders();
+//        registerColors();
+//        registerCutouts();
 
-        FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple());
+        FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY, FireflyParticle.DefaultFactory::new);
     }
 
