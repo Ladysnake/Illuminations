@@ -7,6 +7,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.LightType;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -35,7 +36,8 @@ public abstract class ClientWorldMixin extends World {
     public void randomBlockDisplayTick(int xCenter, int yCenter, int zCenter, int radius, Random random, boolean spawnBarrierParticles, BlockPos.Mutable pos, CallbackInfo info) {
         Biome.Category biomeCategory = this.getBiome(pos).getCategory();
 
-        if (!(this.getTimeOfDay() >= 1000 && this.getTimeOfDay() < 13000) && IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
+        // if night, in correct biome and not in a cave
+        if (!(this.getTimeOfDay() >= 1000 && this.getTimeOfDay() < 13000) && IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory) && this.getWorld().getLightLevel(LightType.SKY, pos) > 5) {
             IlluminationData illuminationData = IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
 
             if (illuminationData.shouldAddParticle(this.random)) {
