@@ -38,7 +38,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         this.setSpriteForAge(spriteProvider);
 
         this.colorRed = 0f;
-        this.colorGreen = 0.50f + new Random().nextFloat() * 0.50f;
+        this.colorGreen = 0.75f + new Random().nextFloat() * 0.25f;
         this.colorBlue = 1f;
 
         this.velocityX = 0;
@@ -144,8 +144,6 @@ public class GlowwormParticle extends SpriteBillboardParticle {
             this.maxAge = 0;
         }
 
-        this.move(this.velocityX, this.velocityY, this.velocityZ);
-
         // blinking
         if (alpha > nextAlphaGoal - FIREFLY_BLINK_STEP && alpha < nextAlphaGoal + FIREFLY_BLINK_STEP) {
             nextAlphaGoal = new Random().nextFloat();
@@ -157,29 +155,28 @@ public class GlowwormParticle extends SpriteBillboardParticle {
             }
         }
 
-//        this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
-//
-//        if ((this.world.getTime() % 20 == 0) && ((xTarget == 0 && yTarget == 0 && zTarget == 0) || new Vec3d(x, y, z).squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0)) {
-//            selectBlockTarget();
-//        }
-//
-//        Vec3d targetVector = new Vec3d(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
-//        double length = targetVector.length();
-//        targetVector = targetVector.multiply(0.1 / length);
-//
-//
-//        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
-//            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-//            velocityY = 0;
-//            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-//        } else {
-//            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-//            velocityY = 0;
-//            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-//        }
-//        if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
-//            this.move(velocityX, velocityY, velocityZ);
-//        }
+        this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
+
+        if ((this.world.getTime() % 20 == 0) && ((xTarget == 0 && yTarget == 0 && zTarget == 0) || new Vec3d(x, y, z).squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0)) {
+            selectBlockTarget();
+        }
+
+        Vec3d targetVector = new Vec3d(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
+        double length = targetVector.length();
+        targetVector = targetVector.multiply(0.1 / length);
+
+
+        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+        } else {
+            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+        }
+
+        if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+            this.move(velocityX, velocityY, velocityZ);
+        }
     }
 
     private void selectBlockTarget() {
