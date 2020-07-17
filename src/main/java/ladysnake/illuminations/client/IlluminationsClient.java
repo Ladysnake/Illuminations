@@ -1,34 +1,74 @@
 package ladysnake.illuminations.client;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import ladysnake.illuminations.client.particle.FamiliarParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
+import ladysnake.illuminations.client.particle.GlowwormParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.block.Blocks;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.*;
+
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 @Environment(EnvType.CLIENT)
 public class IlluminationsClient implements ClientModInitializer {
+    // particle types
     public static DefaultParticleType FIREFLY;
+    public static DefaultParticleType GLOWWORM;
+    public static DefaultParticleType WISP;
 
-    public static ImmutableMap<Biome.Category, IlluminationData> ILLUMINATIONS_BIOME_CATEGORIES;
+    // spawn biomes
+    public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+
+    // spawn predicates
+    public static final Predicate<Long> FIREFLY_TIME_PREDICATE = aLong -> !(aLong >= 1000 && aLong < 13000);
+    public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.AIR;
+    public static final Predicate<Long> GLOWWORM_TIME_PREDICATE = aLong -> true;
+    public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
+
     @Override
     public void onInitializeClient() {
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY, FireflyParticle.DefaultFactory::new);
 
-        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, IlluminationData>builder()
-                .put(Biome.Category.JUNGLE, new IlluminationData(FIREFLY, 0.00002F)) // few
-                .put(Biome.Category.PLAINS, new IlluminationData(FIREFLY, 0.00002F)) // few
-                .put(Biome.Category.SAVANNA, new IlluminationData(FIREFLY, 0.00002F)) // few
-                .put(Biome.Category.TAIGA, new IlluminationData(FIREFLY, 0.00002F)) // few
-                .put(Biome.Category.FOREST, new IlluminationData(FIREFLY, 0.00010F)) // some
-                .put(Biome.Category.RIVER, new IlluminationData(FIREFLY, 0.00010F)) // some
-                .put(Biome.Category.SWAMP, new IlluminationData(FIREFLY, 0.00025F)) // many
+        GLOWWORM = Registry.register(Registry.PARTICLE_TYPE, "illuminations:glowworm", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GLOWWORM, GlowwormParticle.DefaultFactory::new);
+
+        WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP, FamiliarParticle.DefaultFactory::new);
+
+        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
+                .put(Biome.Category.JUNGLE, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                .put(Biome.Category.PLAINS, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                .put(Biome.Category.SAVANNA, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                .put(Biome.Category.TAIGA, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                .put(Biome.Category.FOREST, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                .put(Biome.Category.RIVER, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                .put(Biome.Category.SWAMP, ImmutableSet.of(
+                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
+                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
                 .build();
     }
 

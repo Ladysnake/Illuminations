@@ -1,5 +1,6 @@
 package ladysnake.illuminations.mixin;
 
+import com.google.common.collect.ImmutableSet;
 import ladysnake.illuminations.client.IlluminationData;
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.minecraft.client.render.WorldRenderer;
@@ -37,12 +38,16 @@ public abstract class ClientWorldMixin extends World {
         Biome.Category biomeCategory = this.getBiome(pos).getCategory();
 
         // if night, in correct biome and not in a cave
-        if (!(this.getTimeOfDay() >= 1000 && this.getTimeOfDay() < 13000) && IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory) && this.getWorld().getLightLevel(LightType.SKY, pos) > 5) {
-            IlluminationData illuminationData = IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
+        if (IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
+            ImmutableSet<IlluminationData> illuminationDataSet = IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
 
-            if (illuminationData.shouldAddParticle(this.random)) {
-                this.addParticle(illuminationData.getIlluminationType(), (double)pos.getX() + this.random.nextDouble(), (double)pos.getY() + this.random.nextDouble(), (double)pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
-            }
+            illuminationDataSet.forEach(illuminationData -> {
+                if (illuminationData.getTimeSpawnPredicate().test(this.getTimeOfDay())
+                        && illuminationData.getLocationSpawnPredicate().test(this.getWorld(), pos)
+                        && illuminationData.shouldAddParticle(this.random)) {
+                    this.addParticle(illuminationData.getIlluminationType(), (double)pos.getX() + this.random.nextDouble(), (double)pos.getY() + this.random.nextDouble(), (double)pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
+                }
+            });
         }
     }
 

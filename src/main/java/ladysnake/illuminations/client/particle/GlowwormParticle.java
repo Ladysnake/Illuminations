@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FireflyParticle extends SpriteBillboardParticle {
+public class GlowwormParticle extends SpriteBillboardParticle {
     private static final float FIREFLY_BLINK_STEP = 0.05f;
     protected float alpha = 0f;
     protected float nextAlphaGoal = 0f;
@@ -27,19 +27,24 @@ public class FireflyParticle extends SpriteBillboardParticle {
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
 
-    private FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    private GlowwormParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
         this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
-        this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
-        this.maxHeight = 4;
+        this.maxAge = ThreadLocalRandom.current().nextInt(1200, 3601); // live between one and three minutes
+        this.maxHeight = 255;
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = 0.25f + new Random().nextFloat() * 0.50f;
-        this.colorGreen = 1f;
-        this.colorBlue = 0f;
+        this.colorRed = 0f;
+        this.colorGreen = 0.50f + new Random().nextFloat() * 0.50f;
+        this.colorBlue = 1f;
+
+        this.velocityX = 0;
+        this.velocityY = 0;
+        this.velocityZ = 0;
+        this.initOnCeiling();
     }
 
     @Override
@@ -102,7 +107,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new FireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new GlowwormParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -113,19 +118,33 @@ public class FireflyParticle extends SpriteBillboardParticle {
     private int targetChangeCooldown = 0;
     private boolean isAttractedByLight = false;
     private int maxHeight;
+    boolean onCeiling;
 
     public void tick() {
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        // fade and die on daytime or if old enough
-        if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
+        // if old enough, fade and die
+        if (this.age++ >= this.maxAge) {
             nextAlphaGoal = -FIREFLY_BLINK_STEP;
             if (alpha < 0f) {
                 this.markDead();
             }
         }
+
+        // if above block is no longer here, tag no longer on ceiling
+        if (this.world.getBlockState(new BlockPos(this.x, this.y+0.5, this.z)).isAir()) {
+            this.onCeiling = false;
+        }
+
+        // if no longer on ceiling and no block under, fall, fade and die
+        if (!this.onCeiling) {
+            this.velocityY -= 0.1;
+            this.maxAge = 0;
+        }
+
+        this.move(this.velocityX, this.velocityY, this.velocityZ);
 
         // blinking
         if (alpha > nextAlphaGoal - FIREFLY_BLINK_STEP && alpha < nextAlphaGoal + FIREFLY_BLINK_STEP) {
@@ -138,85 +157,58 @@ public class FireflyParticle extends SpriteBillboardParticle {
             }
         }
 
-        this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
-
-        if ((this.world.getTime() % 20 == 0) && ((xTarget == 0 && yTarget == 0 && zTarget == 0) || new Vec3d(x, y, z).squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0)) {
-            selectBlockTarget();
-        }
-
-        Vec3d targetVector = new Vec3d(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
-        double length = targetVector.length();
-        targetVector = targetVector.multiply(0.1 / length);
-
-
-        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
-            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-            velocityY = 0.05;
-            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-        } else {
-            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
-            velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
-            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
-        }
-        if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
-            this.move(velocityX, velocityY, velocityZ);
-        }
+//        this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
+//
+//        if ((this.world.getTime() % 20 == 0) && ((xTarget == 0 && yTarget == 0 && zTarget == 0) || new Vec3d(x, y, z).squaredDistanceTo(xTarget, yTarget, zTarget) < 9 || targetChangeCooldown <= 0)) {
+//            selectBlockTarget();
+//        }
+//
+//        Vec3d targetVector = new Vec3d(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
+//        double length = targetVector.length();
+//        targetVector = targetVector.multiply(0.1 / length);
+//
+//
+//        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+//            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+//            velocityY = 0;
+//            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+//        } else {
+//            velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+//            velocityY = 0;
+//            velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
+//        }
+//        if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
+//            this.move(velocityX, velocityY, velocityZ);
+//        }
     }
 
     private void selectBlockTarget() {
-        if (this.lightTarget == null || !this.isAttractedByLight) {
-            // Behaviour
-            double groundLevel = 0;
-            for (int i = 0; i < 20; i++) {
-                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
-                if (!checkedBlock.getBlock().canMobSpawnInside()) {
-                    groundLevel = this.y - i;
-                }
-                if (groundLevel != 0) break;
-            }
+        // Behaviour
+        this.xTarget = this.x + random.nextGaussian();
+        this.zTarget = this.z + random.nextGaussian();
 
-            this.xTarget = this.x + random.nextGaussian() * 10;
-            this.yTarget = Math.min(Math.max(this.y + random.nextGaussian() * 2, groundLevel), groundLevel + maxHeight);
-            this.zTarget = this.z + random.nextGaussian() * 10;
-
-            BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
-            if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)
-                    && this.world.getBlockState(targetPos).isSolidBlock(world, targetPos)) {
-                this.yTarget += 1;
-            }
-
-            if (this.world.getLightLevel(LightType.SKY, new BlockPos(x, y, z)) > 8 && !this.world.isDay()) {
-                this.lightTarget = getRandomLitBlockAround();
-            }
-        } else {
-            this.xTarget = this.lightTarget.getX() + random.nextGaussian();
-            this.yTarget = this.lightTarget.getY() + random.nextGaussian();
-            this.zTarget = this.lightTarget.getZ() + random.nextGaussian();
-
-            if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) > 8) {
-                BlockPos possibleTarget = getRandomLitBlockAround();
-                if (this.world.getLightLevel(LightType.BLOCK, possibleTarget) > this.world.getLightLevel(LightType.BLOCK, this.lightTarget))
-                    this.lightTarget = possibleTarget;
-            }
-
-            if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) <= 8 || this.world.isDay())
-                this.lightTarget = null;
-        }
+        BlockPos targetPos = new BlockPos(this.xTarget, this.y, this.zTarget);
 
         targetChangeCooldown = random.nextInt() % 100;
     }
 
-    public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+    private void initOnCeiling() {
+        this.onCeiling = true;
+        this.y = (float) Math.ceil(this.y) - 0.025;
+        this.alpha = 0f;
+
+        while (this.world.getBlockState(new BlockPos(this.x, this.y+1, this.z)).isAir()) {
+            if (this.y++ > 255) {
+                this.markDead();
+                break;
+            }
+        }
+
+        this.setPos(this.x, this.y, this.z);
     }
 
-    private BlockPos getRandomLitBlockAround() {
-        HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
-        for (int i = 0; i < 15; i++) {
-            BlockPos randBP = new BlockPos(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
-            randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
-        }
-        return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+    public BlockPos getTargetPosition() {
+        return new BlockPos(this.xTarget, this.yTarget + 0.95, this.zTarget);
     }
 
 }

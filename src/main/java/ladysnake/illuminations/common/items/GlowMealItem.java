@@ -15,10 +15,10 @@ public class GlowMealItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        for (int i = 0; i < 500; i++) {
-            world.addParticle(IlluminationsClient.FIREFLY, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
+        for (int i = 0; i < 1; i++) {
+            world.addParticle(IlluminationsClient.GLOWWORM, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
         }
-        return TypedActionResult.pass(user.getStackInHand(hand));
+        return TypedActionResult.success(user.getStackInHand(hand));
     }
 
 }
