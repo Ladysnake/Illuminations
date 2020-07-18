@@ -8,6 +8,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class GlowMealItem extends Item {
     public GlowMealItem(Item.Settings item$Settings_1) {
         super(item$Settings_1);
@@ -15,8 +17,10 @@ public class GlowMealItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        Random rand = new Random();
+
         for (int i = 0; i < 1; i++) {
-            world.addParticle(IlluminationsClient.GLOWWORM, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
+            world.addParticle(IlluminationsClient.FIREFLY, user.getX(), user.getY()+rand.nextFloat(), user.getZ(), 0, 0, 0);
         }
         return TypedActionResult.success(user.getStackInHand(hand));
     }

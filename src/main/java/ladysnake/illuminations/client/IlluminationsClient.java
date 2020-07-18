@@ -2,10 +2,10 @@ package ladysnake.illuminations.client;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import ladysnake.illuminations.client.particle.FamiliarParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.aura.FireflyAuraParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,7 +17,7 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.*;
+import net.minecraft.world.biome.Biome;
 
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -28,7 +28,9 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType FIREFLY;
     public static DefaultParticleType GLOWWORM;
     public static DefaultParticleType PLANKTON;
-    public static DefaultParticleType WISP;
+
+    // aura particle types
+    public static DefaultParticleType FIREFLY_AURA;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -43,18 +45,19 @@ public class IlluminationsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY, FireflyParticle.DefaultFactory::new);
-
         GLOWWORM = Registry.register(Registry.PARTICLE_TYPE, "illuminations:glowworm", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GLOWWORM, GlowwormParticle.DefaultFactory::new);
-
         PLANKTON = Registry.register(Registry.PARTICLE_TYPE, "illuminations:plankton", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PLANKTON, PlanktonParticle.DefaultFactory::new);
 
-        WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP, FamiliarParticle.DefaultFactory::new);
+        // aura particles
+        FIREFLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY_AURA, FireflyAuraParticle.DefaultFactory::new);
 
+        // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
                 .put(Biome.Category.JUNGLE, ImmutableSet.of(
                         new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few

@@ -27,7 +27,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
 
-    private FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
