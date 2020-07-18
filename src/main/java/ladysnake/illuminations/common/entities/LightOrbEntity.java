@@ -23,6 +23,11 @@ public abstract class LightOrbEntity extends FlyingEntity {
     }
 
     @Override
+    public boolean shouldRenderName() {
+        return false;
+    }
+
+    @Override
     public boolean hasNoGravity() {
         return true;
     }
