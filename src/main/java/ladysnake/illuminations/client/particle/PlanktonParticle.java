@@ -2,21 +2,26 @@ package ladysnake.illuminations.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LightType;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GlowwormParticle extends SpriteBillboardParticle {
+public class PlanktonParticle extends SpriteBillboardParticle {
     private static final float BLINK_STEP = 0.01f;
     protected float alpha = 0f;
     protected float nextAlphaGoal = 0f;
@@ -24,24 +29,18 @@ public class GlowwormParticle extends SpriteBillboardParticle {
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
 
-    private GlowwormParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    private PlanktonParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
-        this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
-        this.maxAge = ThreadLocalRandom.current().nextInt(1200, 3601); // live between one and three minutes
-        this.maxHeight = 255;
+        this.scale *= 0.10f + new Random().nextFloat() * 0.20f;
+        this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
 
         this.colorRed = 0f;
-        this.colorGreen = 0.75f + new Random().nextFloat() * 0.25f;
+        this.colorGreen = 0.25f + new Random().nextFloat() * 0.25f;
         this.colorBlue = 1f;
-
-        this.velocityX = 0;
-        this.velocityY = 0;
-        this.velocityZ = 0;
-        this.initOnCeiling();
     }
 
     @Override
@@ -85,10 +84,10 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV/2).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
 
         // firefly overlay
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, maxV/2).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, maxV/2).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, a).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, 0.1f).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, maxV/2).color(1f, 1f, 1f, 0.1f).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, maxV/2).color(1f, 1f, 1f, 0.1f).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, 0.1f).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -104,7 +103,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new GlowwormParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new PlanktonParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -113,32 +112,18 @@ public class GlowwormParticle extends SpriteBillboardParticle {
     private double yTarget;
     private double zTarget;
     private int targetChangeCooldown = 0;
-    private boolean isAttractedByLight = false;
-    private int maxHeight;
-    boolean onCeiling;
 
     public void tick() {
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        // if old enough, fade and die
+        // fade if old enough
         if (this.age++ >= this.maxAge) {
             nextAlphaGoal = -BLINK_STEP;
             if (alpha < 0f) {
                 this.markDead();
             }
-        }
-
-        // if above block is no longer here, tag no longer on ceiling
-        if (this.world.getBlockState(new BlockPos(this.x, this.y+0.5, this.z)).isAir()) {
-            this.onCeiling = false;
-        }
-
-        // if no longer on ceiling and no block under, fall, fade and die
-        if (!this.onCeiling) {
-            this.velocityY -= 0.1;
-            this.maxAge = 0;
         }
 
         // blinking
@@ -160,14 +145,16 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 
         Vec3d targetVector = new Vec3d(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
         double length = targetVector.length();
-        targetVector = targetVector.multiply(0.1 / length);
+        targetVector = targetVector.multiply(0.001 / length);
 
 
-        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().canMobSpawnInside()) {
+        if (!this.world.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getFluidState().isIn(FluidTags.WATER)) {
             velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+            velocityY = 0.05;
             velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
         } else {
             velocityX = (0.9) * velocityX + (0.1) * targetVector.x;
+            velocityY = (0.9) * velocityY + (0.1) * targetVector.y;
             velocityZ = (0.9) * velocityZ + (0.1) * targetVector.z;
         }
 
@@ -178,31 +165,30 @@ public class GlowwormParticle extends SpriteBillboardParticle {
 
     private void selectBlockTarget() {
         // Behaviour
-        this.xTarget = this.x + random.nextGaussian();
-        this.zTarget = this.z + random.nextGaussian();
+        double groundLevel = 0;
+        for (int i = 0; i < 20; i++) {
+            BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.x, this.y - i, this.z));
+            if (checkedBlock.getFluidState().isIn(FluidTags.WATER)) {
+                groundLevel = this.y - i;
+            }
+            if (groundLevel != 0) break;
+        }
 
-        BlockPos targetPos = new BlockPos(this.xTarget, this.y, this.zTarget);
+        this.xTarget = this.x + random.nextGaussian() * 10;
+        this.yTarget = Math.max(this.y + random.nextGaussian() * 2, groundLevel);
+        this.zTarget = this.z + random.nextGaussian() * 10;
+
+        BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+        if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)
+                && this.world.getBlockState(targetPos).isSolidBlock(world, targetPos)) {
+            this.yTarget += 1;
+        }
 
         targetChangeCooldown = random.nextInt() % 100;
     }
 
-    private void initOnCeiling() {
-        this.onCeiling = true;
-        this.y = (float) Math.ceil(this.y) - 0.025;
-        this.alpha = 0f;
-
-        while (this.world.getBlockState(new BlockPos(this.x, this.y+1, this.z)).isAir()) {
-            if (this.y++ > 255) {
-                this.markDead();
-                break;
-            }
-        }
-
-        this.setPos(this.x, this.y, this.z);
-    }
-
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.95, this.zTarget);
+        return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
 }

@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import ladysnake.illuminations.client.particle.FamiliarParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
+import ladysnake.illuminations.client.particle.PlanktonParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -25,6 +27,7 @@ public class IlluminationsClient implements ClientModInitializer {
     // particle types
     public static DefaultParticleType FIREFLY;
     public static DefaultParticleType GLOWWORM;
+    public static DefaultParticleType PLANKTON;
     public static DefaultParticleType WISP;
 
     // spawn biomes
@@ -35,6 +38,8 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.AIR;
     public static final Predicate<Long> GLOWWORM_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
+    public static final Predicate<Long> PLANKTON_TIME_PREDICATE = aLong -> true;
+    public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
 
     @Override
     public void onInitializeClient() {
@@ -43,6 +48,9 @@ public class IlluminationsClient implements ClientModInitializer {
 
         GLOWWORM = Registry.register(Registry.PARTICLE_TYPE, "illuminations:glowworm", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GLOWWORM, GlowwormParticle.DefaultFactory::new);
+
+        PLANKTON = Registry.register(Registry.PARTICLE_TYPE, "illuminations:plankton", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PLANKTON, PlanktonParticle.DefaultFactory::new);
 
         WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP, FamiliarParticle.DefaultFactory::new);
@@ -69,6 +77,9 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put(Biome.Category.SWAMP, ImmutableSet.of(
                         new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
                         new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
+                .put(Biome.Category.OCEAN, ImmutableSet.of(
+                        new IlluminationData(PLANKTON, PLANKTON_TIME_PREDICATE, PLANKTON_LOCATION_PREDICATE, 0.00500F) // many
+                ))
                 .build();
     }
 

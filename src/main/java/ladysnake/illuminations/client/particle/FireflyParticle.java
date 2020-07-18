@@ -20,7 +20,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
-    private static final float FIREFLY_BLINK_STEP = 0.05f;
+    private static final float BLINK_STEP = 0.05f;
     protected float alpha = 0f;
     protected float nextAlphaGoal = 0f;
 
@@ -121,20 +121,20 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
         // fade and die on daytime or if old enough
         if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
-            nextAlphaGoal = -FIREFLY_BLINK_STEP;
+            nextAlphaGoal = -BLINK_STEP;
             if (alpha < 0f) {
                 this.markDead();
             }
         }
 
         // blinking
-        if (alpha > nextAlphaGoal - FIREFLY_BLINK_STEP && alpha < nextAlphaGoal + FIREFLY_BLINK_STEP) {
+        if (alpha > nextAlphaGoal - BLINK_STEP && alpha < nextAlphaGoal + BLINK_STEP) {
             nextAlphaGoal = new Random().nextFloat();
         } else {
             if (nextAlphaGoal > alpha) {
-                alpha += FIREFLY_BLINK_STEP;
+                alpha += BLINK_STEP;
             } else if (nextAlphaGoal < alpha) {
-                alpha -= FIREFLY_BLINK_STEP;
+                alpha -= BLINK_STEP;
             }
         }
 
