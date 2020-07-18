@@ -23,6 +23,11 @@ public abstract class LightOrbEntity extends FlyingEntity {
     }
 
     @Override
+    public boolean isAffectedBySplashPotions(){
+        return false;
+    }
+
+    @Override
     public boolean shouldRenderName() {
         return false;
     }
