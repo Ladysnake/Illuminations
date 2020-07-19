@@ -30,7 +30,7 @@ public class PlanktonParticle extends SpriteBillboardParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
-        this.scale *= 0.10f + new Random().nextFloat() * 0.20f;
+        this.scale *= 0.05f + new Random().nextFloat() * 0.05f;
         this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
