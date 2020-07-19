@@ -20,8 +20,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
         // do not render in first person
-        if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player.getUuid() != this.getUuid()) {
-            world.addParticle(IlluminationsClient.FIREFLY_AURA, this.getX(), this.getY() + this.random.nextFloat(), this.getZ(), 0, 0, 0);
+        if (MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().gameRenderer != null) {
+            //noinspection ConstantConditions
+            if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) {
+                world.addParticle(IlluminationsClient.FIREFLY_AURA, this.getX(), this.getY() + this.random.nextFloat(), this.getZ(), 0, 0, 0);
+            }
         }
     }
 
