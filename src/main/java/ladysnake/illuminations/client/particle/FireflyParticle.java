@@ -107,12 +107,12 @@ public class FireflyParticle extends SpriteBillboardParticle {
     }
 
     private BlockPos lightTarget;
-    private double xTarget;
-    private double yTarget;
-    private double zTarget;
-    private int targetChangeCooldown = 0;
+    protected double xTarget;
+    protected double yTarget;
+    protected double zTarget;
+    protected int targetChangeCooldown = 0;
     private boolean isAttractedByLight = false;
-    private int maxHeight;
+    protected int maxHeight;
 
     public void tick() {
         this.prevPosX = this.x;
