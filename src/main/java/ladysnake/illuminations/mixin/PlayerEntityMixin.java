@@ -20,13 +20,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
-        // do not render in first person
-        if (MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().gameRenderer != null) {
-            //noinspection ConstantConditions
-            if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) {
-                if (this.random.nextFloat() <= 0.1F)
-                world.addParticle(IlluminationsClient.FIREFLY_AURA, this.getX() + FireflyAuraParticle.getWanderingDistance(this.random), this.getY() + this.random.nextFloat() + FireflyAuraParticle.getWanderingDistance(this.random), this.getZ() + FireflyAuraParticle.getWanderingDistance(this.random), 0, 0, 0);
-            }
+        // do not render in first person or if the player is invisible
+        //noinspection ConstantConditions
+        if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+            if (this.random.nextFloat() <= 0.1F)
+            world.addParticle(IlluminationsClient.FIREFLY_AURA, this.getX() + FireflyAuraParticle.getWanderingDistance(this.random), this.getY() + 1 + FireflyAuraParticle.getWanderingDistance(this.random), this.getZ() + FireflyAuraParticle.getWanderingDistance(this.random), 0, 0, 0);
         }
     }
 

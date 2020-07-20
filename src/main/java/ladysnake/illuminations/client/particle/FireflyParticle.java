@@ -20,7 +20,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
-    private static final float BLINK_STEP = 0.05f;
+    protected static final float BLINK_STEP = 0.05f;
     protected float alpha = 0f;
     protected float nextAlphaGoal = 0f;
 
