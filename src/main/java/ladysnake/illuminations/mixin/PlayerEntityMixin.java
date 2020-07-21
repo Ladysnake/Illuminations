@@ -1,12 +1,14 @@
 package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.IlluminationsClient;
-import ladysnake.illuminations.client.particle.aura.FireflyAuraParticle;
+import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,11 +22,20 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
-        // do not render in first person or if the player is invisible
-        //noinspection ConstantConditions
-        if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
-            if (this.random.nextFloat() <= 0.1F)
-            world.addParticle(IlluminationsClient.FIREFLY_AURA, this.getX() + FireflyAuraParticle.getWanderingDistance(this.random), this.getY() + 1 + FireflyAuraParticle.getWanderingDistance(this.random), this.getZ() + FireflyAuraParticle.getWanderingDistance(this.random), 0, 0, 0);
+        // if player has an aura
+        if (IlluminationsClient.PLAYER_AURAS.containsKey(this.getUuid())) {
+            String playerAura = IlluminationsClient.PLAYER_AURAS.get(this.getUuid());
+
+            // do not render in first person or if the player is invisible
+            //noinspection ConstantConditions
+            if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
+                    DefaultParticleType auraParticle = IlluminationsClient.AURAS_DATA.get(playerAura).getParticle();
+                    if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random)) {
+                        world.addParticle(auraParticle, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                    }
+                }
+            }
         }
     }
 
