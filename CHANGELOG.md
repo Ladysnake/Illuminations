@@ -1,13 +1,14 @@
 # Illuminations - Changelog
 
 ### Illuminations 1.0 - 1.16.1
-The great overhaul is here! Illuminations is now client only for better performance and spawn control.
+The great overhaul is here! Illuminations is now client only for better performance, spawn control, and the ability to connect to vanilla servers with it.
 - Illuminations are now particles instead of entities, enjoy being able having ten million fireflies without your server committing seppuku
 - Fireflies will now appear regularly in varying quantities depending on the various biomes instead of clouds
 - Added glowworms, illuminations that will stick to cave ceilings
 - Added glowing plankton, illuminations that will spawn in the dark sea depths
 - Removed firefly grass and firefly lantern blocks, glowmeal and firefly items and firefly grass world features
-
+- Introduced auras, special Illuminations effects around the player visible to other players that have the mod. These auras are currently a bonus for donators but some may be available through giveaways and other special events in the future.
+    - Added the Twilight aura
 
 ### Illuminations 0.5.1 - 1.16.1
 - Updated to Minecraft 1.16.1 (thanks to Bulldog83 for the contribution!)
