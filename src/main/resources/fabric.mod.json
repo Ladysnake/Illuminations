@@ -8,13 +8,6 @@
   "authors": [
     "doctor4t"
   ],
-  "contributors": [
-    "Pyrofab",
-	"XuyuEre",
-    "kix99aug",
-    "louiswdg",
-    "lucalabs-de"
-  ],
   "contact": {
     "sources": "https://github.com/Ladysnake/Illuminations"
   },
@@ -24,9 +17,6 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "ladysnake.illuminations.common.Illuminations"
-    ],
     "client": [
       "ladysnake.illuminations.client.IlluminationsClient"
     ]

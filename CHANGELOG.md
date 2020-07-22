@@ -1,6 +1,15 @@
 # Illuminations - Changelog
 
-### Illuminations 0.5.1 - 20w06a
+### Illuminations 1.0 - 1.16.1
+The great overhaul is here! Illuminations is now client only for better performance and spawn control.
+- Illuminations are now particles instead of entities, enjoy being able having ten million fireflies without your server committing seppuku
+- Fireflies will now appear regularly in varying quantities depending on the various biomes instead of clouds
+- Added glowworms, illuminations that will stick to cave ceilings
+- Added glowing plankton, illuminations that will spawn in the dark sea depths
+- Removed firefly grass and firefly lantern blocks, glowmeal and firefly items and firefly grass world features
+
+
+### Illuminations 0.5.1 - 1.16.1
 - Updated to Minecraft 1.16.1 (thanks to Bulldog83 for the contribution!)
 
 ### Illuminations 0.5 - 20w06a
