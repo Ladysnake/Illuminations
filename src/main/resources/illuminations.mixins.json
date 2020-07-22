@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "ladysnake.illuminations.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ClientWorldMixin",
+    "PlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

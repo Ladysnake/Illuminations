@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "hanging=true": { "model": "illuminations:block/hanging_firefly_in_a_bottle"},
-        "hanging=false": { "model": "illuminations:block/firefly_in_a_bottle"}
-    }
-}
