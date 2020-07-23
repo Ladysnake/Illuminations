@@ -34,7 +34,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.colorRed = 216f/255f;
         this.colorGreen = 0f/255f;
         this.colorBlue = 182f/255f;
-        this.nextAlphaGoal = 0.5f;
+        this.nextAlphaGoal = 1f;
 
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
     }
