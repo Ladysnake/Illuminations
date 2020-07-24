@@ -1,5 +1,8 @@
 # Illuminations - Changelog
 
+### Illuminations 1.0.1 - 1.16.1
+- Fixed an issue where the game would crash upon loading the mod with Sodium
+
 ### Illuminations 1.0 - 1.16.1
 The great overhaul is here! Illuminations is now client only for better performance, spawn control, and the ability to connect to vanilla servers with it.
 - Illuminations are now particles instead of entities, enjoy being able having ten million fireflies without your server committing seppuku
