@@ -33,7 +33,6 @@ public abstract class SodiumClientWorldMixin extends World {
 
     @Inject(method = "performBiomeParticleDisplayTick", at = @At("RETURN"))
     public void randomBlockDisplayTick(BlockPos pos, Random random, CallbackInfo info) {
-        System.out.println("WORKS");
         Biome.Category biomeCategory = this.getBiome(pos).getCategory();
 
         // if night, in correct biome and not in a cave
