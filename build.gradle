@@ -29,8 +29,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
+	// ModMenu + Sodium
+	modRuntime 'io.github.prospector:modmenu:1.14.5+build.30'
+	modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
 }
 
 processResources {
@@ -63,6 +64,10 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
+}
+
+repositories {
+	maven { url 'https://jitpack.io' }
 }
 
 // configure the maven publication
