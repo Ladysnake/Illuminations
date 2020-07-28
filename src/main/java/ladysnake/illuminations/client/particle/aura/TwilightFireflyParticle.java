@@ -39,7 +39,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
             this.colorRed = color.getRed()/255f;
             this.colorGreen = color.getGreen()/255f;
             this.colorBlue = color.getBlue()/255f;
-            this.nextAlphaGoal = 0.5f;
+            this.nextAlphaGoal = 1f;
         } else {
             this.markDead();
         }
