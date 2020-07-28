@@ -1,6 +1,12 @@
 # Illuminations - Changelog
 
+### Illuminations 1.0.2 - 1.16.1
+
+- Introduced prismatic auras, auras that you can change the color of on the [Illuminations dashboard](https://illuminations.glitch.me/)
+  - Made the twilight aura prismatic
+
 ### Illuminations 1.0.1 - 1.16.1
+
 - Fixed an issue where the game would crash upon loading the mod with Sodium
 
 ### Illuminations 1.0 - 1.16.1

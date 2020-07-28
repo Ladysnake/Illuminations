@@ -1,12 +1,8 @@
 package ladysnake.illuminations.client;
 
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Random;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 public class AuraData {
     private final DefaultParticleType particle;

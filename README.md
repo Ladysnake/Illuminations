@@ -24,9 +24,13 @@ Glowing **plankton** - even though difficult to notice because of its size - can
 
 **Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
 
-### Twilight aura
+Two types of aura are currently availably: regular auras and prismatic auras. Regular auras are not customizable and have a specific color that you cannot change, while prismatic auras on the other hand will be colored depending on your Illuminations prismatic color.
 
-The **Twilight** aura creates magenta colored fireflies that will orbit around the player. If the player moves, they will leave a trail of these fireflies.
+Auras and prismatic color can be selected and changed via the [Illuminations dashboard](https://illuminations.glitch.me/).
+
+### Twilight aura (prismatic)
+
+The **Twilight** aura creates prismatic colored fireflies that will orbit around the player. If the player moves, they will leave a trail of these fireflies.
 
 ![illuminations-1.0-twilight-aura](README.assets/illuminations-1.0-twilight-aura.gif)
 
@@ -51,3 +55,7 @@ The **Twilight** aura creates magenta colored fireflies that will orbit around t
 #### I wish to support the mod and get an aura. What steps do I need to follow?
 
 In order to get an aura, you will need to make a PayPal donation by following [this link](https://www.paypal.com/donate/?token=khJOtftVs9CuPqxETbT8q2MyRlCrQXkpw-iOaI9NOPJSOpQouUb2Xg1uOifF8ZZDkSoi-W&Z3JncnB0) or via the Curse Forge donate button available on the project page. **When making your donation, please include your Minecraft UUID as well as a valid email address (so I may contact you in case of any problem) in your message.** All donations and aura attributions are manually processed and done as soon as possible, but may take up to a day so please be patient.
+
+#### I want to change my aura / the color of my prismatic auras / disable it, what do I do?
+
+If you have donated multiple times, you may have multiple auras and may want to select a specific one. Or you may just simply want to change your prismatic color or disable your aura. **You can do all this via the [Illuminations dashboard](https://illuminations.glitch.me/)** with no restrictions whatsoever.

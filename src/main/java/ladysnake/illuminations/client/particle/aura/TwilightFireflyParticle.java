@@ -1,5 +1,6 @@
 package ladysnake.illuminations.client.particle.aura;
 
+import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
+import java.awt.*;
 import java.util.Random;
 
 public class TwilightFireflyParticle extends FireflyParticle {
@@ -31,10 +33,16 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
-        this.colorRed = 216f/255f;
-        this.colorGreen = 0f/255f;
-        this.colorBlue = 182f/255f;
-        this.nextAlphaGoal = 0.5f;
+        if (owner != null) {
+            String playerColor = IlluminationsClient.PLAYER_AURAS.getAsJsonObject(owner.getUuid().toString()).get("color").getAsString();
+            Color color = Color.decode(playerColor);
+            this.colorRed = color.getRed()/255f;
+            this.colorGreen = color.getGreen()/255f;
+            this.colorBlue = color.getBlue()/255f;
+            this.nextAlphaGoal = 0.5f;
+        } else {
+            this.markDead();
+        }
 
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
     }
