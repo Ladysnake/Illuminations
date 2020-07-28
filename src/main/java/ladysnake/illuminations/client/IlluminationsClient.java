@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonObject;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
@@ -28,11 +28,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
-import java.util.UUID;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -41,10 +38,9 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations auras
-    private static final String URL = "https://illuminations.glitch.me/auras.json";
+    private static final String URL = "https://illuminations.glitch.me/auras";
     private static final Gson GSON = new GsonBuilder().create();
-    private static final Type AURA_SELECT_TYPE = new TypeToken<Map<UUID, String>>(){}.getType();
-    public static ImmutableMap<UUID, String> PLAYER_AURAS;
+    public static JsonObject PLAYER_AURAS;
     public static ImmutableMap<String, AuraData> AURAS_DATA;
 
     // particle types
@@ -119,7 +115,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     public static void getUsers() {
         try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
-            PLAYER_AURAS = ImmutableMap.copyOf((Map<? extends UUID, ? extends String>) GSON.fromJson(reader, AURA_SELECT_TYPE));
+            PLAYER_AURAS = GSON.fromJson(reader, JsonObject.class);
             logger.log(Level.INFO, "Illuminations player auras retrieved");
         } catch (MalformedURLException e) {
             logger.log(Level.ERROR, "Could not get Illuminations player auras because of malformed URL: " + e.getMessage());

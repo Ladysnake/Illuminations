@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "ClientWorldMixin",
-    "SodiumClientWorldMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "SodiumClientWorldMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {

@@ -1,14 +1,12 @@
 package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.IlluminationsClient;
-import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,8 +21,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
         // if player has an aura
-        if (IlluminationsClient.PLAYER_AURAS.containsKey(this.getUuid())) {
-            String playerAura = IlluminationsClient.PLAYER_AURAS.get(this.getUuid());
+        if (IlluminationsClient.PLAYER_AURAS.has(this.getUuid().toString())) {
+            String playerAura = IlluminationsClient.PLAYER_AURAS.getAsJsonObject(this.getUuid().toString()).get("aura").getAsString();
 
             // do not render in first person or if the player is invisible
             //noinspection ConstantConditions
