@@ -5,6 +5,10 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import ladysnake.illuminations.client.data.AuraData;
+import ladysnake.illuminations.client.data.IlluminationData;
+import ladysnake.illuminations.client.data.PlayerAuraData;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
@@ -15,6 +19,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -28,8 +33,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -40,7 +50,9 @@ public class IlluminationsClient implements ClientModInitializer {
     // illuminations auras
     private static final String URL = "https://illuminations.glitch.me/auras";
     private static final Gson GSON = new GsonBuilder().create();
-    public static JsonObject PLAYER_AURAS;
+    static final Type AURA_SELECT_TYPE = new TypeToken<Map<UUID, PlayerAuraData>>(){}.getType();
+
+    public static Map<UUID, PlayerAuraData> PLAYER_AURAS;
     public static ImmutableMap<String, AuraData> AURAS_DATA;
 
     // particle types
@@ -64,8 +76,27 @@ public class IlluminationsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // get illuminations users
-        getUsers();
+        // get illuminations donators
+        CompletableFuture.supplyAsync(() -> {
+            try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
+                Map<UUID, PlayerAuraData> playerData = GSON.fromJson(reader, AURA_SELECT_TYPE);
+                return playerData;
+            } catch (MalformedURLException e) {
+                logger.log(Level.ERROR, "Could not get player auras because of malformed URL: " + e.getMessage());
+            } catch (IOException e) {
+                logger.log(Level.ERROR, "Could not get player auras because of I/O Error: " + e.getMessage());
+            }
+
+            return null;
+        }).thenAcceptAsync(playerData -> {
+            if (playerData != null) {
+                PLAYER_AURAS = playerData;
+                logger.log(Level.INFO, "Player auras retrieved");
+            } else {
+                PLAYER_AURAS = Collections.emptyMap();
+                logger.log(Level.WARN, "Player auras could not be retrieved, auras will be ignored");
+            }
+        }, MinecraftClient.getInstance());
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
@@ -111,17 +142,6 @@ public class IlluminationsClient implements ClientModInitializer {
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f))
                 .build();
-    }
-
-    public static void getUsers() {
-        try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
-            PLAYER_AURAS = GSON.fromJson(reader, JsonObject.class);
-            logger.log(Level.INFO, "Illuminations player auras retrieved");
-        } catch (MalformedURLException e) {
-            logger.log(Level.ERROR, "Could not get Illuminations player auras because of malformed URL: " + e.getMessage());
-        } catch (IOException e) {
-            logger.log(Level.ERROR, "Could not get Illuminations player auras because of I/O Error: " + e.getMessage());
-        }
     }
 
 }

@@ -1,5 +1,9 @@
 # Illuminations - Changelog
 
+### Illuminations 1.0.3 - 1.16.1
+
+- Added an offline mode so the mod doesn't crash when unable to contact the Illuminations server
+
 ### Illuminations 1.0.2 - 1.16.1
 
 - Introduced prismatic auras, auras that you can change the color of on the [Illuminations dashboard](https://illuminations.glitch.me/)

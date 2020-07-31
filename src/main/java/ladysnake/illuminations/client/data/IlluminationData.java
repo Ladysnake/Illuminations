@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client;
+package ladysnake.illuminations.client.data;
 
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
