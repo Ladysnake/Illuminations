@@ -21,8 +21,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
         // if player has an aura
-        if (IlluminationsClient.PLAYER_AURAS.has(this.getUuid().toString())) {
-            String playerAura = IlluminationsClient.PLAYER_AURAS.getAsJsonObject(this.getUuid().toString()).get("aura").getAsString();
+        if (IlluminationsClient.PLAYER_AURAS.containsKey(this.getUuid())) {
+            String playerAura = IlluminationsClient.PLAYER_AURAS.get(this.getUuid()).getAura();
 
             // do not render in first person or if the player is invisible
             //noinspection ConstantConditions
