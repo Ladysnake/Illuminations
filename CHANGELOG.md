@@ -1,5 +1,9 @@
 # Illuminations - Changelog
 
+### Illuminations 1.0.4 - 1.16.1
+
+- Fixed an issue that caused illuminations to be incorrectly rendered with higher resolution resource packs
+
 ### Illuminations 1.0.3 - 1.16.1
 
 - Added an offline mode so the mod doesn't crash when unable to contact the Illuminations server
