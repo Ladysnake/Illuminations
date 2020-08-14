@@ -1,6 +1,7 @@
 # Illuminations - Changelog
 
 ### Illuminations 1.0.5 - 1.16.2
+- Restricted firefly spawn between daily times 13000 and 23000 (previously was between 13000 and 1000)
 - Updated to Minecraft 1.16.2
 
 ### Illuminations 1.0.4 - 1.16.1

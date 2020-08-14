@@ -67,7 +67,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
 
     // spawn predicates
-    public static final Predicate<Long> FIREFLY_TIME_PREDICATE = aLong -> !(aLong >= 1000 && aLong < 13000);
+    public static final Predicate<Long> FIREFLY_TIME_PREDICATE = aLong -> (aLong >= 13000 && aLong < 23000);
     public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.AIR;
     public static final Predicate<Long> GLOWWORM_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
