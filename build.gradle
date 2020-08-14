@@ -30,8 +30,8 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// ModMenu + Sodium
-	modRuntime 'io.github.prospector:modmenu:1.14.5+build.30'
-	modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
+//	modRuntime 'io.github.prospector:modmenu:1.14.6+build.31'
+//	modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
 }
 
 processResources {

@@ -1,20 +1,19 @@
 # Illuminations - Changelog
 
-### Illuminations 1.0.4 - 1.16.1
+### Illuminations 1.0.5 - 1.16.2
+- Updated to Minecraft 1.16.2
 
+### Illuminations 1.0.4 - 1.16.1
 - Fixed an issue that caused illuminations to be incorrectly rendered with higher resolution resource packs
 
 ### Illuminations 1.0.3 - 1.16.1
-
 - Added an offline mode so the mod doesn't crash when unable to contact the Illuminations server
 
 ### Illuminations 1.0.2 - 1.16.1
-
 - Introduced prismatic auras, auras that you can change the color of on the [Illuminations dashboard](https://illuminations.glitch.me/)
   - Made the twilight aura prismatic
 
 ### Illuminations 1.0.1 - 1.16.1
-
 - Fixed an issue where the game would crash upon loading the mod with Sodium
 
 ### Illuminations 1.0 - 1.16.1
