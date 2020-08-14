@@ -27,8 +27,8 @@ import java.util.function.Supplier;
 public abstract class ClientWorldMixin extends World {
     @Shadow @Final private WorldRenderer worldRenderer;
 
-    protected ClientWorldMixin(MutableWorldProperties mutableWorldProperties, RegistryKey<World> registryKey, RegistryKey<DimensionType> registryKey2, DimensionType dimensionType, Supplier<Profiler> profiler, boolean bl, boolean bl2, long l) {
-        super(mutableWorldProperties, registryKey, registryKey2, dimensionType, profiler, bl, bl2, l);
+    protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
+        super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
     }
 
     @Inject(method = "randomBlockDisplayTick", slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;")),
@@ -42,7 +42,7 @@ public abstract class ClientWorldMixin extends World {
 
             illuminationDataSet.forEach(illuminationData -> {
                 if (illuminationData.getTimeSpawnPredicate().test(this.getTimeOfDay())
-                        && illuminationData.getLocationSpawnPredicate().test(this.getWorld(), pos)
+                        && illuminationData.getLocationSpawnPredicate().test(this, pos)
                         && illuminationData.shouldAddParticle(this.random)) {
                     this.addParticle(illuminationData.getIlluminationType(), (double)pos.getX() + this.random.nextDouble(), (double)pos.getY() + this.random.nextDouble(), (double)pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
                 }
