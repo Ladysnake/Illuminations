@@ -54,7 +54,7 @@ The **Twilight** aura creates prismatic colored fireflies that will orbit around
 
 #### I wish to support the mod and get an aura. What steps do I need to follow?
 
-In order to get an aura, you will need to make a PayPal donation by following [this link](https://www.paypal.com/donate/?token=khJOtftVs9CuPqxETbT8q2MyRlCrQXkpw-iOaI9NOPJSOpQouUb2Xg1uOifF8ZZDkSoi-W&Z3JncnB0) or via the Curse Forge donate button available on the project page. **When making your donation, please include your Minecraft UUID as well as a valid email address (so I may contact you in case of any problem) in your message.** All donations and aura attributions are manually processed and done as soon as possible, but may take up to a day so please be patient.
+In order to get an aura, you will need to make a PayPal donation by following [this link](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B6H4NEF43GM2S&source=url) or via the Curse Forge donate button available on the project page. **When making your donation, please include your Minecraft UUID as well as a valid email address (so I may contact you in case of any problem) in your message.** All donations and aura attributions are manually processed and done as soon as possible, but may take up to a day so please be patient.
 
 #### I want to change my aura / the color of my prismatic auras / disable it, what do I do?
 
