@@ -1,5 +1,10 @@
 # Illuminations - Changelog
 
+### Illuminations 1.0.6 - 1.16.3
+- Fixed an issue where server players using Illuminations would crash upon a player with an aura dying
+- Fixed an issue where players with an aura would crash upon dying in third person modes
+- Updated to Minecraft 1.16.3
+
 ### Illuminations 1.0.5 - 1.16.2
 - Restricted firefly spawn between daily times 13000 and 23000 (previously was between 13000 and 1000)
 - Updated to Minecraft 1.16.2
