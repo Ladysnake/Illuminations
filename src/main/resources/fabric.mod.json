@@ -19,6 +19,9 @@
   "entrypoints": {
     "client": [
       "ladysnake.illuminations.client.IlluminationsClient"
+    ],
+    "main": [
+      "ladysnake.illuminations.common.Illuminations"
     ]
   },
   "mixins": [

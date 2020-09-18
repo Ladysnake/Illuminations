@@ -4,22 +4,27 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.PlayerAuraData;
+import ladysnake.illuminations.client.network.EntityDispatcher;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
+import ladysnake.illuminations.common.Illuminations;
+import ladysnake.illuminations.common.network.Packets;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -142,6 +147,15 @@ public class IlluminationsClient implements ClientModInitializer {
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f))
                 .build();
+
+        // register renders
+        registerRenders();
+
+        // packet registry
+        ClientSidePacketRegistry.INSTANCE.register(Packets.SPAWN, EntityDispatcher::spawnFrom);
     }
 
+    public static void registerRenders() {
+        EntityRendererRegistry.INSTANCE.register(Illuminations.BUGBALL, (manager, context) -> new FlyingItemEntityRenderer(manager, context.getItemRenderer()));
+    }
 }
