@@ -28,7 +28,7 @@ public class PrideParticle extends FireflyParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
         this.alpha = 0;
-        this.maxAge = 220;
+        this.maxAge = 40;
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale = 0.25f;
@@ -95,7 +95,6 @@ public class PrideParticle extends FireflyParticle {
 
     @Override
     public void tick() {
-        System.out.println("age="+age);
         if (this.age > 10) {
             alpha = 1;
         } else {
@@ -112,7 +111,7 @@ public class PrideParticle extends FireflyParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX(), owner.getY() + 2.3f, owner.getZ());
+            this.setPos(owner.getX(), owner.getY() + 2.3f + Math.sin(owner.age/12f)/12f, owner.getZ());
         } else {
             this.markDead();
         }

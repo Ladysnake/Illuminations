@@ -150,7 +150,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura spawn chances
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1, 0, 0, 0))
-                .put("pride", new AuraData(PRIDE_AURA, 1f, 200, 0, 2.3f, 0))
+                .put("pride", new AuraData(PRIDE_AURA, 1f, 20, 0, 2.3f, 0))
                 .build();
 
         // register renders
