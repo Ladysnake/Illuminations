@@ -1,6 +1,7 @@
 package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.data.AuraData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,14 +24,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // if player has an aura
         if (IlluminationsClient.PLAYER_AURAS.containsKey(this.getUuid())) {
             String playerAura = IlluminationsClient.PLAYER_AURAS.get(this.getUuid()).getAura();
-
             // do not render in first person or if the player is invisible
             //noinspection ConstantConditions
             if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                 if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
-                    DefaultParticleType auraParticle = IlluminationsClient.AURAS_DATA.get(playerAura).getParticle();
-                    if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random)) {
-                        world.addParticle(auraParticle, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                    AuraData aura = IlluminationsClient.AURAS_DATA.get(playerAura);
+                    if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
+                        world.addParticle(aura.getParticle(), this.getX()+aura.getSpawnOffsetX(), this.getY()+aura.getSpawnOffsetY(), this.getZ()+aura.getSpawnOffsetZ(), 0, 0, 0);
                     }
                 }
             }

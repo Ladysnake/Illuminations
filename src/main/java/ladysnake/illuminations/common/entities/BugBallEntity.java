@@ -47,14 +47,13 @@ public class BugBallEntity extends ThrownItemEntity {
 
     @Environment(EnvType.CLIENT)
     public void handleStatus(byte status) {
-        if (status == 3) {
-            ParticleEffect particleEffect = this.getParticleParameters();
-
-            for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
-            }
-        }
-
+//        if (status == 3) {
+//            ParticleEffect particleEffect = this.getParticleParameters();
+//
+//            for(int i = 0; i < 8; ++i) {
+//                this.world.addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+//            }
+//        }
     }
 
     protected void onEntityHit(EntityHitResult entityHitResult) {

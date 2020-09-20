@@ -12,6 +12,7 @@ import ladysnake.illuminations.client.network.EntityDispatcher;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.aura.PrideParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.network.Packets;
@@ -67,6 +68,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     // aura particle types
     public static DefaultParticleType TWILIGHT_AURA;
+    public static DefaultParticleType PRIDE_AURA;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -114,6 +116,8 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
+        PRIDE_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_AURA, PrideParticle.DefaultFactory::new);
 
         // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
@@ -145,7 +149,8 @@ public class IlluminationsClient implements ClientModInitializer {
 
         // aura spawn chances
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f))
+                .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1, 0, 0, 0))
+                .put("pride", new AuraData(PRIDE_AURA, 1f, 200, 0, 2.3f, 0))
                 .build();
 
         // register renders
