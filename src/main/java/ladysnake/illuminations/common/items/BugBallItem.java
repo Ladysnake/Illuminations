@@ -46,9 +46,4 @@ public class BugBallItem extends Item {
 
         return TypedActionResult.method_29237(itemStack, world.isClient());
     }
-
-    @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new TranslatableText("item.illuminations.bugball.firefly").setStyle(EMPTY.withColor(Formatting.GREEN)));
-    }
 }
