@@ -1,6 +1,7 @@
 # Illuminations - Changelog
 
 ### Illuminations 1.0.6 - 1.16.3
+- Introduced bugballs: get them from a full composter (up to four) and throw them around to spawn fireflies!
 - Fixed an issue where server players using Illuminations would crash upon a player with an aura dying
 - Fixed an issue where players with an aura would crash upon dying in third person modes
 - Updated to Minecraft 1.16.3

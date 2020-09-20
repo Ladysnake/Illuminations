@@ -6,6 +6,7 @@ import ladysnake.illuminations.common.IlluminationsItems;
 import ladysnake.illuminations.common.network.Packets;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -65,7 +66,14 @@ public class BugBallEntity extends ThrownItemEntity {
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
 
-        for (int i = 0; i < 300; i++) {
+        if (this.world.isClient()) {
+            if (world.getBlockState(this.getBlockPos()).isAir()) {
+                this.world.setBlockState(this.getBlockPos(), Blocks.DIRT.getDefaultState());
+                world.breakBlock(this.getBlockPos(), false);
+            }
+        }
+
+        for (int i = 0; i < 100; i++) {
             world.addParticle(IlluminationsClient.FIREFLY, (double)this.getBlockPos().getX() + this.random.nextDouble(), (double)this.getBlockPos().getY() + this.random.nextDouble(), (double)this.getBlockPos().getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);;
         }
 
