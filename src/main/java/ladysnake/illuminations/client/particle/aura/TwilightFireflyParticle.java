@@ -34,7 +34,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.maxHeight = 2;
 
         if (owner != null) {
-            String playerColor = IlluminationsClient.PLAYER_AURAS.get(owner.getUuid()).getColor();
+            String playerColor = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()).getColor();
             Color color = Color.decode(playerColor);
             this.colorRed = color.getRed()/255f;
             this.colorGreen = color.getGreen()/255f;

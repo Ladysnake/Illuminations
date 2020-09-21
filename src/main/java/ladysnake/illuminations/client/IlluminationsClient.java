@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
-import ladysnake.illuminations.client.data.PlayerAuraData;
+import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.network.EntityDispatcher;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
@@ -54,12 +54,13 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations auras
-    private static final String URL = "https://illuminations.glitch.me/auras";
+    private static final String URL = "https://illuminations.glitch.me/data";
     private static final Gson GSON = new GsonBuilder().create();
-    static final Type AURA_SELECT_TYPE = new TypeToken<Map<UUID, PlayerAuraData>>(){}.getType();
+    static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
 
-    public static Map<UUID, PlayerAuraData> PLAYER_AURAS;
+    public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS;
     public static ImmutableMap<String, AuraData> AURAS_DATA;
+    public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
 
     // particle types
     public static DefaultParticleType FIREFLY;
@@ -68,7 +69,8 @@ public class IlluminationsClient implements ClientModInitializer {
 
     // aura particle types
     public static DefaultParticleType TWILIGHT_AURA;
-    public static DefaultParticleType PRIDE_AURA;
+    public static DefaultParticleType PRIDE_OVERHEAD;
+    public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -86,22 +88,22 @@ public class IlluminationsClient implements ClientModInitializer {
         // get illuminations donators
         CompletableFuture.supplyAsync(() -> {
             try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
-                Map<UUID, PlayerAuraData> playerData = GSON.fromJson(reader, AURA_SELECT_TYPE);
+                Map<UUID, PlayerCosmeticData> playerData = GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
                 return playerData;
             } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get player auras because of malformed URL: " + e.getMessage());
+                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get player auras because of I/O Error: " + e.getMessage());
+                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
             }
 
             return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
-                PLAYER_AURAS = playerData;
-                logger.log(Level.INFO, "Player auras retrieved");
+                PLAYER_COSMETICS = playerData;
+                logger.log(Level.INFO, "Player cosmetics retrieved");
             } else {
-                PLAYER_AURAS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player auras could not be retrieved, auras will be ignored");
+                PLAYER_COSMETICS = Collections.emptyMap();
+                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
 
@@ -116,8 +118,10 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
-        PRIDE_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_AURA, PrideParticle.DefaultFactory::new);
+        PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
+        TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
 
         // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
@@ -147,10 +151,13 @@ public class IlluminationsClient implements ClientModInitializer {
                 ))
                 .build();
 
-        // aura spawn chances
+        // aura matching and spawn chances + overhead matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
-                .put("pride", new AuraData(PRIDE_AURA, 1f, 20))
+                .build();
+        OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
+                .put("pride", PRIDE_OVERHEAD)
+                .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .build();
 
         // register renders
