@@ -1,7 +1,9 @@
 # Illuminations - Changelog
 
-### Illuminations 1.0.6 - 1.16.3
+### Illuminations 1.1 - 1.16.3
 - Introduced bugballs: get them from a full composter (up to four) and throw them around to spawn fireflies!
+- Introduced overheads, a new type of cosmetic that can be equipped independently of auras and will float over your head
+    - Added the Pride and Trans Pride overheads
 - Fixed an issue where server players using Illuminations would crash upon a player with an aura dying
 - Fixed an issue where players with an aura would crash upon dying in third person modes
 - Updated to Minecraft 1.16.3
