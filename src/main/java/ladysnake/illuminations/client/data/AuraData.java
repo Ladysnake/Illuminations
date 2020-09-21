@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.data;
 
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 

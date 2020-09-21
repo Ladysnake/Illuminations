@@ -6,23 +6,15 @@
 package ladysnake.illuminations.common.items;
 
 import ladysnake.illuminations.common.entities.BugBallEntity;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import java.util.List;
-
-import static net.minecraft.text.Style.EMPTY;
 
 public class BugBallItem extends Item {
     public BugBallItem(Settings settings) {

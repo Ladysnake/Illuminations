@@ -2,7 +2,6 @@ package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.data.AuraData;
-import ladysnake.illuminations.common.Illuminations;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
