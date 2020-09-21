@@ -1,8 +1,8 @@
 package ladysnake.illuminations.mixin;
 
 import com.google.common.collect.ImmutableSet;
-import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.data.IlluminationData;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;

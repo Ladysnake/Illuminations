@@ -7,22 +7,20 @@ import java.util.Random;
 public class AuraData {
     private final DefaultParticleType particle;
     private final float chance;
+    private final int delay;
 
-    public AuraData(DefaultParticleType particle, float chance) {
+    public AuraData(DefaultParticleType particle, float chance, int delay) {
         this.particle = particle;
         this.chance = chance;
+        this.delay = delay;
     }
 
     public DefaultParticleType getParticle() {
         return particle;
     }
 
-    public float getChance() {
-        return chance;
-    }
-
-    public boolean shouldAddParticle(Random random) {
+    public boolean shouldAddParticle(Random random, int age) {
         float rand = random.nextFloat();
-        return rand <= this.chance;
+        return rand <= this.chance && (age % delay == 0);
     }
 }

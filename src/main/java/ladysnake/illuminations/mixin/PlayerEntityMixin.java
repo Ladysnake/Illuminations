@@ -1,6 +1,7 @@
 package ladysnake.illuminations.mixin;
 
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.data.AuraData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -20,17 +21,34 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
-        // if player has an aura
-        if (IlluminationsClient.PLAYER_AURAS.containsKey(this.getUuid())) {
-            String playerAura = IlluminationsClient.PLAYER_AURAS.get(this.getUuid()).getAura();
+        // if player has cosmetics
+        if (IlluminationsClient.PLAYER_COSMETICS.containsKey(this.getUuid())) {
+            // player aura
+            String playerAura = IlluminationsClient.PLAYER_COSMETICS.get(this.getUuid()).getAura();
+            if (playerAura != null && IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
+                // do not render in first person or if the player is invisible
+                //noinspection ConstantConditions
+                if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                    if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
+                        AuraData aura = IlluminationsClient.AURAS_DATA.get(playerAura);
+                        if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
+                            world.addParticle(aura.getParticle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                        }
+                    }
+                }
+            }
 
-            // do not render in first person or if the player is invisible
-            //noinspection ConstantConditions
-            if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
-                if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
-                    DefaultParticleType auraParticle = IlluminationsClient.AURAS_DATA.get(playerAura).getParticle();
-                    if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random)) {
-                        world.addParticle(auraParticle, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+            // player overhead
+            String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(this.getUuid()).getOverhead();
+            if (playerOverhead != null && IlluminationsClient.OVERHEADS_DATA.containsKey(playerOverhead)) {
+                // do not render in first person or if the player is invisible
+                //noinspection ConstantConditions
+                if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                    if (IlluminationsClient.OVERHEADS_DATA.containsKey(playerOverhead)) {
+                        DefaultParticleType overhead = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead);
+                        if (this.age % 20 == 0) {
+                            world.addParticle(overhead, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                        }
                     }
                 }
             }

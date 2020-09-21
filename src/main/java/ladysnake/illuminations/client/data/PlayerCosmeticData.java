@@ -1,12 +1,14 @@
 package ladysnake.illuminations.client.data;
 
-public class PlayerAuraData {
+public class PlayerCosmeticData {
     private final String aura;
     private final String color;
+    private final String overhead;
 
-    public PlayerAuraData(String aura, String color) {
+    public PlayerCosmeticData(String aura, String color, String overhead) {
         this.aura = aura;
         this.color = color;
+        this.overhead = overhead;
     }
 
     public String getAura() {
@@ -15,5 +17,9 @@ public class PlayerAuraData {
 
     public String getColor() {
         return color;
+    }
+
+    public String getOverhead() {
+        return overhead;
     }
 }
