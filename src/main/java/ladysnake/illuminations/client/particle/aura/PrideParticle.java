@@ -31,7 +31,7 @@ public class PrideParticle extends FireflyParticle {
         this.maxAge = 40;
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
-        this.scale = 0.25f;
+        this.scale = 0.2f;
 
         if (this.owner != null) {
             this.setPos(owner.getX(), owner.getY()+2.1, owner.getZ());

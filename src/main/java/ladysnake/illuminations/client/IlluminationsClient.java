@@ -85,7 +85,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // get illuminations donators
+        // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
                 Map<UUID, PlayerCosmeticData> playerData = GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
