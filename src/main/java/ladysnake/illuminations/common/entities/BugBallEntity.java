@@ -70,13 +70,11 @@ public class BugBallEntity extends ThrownItemEntity {
                 this.world.setBlockState(this.getBlockPos(), Blocks.DIRT.getDefaultState());
                 world.breakBlock(this.getBlockPos(), false);
             }
-        }
 
-        for (int i = 0; i < 100; i++) {
-            world.addParticle(IlluminationsClient.FIREFLY, (double)this.getBlockPos().getX() + this.random.nextDouble(), (double)this.getBlockPos().getY() + this.random.nextDouble(), (double)this.getBlockPos().getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);;
-        }
-
-        if (!this.world.isClient) {
+            for (int i = 0; i < 100; i++) {
+                world.addParticle(IlluminationsClient.FIREFLY, (double) this.getBlockPos().getX() + this.random.nextDouble(), (double) this.getBlockPos().getY() + this.random.nextDouble(), (double) this.getBlockPos().getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
+            }
+        } else {
             this.world.sendEntityStatus(this, (byte)3);
             this.remove();
         }
