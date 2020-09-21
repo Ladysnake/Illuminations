@@ -30,7 +30,7 @@ public class PrideParticle extends FireflyParticle {
         this.scale = 0.2f;
 
         if (this.owner != null) {
-            this.setPos(owner.getX(), owner.getY()+2.1, owner.getZ());
+            this.setPos(owner.getX(), owner.getY()+2.3f, owner.getZ());
         } else {
             this.markDead();
         }
