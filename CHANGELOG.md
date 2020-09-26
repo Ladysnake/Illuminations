@@ -1,5 +1,8 @@
 # Illuminations - Changelog
 
+### Illuminations 1.1-1.16.1 - 1.16.1
+- Backported to Minecraft 1.16.1
+
 ### Illuminations 1.1 - 1.16.3
 - Introduced bugballs: get them from a full composter (up to four) and throw them around to spawn fireflies! (only available if Illuminations is installed on both server and clients)
 - Introduced overheads, a new type of cosmetic that can be equipped independently of auras and will float over your head

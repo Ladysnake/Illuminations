@@ -26,8 +26,8 @@ import java.util.function.Supplier;
 public abstract class SodiumClientWorldMixin extends World {
     @Shadow @Final private WorldRenderer worldRenderer;
 
-    protected SodiumClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
-        super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
+    protected SodiumClientWorldMixin(MutableWorldProperties mutableWorldProperties, RegistryKey<World> registryKey, RegistryKey<DimensionType> registryKey2, DimensionType dimensionType, Supplier<Profiler> profiler, boolean bl, boolean bl2, long l) {
+        super(mutableWorldProperties, registryKey, registryKey2, dimensionType, profiler, bl, bl2, l);
     }
 
     @Inject(method = "performBiomeParticleDisplayTick", at = @At("RETURN"))
