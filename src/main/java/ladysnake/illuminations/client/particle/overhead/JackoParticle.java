@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.particle.aura;
+package ladysnake.illuminations.client.particle.overhead;
 
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
@@ -13,27 +13,18 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
-public class PrideParticle extends FireflyParticle {
-    private final PlayerEntity owner;
+public class JackoParticle extends OverheadParticle {
+    private float glow;
 
-    public PrideParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    public JackoParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-        this.alpha = 0;
-        this.maxAge = 40;
-        this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
-
-        this.scale = 0.2f;
-
-        if (this.owner != null) {
-            this.setPos(owner.getX(), owner.getY()+2.3f, owner.getZ());
-        } else {
-            this.markDead();
-        }
+        this.glow = 0;
     }
 
     @Environment(EnvType.CLIENT)
@@ -45,7 +36,7 @@ public class PrideParticle extends FireflyParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new PrideParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new JackoParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -80,21 +71,39 @@ public class PrideParticle extends FireflyParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
+        int p = this.getColorMultiplier(tickDelta);
         int l = 15728880;
+        float a = Math.min(1f, Math.max(0f, this.alpha));
+        float gl = Math.min(1f, Math.max(0f, this.glow));
 
-        // firefly
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+        // pumpkin
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+
+        // pumpkin glow
+        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, gl).light(l).next();
     }
 
     @Override
     public void tick() {
         if (this.age > 10) {
             alpha = 1;
+            if (owner != null) {
+                // if night or dark enough
+                if (!(world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
+                    glow = 1;
+                } else {
+                    glow = 0;
+                }
+            }
         } else {
             alpha = 0;
+            glow = 0;
         }
 
         if (owner != null) {
@@ -107,7 +116,7 @@ public class PrideParticle extends FireflyParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX(), owner.getY() + 2.3f + Math.sin(owner.age/12f)/12f, owner.getZ());
+            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age/12f)/12f, owner.getZ());
         } else {
             this.markDead();
         }
