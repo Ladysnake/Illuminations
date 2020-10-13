@@ -12,6 +12,7 @@ import ladysnake.illuminations.client.network.EntityDispatcher;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.aura.JackoParticle;
 import ladysnake.illuminations.client.particle.aura.PrideParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.common.Illuminations;
@@ -71,6 +72,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
+    public static DefaultParticleType JACKO_OVERHEAD;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -122,6 +124,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
         TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
+        JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
 
         // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
@@ -158,6 +162,7 @@ public class IlluminationsClient implements ClientModInitializer {
         OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
+                .put("jacko", JACKO_OVERHEAD)
                 .build();
 
         // register renders
