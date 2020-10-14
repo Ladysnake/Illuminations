@@ -12,9 +12,10 @@ import ladysnake.illuminations.client.network.EntityDispatcher;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
+import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
-import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.network.Packets;
 import net.fabricmc.api.ClientModInitializer;
@@ -70,6 +71,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     // aura particle types
     public static DefaultParticleType TWILIGHT_AURA;
+    public static DefaultParticleType GHOSTLY_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
     public static DefaultParticleType JACKO_OVERHEAD;
@@ -120,6 +122,8 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
+        GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ghostly_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
         PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
@@ -158,6 +162,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura matching and spawn chances + overhead matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
