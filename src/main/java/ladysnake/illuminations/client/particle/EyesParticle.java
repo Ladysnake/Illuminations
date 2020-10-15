@@ -8,21 +8,17 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
-import java.awt.*;
 import java.util.Random;
-
-import static com.ibm.icu.impl.ValidIdentifiers.Datatype.variant;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class EyesParticle extends SpriteBillboardParticle {
-    private final PlayerEntity owner;
-    protected float alpha = 0f;
+    protected float alpha = 1f;
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
@@ -30,29 +26,15 @@ public class EyesParticle extends SpriteBillboardParticle {
     public EyesParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
-        this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
+        this.setSprite(spriteProvider.getSprite(0, 3));
 
         this.scale *= 1f + new Random().nextFloat();
-        this.maxAge = 60; // live between 20 seconds and one minute
+        this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between   seconds and one minute
         this.collidesWithWorld = true;
-        this.setSpriteForAge(spriteProvider);
 
         this.colorRed = 1f;
         this.colorGreen = 1f;
         this.colorBlue = 1f;
-
-        if (this.owner != null) {
-            String playerColor = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()).getColor();
-            Color color = Color.decode(playerColor);
-            this.colorRed = color.getRed()/255f;
-            this.colorGreen = color.getGreen()/255f;
-            this.colorBlue = color.getBlue()/255f;
-
-            this.setPos(owner.getX()+RANDOM.nextFloat()*2-1, owner.getY()+owner.getHeight()/2f+RANDOM.nextFloat()*1.5-0.5, owner.getZ()+RANDOM.nextFloat()*2-1);
-        } else {
-            this.markDead();
-        }
-
     }
 
     @Override
@@ -112,21 +94,35 @@ public class EyesParticle extends SpriteBillboardParticle {
     }
 
     public void tick() {
-        if (this.age < 5) {
-            alpha = 0f;
+        if (this.age++ < this.maxAge) {
+            if (this.age < 1) {
+                this.setSprite(spriteProvider.getSprite(0, 3));
+            } else if (this.age < 2) {
+                this.setSprite(spriteProvider.getSprite(1, 3));
+            } else if (this.age < 3) {
+                this.setSprite(spriteProvider.getSprite(2, 3));
+            } else {
+                this.setSprite(spriteProvider.getSprite(3, 3));
+            }
         } else {
-            alpha = 1f;
+            if (this.age < this.maxAge+1) {
+                this.setSprite(spriteProvider.getSprite(2, 3));
+            } else if (this.age < this.maxAge+2) {
+                this.setSprite(spriteProvider.getSprite(1, 3));
+            } else if (this.age < this.maxAge+3) {
+                this.setSprite(spriteProvider.getSprite(0, 3));
+            } else {
+                this.markDead();
+            }
         }
 
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        this.setSpriteForAge(spriteProvider);
-
-        // fade and die on daytime or if old enough
-        if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
-            this.markDead();
+        // disappear if light or if player gets too close
+        if (this.maxAge > this.age && (world.getLightLevel(new BlockPos(x, y, z)) > 0 || world.getClosestPlayer(x, y, z, IlluminationsClient.EYES_VANISHING_DISTANCE, false) != null)) {
+            this.maxAge = this.age;
         }
     }
 

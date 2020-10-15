@@ -34,7 +34,6 @@ public abstract class SodiumClientWorldMixin extends World {
     public void randomBlockDisplayTick(BlockPos pos, Random random, CallbackInfo info) {
         Biome.Category biomeCategory = this.getBiome(pos).getCategory();
 
-        // if night, in correct biome and not in a cave
         if (IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
             ImmutableSet<IlluminationData> illuminationDataSet = IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
 
@@ -45,6 +44,13 @@ public abstract class SodiumClientWorldMixin extends World {
                     this.addParticle(illuminationData.getIlluminationType(), (double)pos.getX() + this.random.nextDouble(), (double)pos.getY() + this.random.nextDouble(), (double)pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
                 }
             });
+        }
+
+        // spooky eyes
+        if (IlluminationsClient.EYES_TIME_PREDICATE.test(this.getTimeOfDay())
+                && IlluminationsClient.EYES_LOCATION_PREDICATE.test(this, pos)
+                && random.nextFloat() <= IlluminationsClient.EYES_SPAWN_CHANCE) {
+            this.addParticle(IlluminationsClient.EYES, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }
 
