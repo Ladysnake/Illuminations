@@ -42,11 +42,9 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         this.setSprite(spriteProvider.getSprite(variant, 3));
 
         if (this.owner != null) {
-            String playerColor = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()).getColor();
-            Color color = Color.decode(playerColor);
-            this.colorRed = color.getRed()/255f;
-            this.colorGreen = color.getGreen()/255f;
-            this.colorBlue = color.getBlue()/255f;
+            this.colorRed = 1f;
+            this.colorGreen = 1f;
+            this.colorBlue = 1f;
             this.setPos(owner.getX()+offsetX, owner.getY()+offsetY, owner.getZ()+offsetZ);
         } else {
             this.markDead();

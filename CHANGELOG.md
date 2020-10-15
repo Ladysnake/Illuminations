@@ -1,5 +1,11 @@
 # Illuminations - Changelog
 
+### Illuminations 1.2 - 1.16.3
+- Added autumn flies: during the month of October, fireflies will be orange
+- Added eyes in the dark: during the month of October, glowing eyes may appear in very dark places to creep on you
+- Added the Jacko overhead
+- Added the Ghostly aura
+
 ### Illuminations 1.1 - 1.16.3
 - Introduced bugballs: get them from a full composter (up to four) and throw them around to spawn fireflies! (only available if Illuminations is installed on both server and clients)
 - Introduced overheads, a new type of cosmetic that can be equipped independently of auras and will float over your head
