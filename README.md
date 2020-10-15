@@ -20,6 +20,18 @@ Glowing **plankton** - even though difficult to notice because of its size - can
 
 ![illuminations-1.0-plankton](README.assets/illuminations-1.0-plankton.png)
 
+### "Autumnflies"
+
+During the month of October, fireflies will adopt an orange tint instead of their regular green one.
+
+![illuminations-1.2-autumnflies](README.assets/illuminations-1.2-autumnflies.png)
+
+### Eyes in the dark
+
+Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
+
+![](README.assets/illuminations-1.2-eyes.png)
+
 ## Auras
 
 **Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
@@ -28,11 +40,33 @@ Two types of aura are currently availably: regular auras and prismatic auras. Re
 
 Auras and prismatic color can be selected and changed via the [Illuminations dashboard](https://illuminations.glitch.me/).
 
-### Twilight aura (prismatic)
+### Ghostly aura
 
-The **Twilight** aura creates prismatic colored fireflies that will orbit around the player. If the player moves, they will leave a trail of these fireflies.
+The **Ghostly** aura emanates little ghosts that fly upward and gradually appear and disappear. This aura is available to donators as of the 15/10/2020.
+
+![](README.assets/illuminations-1.2-ghostly-aura.gif)
+
+### Twilight aura
+
+The **Twilight** aura creates prismatic colored fireflies  that will orbit around the player. If the player moves, they will leave a trail of these fireflies. This aura was available to donators from the 23/07/2020 to the 15/10/2020.
 
 ![illuminations-1.0-twilight-aura](README.assets/illuminations-1.0-twilight-aura.gif)
+
+## Overheads
+
+**Overheads** are cosmetics that float above player heads.
+
+### Pride (and trans pride) heart
+
+Available for free to anyone that registers for an Illuminations account. https://illuminations.glitch.me/pride
+
+![illuminations-1.1](README.assets/illuminations-1.1.png)
+
+### Jacko
+
+A happy jack o' lantern that lights up at night and in dark areas. Available as an extra bonus to donators during October 2020.
+
+![](README.assets/illuminations-1.2-jacko.gif)
 
 ## FAQ
 
@@ -44,18 +78,14 @@ The **Twilight** aura creates prismatic colored fireflies that will orbit around
 
 **Yes**: If you have installed this mod on your Minecraft client, you will be able to connect to vanilla Minecraft servers and the ambient illuminations will work as intended.
 
-#### Are auras visible to other players?
+#### Are cosmetics visible to other players?
 
-**Yes**: If the player has the mod installed on their client, your aura will be visible to them, just like their aura will be visible to you if they possess one.
+**Yes**: If the player has the mod installed on their client, all your cosmetics will be visible to them, just like theirs will be visible to you.
 
 #### How to get an aura?
 
-**Auras are currently only available to donators**, if they have donated more than 1$.
+**Auras are currently only available to donators**, [more information here](https://illuminations.glitch.me/register).
 
-#### I wish to support the mod and get an aura. What steps do I need to follow?
-
-In order to get an aura, you will need to make a PayPal donation by following [this link](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B6H4NEF43GM2S&source=url) or via the Curse Forge donate button available on the project page. **When making your donation, please include your Minecraft UUID as well as a valid email address (so I may contact you in case of any problem) in your message.** All donations and aura attributions are manually processed and done as soon as possible, but may take up to a day so please be patient.
-
-#### I want to change my aura / the color of my prismatic auras / disable it, what do I do?
+#### I want to change my cosmetics / the color of my prismatic auras / disable it, what do I do?
 
 If you have donated multiple times, you may have multiple auras and may want to select a specific one. Or you may just simply want to change your prismatic color or disable your aura. **You can do all this via the [Illuminations dashboard](https://illuminations.glitch.me/)** with no restrictions whatsoever.
