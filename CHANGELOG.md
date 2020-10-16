@@ -1,5 +1,8 @@
 # Illuminations - Changelog
 
+### Illuminations 1.2.1 - 1.16.3
+- Fixed an issue with glowing eyes appearing in other dimensions than the overworld
+
 ### Illuminations 1.2 - 1.16.3 and 1.16.1
 - Added autumn flies: during the month of October, fireflies will be orange
 - Added eyes in the dark: during the month of October, glowing eyes may appear in very dark places to creep on you
