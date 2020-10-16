@@ -15,6 +15,8 @@ import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -37,8 +39,13 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = 0.25f + new Random().nextFloat() * 0.50f;
-        this.colorGreen = 1f;
+        if (LocalDate.now().getMonth() == Month.OCTOBER) {
+            this.colorRed = 1f;
+            this.colorGreen = 0.25f + new Random().nextFloat() * 0.25f;
+        } else {
+            this.colorRed = 0.25f + new Random().nextFloat() * 0.50f;
+            this.colorGreen = 1f;
+        }
         this.colorBlue = 0f;
     }
 

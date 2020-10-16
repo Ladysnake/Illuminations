@@ -9,11 +9,14 @@ import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.network.EntityDispatcher;
+import ladysnake.illuminations.client.particle.EyesParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
-import ladysnake.illuminations.client.particle.aura.PrideParticle;
+import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
+import ladysnake.illuminations.client.particle.overhead.JackoParticle;
+import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.common.Illuminations;
 import ladysnake.illuminations.common.network.Packets;
 import net.fabricmc.api.ClientModInitializer;
@@ -42,6 +45,8 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
@@ -53,11 +58,14 @@ import java.util.function.Predicate;
 public class IlluminationsClient implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
-    // illuminations auras
+    // illuminations constants
+    public static final float EYES_SPAWN_CHANCE = 0.001f;
+    public static final int EYES_VANISHING_DISTANCE = 5;
+
+    // illuminations cosmetics
     private static final String URL = "https://illuminations.glitch.me/data";
     private static final Gson GSON = new GsonBuilder().create();
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
-
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS;
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
@@ -66,11 +74,14 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType FIREFLY;
     public static DefaultParticleType GLOWWORM;
     public static DefaultParticleType PLANKTON;
+    public static DefaultParticleType EYES;
 
     // aura particle types
     public static DefaultParticleType TWILIGHT_AURA;
+    public static DefaultParticleType GHOSTLY_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
+    public static DefaultParticleType JACKO_OVERHEAD;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -82,6 +93,8 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final Predicate<Long> PLANKTON_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
+    public static final Predicate<Long> EYES_TIME_PREDICATE = aLong -> (LocalDate.now().getMonth() == Month.OCTOBER);
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null;
 
     @Override
     public void onInitializeClient() {
@@ -114,14 +127,20 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GLOWWORM, GlowwormParticle.DefaultFactory::new);
         PLANKTON = Registry.register(Registry.PARTICLE_TYPE, "illuminations:plankton", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PLANKTON, PlanktonParticle.DefaultFactory::new);
+        EYES = Registry.register(Registry.PARTICLE_TYPE, "illuminations:eyes", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.EYES, EyesParticle.DefaultFactory::new);
 
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
+        GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ghostly_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
         PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, PrideParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
 
         // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
@@ -154,10 +173,12 @@ public class IlluminationsClient implements ClientModInitializer {
         // aura matching and spawn chances + overhead matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
+                .put("jacko", JACKO_OVERHEAD)
                 .build();
 
         // register renders

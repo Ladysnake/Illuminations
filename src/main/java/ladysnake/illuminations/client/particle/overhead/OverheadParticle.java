@@ -1,11 +1,9 @@
-package ladysnake.illuminations.client.particle.aura;
+package ladysnake.illuminations.client.particle.overhead;
 
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -17,11 +15,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
-public class PrideParticle extends FireflyParticle {
-    private final PlayerEntity owner;
+import java.util.Random;
 
-    public PrideParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+public class OverheadParticle extends FireflyParticle {
+    protected final PlayerEntity owner;
+    protected float alpha = 0f;
+
+    private static final Random RANDOM = new Random();
+    private final SpriteProvider spriteProvider;
+
+    public OverheadParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+        this.spriteProvider = spriteProvider;
+        this.setSpriteForAge(spriteProvider);
 
         this.alpha = 0;
         this.maxAge = 40;
@@ -29,9 +35,7 @@ public class PrideParticle extends FireflyParticle {
 
         this.scale = 0.2f;
 
-        if (this.owner != null) {
-            this.setPos(owner.getX(), owner.getY()+2.3f, owner.getZ());
-        } else {
+        if (this.owner == null) {
             this.markDead();
         }
     }
@@ -45,7 +49,7 @@ public class PrideParticle extends FireflyParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new PrideParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new OverheadParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -82,11 +86,14 @@ public class PrideParticle extends FireflyParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        // firefly
         vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
         vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
         vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
         vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+    }
+
+    public ParticleTextureSheet getType() {
+        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override
@@ -107,7 +114,7 @@ public class PrideParticle extends FireflyParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX(), owner.getY() + 2.3f + Math.sin(owner.age/12f)/12f, owner.getZ());
+            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age/12f)/12f, owner.getZ());
         } else {
             this.markDead();
         }
