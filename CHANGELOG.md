@@ -2,6 +2,7 @@
 
 ### Illuminations 1.2.1 - 1.16.3
 - Fixed an issue with glowing eyes appearing in other dimensions than the overworld
+- Added website and issue links to the mod description
 
 ### Illuminations 1.2 - 1.16.3 and 1.16.1
 - Added autumn flies: during the month of October, fireflies will be orange
