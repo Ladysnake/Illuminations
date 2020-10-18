@@ -9,7 +9,9 @@
     "doctor4t"
   ],
   "contact": {
-    "sources": "https://github.com/Ladysnake/Illuminations"
+    "homepage": "https://illuminations.glitch.me/",
+    "sources": "https://github.com/Ladysnake/Illuminations",
+    "issues": "https://github.com/Ladysnake/Illuminations/issues"
   },
 
   "license": "CC-BY-NC-SA 4.0",
