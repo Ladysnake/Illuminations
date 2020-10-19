@@ -29,9 +29,20 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// ModMenu + Sodium
-//	modRuntime 'io.github.prospector:modmenu:1.14.6+build.31'
-//	modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
+	// Sodium
+	// modRuntime 'io.github.prospector:modmenu:1.14.6+build.31'
+	// modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
+
+	// cloth config
+	modApi("me.shedaniel.cloth:config-2:4.8.2") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	include "me.shedaniel.cloth:config-2:4.8.2"
+
+	// mod menu
+	modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 }
 
 processResources {
