@@ -10,6 +10,7 @@ import java.util.Properties;
 public class Config {
     public static final Path PROPERTIES_PATH = FabricLoader.getInstance().getConfigDir().resolve("illuminations.properties");
     private static final Properties config = new Properties();
+    private static EyesInTheDark eyesInTheDark;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -28,6 +29,8 @@ public class Config {
             // define default properties
             config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
         }
+
+        eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
     }
 
     public static void save() {
@@ -39,10 +42,11 @@ public class Config {
     }
 
     public static EyesInTheDark getEyesInTheDark() {
-        return EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
+        return eyesInTheDark;
     }
 
     public static void setEyesInTheDark(EyesInTheDark value) {
+        eyesInTheDark = value;
         config.setProperty("eyes-in-the-dark", value.toString());
         Config.save();
     }
