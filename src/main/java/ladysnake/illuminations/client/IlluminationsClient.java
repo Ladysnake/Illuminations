@@ -93,11 +93,14 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final Predicate<Long> PLANKTON_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final Predicate<Long> EYES_TIME_PREDICATE = aLong -> (LocalDate.now().getMonth() == Month.OCTOBER);
+    public static final Predicate<Long> EYES_TIME_PREDICATE = aLong -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS);
     public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
 
     @Override
     public void onInitializeClient() {
+        // load config
+        Config.load();
+
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {

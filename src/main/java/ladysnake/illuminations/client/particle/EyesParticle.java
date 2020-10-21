@@ -1,5 +1,6 @@
 package ladysnake.illuminations.client.particle;
 
+import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -41,8 +42,10 @@ public class EyesParticle extends SpriteBillboardParticle {
 
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        // disable if night vision
-        if (!(camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION))) {
+        // disable if night vision or config is set to disabled
+        if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || Config.getEyesInTheDark() == Config.EyesInTheDark.DISABLE) {
+            this.markDead();
+        } else {
             Vec3d vec3d = camera.getPos();
             float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
             float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());

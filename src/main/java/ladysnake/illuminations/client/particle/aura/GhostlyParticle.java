@@ -1,6 +1,5 @@
 package ladysnake.illuminations.client.particle.aura;
 
-import ladysnake.illuminations.client.IlluminationsClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -15,7 +14,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
-import java.awt.*;
 import java.util.Random;
 
 public class GhostlyParticle extends SpriteBillboardParticle {
