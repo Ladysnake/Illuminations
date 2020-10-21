@@ -1,5 +1,10 @@
 # Illuminations - Changelog
 
+### Illuminations 1.2.2 - 1.16.3
+- Introduced a config
+- Added a config option to enable, disable or always display eyes in the dark
+- Eyes in the dark no longer appear if the player has night vision
+
 ### Illuminations 1.2.1 - 1.16.3
 - Fixed an issue with glowing eyes appearing in other dimensions than the overworld
 - Added website and issue links to the mod description
