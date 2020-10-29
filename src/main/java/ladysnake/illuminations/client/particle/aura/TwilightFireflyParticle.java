@@ -33,7 +33,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
-        if (owner != null) {
+        if (owner != null && owner.getUuid() != null) {
             String playerColor = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()).getColor();
             Color color = Color.decode(playerColor);
             this.colorRed = color.getRed()/255f;

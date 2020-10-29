@@ -111,21 +111,25 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     }
 
     public void tick() {
-        this.prevPosX = this.x;
-        this.prevPosY = this.y;
-        this.prevPosZ = this.z;
+        if (owner != null) {
+            this.prevPosX = this.x;
+            this.prevPosY = this.y;
+            this.prevPosZ = this.z;
 
-        if (age++ < maxAge) {
-            alpha += 0.01;
-        } else {
-            alpha -= 0.01;
-            if (alpha <= 0) {
-                this.markDead();
+            if (age++ < maxAge) {
+                alpha += 0.01;
+            } else {
+                alpha -= 0.01;
+                if (alpha <= 0) {
+                    this.markDead();
+                }
             }
-        }
 
-        offsetY += 0.1;
-        this.setPos(owner.getX()+offsetX, owner.getY()+offsetY, owner.getZ()+offsetZ);
+            offsetY += 0.1;
+            this.setPos(owner.getX() + offsetX, owner.getY() + offsetY, owner.getZ() + offsetZ);
+        } else {
+            this.markDead();
+        }
     }
 
 }
