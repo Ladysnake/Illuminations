@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client;
 
 import io.github.prospector.modmenu.api.ModMenuApi;
-import ladysnake.illuminations.common.Illuminations;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -13,7 +12,7 @@ import java.util.function.Function;
 public class IlluminationsModMenuIntegration implements ModMenuApi {
     @Override
     public String getModId() {
-        return Illuminations.MODID;
+        return "illuminations";
     }
 
     @Override
