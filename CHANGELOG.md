@@ -1,5 +1,9 @@
 # Illuminations - Changelog
 
+### Illuminations 1.2.4 - 1.16.3
+- Removed bugballs, making the mod client-only again
+- Updated to snapshot 20w45a
+
 ### Illuminations 1.2.3 - 1.16.3
 - Fixed an issue where server players using Illuminations would crash upon a player with an aura dying (again)
 - Fixed an issue where players with an aura would crash upon dying in third person modes (again)
