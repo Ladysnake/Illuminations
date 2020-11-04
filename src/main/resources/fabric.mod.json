@@ -17,7 +17,7 @@
   "license": "CC-BY-NC-SA 4.0",
   "icon": "assets/illuminations/illuminations.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "ladysnake.illuminations.client.IlluminationsClient"
