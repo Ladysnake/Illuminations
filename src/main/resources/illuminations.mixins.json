@@ -7,9 +7,6 @@
     "PlayerEntityMixin",
     "SodiumClientWorldMixin"
   ],
-  "mixins": [
-    "ComposterBlockMixin"
-  ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1

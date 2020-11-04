@@ -22,9 +22,6 @@
     "client": [
       "ladysnake.illuminations.client.IlluminationsClient"
     ],
-    "main": [
-      "ladysnake.illuminations.common.Illuminations"
-    ],
     "modmenu": [
       "ladysnake.illuminations.client.IlluminationsModMenuIntegration"
     ]
