@@ -60,7 +60,7 @@ public class IlluminationsClient implements ClientModInitializer {
     private static final String URL = "https://illuminations.glitch.me/data";
     private static final Gson GSON = new GsonBuilder().create();
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
-    public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS;
+    public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
 
