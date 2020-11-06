@@ -1,6 +1,6 @@
 # Illuminations - Changelog
 
-### Illuminations 1.2.4 - 1.16.3
+### Illuminations 1.2.4 - 20w45a
 - Removed bugballs, making the mod client-only again
 - Updated to snapshot 20w45a
 
