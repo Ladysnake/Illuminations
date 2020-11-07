@@ -20,11 +20,11 @@ group = project.maven_group
 minecraft {
 }
 
-def apiModules = [
-		"fabric-api-base",
-		"fabric-resource-loader-v0",
-		"fabric-particles-v1"
-]
+//def apiModules = [
+//		"fabric-api-base",
+//		"fabric-resource-loader-v0",
+//		"fabric-particles-v1"
+//]
 
 dependencies {
 	//to change the versions see the gradle.properties file
@@ -33,10 +33,10 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-//	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	apiModules.each {
-		modImplementation include(fabricApi.module(it, project.fabric_version))
-	}
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+//	apiModules.each {
+//		modImplementation include(fabricApi.module(it, project.fabric_version))
+//	}
 
 	// Sodium
 	// modRuntime 'io.github.prospector:modmenu:1.14.6+build.31'
