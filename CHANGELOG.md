@@ -1,6 +1,6 @@
 # Illuminations - Changelog:
 
-### Illuminations 1.2.5 - 1.16.4
+### Illuminations 1.2.5 - 1.16.4 and 20w45a
 - Fixed an issue that caused a crash when Illuminations servers aren't reachable
 - Updated to Minecraft 1.16.4
 
