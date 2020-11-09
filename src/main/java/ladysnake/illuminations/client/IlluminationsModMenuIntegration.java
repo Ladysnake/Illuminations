@@ -45,7 +45,9 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             general.addEntry(entryBuilder
                     .startIntSlider(new TranslatableText("option.illuminations.density"), Config.getDensity(), 0, 1000)
                     .setTooltip(
-                            new TranslatableText("option.tooltip.illuminations.density"))
+                            new TranslatableText("option.tooltip.illuminations.density"),
+                            new TranslatableText("option.tooltip.illuminations.density.lowest"),
+                            new TranslatableText("option.tooltip.illuminations.density.highest"))
                     .setSaveConsumer(Config::setDensity)
                     .setDefaultValue(100)
                     .build());

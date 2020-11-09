@@ -1,5 +1,4 @@
 {
-  "item.illuminations.bugball": "Bugball",
   "title.illuminations.config": "Illuminations Config",
   "category.illuminations.general": "General",
   "option.illuminations.eyesInTheDark": "Eyes in the Dark",
@@ -7,5 +6,9 @@
   "option.tooltip.illuminations.eyesInTheDark.default": "Set on ENABLE by default.",
   "option.tooltip.illuminations.eyesInTheDark.enable": "ENABLE: Eyes will appear during October",
   "option.tooltip.illuminations.eyesInTheDark.disable": "DISABLE: Eyes will never appear",
-  "option.tooltip.illuminations.eyesInTheDark.always": "ALWAYS: Eyes will appear no matter the date"
+  "option.tooltip.illuminations.eyesInTheDark.always": "ALWAYS: Eyes will appear no matter the date",
+  "option.illuminations.density": "Spawn Density",
+  "option.tooltip.illuminations.density": "The spawn rate percentage multiplier. Does not affect eyes in the dark.",
+  "option.tooltip.illuminations.density.lowest": "0%: Disables illuminations",
+  "option.tooltip.illuminations.density.highest": "1000%: Multiplies the amount of illuminations appearing by 10"
 }
