@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.2.6 - 1.16.4
+- Added a "density" config option that multiplies the amount of illuminations appearing
+
 ### Illuminations 1.2.5 - 1.16.4
 - Fixed an issue that caused a crash when Illuminations servers aren't reachable
 - Updated to Minecraft 1.16.4
