@@ -25,8 +25,6 @@ import java.util.function.Supplier;
 
 @Mixin(ClientWorld.class)
 public abstract class ClientWorldMixin extends World {
-    @Shadow @Final private WorldRenderer worldRenderer;
-
     protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
         super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
     }

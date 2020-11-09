@@ -35,12 +35,12 @@ public class Config {
         try {
             eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
         } catch (Exception e) {
-            eyesInTheDark = EyesInTheDark.ENABLE;
+            setEyesInTheDark(EyesInTheDark.ENABLE);
         }
         try {
             density = Integer.parseInt(config.getProperty("density"));
         } catch (Exception e) {
-            density = 100;
+            setDensity(100);
         }
     }
 
@@ -68,7 +68,7 @@ public class Config {
 
     public static void setDensity(int value) {
         density = value;
-        config.setProperty("eyes-in-the-dark", Integer.toString(value));
+        config.setProperty("density", Integer.toString(value));
         Config.save();
     }
 }

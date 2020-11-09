@@ -1,5 +1,6 @@
 package ladysnake.illuminations.client.data;
 
+import ladysnake.illuminations.client.Config;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -38,6 +39,7 @@ public class IlluminationData {
     }
 
     public boolean shouldAddParticle(Random random) {
-        return random.nextFloat() <= this.chance;
+        int density = Config.getDensity()/100;
+        return random.nextFloat() <= this.chance * density;
     }
 }
