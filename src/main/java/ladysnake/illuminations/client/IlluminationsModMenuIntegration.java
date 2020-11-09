@@ -42,6 +42,14 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .setDefaultValue(Config.EyesInTheDark.ENABLE)
                 .build());
 
+            general.addEntry(entryBuilder
+                    .startIntSlider(new TranslatableText("option.illuminations.density"), Config.getDensity(), 0, 1000)
+                    .setTooltip(
+                            new TranslatableText("option.tooltip.illuminations.density"))
+                    .setSaveConsumer(Config::setDensity)
+                    .setDefaultValue(100)
+                    .build());
+
             // build and return the config screen
             return builder.build();
         };

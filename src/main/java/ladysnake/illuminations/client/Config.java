@@ -11,6 +11,7 @@ public class Config {
     public static final Path PROPERTIES_PATH = FabricLoader.getInstance().getConfigDir().resolve("illuminations.properties");
     private static final Properties config = new Properties();
     private static EyesInTheDark eyesInTheDark;
+    private static int density;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -28,9 +29,19 @@ public class Config {
         } else { // if no illuminations.properties, load default values
             // define default properties
             config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
+            config.setProperty("density", "100");
         }
 
-        eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
+        try {
+            eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
+        } catch (Exception e) {
+            eyesInTheDark = EyesInTheDark.ENABLE;
+        }
+        try {
+            density = Integer.parseInt(config.getProperty("density"));
+        } catch (Exception e) {
+            density = 100;
+        }
     }
 
     public static void save() {
@@ -51,4 +62,13 @@ public class Config {
         Config.save();
     }
 
+    public static int getDensity() {
+        return density;
+    }
+
+    public static void setDensity(int value) {
+        density = value;
+        config.setProperty("eyes-in-the-dark", Integer.toString(value));
+        Config.save();
+    }
 }
