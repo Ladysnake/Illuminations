@@ -1,5 +1,6 @@
 package ladysnake.illuminations.mixin;
 
+import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.UpdateToast;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -12,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TitleScreenMixin {
     @Inject(at = @At(value = "RETURN"), method = "render")
     protected void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        UpdateToast.add();
+        if (IlluminationsClient.getLatestVersion() != null) {
+            UpdateToast.add();
+        }
     }
 }

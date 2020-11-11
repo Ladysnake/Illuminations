@@ -14,8 +14,8 @@ public class UpdateToast implements Toast {
         manager.getGame().getTextureManager().bindTexture(Toast.TEXTURE);
         RenderSystem.color3f(1.0F, 1.0F, 1.0F);
         manager.drawTexture(matrices, 0, 0, 0, 64, 160, 32);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations"), 18, 7, -25);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Update motherfucker do you want it?"), 18, 18, -1);
+        manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations"), 18, 7, -256);
+        manager.getGame().textRenderer.draw(matrices, new LiteralText("Update available!"), 18, 18, -1);
         return MinecraftClient.getInstance().currentScreen instanceof TitleScreen ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
     }
 

@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
@@ -21,6 +23,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.DefaultParticleType;
@@ -57,12 +60,17 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final int EYES_VANISHING_DISTANCE = 5;
 
     // illuminations cosmetics
-    private static final String URL = "https://illuminations.glitch.me/data";
-    private static final Gson GSON = new GsonBuilder().create();
+    private static final String COSMETICS_URL = "https://illuminations.glitch.me/data";
+    private static final Gson COSMETICS_GSON = new GsonBuilder().create();
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
+
+    // update information
+    private static final String UPDATES_URL = "https://illuminations.glitch.me/version";
+    private static String LATEST_VERSION;
+    private static String LATEST_DOWNLOAD_URL;
 
     // particle types
     public static DefaultParticleType FIREFLY;
@@ -97,8 +105,8 @@ public class IlluminationsClient implements ClientModInitializer {
 
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
-            try(Reader reader = new InputStreamReader(new URL(URL).openStream())) {
-                Map<UUID, PlayerCosmeticData> playerData = GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
+            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
+                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
                 return playerData;
             } catch (MalformedURLException e) {
                 logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
@@ -114,6 +122,37 @@ public class IlluminationsClient implements ClientModInitializer {
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
                 logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
+            }
+        }, MinecraftClient.getInstance());
+
+        // get illuminations latest version for the current minecraft version
+        String minecraftVersion =  MinecraftClient.getInstance().getGame().getVersion().getName();
+        String illuminationsVersion = FabricLoader.getInstance().getModContainer("illuminations").get().getMetadata().getVersion().getFriendlyString();
+        CompletableFuture.supplyAsync(() -> {
+            try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + "?version=" + minecraftVersion).openStream())) {
+                JsonParser jp = new JsonParser();
+                JsonElement jsonElement = jp.parse(reader);
+                return jsonElement.getAsJsonObject();
+            } catch (MalformedURLException e) {
+                logger.log(Level.ERROR, "Could not get update information because of malformed URL: " + e.getMessage());
+            } catch (IOException e) {
+                logger.log(Level.ERROR, "Could not get update information because of I/O Error: " + e.getMessage());
+            }
+
+            return null;
+        }).thenAcceptAsync(latestVersionJson -> {
+            if (latestVersionJson != null) {
+                String latestVersion = latestVersionJson.get("version").getAsString();
+                // if not the latest version, update toast
+                if (!latestVersion.equals(illuminationsVersion)) {
+                    LATEST_VERSION = latestVersion;
+                    LATEST_DOWNLOAD_URL = latestVersionJson.get("download").getAsString();
+                    logger.log(Level.INFO, "Currently present Illuminations version is "+illuminationsVersion+"while the latest Illuminations version for Minecraft "+minecraftVersion+" is Illuminations "+latestVersion+"; how about updating?");
+                } else {
+                    logger.log(Level.INFO, "Illuminations is on the latest version, no update needed");
+                }
+            } else {
+                logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
             }
         }, MinecraftClient.getInstance());
 
@@ -177,6 +216,19 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .put("jacko", JACKO_OVERHEAD)
                 .build();
+
+
+
+//        ClientTickEvents.START_WORLD_TICK.register(world -> {
+//            String minecraftVersion = MinecraftClient.getInstance().getGameVersion();
+//            String illuminationsVersion = FabricLoader.getInstance().getModContainer("illuminations").get().getMetadata().getVersion().getFriendlyString();
+//            world.getPlayerByUuid(MinecraftClient.getInstance().player.getUuid()).sendMessage(new LiteralText("Minecraft version: "+minecraftVersion+" // Illuminations version: "+illuminationsVersion), false);
+//            UpdateToast updateToast = new UpdateToast();
+//            updat
+//        });
     }
 
+    public static String getLatestVersion() {
+        return LATEST_VERSION;
+    }
 }
