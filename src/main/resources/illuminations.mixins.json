@@ -5,7 +5,8 @@
   "client": [
     "ClientWorldMixin",
     "PlayerEntityMixin",
-    "SodiumClientWorldMixin"
+    "SodiumClientWorldMixin",
+    "TitleScreenMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
