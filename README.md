@@ -26,11 +26,27 @@ During the month of October, fireflies will adopt an orange tint instead of thei
 
 ![illuminations-1.2-autumnflies](README.assets/illuminations-1.2-autumnflies.png)
 
-### Eyes in the dark
+### Eyes in the Dark
 
 Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
 
 ![](README.assets/illuminations-1.2-eyes.png)
+
+## Configurability
+
+Illuminations possesses a few config options you can use to change how the mod behaves to better fit your needs.
+
+### Eyes in the Dark
+
+Enable glowing eyes appearing in low light environments. Set on ENABLE by default.
+- ENABLE: Eyes will appear during October
+- DISABLE: Eyes will never appear
+- ALWAYS: Eyes will appear no matter the date
+
+### Spawn Density
+
+The spawn rate percentage multiplier. Does not affect eyes in the dark.
+0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
 ## Auras
 
