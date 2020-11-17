@@ -52,6 +52,14 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .setDefaultValue(100)
                     .build());
 
+            general.addEntry(entryBuilder
+                    .startBooleanToggle(new TranslatableText("option.illuminations.autoupdate"), Config.getAutoUpdate())
+                    .setTooltip(
+                            new TranslatableText("option.tooltip.illuminations.autoupdate"))
+                    .setSaveConsumer(Config::setAutoUpdate)
+                    .setDefaultValue(true)
+                    .build());
+
             // build and return the config screen
             return builder.build();
         };

@@ -12,6 +12,7 @@ public class Config {
     private static final Properties config = new Properties();
     private static EyesInTheDark eyesInTheDark;
     private static int density;
+    private static boolean autoupdate;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -30,17 +31,17 @@ public class Config {
             // define default properties
             config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
             config.setProperty("density", "100");
+            config.setProperty("auto-update", "true");
         }
 
         try {
             eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
+            density = Integer.parseInt(config.getProperty("density"));
+            autoupdate = Boolean.parseBoolean(config.getProperty("auto-update"));
         } catch (Exception e) {
             setEyesInTheDark(EyesInTheDark.ENABLE);
-        }
-        try {
-            density = Integer.parseInt(config.getProperty("density"));
-        } catch (Exception e) {
             setDensity(100);
+            setAutoUpdate(true);
         }
     }
 
@@ -69,6 +70,16 @@ public class Config {
     public static void setDensity(int value) {
         density = value;
         config.setProperty("density", Integer.toString(value));
+        Config.save();
+    }
+
+    public static boolean getAutoUpdate() {
+        return autoupdate;
+    }
+
+    public static void setAutoUpdate(boolean value) {
+        autoupdate = value;
+        config.setProperty("auto-update", Boolean.toString(value));
         Config.save();
     }
 }

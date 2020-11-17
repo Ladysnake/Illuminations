@@ -139,62 +139,65 @@ public class IlluminationsClient implements ClientModInitializer {
         }
 
         // get illuminations latest version for the current minecraft version
-        String minecraftVersion =  MinecraftClient.getInstance().getGame().getVersion().getName();
-        String illuminationsVersion = FabricLoader.getInstance().getModContainer("illuminations").get().getMetadata().getVersion().getFriendlyString();
-        CompletableFuture.supplyAsync(() -> {
-            try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + minecraftVersion).openStream())) {
-                JsonParser jp = new JsonParser();
-                JsonElement jsonElement = jp.parse(reader);
-                return jsonElement.getAsJsonObject();
-            } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get update information because of malformed URL: " + e.getMessage());
-            } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get update information because of I/O Error: " + e.getMessage());
-            }
-
-            return null;
-        }).thenAcceptAsync(latestVersionJson -> {
-            if (latestVersionJson != null) {
-                String latestVersion = latestVersionJson.get("version").getAsString();
-                String latestFileName = latestVersionJson.get("filename").getAsString();
-                // if not the latest version, update toast
-                if (!latestVersion.equalsIgnoreCase(illuminationsVersion) && !FabricLoader.getInstance().isDevelopmentEnvironment()) {
-                    LATEST_VERSION = latestVersion;
-                    LATEST_DOWNLOAD_URL = latestVersionJson.get("download").getAsString();
-                    logger.log(Level.INFO, "Currently present version is "+illuminationsVersion+" while the latest version for Minecraft "+minecraftVersion+" is "+latestVersion+"; downloading update");
-
-                    try {
-                        // download new jar
-                        URL website = new URL(latestVersionJson.get("download").getAsString());
-                        ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-                        FileOutputStream fos = new FileOutputStream("mods/" + latestFileName);
-                        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-
-                        // once done, extract the uninstaller
-                        InputStream in = IlluminationsClient.class.getResourceAsStream("/" + uninstallerFile);
-                        Files.copy(in, Paths.get("mods/" + uninstallerFile), StandardCopyOption.REPLACE_EXISTING);
-
-                        // get the old version file name
-                        String oldFile = new File(IlluminationsClient.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName();
-                        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                            try {
-                                logger.log(Level.INFO, "Minecraft instance shutting down, uninstalling " + oldFile);
-                                new ProcessBuilder("java", "-jar", "mods/" + uninstallerFile, oldFile).start();
-                            } catch (IOException e) {
-                                logger.log(Level.ERROR, "Could not run previous version uninstaller");
-                                e.printStackTrace();
-                            }
-                        }));
-                    } catch (MalformedURLException e) {
-                        logger.log(Level.ERROR, "Could not download update because of malformed URL: " + e.getMessage());
-                    } catch (IOException e) {
-                        logger.log(Level.ERROR, "Could not download update because of I/O Error: " + e.getMessage());
-                    }
+        // verify it's not a dev environment and the config is set to true
+        if (!FabricLoader.getInstance().isDevelopmentEnvironment() && Config.getAutoUpdate()) {
+            String minecraftVersion = MinecraftClient.getInstance().getGame().getVersion().getName();
+            String illuminationsVersion = FabricLoader.getInstance().getModContainer("illuminations").get().getMetadata().getVersion().getFriendlyString();
+            CompletableFuture.supplyAsync(() -> {
+                try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + minecraftVersion).openStream())) {
+                    JsonParser jp = new JsonParser();
+                    JsonElement jsonElement = jp.parse(reader);
+                    return jsonElement.getAsJsonObject();
+                } catch (MalformedURLException e) {
+                    logger.log(Level.ERROR, "Could not get update information because of malformed URL: " + e.getMessage());
+                } catch (IOException e) {
+                    logger.log(Level.ERROR, "Could not get update information because of I/O Error: " + e.getMessage());
                 }
-            } else {
-                logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
-            }
-        }, MinecraftClient.getInstance());
+
+                return null;
+            }).thenAcceptAsync(latestVersionJson -> {
+                if (latestVersionJson != null) {
+                    String latestVersion = latestVersionJson.get("version").getAsString();
+                    String latestFileName = latestVersionJson.get("filename").getAsString();
+                    // if not the latest version, update toast
+                    if (!latestVersion.equalsIgnoreCase(illuminationsVersion)) {
+                        LATEST_VERSION = latestVersion;
+                        LATEST_DOWNLOAD_URL = latestVersionJson.get("download").getAsString();
+                        logger.log(Level.INFO, "Currently present version is " + illuminationsVersion + " while the latest version for Minecraft " + minecraftVersion + " is " + latestVersion + "; downloading update");
+
+                        try {
+                            // download new jar
+                            URL website = new URL(latestVersionJson.get("download").getAsString());
+                            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+                            FileOutputStream fos = new FileOutputStream("mods/" + latestFileName);
+                            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+
+                            // once done, extract the uninstaller
+                            InputStream in = IlluminationsClient.class.getResourceAsStream("/" + uninstallerFile);
+                            Files.copy(in, Paths.get("mods/" + uninstallerFile), StandardCopyOption.REPLACE_EXISTING);
+
+                            // get the old version file name
+                            String oldFile = new File(IlluminationsClient.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName();
+                            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                                try {
+                                    logger.log(Level.INFO, "Minecraft instance shutting down, uninstalling " + oldFile);
+                                    new ProcessBuilder("java", "-jar", "mods/" + uninstallerFile, oldFile).start();
+                                } catch (IOException e) {
+                                    logger.log(Level.ERROR, "Could not run previous version uninstaller");
+                                    e.printStackTrace();
+                                }
+                            }));
+                        } catch (MalformedURLException e) {
+                            logger.log(Level.ERROR, "Could not download update because of malformed URL: " + e.getMessage());
+                        } catch (IOException e) {
+                            logger.log(Level.ERROR, "Could not download update because of I/O Error: " + e.getMessage());
+                        }
+                    }
+                } else {
+                    logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
+                }
+            }, MinecraftClient.getInstance());
+        }
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
