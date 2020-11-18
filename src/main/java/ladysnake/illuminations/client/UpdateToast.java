@@ -7,11 +7,12 @@ import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.util.Identifier;
 
 public class UpdateToast implements Toast {
     @Override
     public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
-        manager.getGame().getTextureManager().bindTexture(Toast.TEXTURE);
+        manager.getGame().getTextureManager().bindTexture(new Identifier("illuminations", "textures/gui/update_toast.png"));
         RenderSystem.color3f(1.0F, 1.0F, 1.0F);
         manager.drawTexture(matrices, 0, 0, 0, 64, 160, 32);
         manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations"), 18, 7, -256);
