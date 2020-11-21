@@ -103,9 +103,11 @@ public class FireflyParticle extends SpriteBillboardParticle {
     @Environment(EnvType.CLIENT)
     public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
         private final SpriteProvider spriteProvider;
+        public static DefaultFactory lastInstance;
 
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
+        public DefaultFactory(SpriteProvider provider) {
+            this.spriteProvider = provider;
+            lastInstance = this;
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
