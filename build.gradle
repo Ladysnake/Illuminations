@@ -52,6 +52,9 @@ dependencies {
 	modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
+
+	// canvas renderer
+	modCompile "grondag:canvas-mc116:1.0.+"
 }
 
 processResources {
@@ -88,6 +91,21 @@ jar {
 
 repositories {
 	maven { url 'https://jitpack.io' }
+
+	// where grondag's mods live
+	maven {
+		name = "dblsaiko"
+		url = "https://maven.dblsaiko.net/"
+	}
+	maven {
+		name = "Cotton"
+		url = "http://server.bbkr.space:8081/artifactory/libs-release/"
+	}
+	// REI, odds and ends
+	maven {
+		name = "CurseForge"
+		url = "https://minecraft.curseforge.com/api/maven"
+	}
 }
 
 // configure the maven publication
