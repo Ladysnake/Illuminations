@@ -4,14 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 
@@ -23,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
     protected static final float BLINK_STEP = 0.05f;
-    protected float alpha = 0f;
     protected float nextAlphaGoal = 0f;
 
     private static final Random RANDOM = new Random();
@@ -38,6 +32,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.maxHeight = 4;
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
+        this.colorAlpha = 0f;
 
         if (LocalDate.now().getMonth() == Month.OCTOBER) {
             this.colorRed = 1f;
@@ -47,53 +42,6 @@ public class FireflyParticle extends SpriteBillboardParticle {
             this.colorGreen = 1f;
         }
         this.colorBlue = 0f;
-    }
-
-    @Override
-    public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        Vec3d vec3d = camera.getPos();
-        float f = (float)(MathHelper.lerp((double)tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float)(MathHelper.lerp((double)tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float)(MathHelper.lerp((double)tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-        Quaternion quaternion2;
-        if (this.angle == 0.0F) {
-            quaternion2 = camera.getRotation();
-        } else {
-            quaternion2 = new Quaternion(camera.getRotation());
-            float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getRadialQuaternion(i));
-        }
-
-        Vector3f vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        vector3f.rotate(quaternion2);
-        Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-        float j = this.getSize(tickDelta);
-
-        for(int k = 0; k < 4; ++k) {
-            Vector3f vector3f2 = vector3fs[k];
-            vector3f2.rotate(quaternion2);
-            vector3f2.scale(j);
-            vector3f2.add(f, g, h);
-        }
-
-        float minU = this.getMinU();
-        float maxU = this.getMaxU();
-        float minV = this.getMinV();
-        float maxV = this.getMaxV();
-        int l = 15728880;
-        float a = Math.min(1f, Math.max(0f, this.alpha));
-
-        // firefly
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-
-        // firefly overlay
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, a).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -128,20 +76,20 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
         // fade and die on daytime or if old enough
         if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
-            nextAlphaGoal = -BLINK_STEP;
-            if (alpha < 0f) {
+            nextAlphaGoal = 0;
+            if (colorAlpha < 0f) {
                 this.markDead();
             }
         }
 
         // blinking
-        if (alpha > nextAlphaGoal - BLINK_STEP && alpha < nextAlphaGoal + BLINK_STEP) {
+        if (colorAlpha > nextAlphaGoal - BLINK_STEP && colorAlpha < nextAlphaGoal + BLINK_STEP) {
             nextAlphaGoal = new Random().nextFloat();
         } else {
-            if (nextAlphaGoal > alpha) {
-                alpha += BLINK_STEP;
-            } else if (nextAlphaGoal < alpha) {
-                alpha -= BLINK_STEP;
+            if (nextAlphaGoal > colorAlpha) {
+                colorAlpha = Math.min(colorAlpha + BLINK_STEP, 1f);
+            } else if (nextAlphaGoal < colorAlpha) {
+                colorAlpha = Math.max(colorAlpha - BLINK_STEP, 0f);
             }
         }
 

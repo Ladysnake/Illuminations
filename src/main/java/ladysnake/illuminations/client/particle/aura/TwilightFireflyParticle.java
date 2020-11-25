@@ -61,53 +61,6 @@ public class TwilightFireflyParticle extends FireflyParticle {
     }
 
     @Override
-    public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        Vec3d vec3d = camera.getPos();
-        float f = (float)(MathHelper.lerp((double)tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float)(MathHelper.lerp((double)tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float)(MathHelper.lerp((double)tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-        Quaternion quaternion2;
-        if (this.angle == 0.0F) {
-            quaternion2 = camera.getRotation();
-        } else {
-            quaternion2 = new Quaternion(camera.getRotation());
-            float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getRadialQuaternion(i));
-        }
-
-        Vector3f vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        vector3f.rotate(quaternion2);
-        Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-        float j = this.getSize(tickDelta);
-
-        for(int k = 0; k < 4; ++k) {
-            Vector3f vector3f2 = vector3fs[k];
-            vector3f2.rotate(quaternion2);
-            vector3f2.scale(j);
-            vector3f2.add(f, g, h);
-        }
-
-        float minU = this.getMinU();
-        float maxU = this.getMaxU();
-        float minV = this.getMinV();
-        float maxV = this.getMaxV();
-        int l = 15728880;
-        float a = MathHelper.clamp(this.alpha, 0.0F, 1.0F);
-
-        // firefly
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-
-        // firefly overlay
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, 0.4f * a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.4f * a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, 0.4f * a).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, 0.4f * a).light(l).next();
-    }
-
-    @Override
     public void tick() {
         if (owner != null) {
             this.prevPosX = this.x;
@@ -117,16 +70,20 @@ public class TwilightFireflyParticle extends FireflyParticle {
             // fade and die on daytime or if old enough
             if (this.age++ >= this.maxAge) {
                 nextAlphaGoal = -BLINK_STEP;
-                if (alpha < 0f) {
+                if (colorAlpha < 0f) {
                     this.markDead();
                 }
             }
 
             // blinking
-            if (nextAlphaGoal > alpha) {
-                alpha += BLINK_STEP;
-            } else if (nextAlphaGoal < alpha) {
-                alpha -= BLINK_STEP;
+            if (colorAlpha > nextAlphaGoal - BLINK_STEP && colorAlpha < nextAlphaGoal + BLINK_STEP) {
+                nextAlphaGoal = new Random().nextFloat();
+            } else {
+                if (nextAlphaGoal > colorAlpha) {
+                    colorAlpha = Math.min(colorAlpha + BLINK_STEP, 1f);
+                } else if (nextAlphaGoal < colorAlpha) {
+                    colorAlpha = Math.max(colorAlpha - BLINK_STEP, 0f);
+                }
             }
 
             this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;

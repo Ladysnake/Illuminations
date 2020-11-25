@@ -55,6 +55,8 @@ dependencies {
 
 	// canvas renderer
 	modCompile "grondag:canvas-mc116:1.0.+"
+	modCompile "grondag:frex-mc116:4.0.174"
+	modCompile "grondag:frex-events-mc116:1.0.+"
 }
 
 processResources {
