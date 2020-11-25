@@ -38,7 +38,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             this.colorRed = 1f;
             this.colorGreen = 0.25f + new Random().nextFloat() * 0.25f;
         } else {
-            this.colorRed = 0.25f + new Random().nextFloat() * 0.50f;
+            this.colorRed = 0.5f + new Random().nextFloat() * 0.5f;
             this.colorGreen = 1f;
         }
         this.colorBlue = 0f;
