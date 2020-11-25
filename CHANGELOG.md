@@ -2,6 +2,11 @@
 
 ### Illuminations 1.2.6 - 1.16.4
 - Added a "density" config option that multiplies the amount of illuminations appearing
+- Added an auto-updater built into the mod : if Illuminations is outdated, it will notify you and automatically install the latest version
+    - Enabled by default, can be disabled via a config option
+- Fixed (ONCE MORE, CAUSE I HAVE DUM) an issue where server players using Illuminations would crash upon a player with an aura dying
+    - This time it's fixed for good (I swear (I think (I hope)))
+- Added some disgusting temporary hacks to fix an issue where illuminations would never appear if BetterEnd was installed
 
 ### Illuminations 1.2.5 - 1.16.4
 - Fixed an issue that caused a crash when Illuminations servers aren't reachable
@@ -106,7 +111,7 @@ The great overhaul is here! Illuminations is now client only for better performa
 
 ### Illuminations 0.1.7 - 1.14.1
 + Fixed the bug where mip map levels wouldn't work
-+ Completely removeed the experimental items
++ Completely removed the experimental items
 
 ### Illuminations 0.1.6 - 1.14.1
 + Added Firefly in a bottle
