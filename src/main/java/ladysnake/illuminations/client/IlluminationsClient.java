@@ -31,6 +31,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -59,6 +60,7 @@ import java.util.function.Predicate;
 
 @Environment(EnvType.CLIENT)
 public class IlluminationsClient implements ClientModInitializer {
+    public static final String MODID = "illuminations";
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations constants
@@ -72,6 +74,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
+    public static ImmutableMap<String, Identifier> CROWNS_DATA;
 
     // update information
     private static final String UPDATES_URL = "https://illuminations.glitch.me/latest?version=";
@@ -90,6 +93,10 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
     public static DefaultParticleType JACKO_OVERHEAD;
+
+    // crown identifiers
+    public static final Identifier SOLAR_CROWN = new Identifier(MODID, "textures/entity/solar_crown.png");
+    public static final Identifier FROST_CROWN = new Identifier(MODID, "textures/entity/frost_crown.png");
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -222,7 +229,7 @@ public class IlluminationsClient implements ClientModInitializer {
         JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
 
-        // crowns
+        // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
             if (entityType == EntityType.PLAYER) {
   		        registrationHelper.register(new CrownFeatureRenderer(livingEntityRenderer));
@@ -257,7 +264,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 ))
                 .build();
 
-        // aura matching and spawn chances + overhead matching
+        // aura matching and spawn chances + overhead matching + crown matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
@@ -266,6 +273,10 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .put("jacko", JACKO_OVERHEAD)
+                .build();
+        CROWNS_DATA = ImmutableMap.<String, Identifier>builder()
+                .put("solar_crown", SOLAR_CROWN)
+                .put("frost_crown", FROST_CROWN)
                 .build();
     }
 
