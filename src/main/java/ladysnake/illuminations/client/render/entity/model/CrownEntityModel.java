@@ -8,15 +8,16 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 
 public class CrownEntityModel<T extends LivingEntity> extends AnimalModel<T> {
-	private final ModelPart crown;
-	private final ModelPart crown_r1;
-	private final ModelPart crown_r2;
-	private final ModelPart crown_r3;
-	private final ModelPart crown_r4;
+	public final ModelPart crown;
+	public final ModelPart crown_r1;
+	public final ModelPart crown_r2;
+	public final ModelPart crown_r3;
+	public final ModelPart crown_r4;
 
 	public CrownEntityModel() {
 		textureWidth = 32;
