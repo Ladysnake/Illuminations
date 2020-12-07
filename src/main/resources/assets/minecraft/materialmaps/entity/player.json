@@ -1,0 +1,20 @@
+{
+  "map": [
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/frost_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/solar_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
+import ladysnake.illuminations.client.render.entity.feature.CrownFeatureRenderer;
 import ladysnake.illuminations.client.particle.EyesParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
@@ -22,10 +23,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -73,7 +76,6 @@ public class IlluminationsClient implements ClientModInitializer {
     // update information
     private static final String UPDATES_URL = "https://illuminations.glitch.me/latest?version=";
     private static String LATEST_VERSION;
-    private static String LATEST_DOWNLOAD_URL;
     private static final String uninstallerFile = "illuminations-uninstaller.jar";
 
     // particle types
@@ -162,7 +164,6 @@ public class IlluminationsClient implements ClientModInitializer {
                     // if not the latest version, update toast
                     if (!latestVersion.equalsIgnoreCase(illuminationsVersion)) {
                         LATEST_VERSION = latestVersion;
-                        LATEST_DOWNLOAD_URL = latestVersionJson.get("download").getAsString();
                         logger.log(Level.INFO, "Currently present version is " + illuminationsVersion + " while the latest version for Minecraft " + minecraftVersion + " is " + latestVersion + "; downloading update");
 
                         try {
@@ -220,6 +221,13 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
+
+        // crowns
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
+            if (entityType == EntityType.PLAYER) {
+  		        registrationHelper.register(new CrownFeatureRenderer(livingEntityRenderer));
+  	        }
+        });
 
         // spawn biomes for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
