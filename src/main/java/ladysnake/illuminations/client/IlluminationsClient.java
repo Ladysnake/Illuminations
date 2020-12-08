@@ -28,6 +28,9 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
@@ -232,7 +235,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
             if (entityType == EntityType.PLAYER) {
-  		        registrationHelper.register(new CrownFeatureRenderer(livingEntityRenderer));
+  		        registrationHelper.register(new CrownFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
   	        }
         });
 

@@ -10,6 +10,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
@@ -17,41 +18,38 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-public class CrownFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
-    private final CrownEntityModel<T> crown = new CrownEntityModel<>();
+public class CrownFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+    private final CrownEntityModel<AbstractClientPlayerEntity> crown = new CrownEntityModel<>();
 
-    public CrownFeatureRenderer(FeatureRendererContext<T, M> featureRendererContext) {
+    public CrownFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
         super(featureRendererContext);
     }
 
-    public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
-        if (livingEntity instanceof AbstractClientPlayerEntity) {
-            AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity) livingEntity;
+    @Override
+    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if (IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()) != null) {
+            String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
+            if (playerOverhead != null && IlluminationsClient.CROWNS_DATA.containsKey(playerOverhead)) {
+                Identifier identifier4 = IlluminationsClient.CROWNS_DATA.get(playerOverhead);
 
-            if (IlluminationsClient.PLAYER_COSMETICS.get(abstractClientPlayerEntity.getUuid()) != null) {
-                String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(abstractClientPlayerEntity.getUuid()).getOverhead();
-                if (playerOverhead != null && IlluminationsClient.CROWNS_DATA.containsKey(playerOverhead)) {
-                    Identifier identifier4 = IlluminationsClient.CROWNS_DATA.get(playerOverhead);
+                float o = MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw) - MathHelper.lerp(tickDelta, entity.prevBodyYaw, entity.bodyYaw);
+                float p = MathHelper.lerp(tickDelta, entity.prevPitch, entity.pitch);
+                matrices.push();
+                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(o));
+                matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(p));
+                matrices.translate(0.0D, -Math.sin(entity.age / 30f) / 30f, 0.0D);
+                matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(-p));
+                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-o));
+                this.crown.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+                VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, CrownRenderLayer.getCrown(identifier4), true, true);
 
-                    float o = MathHelper.lerp(h, abstractClientPlayerEntity.prevYaw, abstractClientPlayerEntity.yaw) - MathHelper.lerp(h, abstractClientPlayerEntity.prevBodyYaw, abstractClientPlayerEntity.bodyYaw);
-                    float p = MathHelper.lerp(h, abstractClientPlayerEntity.prevPitch, abstractClientPlayerEntity.pitch);
-                    matrixStack.push();
-                    matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(o));
-                    matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(p));
-                    matrixStack.translate(0.0D, -0.55D - Math.sin(livingEntity.age / 30f) / 30f, 0.0D);
-                    matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(-p));
-                    matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-o));
-                    this.crown.setAngles(livingEntity, f, g, j, k, l);
-                    VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, CrownRenderLayer.getCrown(identifier4), true, true);
-
-                    this.crown.crown.copyPositionAndRotation(this.getContextModel().head);
-                    this.crown.crown.pivotX = 0;
-                    this.crown.crown.pivotY = 0;
-                    this.crown.render(matrixStack, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-                    matrixStack.pop();
-                }
+                this.crown.crown.copyPositionAndRotation(this.getContextModel().head);
+                this.crown.crown.pivotX = 0;
+                this.crown.crown.pivotY = 0;
+                this.crown.animateModel(entity, limbAngle, limbDistance, tickDelta);
+                this.crown.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+                matrices.pop();
             }
         }
     }
-
 }
