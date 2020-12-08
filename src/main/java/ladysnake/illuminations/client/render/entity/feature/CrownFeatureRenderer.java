@@ -38,8 +38,6 @@ public class CrownFeatureRenderer<T extends LivingEntity, M extends BipedEntityM
                     matrixStack.push();
                     matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(o));
                     matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(p));
-                    this.crown.crown.pivotX = 0;
-                    this.crown.crown.pivotY = 0;
                     matrixStack.translate(0.0D, -0.55D - Math.sin(livingEntity.age / 30f) / 30f, 0.0D);
                     matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(-p));
                     matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-o));
@@ -47,6 +45,8 @@ public class CrownFeatureRenderer<T extends LivingEntity, M extends BipedEntityM
                     VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, CrownRenderLayer.getCrown(identifier4), true, true);
 
                     this.crown.crown.copyPositionAndRotation(this.getContextModel().head);
+                    this.crown.crown.pivotX = 0;
+                    this.crown.crown.pivotY = 0;
                     this.crown.render(matrixStack, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
                     matrixStack.pop();
                 }
