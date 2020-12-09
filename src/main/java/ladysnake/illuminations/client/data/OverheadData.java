@@ -2,8 +2,6 @@ package ladysnake.illuminations.client.data;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.entity.model.OverheadEntityModel;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.util.Identifier;
 
 public class OverheadData {

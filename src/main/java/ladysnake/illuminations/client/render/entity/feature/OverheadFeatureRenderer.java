@@ -2,7 +2,6 @@ package ladysnake.illuminations.client.render.entity.feature;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.CrownRenderLayer;
-import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
 import ladysnake.illuminations.client.render.entity.model.OverheadEntityModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -30,7 +29,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
                 model.head.pivotY = this.getContextModel().head.pivotY;
                 model.head.pitch = this.getContextModel().head.pitch;
                 model.head.yaw = this.getContextModel().head.yaw;
-                model.render(matrices, vertexConsumers.getBuffer(CrownRenderLayer.getCrown(texture)), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+                model.render(matrices, vertexConsumers.getBuffer(CrownRenderLayer.getCrown(texture)), 15728880, OverlayTexture.DEFAULT_UV, 1f, 0f, 0f, 1f);
             }
         }
     }

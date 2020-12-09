@@ -36,7 +36,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
