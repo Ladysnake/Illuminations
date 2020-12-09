@@ -20,11 +20,18 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        OverheadEntityModel crownModel = new CrownEntityModel();
-        crownModel.head.pivotX = this.getContextModel().head.pivotX;
-        crownModel.head.pivotY = this.getContextModel().head.pivotY;
-        crownModel.head.pitch = this.getContextModel().head.pitch;
-        crownModel.head.yaw = this.getContextModel().head.yaw;
-        crownModel.render(matrices, vertexConsumers.getBuffer(CrownRenderLayer.getCrown(new Identifier(IlluminationsClient.MODID, "textures/entity/solar_crown.png"))), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+        if (IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()) != null) {
+            String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
+            if (playerOverhead != null && IlluminationsClient.OVERHEADS_DATA.containsKey(playerOverhead)) {
+                Identifier texture = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getTexture();
+                OverheadEntityModel model = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getModel();
+
+                model.head.pivotX = this.getContextModel().head.pivotX;
+                model.head.pivotY = this.getContextModel().head.pivotY;
+                model.head.pitch = this.getContextModel().head.pitch;
+                model.head.yaw = this.getContextModel().head.yaw;
+                model.render(matrices, vertexConsumers.getBuffer(CrownRenderLayer.getCrown(texture)), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+            }
+        }
     }
 }

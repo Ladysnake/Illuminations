@@ -1,20 +1,21 @@
 package ladysnake.illuminations.client.data;
 
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.render.entity.model.OverheadEntityModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.util.Identifier;
 
 public class OverheadData {
-    private final PlayerEntityModel<AbstractClientPlayerEntity> model;
+    private final OverheadEntityModel model;
     private final Identifier texture;
 
-    public OverheadData(PlayerEntityModel<AbstractClientPlayerEntity> model, String textureName) {
+    public OverheadData(OverheadEntityModel model, String textureName) {
         this.model = model;
-        this.texture = new Identifier("textures/entity/steve.png");
+        this.texture = new Identifier(IlluminationsClient.MODID, "textures/entity/"+textureName+".png");
     }
 
-    public PlayerEntityModel<AbstractClientPlayerEntity> getModel() {
+    public OverheadEntityModel getModel() {
         return model;
     }
 

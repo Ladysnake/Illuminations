@@ -275,10 +275,10 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .put("jacko", JACKO_OVERHEAD)
                 .build();
-//        OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
-//                .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
-//                .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
-//                .build();
+        OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
+                .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
+                .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
+                .build();
     }
 
     public static String getLatestVersion() {
