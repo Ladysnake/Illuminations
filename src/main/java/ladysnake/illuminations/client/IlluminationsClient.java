@@ -9,8 +9,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
+import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.render.entity.feature.CrownFeatureRenderer;
 import ladysnake.illuminations.client.particle.EyesParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
@@ -19,6 +19,8 @@ import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
+import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
+import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -76,8 +78,8 @@ public class IlluminationsClient implements ClientModInitializer {
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
-    public static ImmutableMap<String, DefaultParticleType> OVERHEADS_DATA;
-    public static ImmutableMap<String, Identifier> CROWNS_DATA;
+    public static ImmutableMap<String, DefaultParticleType> OLD_OVERHEADS_DATA;
+    public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
 
     // update information
     private static final String UPDATES_URL = "https://illuminations.glitch.me/latest?version=";
@@ -96,10 +98,6 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
     public static DefaultParticleType JACKO_OVERHEAD;
-
-    // crown identifiers
-    public static final Identifier SOLAR_CROWN = new Identifier(MODID, "textures/entity/solar_crown.png");
-    public static final Identifier FROST_CROWN = new Identifier(MODID, "textures/entity/frost_crown.png");
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -235,7 +233,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
             if (entityType == EntityType.PLAYER) {
-  		        registrationHelper.register(new CrownFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
+  		        registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
   	        }
         });
 
@@ -272,15 +270,15 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .build();
-        OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
+        OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .put("jacko", JACKO_OVERHEAD)
                 .build();
-        CROWNS_DATA = ImmutableMap.<String, Identifier>builder()
-                .put("solar_crown", SOLAR_CROWN)
-                .put("frost_crown", FROST_CROWN)
-                .build();
+//        OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
+//                .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
+//                .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
+//                .build();
     }
 
     public static String getLatestVersion() {
