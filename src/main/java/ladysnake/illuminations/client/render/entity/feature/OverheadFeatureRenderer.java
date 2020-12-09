@@ -20,7 +20,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()) != null) {
+        if (IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()) != null && !entity.isInvisible()) {
             String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
             if (playerOverhead != null && IlluminationsClient.OVERHEADS_DATA.containsKey(playerOverhead)) {
                 Identifier texture = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getTexture();
