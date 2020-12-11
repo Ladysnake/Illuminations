@@ -50,7 +50,7 @@ The spawn rate percentage multiplier. Does not affect eyes in the dark.
 
 ## Donator rewards
 
-People that support the mod deserve some brilliant cosmetics, and Illuminations delivers! [More information here](https://illuminations.glitch.me/register).
+People that support the mod deserve some brilliant cosmetics, and Illuminations delivers! [More information here](https://illuminations.glitch.me/donators).
 
 ## Auras
 
