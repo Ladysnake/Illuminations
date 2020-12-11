@@ -48,6 +48,10 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
+## Donator rewards
+
+People that support the mod deserve some brilliant cosmetics, and Illuminations delivers! [More information here](https://illuminations.glitch.me/register).
+
 ## Auras
 
 **Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
@@ -56,17 +60,17 @@ Two types of aura are currently availably: regular auras and prismatic auras. Re
 
 Auras and prismatic color can be selected and changed via the [Illuminations dashboard](https://illuminations.glitch.me/).
 
-### Ghostly aura
-
-The **Ghostly** aura emanates little ghosts that fly upward and gradually appear and disappear. This aura is available to donators as of the 15/10/2020.
-
-![](README.assets/illuminations-1.2-ghostly-aura.gif)
-
 ### Twilight aura
 
-The **Twilight** aura creates prismatic colored fireflies  that will orbit around the player. If the player moves, they will leave a trail of these fireflies. This aura was available to donators from the 23/07/2020 to the 15/10/2020.
+The **Twilight** aura creates colored fireflies  that will orbit around the player. The color of the fireflies can be changed to any color you want via the Illuminations dashboard. If the player moves, they will leave a trail of these fireflies. This aura is available to tier 1 donators.
 
 ![illuminations-1.0-twilight-aura](README.assets/illuminations-1.0-twilight-aura.gif)
+
+### Ghostly aura
+
+The **Ghostly** aura emanates little ghosts that fly upward and gradually appear and disappear. This aura is available to tier 2 donators.
+
+![](README.assets/illuminations-1.2-ghostly-aura.gif)
 
 ## Overheads
 
@@ -80,9 +84,11 @@ Available for free to anyone that registers for an Illuminations account. https:
 
 ### Jacko
 
-A happy jack o' lantern that lights up at night and in dark areas. Available as an extra bonus to donators during October 2020.
+A happy jack o' lantern that lights up at night and in dark areas. Available to tier 2 donators.
 
 ![](README.assets/illuminations-1.2-jacko.gif)
+
+### Frost and Solar crowns
 
 ## FAQ
 
@@ -98,7 +104,7 @@ A happy jack o' lantern that lights up at night and in dark areas. Available as 
 
 **Yes**: If the player has the mod installed on their client, all your cosmetics will be visible to them, just like theirs will be visible to you.
 
-#### How to get an aura?
+#### How to get an aura or crown?
 
 **Auras are currently only available to donators**, [more information here](https://illuminations.glitch.me/register).
 
