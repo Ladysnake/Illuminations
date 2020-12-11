@@ -1,5 +1,15 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.3 - 1.16.4
+- Tweaked firefly render
+- Added proper Canvas bloom compatibility for illuminations and cosmetics
+- Introduced two new unique overheads: the frost crown and the solar crown
+On an unrelated but still important note: the way donator rewards work has been changed.
+- Instead of having special rewards depending on the time of your donation, donators will be classed into two tiers:
+    - Tier 1: Donations of at least 2€ will reward you with the color customizable **Twilight aura**
+    - Tier 2: Donations of at least 5€ will reward you with **all other cosmetics as well as future cosmetics** (as well as tier 1 rewards)
+- All previous donators have been rewarded with Tier 2
+
 ### Illuminations 1.2.6 - 1.16.4
 - Added a "density" config option that multiplies the amount of illuminations appearing
 - Added an auto-updater built into the mod : if Illuminations is outdated, it will notify you and automatically install the latest version
