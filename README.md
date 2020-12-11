@@ -48,10 +48,6 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
-## Donator rewards
-
-People that support the mod deserve some brilliant cosmetics, and Illuminations delivers! [More information here](https://illuminations.glitch.me/donators).
-
 ## Auras
 
 **Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
@@ -74,7 +70,7 @@ The **Ghostly** aura emanates little ghosts that fly upward and gradually appear
 
 ## Overheads
 
-**Overheads** are cosmetics that float above player heads.
+**Overheads** are cosmetics that float above player heads. They are visible to other players with Illuminations installed (even on vanilla servers).
 
 ### Pride (and trans pride) heart
 
