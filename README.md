@@ -90,6 +90,10 @@ A happy jack o' lantern that lights up at night and in dark areas. Available to 
 
 ### Frost and Solar crowns
 
+3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice. *(Screenshot taken with Canvas Renderer, necessary if you want the bloom effect)*
+
+![illuminations-1.3-crowns](C:\Users\river\Desktop\Projects\Illuminations\README.assets\illuminations-1.3-crowns.png)
+
 ## FAQ
 
 #### Can I include this mod in a modpack?
