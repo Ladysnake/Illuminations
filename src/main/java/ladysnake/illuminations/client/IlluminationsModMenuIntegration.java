@@ -61,11 +61,11 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .build());
 
             general.addEntry(entryBuilder
-                    .startBooleanToggle(new TranslatableText("option.illuminations.classicRender"), Config.getClassicRender())
+                    .startIntSlider(new TranslatableText("option.illuminations.fireflyWhiteAlpha"), Config.getFireflyWhiteAlpha(), 0, 100)
                     .setTooltip(
-                            new TranslatableText("option.tooltip.illuminations.classicRender"))
-                    .setSaveConsumer(Config::setClassicRender)
-                    .setDefaultValue(true)
+                            new TranslatableText("option.tooltip.illuminations.fireflyWhiteAlpha"))
+                    .setSaveConsumer(Config::setFireflyWhiteAlpha)
+                    .setDefaultValue(100)
                     .build());
 
             // build and return the config screen

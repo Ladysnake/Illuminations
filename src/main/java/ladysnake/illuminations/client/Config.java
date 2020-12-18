@@ -13,7 +13,7 @@ public class Config {
     private static EyesInTheDark eyesInTheDark;
     private static int density;
     private static boolean autoUpdate;
-    private static boolean classicRender;
+    private static int fireflyWhiteAlpha;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -33,19 +33,19 @@ public class Config {
             config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
             config.setProperty("density", "100");
             config.setProperty("auto-update", "true");
-            config.setProperty("classic-render", "false");
+            config.setProperty("firefly-white-alpha", "100");
         }
 
         try {
             eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
             density = Integer.parseInt(config.getProperty("density"));
             autoUpdate = Boolean.parseBoolean(config.getProperty("auto-update"));
-            classicRender = Boolean.parseBoolean(config.getProperty("classic-render"));
+            fireflyWhiteAlpha = Integer.parseInt(config.getProperty("firefly-white-alpha"));
         } catch (Exception e) {
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
             setAutoUpdate(true);
-            setClassicRender(false);
+            setFireflyWhiteAlpha(100);
         }
     }
 
@@ -87,13 +87,13 @@ public class Config {
         Config.save();
     }
 
-    public static boolean getClassicRender() {
-        return classicRender;
+    public static int getFireflyWhiteAlpha() {
+        return fireflyWhiteAlpha;
     }
 
-    public static void setClassicRender(boolean value) {
-        classicRender = value;
-        config.setProperty("classic-render", Boolean.toString(value));
+    public static void setFireflyWhiteAlpha(int value) {
+        fireflyWhiteAlpha = value;
+        config.setProperty("firefly-white-alpha", Integer.toString(value));
         Config.save();
     }
 }
