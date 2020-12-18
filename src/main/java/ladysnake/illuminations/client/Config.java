@@ -30,10 +30,10 @@ public class Config {
             }
         } else { // if no illuminations.properties, load default values
             // define default properties
-            config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
-            config.setProperty("density", "100");
-            config.setProperty("auto-update", "true");
-            config.setProperty("firefly-white-alpha", "100");
+            setEyesInTheDark(EyesInTheDark.ENABLE);
+            setDensity(100);
+            setAutoUpdate(true);
+            setFireflyWhiteAlpha(100);
         }
 
         try {
