@@ -39,7 +39,7 @@ public class IlluminationData {
     }
 
     public boolean shouldAddParticle(Random random) {
-        int density = Config.getDensity()/100;
+        float density = Config.getDensity()/100f;
         return random.nextFloat() <= this.chance * density;
     }
 }
