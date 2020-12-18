@@ -277,6 +277,7 @@ public class IlluminationsClient implements ClientModInitializer {
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
                 .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
+                .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
                 .build();
     }
 

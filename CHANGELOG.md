@@ -1,7 +1,11 @@
 # Illuminations - Changelog:
 
 ### Illuminations 1.3.1 - 1.16.4
-- Fixed an issue 
+- Fixed an issue where illuminations would not glow in the dark without Canvas
+- Added a firefly white alpha config options
+    - Controls the alpha value of the white center glow for fireflies, glowworms, plankton and twilight aura fireflies (0 is no white center, 100 is a full alpha white center)
+- Fixed an issue where values under 100 for illumination spawn density would prevent spawn entirely
+- Fixed an issue where the config file would only generate with ModMenu loaded
 
 ### Illuminations 1.3 - 1.16.4
 - Tweaked firefly render
