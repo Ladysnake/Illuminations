@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.4-SNAPSHOT'
+	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.matthewprenger.cursegradle' version '1.4.0'
 	id 'org.ajoberstar.grgit' version '3.1.1'
@@ -54,9 +54,7 @@ dependencies {
 	}
 
 	// canvas renderer
-	modCompile "grondag:canvas-mc116:1.0.+"
-	modCompile "grondag:frex-mc116:4.0.174"
-	modCompile "grondag:frex-events-mc116:1.0.+"
+//	modCompile "grondag:canvas-mc116:1.0.+"
 }
 
 processResources {

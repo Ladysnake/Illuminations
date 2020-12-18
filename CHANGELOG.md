@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.3.1 - 1.16.4
+
+
 ### Illuminations 1.3 - 1.16.4
 - Tweaked firefly render
 - Added proper Canvas bloom compatibility for illuminations and cosmetics

@@ -12,7 +12,8 @@ public class Config {
     private static final Properties config = new Properties();
     private static EyesInTheDark eyesInTheDark;
     private static int density;
-    private static boolean autoupdate;
+    private static boolean autoUpdate;
+    private static boolean classicRender;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -32,16 +33,19 @@ public class Config {
             config.setProperty("eyes-in-the-dark", EyesInTheDark.ENABLE.toString());
             config.setProperty("density", "100");
             config.setProperty("auto-update", "true");
+            config.setProperty("classic-render", "false");
         }
 
         try {
             eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
             density = Integer.parseInt(config.getProperty("density"));
-            autoupdate = Boolean.parseBoolean(config.getProperty("auto-update"));
+            autoUpdate = Boolean.parseBoolean(config.getProperty("auto-update"));
+            classicRender = Boolean.parseBoolean(config.getProperty("classic-render"));
         } catch (Exception e) {
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
             setAutoUpdate(true);
+            setClassicRender(false);
         }
     }
 
@@ -74,12 +78,22 @@ public class Config {
     }
 
     public static boolean getAutoUpdate() {
-        return autoupdate;
+        return autoUpdate;
     }
 
     public static void setAutoUpdate(boolean value) {
-        autoupdate = value;
+        autoUpdate = value;
         config.setProperty("auto-update", Boolean.toString(value));
+        Config.save();
+    }
+
+    public static boolean getClassicRender() {
+        return classicRender;
+    }
+
+    public static void setClassicRender(boolean value) {
+        classicRender = value;
+        config.setProperty("classic-render", Boolean.toString(value));
         Config.save();
     }
 }
