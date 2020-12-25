@@ -54,7 +54,7 @@ dependencies {
 	}
 
 	// canvas renderer
-//	modCompile "grondag:canvas-mc116:1.0.+"
+	modCompile "grondag:canvas-mc116:1.0.+"
 }
 
 processResources {
