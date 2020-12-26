@@ -21,7 +21,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
-    private final float rotateFactor;
+    protected final float rotateFactor;
 
     public ChorusPetalParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -41,6 +41,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.velocityZ = velocityZ -0.05D - random.nextFloat()/10;
 
         this.rotateFactor = ((float)Math.random() - 0.5F) * 0.01F;
+        this.angle = random.nextFloat()*360f;
     }
 
     @Override

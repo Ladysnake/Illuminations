@@ -1,5 +1,12 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4: The Chorus Petals Update - 1.16.4
+- Introduced Chorus Petals: appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple
+    - The younger the flower is, the more petals will appear
+    - Breaking a Chorus flower will provoke a burst of petals
+        - Again, the younger the flower, the more petals will burst
+- Added the Chorus aura for Tier 2 donators
+
 ### Illuminations 1.3.1 - 1.16.4
 - Fixed an issue where illuminations would not glow in the dark without Canvas
 - Added a firefly white alpha config options
