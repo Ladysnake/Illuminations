@@ -8,7 +8,8 @@
     "SodiumClientWorldMixin",
     "TitleScreenMixin",
     "BlockMixin",
-    "ChorusFlowerBlockMixin"
+    "ChorusFlowerBlockMixin",
+    "ParticleManagerMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {

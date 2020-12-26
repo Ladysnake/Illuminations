@@ -32,11 +32,14 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.collidesWithWorld = true;
         this.setSprite(spriteProvider.getSprite(variant, 2));
 
-        this.velocityY = -0.15D - random.nextFloat()/10;
-        this.velocityX = -0.05D - random.nextFloat()/10;
-        this.velocityZ = -0.05D - random.nextFloat()/10;
+        if (velocityY == 0f && velocityX == 0f && velocityZ == 0f) {
+            this.colorAlpha = 0f;
+        }
+        
+        this.velocityY = velocityY -0.15D - random.nextFloat()/10;
+        this.velocityX = velocityX -0.05D - random.nextFloat()/10;
+        this.velocityZ = velocityZ -0.05D - random.nextFloat()/10;
 
-        this.colorAlpha = 0f;
         this.rotateFactor = ((float)Math.random() - 0.5F) * 0.01F;
     }
 
