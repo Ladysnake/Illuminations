@@ -108,8 +108,6 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
     public static final Predicate<Long> EYES_TIME_PREDICATE = aLong -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS);
     public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
-    public static final Predicate<Long> CHORUS_PETAL_TIME_PREDICATE = aLong -> true;
-    public static final BiPredicate<World, BlockPos> CHORUS_PETAL_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.AIR;
 
     @Override
     public void onInitializeClient() {
@@ -263,8 +261,6 @@ public class IlluminationsClient implements ClientModInitializer {
                         new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
                 .put(Biome.Category.OCEAN, ImmutableSet.of(
                         new IlluminationData(PLANKTON, PLANKTON_TIME_PREDICATE, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
-                .put(Biome.Category.THEEND, ImmutableSet.of(
-                        new IlluminationData(CHORUS_PETAL, CHORUS_PETAL_TIME_PREDICATE, CHORUS_PETAL_LOCATION_PREDICATE, 0.00250F))) // many
                 .build();
 
         // aura matching and spawn chances + overhead matching + crown matching

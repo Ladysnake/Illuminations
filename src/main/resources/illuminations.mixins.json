@@ -6,7 +6,9 @@
     "ClientWorldMixin",
     "PlayerEntityMixin",
     "SodiumClientWorldMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "BlockMixin",
+    "ChorusFlowerBlockMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
