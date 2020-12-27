@@ -6,6 +6,7 @@
     - Breaking a Chorus flower will provoke a burst of petals
         - Again, the younger the flower, the more petals will burst
 - Added the Chorus aura for Tier 2 donators
+- Added the Chorus crown for Tier 2 donators
 
 ### Illuminations 1.3.1 - 1.16.4
 - Fixed an issue where illuminations would not glow in the dark without Canvas
