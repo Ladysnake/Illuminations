@@ -2,6 +2,8 @@
 
 **Illuminations** is a client sided Minecraft Fabric mod that adds multiple ambient particles in order to make your world more enjoyable at night or in dark places.
 
+*(All screenshots with a bloom effect were taken with Canvas Renderer)*
+
 ## Illuminations types
 
 ### Fireflies
@@ -94,7 +96,7 @@ A happy jack o' lantern that lights up at night and in dark areas. Available to 
 
 ### Frost and Solar crowns
 
-3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice. *(Screenshot taken with Canvas Renderer, necessary if you want the bloom effect)*
+3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
 
 ![illuminations-1.3-crowns](README.assets//illuminations-1.3-crowns.png)
 
