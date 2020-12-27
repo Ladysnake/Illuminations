@@ -3,13 +3,13 @@
   "package": "ladysnake.illuminations.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "ClientWorldMixin",
-    "PlayerEntityMixin",
-    "SodiumClientWorldMixin",
-    "TitleScreenMixin",
     "BlockMixin",
     "ChorusFlowerBlockMixin",
-    "ParticleManagerMixin"
+    "ClientWorldMixin",
+    "ParticleManagerMixin",
+    "PlayerEntityMixin",
+    "SodiumClientWorldMixin",
+    "TitleScreenMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {

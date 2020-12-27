@@ -15,6 +15,14 @@
         }
       },
       "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/chorus_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
     }
   ]
 }

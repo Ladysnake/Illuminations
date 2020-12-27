@@ -4,7 +4,6 @@ import ladysnake.illuminations.client.IlluminationsClient;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChorusFlowerBlock;
-import net.minecraft.client.particle.BlockDustParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.world.ClientWorld;
