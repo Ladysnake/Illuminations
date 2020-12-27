@@ -6,7 +6,15 @@
 
 ### Fireflies
 
-**Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.![illuminations-1.0-fireflies](README.assets/illuminations-1.0-fireflies.png)
+**Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
+
+![illuminations-1.0-fireflies](README.assets/illuminations-1.0-fireflies.png)
+
+### Chorus Petals
+
+Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
+
+![illuminations-1.4-choruspetals](README.assets/illuminations-1.4-choruspetals.png)
 
 ### Glowworms
 
