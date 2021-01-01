@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.1 - 1.16.4
+- Added missing Canvas compatibility with the Chorus aura
+
 ### Illuminations 1.4: The Chorus Petals Update - 1.16.4
 - Introduced Chorus Petals: appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple
     - The younger the flower is, the more petals will appear
