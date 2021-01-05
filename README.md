@@ -58,13 +58,13 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
-## Auras
+## Cosmetics
 
 **Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
 
-Two types of aura are currently availably: regular auras and prismatic auras. Regular auras are not customizable and have a specific color that you cannot change, while prismatic auras on the other hand will be colored depending on your Illuminations prismatic color.
+**Overheads** are cosmetics that float above player heads. They are visible to other players with Illuminations installed (even on vanilla servers).
 
-Auras and prismatic color can be selected and changed via the [Illuminations dashboard](https://illuminations.glitch.me/).
+Auras and overheads can be selected and changed via the [Illuminations dashboard](https://illuminations.glitch.me/).
 
 ### Twilight aura
 
@@ -78,9 +78,15 @@ The **Ghostly** aura emanates little ghosts that fly upward and gradually appear
 
 ![](README.assets/illuminations-1.2-ghostly-aura.gif)
 
-## Overheads
+### Frost and Solar crowns
 
-**Overheads** are cosmetics that float above player heads. They are visible to other players with Illuminations installed (even on vanilla servers).
+3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
+
+![illuminations-1.3-crowns](README.assets//illuminations-1.3-crowns.png)
+
+### Chorus aura and crown
+
+![illuminations-1.4-choruscosmetics](README.assets/illuminations-1.4-choruscosmetics.gif)
 
 ### Pride (and trans pride) heart
 
@@ -93,12 +99,6 @@ Available for free to anyone that registers for an Illuminations account. https:
 A happy jack o' lantern that lights up at night and in dark areas. Available to tier 2 donators.
 
 ![](README.assets/illuminations-1.2-jacko.gif)
-
-### Frost and Solar crowns
-
-3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
-
-![illuminations-1.3-crowns](README.assets//illuminations-1.3-crowns.png)
 
 ## FAQ
 
