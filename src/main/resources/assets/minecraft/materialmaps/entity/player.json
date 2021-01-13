@@ -31,6 +31,22 @@
         }
       },
       "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/dreadlich_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/mooncult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
     }
   ]
 }
