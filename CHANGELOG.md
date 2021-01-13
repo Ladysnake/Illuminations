@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.2 - 1.16.4
+- Fixed an issue with Vanguard that would cause Illuminations to remove itself
+
 ### Illuminations 1.4.1 - 1.16.4
 - Added missing Canvas compatibility with the Chorus aura
 - Switched from the integrated auto-updater to Vanguard
