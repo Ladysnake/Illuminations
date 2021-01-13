@@ -8,8 +8,7 @@
     "ClientWorldMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
-    "SodiumClientWorldMixin",
-    "TitleScreenMixin"
+    "SodiumClientWorldMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {

@@ -17,6 +17,12 @@
   "license": "CC-BY-NC-SA 4.0",
   "icon": "assets/illuminations/illuminations.png",
 
+  "custom": {
+    "vanguard": {
+      "update-url": "https://illuminations.glitch.me/latest?version="
+    }
+  },
+
   "environment": "client",
   "entrypoints": {
     "client": [

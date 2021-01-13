@@ -21,7 +21,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
-    protected final float rotateFactor;
+    protected final float rotationFactor;
 
     public ChorusPetalParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -40,7 +40,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.velocityX = velocityX -0.05D - random.nextFloat()/10;
         this.velocityZ = velocityZ -0.05D - random.nextFloat()/10;
 
-        this.rotateFactor = ((float)Math.random() - 0.5F) * 0.01F;
+        this.rotationFactor = ((float)Math.random() - 0.5F) * 0.01F;
         this.angle = random.nextFloat()*360f;
     }
 
@@ -138,7 +138,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         }
 
         if (this.velocityY != 0) {
-            this.angle += Math.PI * Math.sin(rotateFactor * this.age) / 2;
+            this.angle += Math.PI * Math.sin(rotationFactor * this.age) / 2;
         }
     }
 

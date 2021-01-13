@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
@@ -25,7 +23,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -42,15 +39,12 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
@@ -80,8 +74,6 @@ public class IlluminationsClient implements ClientModInitializer {
 
     // update information
     private static final String UPDATES_URL = "https://illuminations.glitch.me/latest?version=";
-    private static String LATEST_VERSION;
-    private static final String uninstallerFile = "illuminations-uninstaller.jar";
 
     // particle types
     public static DefaultParticleType FIREFLY;
@@ -137,75 +129,6 @@ public class IlluminationsClient implements ClientModInitializer {
                 logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
-
-        // delete uninstaller
-        if (Files.exists(Paths.get("mods/" + uninstallerFile))) {
-            try {
-                Files.delete(Paths.get("mods/" + uninstallerFile));
-            } catch (IOException e) {
-                logger.log(Level.WARN, "Could not remove uninstaller because of I/O Error: " + e.getMessage());
-            }
-        }
-
-        // get illuminations latest version for the current minecraft version
-        // verify it's not a dev environment and the config is set to true
-        if (!FabricLoader.getInstance().isDevelopmentEnvironment() && Config.getAutoUpdate()) {
-            String minecraftVersion = MinecraftClient.getInstance().getGame().getVersion().getName();
-            String illuminationsVersion = FabricLoader.getInstance().getModContainer("illuminations").get().getMetadata().getVersion().getFriendlyString();
-            CompletableFuture.supplyAsync(() -> {
-                try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + minecraftVersion).openStream())) {
-                    JsonParser jp = new JsonParser();
-                    JsonElement jsonElement = jp.parse(reader);
-                    return jsonElement.getAsJsonObject();
-                } catch (MalformedURLException e) {
-                    logger.log(Level.ERROR, "Could not get update information because of malformed URL: " + e.getMessage());
-                } catch (IOException e) {
-                    logger.log(Level.ERROR, "Could not get update information because of I/O Error: " + e.getMessage());
-                }
-
-                return null;
-            }).thenAcceptAsync(latestVersionJson -> {
-                if (latestVersionJson != null) {
-                    String latestVersion = latestVersionJson.get("version").getAsString();
-                    String latestFileName = latestVersionJson.get("filename").getAsString();
-                    // if not the latest version, update toast
-                    if (!latestVersion.equalsIgnoreCase(illuminationsVersion)) {
-                        LATEST_VERSION = latestVersion;
-                        logger.log(Level.INFO, "Currently present version is " + illuminationsVersion + " while the latest version for Minecraft " + minecraftVersion + " is " + latestVersion + "; downloading update");
-
-                        try {
-                            // download new jar
-                            URL website = new URL(latestVersionJson.get("download").getAsString());
-                            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-                            FileOutputStream fos = new FileOutputStream("mods/" + latestFileName);
-                            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-
-                            // once done, extract the uninstaller
-                            InputStream in = IlluminationsClient.class.getResourceAsStream("/" + uninstallerFile);
-                            Files.copy(in, Paths.get("mods/" + uninstallerFile), StandardCopyOption.REPLACE_EXISTING);
-
-                            // get the old version file name
-                            String oldFile = new File(IlluminationsClient.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName();
-                            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                                try {
-                                    logger.log(Level.INFO, "Minecraft instance shutting down, uninstalling " + oldFile);
-                                    new ProcessBuilder("java", "-jar", "mods/" + uninstallerFile, oldFile).start();
-                                } catch (IOException e) {
-                                    logger.log(Level.ERROR, "Could not run previous version uninstaller");
-                                    e.printStackTrace();
-                                }
-                            }));
-                        } catch (MalformedURLException e) {
-                            logger.log(Level.ERROR, "Could not download update because of malformed URL: " + e.getMessage());
-                        } catch (IOException e) {
-                            logger.log(Level.ERROR, "Could not download update because of I/O Error: " + e.getMessage());
-                        }
-                    }
-                } else {
-                    logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
-                }
-            }, MinecraftClient.getInstance());
-        }
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
@@ -283,10 +206,8 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
                 .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
                 .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
+                .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
+                .put("lich_crown", new OverheadData(new CrownEntityModel(), "lich_crown"))
                 .build();
-    }
-
-    public static String getLatestVersion() {
-        return LATEST_VERSION;
     }
 }

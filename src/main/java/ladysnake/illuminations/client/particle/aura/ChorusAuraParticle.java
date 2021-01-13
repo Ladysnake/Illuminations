@@ -71,7 +71,7 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
         }
 
         if (this.velocityY != 0) {
-            this.angle += Math.PI * Math.sin(rotateFactor * this.age) / 2;
+            this.angle += Math.PI * Math.sin(rotationFactor * this.age) / 2;
         }
     }
 

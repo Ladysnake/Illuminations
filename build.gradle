@@ -26,6 +26,31 @@ minecraft {
 //		"fabric-particles-v1"
 //]
 
+repositories {
+	maven { url 'https://jitpack.io' }
+	mavenLocal()
+
+	// where grondag's mods live
+	maven {
+		name = "dblsaiko"
+		url = "https://maven.dblsaiko.net/"
+	}
+	maven {
+		name = "Cotton"
+		url = "http://server.bbkr.space:8081/artifactory/libs-release/"
+	}
+	// REI, odds and ends
+	maven {
+		name = "CurseForge"
+		url = "https://minecraft.curseforge.com/api/maven"
+	}
+	// Ladysnake
+	maven {
+		name = "Ladysnake Libs"
+		url = "https://dl.bintray.com/ladysnake/libs"
+	}
+}
+
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -55,6 +80,9 @@ dependencies {
 
 	// canvas renderer
 	modCompile "grondag:canvas-mc116:1.0.+"
+
+	// vanguard auto updater
+	include "io.github.ladysnake:vanguard:${vanguard_version}"
 }
 
 processResources {
@@ -87,25 +115,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
-}
-
-repositories {
-	maven { url 'https://jitpack.io' }
-
-	// where grondag's mods live
-	maven {
-		name = "dblsaiko"
-		url = "https://maven.dblsaiko.net/"
-	}
-	maven {
-		name = "Cotton"
-		url = "http://server.bbkr.space:8081/artifactory/libs-release/"
-	}
-	// REI, odds and ends
-	maven {
-		name = "CurseForge"
-		url = "https://minecraft.curseforge.com/api/maven"
-	}
 }
 
 // configure the maven publication
