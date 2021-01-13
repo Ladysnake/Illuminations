@@ -207,7 +207,8 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
                 .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
                 .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
-                .put("lich_crown", new OverheadData(new CrownEntityModel(), "lich_crown"))
+                .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
+                .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
                 .build();
     }
 }
