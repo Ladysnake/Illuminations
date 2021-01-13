@@ -86,6 +86,8 @@ The **Ghostly** aura emanates little ghosts that fly upward and gradually appear
 
 ### Bloodfiend, Dreadlich and Mooncult crowns
 
+*Designed by ArathainFarqoe!*
+
 ![image-20210113112423799](README.assets/illuminations-1.4.1-crowns.png)
 
 ### Chorus aura and crown
