@@ -82,7 +82,11 @@ The **Ghostly** aura emanates little ghosts that fly upward and gradually appear
 
 3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
 
-![illuminations-1.3-crowns](README.assets//illuminations-1.3-crowns.png)
+![illuminations-1.3-crowns](README.assets/illuminations-1.3-crowns.png)
+
+### Bloodfiend, Dreadlich and Mooncult crowns
+
+![image-20210113112423799](README.assets/illuminations-1.4.1-crowns.png)
 
 ### Chorus aura and crown
 
