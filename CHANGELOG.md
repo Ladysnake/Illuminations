@@ -1,5 +1,9 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.3 - 1.16.4
+- Updated to Vanguard 1.0.4
+- Removed the no longer used auto-update config option 
+
 ### Illuminations 1.4.2 - 1.16.4
 - Updated to Vanguard 1.0.1
 
