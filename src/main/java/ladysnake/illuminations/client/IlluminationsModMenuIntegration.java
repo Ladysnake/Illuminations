@@ -53,14 +53,6 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .build());
 
             general.addEntry(entryBuilder
-                    .startBooleanToggle(new TranslatableText("option.illuminations.autoUpdate"), Config.getAutoUpdate())
-                    .setTooltip(
-                            new TranslatableText("option.tooltip.illuminations.autoUpdate"))
-                    .setSaveConsumer(Config::setAutoUpdate)
-                    .setDefaultValue(true)
-                    .build());
-
-            general.addEntry(entryBuilder
                     .startIntSlider(new TranslatableText("option.illuminations.fireflyWhiteAlpha"), Config.getFireflyWhiteAlpha(), 0, 100)
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.fireflyWhiteAlpha"))
