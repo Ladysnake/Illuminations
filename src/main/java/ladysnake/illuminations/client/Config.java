@@ -12,7 +12,6 @@ public class Config {
     private static final Properties config = new Properties();
     private static EyesInTheDark eyesInTheDark;
     private static int density;
-    private static boolean autoUpdate;
     private static int fireflyWhiteAlpha;
 
     public enum EyesInTheDark {
@@ -32,19 +31,16 @@ public class Config {
             // define default properties
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
-            setAutoUpdate(true);
             setFireflyWhiteAlpha(100);
         }
 
         try {
             eyesInTheDark = EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark"));
             density = Integer.parseInt(config.getProperty("density"));
-            autoUpdate = Boolean.parseBoolean(config.getProperty("auto-update"));
             fireflyWhiteAlpha = Integer.parseInt(config.getProperty("firefly-white-alpha"));
         } catch (Exception e) {
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
-            setAutoUpdate(true);
             setFireflyWhiteAlpha(100);
         }
     }
@@ -74,16 +70,6 @@ public class Config {
     public static void setDensity(int value) {
         density = value;
         config.setProperty("density", Integer.toString(value));
-        Config.save();
-    }
-
-    public static boolean getAutoUpdate() {
-        return autoUpdate;
-    }
-
-    public static void setAutoUpdate(boolean value) {
-        autoUpdate = value;
-        config.setProperty("auto-update", Boolean.toString(value));
         Config.save();
     }
 
