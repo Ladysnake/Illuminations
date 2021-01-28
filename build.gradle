@@ -28,7 +28,6 @@ minecraft {
 
 repositories {
 	maven { url 'https://jitpack.io' }
-	mavenLocal()
 
 	// where grondag's mods live
 	maven {
