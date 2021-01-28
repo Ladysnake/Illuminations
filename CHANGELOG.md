@@ -1,5 +1,9 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.4 - 1.16.5
+- Fixed an issue that caused fireflies not to spawn if time is set to something greater than 24000
+- Updated to Vanguard 1.0.5
+
 ### Illuminations 1.4.3 - 1.16.4
 - Updated to Vanguard 1.0.4
 - Removed the no longer used auto-update config option 
