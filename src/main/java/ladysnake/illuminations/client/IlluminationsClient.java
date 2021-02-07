@@ -64,7 +64,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final int EYES_VANISHING_DISTANCE = 5;
 
     // illuminations cosmetics
-    private static final String COSMETICS_URL = "https://illuminations.glitch.me/data";
+    private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
     private static final Gson COSMETICS_GSON = new GsonBuilder().create();
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
@@ -115,26 +115,7 @@ public class IlluminationsClient implements ClientModInitializer {
         Config.load();
 
         // get illuminations player cosmetics
-        CompletableFuture.supplyAsync(() -> {
-            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
-                return playerData;
-            } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
-            } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
-            }
-
-            return null;
-        }).thenAcceptAsync(playerData -> {
-            if (playerData != null) {
-                PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics retrieved");
-            } else {
-                PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
-            }
-        }, MinecraftClient.getInstance());
+        loadPlayerCosmetics();
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
@@ -216,5 +197,29 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
                 .build();
+    }
+
+    public static void loadPlayerCosmetics() {
+        // get illuminations player cosmetics
+        CompletableFuture.supplyAsync(() -> {
+            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
+                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
+                return playerData;
+            } catch (MalformedURLException e) {
+                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+            } catch (IOException e) {
+                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+            }
+
+            return null;
+        }).thenAcceptAsync(playerData -> {
+            if (playerData != null) {
+                PLAYER_COSMETICS = playerData;
+                logger.log(Level.INFO, "Player cosmetics retrieved");
+            } else {
+                PLAYER_COSMETICS = Collections.emptyMap();
+                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
+            }
+        }, MinecraftClient.getInstance());
     }
 }

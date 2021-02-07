@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.5 - 1.16.5
+- Illuminations cosmetics will now be reloaded upon a player joining a world, no longer needing to restart the game in order to see changes
+
 ### Illuminations 1.4.4 - 1.16.5
 - Fixed an issue that caused fireflies not to spawn if time is set to something greater than 24000
 - Updated to Vanguard 1.0.5

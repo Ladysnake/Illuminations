@@ -3,6 +3,7 @@ package ladysnake.illuminations.mixin;
 import com.google.common.collect.ImmutableSet;
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.data.IlluminationData;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;
@@ -48,6 +49,11 @@ public abstract class ClientWorldMixin extends World {
                 && random.nextFloat() <= IlluminationsClient.EYES_SPAWN_CHANCE) {
             this.addParticle(IlluminationsClient.EYES, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    @Inject(method = "addPlayer", at = @At(value = "RETURN"))
+    public void addPlayer(int id, AbstractClientPlayerEntity player, CallbackInfo ci) {
+        IlluminationsClient.loadPlayerCosmetics();
     }
 
 }
