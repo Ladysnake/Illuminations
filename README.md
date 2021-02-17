@@ -129,7 +129,7 @@ A happy jack o' lantern that lights up at night and in dark areas. Available to 
 If you have donated multiple times, you may have multiple auras and may want to select a specific one. Or you may just simply want to change your prismatic color or disable your aura. **You can do all this via the [Illuminations dashboard](https://illuminations.glitch.me/)** with no restrictions whatsoever.
 
 
-Copyright (C) 2021 Ladysnake
+###### Copyright (C) 2021 Ladysnake
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
