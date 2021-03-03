@@ -58,7 +58,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         } else {
             quaternion2 = new Quaternion(camera.getRotation());
             float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getRadialQuaternion(i));
+            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getDegreesQuaternion(i));
         }
 
         Vector3f vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
