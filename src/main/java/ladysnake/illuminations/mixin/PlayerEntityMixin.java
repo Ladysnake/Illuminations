@@ -53,6 +53,18 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
             }
         }
+
+        String playerAura = "shadowbringer";
+        // do not render in first person or if the player is invisible
+        //noinspection ConstantConditions
+        if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+            if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
+                AuraData aura = IlluminationsClient.AURAS_DATA.get(playerAura);
+                if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
+                    world.addParticle(aura.getParticle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                }
+            }
+        }
     }
 
 }
