@@ -17,15 +17,15 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
     boolean negateX = random.nextBoolean(), negateZ = random.nextBoolean();
     private final SpriteProvider spriteProvider;
     private final float randEffect = random.nextFloat() + 0.5F;
-    int spriteState = 0;
 
     public ShadowbringerParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
-        this.maxAge = 100 + random.nextInt(40);
+        this.maxAge = 40 + random.nextInt(40);
         this.velocityY = (0.2 + random.nextFloat()) / 10;
         this.velocityX = negateX ? -random.nextGaussian()/50 : random.nextGaussian()/50;
         this.velocityZ = negateZ ? -random.nextGaussian()/50 : random.nextGaussian()/50;
+        this.scale = (float) (scale * 2 + (random.nextGaussian() / 12.0));
         this.spriteProvider = spriteProvider;
 
         this.setSprite(spriteProvider.getSprite(0, 3));
@@ -63,7 +63,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
         this.move(this.velocityX, this.velocityY, this.velocityZ);
 
         if(age > 0 && maxAge > 0) {
-            float agePercent = (float) ((float) age / maxAge);
+            float agePercent = (float) ((float) age / maxAge * 1.5);
             this.setSprite(spriteProvider.getSprite(Math.min(3, (int) (agePercent * 4)), 3));
         }
 
