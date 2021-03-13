@@ -25,7 +25,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
         this.velocityY = (0.2 + random.nextFloat()) / 10;
         this.velocityX = negateX ? -random.nextGaussian()/50 : random.nextGaussian()/50;
         this.velocityZ = negateZ ? -random.nextGaussian()/50 : random.nextGaussian()/50;
-        this.scale = (float) (scale * 2 + (random.nextGaussian() / 12.0));
+        this.scale = (float) (scale + (random.nextGaussian() / 12.0));
         this.spriteProvider = spriteProvider;
 
         this.setSprite(spriteProvider.getSprite(0, 3));
