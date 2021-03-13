@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.6 - 1.16.5
+- Improved log output when having trouble with cosmetics
+
 ### Illuminations 1.4.5 - 1.16.5
 - Illuminations cosmetics will now be reloaded upon a player joining a world, no longer needing to restart the game in order to see changes
 

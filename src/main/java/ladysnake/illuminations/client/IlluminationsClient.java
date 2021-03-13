@@ -212,6 +212,9 @@ public class IlluminationsClient implements ClientModInitializer {
             }
 
             return null;
+        }).exceptionally(throwable -> {
+            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
