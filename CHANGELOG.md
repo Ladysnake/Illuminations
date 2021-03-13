@@ -1,6 +1,7 @@
 # Illuminations - Changelog:
 
 ### Illuminations 1.4.6 - 1.16.5
+- Fixed chorus petals not uniformly rotating
 - Improved log output when having trouble with cosmetics
 
 ### Illuminations 1.4.5 - 1.16.5
