@@ -9,7 +9,11 @@ import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.particle.*;
+import ladysnake.illuminations.client.particle.ChorusPetalParticle;
+import ladysnake.illuminations.client.particle.EyesParticle;
+import ladysnake.illuminations.client.particle.FireflyParticle;
+import ladysnake.illuminations.client.particle.GlowwormParticle;
+import ladysnake.illuminations.client.particle.PlanktonParticle;
 import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
 import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
 import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
@@ -18,6 +22,9 @@ import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
+import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
+import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
+import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -200,6 +207,10 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
                 .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
+                .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
+                .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
+                .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
+                .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
                 .build();
     }
 

@@ -47,6 +47,38 @@
         }
       },
       "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/glowsquid_cult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/timeaspect_cult_crown.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/voidheart_tiara.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/summerbreeze_wreath.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
     }
   ]
 }
