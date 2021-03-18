@@ -14,10 +14,7 @@ import ladysnake.illuminations.client.particle.EyesParticle;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
-import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
-import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
-import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
-import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
+import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
@@ -94,6 +91,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
     public static DefaultParticleType CHORUS_AURA;
+    public static DefaultParticleType AUTUMN_LEAVES_AURA;
     public static DefaultParticleType SHADOWBRINGER_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
@@ -144,6 +142,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
         CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
+        AUTUMN_LEAVES_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:autumn_leaves", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.AUTUMN_LEAVES_AURA, AutumnLeavesParticle.DefaultFactory::new);
         SHADOWBRINGER_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:shadowbringer_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
         PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
@@ -192,6 +192,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
                 .put("shadowbringer", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
                 .build();
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
