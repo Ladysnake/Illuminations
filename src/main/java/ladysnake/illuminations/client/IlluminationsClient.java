@@ -21,10 +21,7 @@ import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
-import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
+import ladysnake.illuminations.client.render.entity.model.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -204,6 +201,8 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
                 .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
                 .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
+                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
+                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
                 .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
                 .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
