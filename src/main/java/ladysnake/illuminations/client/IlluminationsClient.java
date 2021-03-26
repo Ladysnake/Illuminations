@@ -91,6 +91,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
     public static DefaultParticleType CHORUS_AURA;
+    public static DefaultParticleType AUTUMN_LEAVES_AURA;
     public static DefaultParticleType SCULK_TENDRIL_AURA;
     public static DefaultParticleType SHADOWBRINGER_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
@@ -142,6 +143,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
         CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
+        AUTUMN_LEAVES_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:autumn_leaves", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.AUTUMN_LEAVES_AURA, AutumnLeavesParticle.DefaultFactory::new);
         SCULK_TENDRIL_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:sculk_tendril", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SCULK_TENDRIL_AURA, SculkTendrilParticle.DefaultFactory::new);
         SHADOWBRINGER_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:shadowbringer_aura", FabricParticleTypes.simple(true));
@@ -192,6 +195,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
                 .put("sculk_tendril", new AuraData(SCULK_TENDRIL_AURA, 0.3f, 1))
                 .put("shadowbringer", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
                 .build();
