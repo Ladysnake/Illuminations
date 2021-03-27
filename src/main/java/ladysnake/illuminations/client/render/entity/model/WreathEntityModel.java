@@ -14,7 +14,7 @@ public class WreathEntityModel extends OverheadEntityModel {
         wreath = new ModelPart(this);
         wreath.setPivot(0.0F, 24.0F, 0.0F);
         head.addChild(wreath);
-        wreath.setTextureOffset(0, 0).addCuboid(-5.0F, -34.5F, -5.0F, 10.0F, 5.0F, 8.0F, 0.5F, false);
+        wreath.setTextureOffset(0, 0).addCuboid(-5.0F, -34.5F, -5.0F, 10.0F, 5.0F, 8.0F, 0F, false);
     }
 
     public void setRotationAngle(ModelPart bone, float x, float y, float z) {

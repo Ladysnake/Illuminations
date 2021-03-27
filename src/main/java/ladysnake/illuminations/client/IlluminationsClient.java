@@ -18,10 +18,7 @@ import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
-import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
+import ladysnake.illuminations.client.render.entity.model.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -94,6 +91,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType AUTUMN_LEAVES_AURA;
     public static DefaultParticleType SCULK_TENDRIL_AURA;
     public static DefaultParticleType SHADOWBRINGER_AURA;
+    public static DefaultParticleType GOLDENROD_AURA;
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
     public static DefaultParticleType JACKO_OVERHEAD;
@@ -149,6 +147,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SCULK_TENDRIL_AURA, SculkTendrilParticle.DefaultFactory::new);
         SHADOWBRINGER_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:shadowbringer_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
+        GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
         PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
@@ -198,6 +198,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
                 .put("sculk_tendril", new AuraData(SCULK_TENDRIL_AURA, 0.3f, 1))
                 .put("shadowbringer", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
+                .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
                 .build();
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
@@ -209,6 +210,8 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
                 .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
                 .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
+                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
+                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
                 .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
                 .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
