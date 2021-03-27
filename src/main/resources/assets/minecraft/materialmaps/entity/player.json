@@ -95,6 +95,14 @@
         }
       },
       "material": "canvas:emissive_transform"
+    },
+    {
+      "predicate": {
+        "materialPredicate": {
+          "texture": "illuminations:textures/entity/worldweaver_halo.png"
+        }
+      },
+      "material": "canvas:emissive_transform"
     }
   ]
 }
