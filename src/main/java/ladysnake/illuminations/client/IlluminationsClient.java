@@ -216,6 +216,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
                 .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
+                .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
                 .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
                 .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
                 .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
