@@ -214,8 +214,8 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
                 .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
                 .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
-                .put("sculk_tendril", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
-                .put("shadowbringer", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
+                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
+                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
                 .build();
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
