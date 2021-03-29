@@ -2,6 +2,7 @@ package ladysnake.illuminations.client.render.entity.feature;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
+import ladysnake.illuminations.client.render.CrownRenderLayer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -36,7 +37,7 @@ public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
         float g = data.getColorGreen() / 255.0F;
         float b = data.getColorBlue() / 255.0F;
         DripFeatureRenderer.playerModel.render(matrices, ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(dripTexture), false, false), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-        DripFeatureRenderer.playerModel.render(matrices, ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(dripColorTexture), false, false), light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
+        DripFeatureRenderer.playerModel.render(matrices, vertexConsumers.getBuffer(CrownRenderLayer.getCrown(dripColorTexture)), 15728880, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
     }
 
 }
