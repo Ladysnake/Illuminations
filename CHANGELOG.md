@@ -1,5 +1,14 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.7 - 1.16.5
+- Added the Illuminations contest winning crowns and auras for tier 2 donators
+    - Added the Voidheart Tiara and Shadowbringer Soul aura by azazelthedemonlord
+    - Added the Deepsculk Horns, Springfae Horns and Worldweaver Halo overheads by ArathainFarqoe
+    - Added the Glowsquid Cult and Time Aspect Cult crowns by Heather Shadelight
+    - Added the Golden Rod aura and Summerbreaze Wreath overhead by 24Chrome
+    - Added the Deep Tendrils and Autumn Leaves auras by SekoiaTree
+- Added a color customizable Drip cosmetic for over-generous donators
+
 ### Illuminations 1.4.6 - 1.16.5
 - Fixed chorus petals not uniformly rotating
 - Improved log output when having trouble with cosmetics
