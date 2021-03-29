@@ -2,8 +2,7 @@ package ladysnake.illuminations.client;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
@@ -64,7 +63,7 @@ public class IlluminationsClient implements ClientModInitializer {
 
     // illuminations cosmetics
     private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
-    private static final Gson COSMETICS_GSON = new GsonBuilder().create();
+    public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
@@ -271,5 +270,16 @@ public class IlluminationsClient implements ClientModInitializer {
                 logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
+    }
+
+    private static class PlayerCosmeticDataParser implements JsonDeserializer<PlayerCosmeticData> {
+        @Override
+        public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonObject jsonObject = json.getAsJsonObject();
+            return new PlayerCosmeticData(jsonObject.get("aura")
+                    , jsonObject.get("color")
+                    , jsonObject.get("overhead")
+                    , jsonObject.get("drip"));
+        }
     }
 }

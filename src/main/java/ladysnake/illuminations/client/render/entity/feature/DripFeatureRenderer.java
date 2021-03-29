@@ -25,7 +25,7 @@ public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (!IlluminationsClient.PLAYER_COSMETICS.containsKey(entity.getUuid()) || !entity.isInvisible() || !IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).isDrip()) {
+        if (!IlluminationsClient.PLAYER_COSMETICS.containsKey(entity.getUuid()) || entity.isInvisible() || !IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).isDrip()) {
             return;
         }
         this.getContextModel().setAttributes(playerModel);

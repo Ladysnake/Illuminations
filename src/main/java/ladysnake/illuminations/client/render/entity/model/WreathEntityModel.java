@@ -7,7 +7,7 @@ public class WreathEntityModel extends OverheadEntityModel {
     private final ModelPart wreath;
 
     public WreathEntityModel() {
-        textureWidth = 32;
+        textureWidth = 48;
         textureHeight = 16;
         head.setPivot(0.0F, 0.0F, 0.0F);
 
