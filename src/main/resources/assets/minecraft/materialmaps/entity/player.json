@@ -110,7 +110,7 @@
           "texture": "illuminations:textures/entity/drip_color.png"
         }
       },
-      "material": "canvas:emissive_no_blur"
+      "material": "canvas:emissive_transform"
     }
   ]
 }
