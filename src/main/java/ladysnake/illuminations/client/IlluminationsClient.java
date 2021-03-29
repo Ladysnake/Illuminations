@@ -92,6 +92,11 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType PRIDE_OVERHEAD;
     public static DefaultParticleType TRANS_PRIDE_OVERHEAD;
     public static DefaultParticleType JACKO_OVERHEAD;
+    public static DefaultParticleType LESBIAN_PRIDE_OVERHEAD;
+    public static DefaultParticleType BI_PRIDE_OVERHEAD;
+    public static DefaultParticleType ACE_PRIDE_OVERHEAD;
+    public static DefaultParticleType NB_PRIDE_OVERHEAD;
+    public static DefaultParticleType INTERSEX_PRIDE_OVERHEAD;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -152,6 +157,16 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
+        LESBIAN_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.LESBIAN_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        BI_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.BI_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ACE_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.ACE_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        NB_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        INTERSEX_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_overhead", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);  ///haha sex
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
@@ -207,6 +222,11 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
                 .put("jacko", JACKO_OVERHEAD)
+                .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
+                .put("bi_pride", BI_PRIDE_OVERHEAD)
+                .put("ace_pride", ACE_PRIDE_OVERHEAD)
+                .put("nb_pride", NB_PRIDE_OVERHEAD)
+                .put("intersex_pride", INTERSEX_PRIDE_OVERHEAD)
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
