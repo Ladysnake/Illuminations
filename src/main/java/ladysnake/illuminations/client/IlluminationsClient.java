@@ -9,14 +9,11 @@ import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.particle.ChorusPetalParticle;
-import ladysnake.illuminations.client.particle.EyesParticle;
-import ladysnake.illuminations.client.particle.FireflyParticle;
-import ladysnake.illuminations.client.particle.GlowwormParticle;
-import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
+import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.model.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -161,6 +158,12 @@ public class IlluminationsClient implements ClientModInitializer {
             if (entityType == EntityType.PLAYER) {
   		        registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
   	        }
+        });
+
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
+            if (entityType == EntityType.PLAYER) {
+                registrationHelper.register(new DripFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
+            }
         });
 
         // spawn biomes for Illuminations

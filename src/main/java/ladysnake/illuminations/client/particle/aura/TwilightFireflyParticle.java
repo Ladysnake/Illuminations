@@ -2,6 +2,7 @@ package ladysnake.illuminations.client.particle.aura;
 
 import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,7 +22,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 
-import java.awt.*;
 import java.util.Random;
 
 public class TwilightFireflyParticle extends FireflyParticle {
@@ -35,11 +35,10 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.maxHeight = 2;
 
         if (owner != null && owner.getUuid() != null && IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()) != null) {
-            String playerColor = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()).getColor();
-            Color color = Color.decode(playerColor);
-            this.colorRed = color.getRed() / 255f;
-            this.colorGreen = color.getGreen() / 255f;
-            this.colorBlue = color.getBlue() / 255f;
+            PlayerCosmeticData data = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid());
+            this.colorRed = data.getColorRed() / 255f;
+            this.colorGreen = data.getColorGreen() / 255f;
+            this.colorBlue = data.getColorBlue() / 255f;
             this.nextAlphaGoal = 1f;
         } else {
             this.markDead();
