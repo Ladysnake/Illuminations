@@ -110,7 +110,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
     protected void repositionFromBoundingBox() {
         Box box = this.getBoundingBox();
         this.x = (box.minX + box.maxX) / 2.0D;
-        this.y = box.minY+0.3D;
+        this.y = box.minY+0.4D;
         this.z = (box.minZ + box.maxZ) / 2.0D;
     }
 
