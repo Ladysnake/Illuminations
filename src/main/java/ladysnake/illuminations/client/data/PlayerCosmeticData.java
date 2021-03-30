@@ -22,8 +22,8 @@ public class PlayerCosmeticData {
             this.colorBlue = 0;
         } else {
             this.colorRed = Integer.valueOf(color.getAsString().substring(1, 3), 16);
-            this.colorBlue = Integer.valueOf(color.getAsString().substring(3, 5), 16);
-            this.colorGreen = Integer.valueOf(color.getAsString().substring(5), 16);
+            this.colorGreen = Integer.valueOf(color.getAsString().substring(3, 5), 16);
+            this.colorBlue = Integer.valueOf(color.getAsString().substring(5), 16);
         }
         if (overhead.isJsonNull()) {
             this.overhead = null;
