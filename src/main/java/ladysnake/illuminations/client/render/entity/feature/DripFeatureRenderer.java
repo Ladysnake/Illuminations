@@ -16,7 +16,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-    private static final BipedEntityModel<AbstractClientPlayerEntity> playerModel = new BipedEntityModel<>(1.0F);
+    private static final BipedEntityModel<AbstractClientPlayerEntity> playerModel = new BipedEntityModel<>(1.1F);
     private static final Identifier dripTexture = new Identifier("illuminations", "textures/entity/drip.png");
     private static final Identifier dripColorTexture = new Identifier("illuminations", "textures/entity/drip_color.png");
     public DripFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {

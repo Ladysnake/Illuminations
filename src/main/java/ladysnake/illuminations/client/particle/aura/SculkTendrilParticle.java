@@ -84,7 +84,13 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
             wasOnGround = true;
         }
         if (this.age++ < this.maxAge) {
-            this.scale = Math.min(0.4f, this.scale + 0.05f);
+            if (this.scale == 0f) {
+                this.y -= 0.4f;
+            }
+            if (this.scale < 0.4f) {
+                this.scale = Math.min(0.4f, this.scale + 0.05f);
+                this.y += 0.05f;
+            }
             if (this.age == 75) {
                 this.setSprite(provider.getSprite(1,1));
             }
@@ -99,6 +105,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
 
         if (this.age >= this.maxAge) {
             this.scale = Math.max(0f, this.scale-0.05f);
+            this.y -= 0.05f;
 
             if (this.scale <= 0f) {
                 this.markDead();
