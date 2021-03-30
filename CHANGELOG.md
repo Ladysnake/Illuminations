@@ -1,5 +1,10 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.4.8 - 1.16.5
+- Fixed an issue that caused the prismatic color to not be retrieved from the dashboard
+- Fixed the bad UV mapping of the Summerbreeze Wreath and the Voidhearrt Tiara crowns
+- Fixed Drip only appearing when invisible
+
 ### Illuminations 1.4.7 - 1.16.5
 - Added the Illuminations contest winning crowns and auras for tier 2 donators
     - Added the Voidheart Tiara and Shadowbringer Soul aura by azazelthedemonlord
