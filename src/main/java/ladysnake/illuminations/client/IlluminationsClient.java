@@ -252,22 +252,22 @@ public class IlluminationsClient implements ClientModInitializer {
                 Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
                 return playerData;
             } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+                logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+                logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because of I/O Error: " + e.getMessage());
             }
 
             return null;
         }).exceptionally(throwable -> {
-            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics retrieved");
+                logger.log(Level.INFO, "(Illuminations) Player cosmetics retrieved");
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
+                logger.log(Level.WARN, "(Illuminations) Player cosmetics could not be retrieved, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
     }
