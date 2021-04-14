@@ -22,6 +22,8 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.ReusableStream;
 import net.minecraft.util.math.BlockPos;
@@ -128,7 +130,9 @@ public class WillOWispParticle extends Particle {
             this.onGround = false;
         }
 
-        if ()
+        if (random.nextInt(20) == 0) {
+            this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+        }
     }
 
     @Override
