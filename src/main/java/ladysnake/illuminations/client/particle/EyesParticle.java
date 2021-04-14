@@ -4,7 +4,11 @@ import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
@@ -75,11 +79,11 @@ public class EyesParticle extends SpriteBillboardParticle {
                 this.setSprite(spriteProvider.getSprite(3, 3));
             }
         } else {
-            if (this.age < this.maxAge+1) {
+            if (this.age < this.maxAge + 1) {
                 this.setSprite(spriteProvider.getSprite(2, 3));
-            } else if (this.age < this.maxAge+2) {
+            } else if (this.age < this.maxAge + 2) {
                 this.setSprite(spriteProvider.getSprite(1, 3));
-            } else if (this.age < this.maxAge+3) {
+            } else if (this.age < this.maxAge + 3) {
                 this.setSprite(spriteProvider.getSprite(0, 3));
             } else {
                 this.markDead();

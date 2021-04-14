@@ -38,7 +38,7 @@ public abstract class ClientWorldMixin extends World {
                 if (illuminationData.getTimeSpawnPredicate().test(this.getTimeOfDay())
                         && illuminationData.getLocationSpawnPredicate().test(this, pos)
                         && illuminationData.shouldAddParticle(this.random)) {
-                    this.addParticle(illuminationData.getIlluminationType(), (double)pos.getX() + this.random.nextDouble(), (double)pos.getY() + this.random.nextDouble(), (double)pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
+                    this.addParticle(illuminationData.getIlluminationType(), (double) pos.getX() + this.random.nextDouble(), (double) pos.getY() + this.random.nextDouble(), (double) pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
                 }
             });
         }
@@ -47,7 +47,7 @@ public abstract class ClientWorldMixin extends World {
         if (IlluminationsClient.EYES_TIME_PREDICATE.test(this.getTimeOfDay())
                 && IlluminationsClient.EYES_LOCATION_PREDICATE.test(this, pos)
                 && random.nextFloat() <= IlluminationsClient.EYES_SPAWN_CHANCE) {
-            this.addParticle(IlluminationsClient.EYES, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+            this.addParticle(IlluminationsClient.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }
 

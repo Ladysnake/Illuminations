@@ -2,7 +2,11 @@ package ladysnake.illuminations.client.particle.aura;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -21,8 +25,8 @@ public class GhostlyParticle extends SpriteBillboardParticle {
 
     private final PlayerEntity owner;
     protected float alpha = 0f;
-    protected float offsetX = RANDOM.nextFloat()*.7f-0.35f;
-    protected float offsetZ = RANDOM.nextFloat()*.7f-0.35f;
+    protected float offsetX = RANDOM.nextFloat() * .7f - 0.35f;
+    protected float offsetZ = RANDOM.nextFloat() * .7f - 0.35f;
     protected float offsetY = 0;
     private final int variant = RANDOM.nextInt(4);
 
@@ -35,7 +39,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale *= 1f + RANDOM.nextFloat();
-        this.maxAge = RANDOM.nextInt(5)+8;
+        this.maxAge = RANDOM.nextInt(5) + 8;
         this.collidesWithWorld = true;
         this.setSprite(spriteProvider.getSprite(variant, 3));
 
@@ -43,7 +47,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
             this.colorRed = 1f;
             this.colorGreen = 1f;
             this.colorBlue = 1f;
-            this.setPos(owner.getX()+offsetX, owner.getY()+offsetY, owner.getZ()+offsetZ);
+            this.setPos(owner.getX() + offsetX, owner.getY() + offsetY, owner.getZ() + offsetZ);
         } else {
             this.markDead();
         }
@@ -52,9 +56,9 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
-        float f = (float)(MathHelper.lerp((double)tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float)(MathHelper.lerp((double)tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float)(MathHelper.lerp((double)tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
@@ -69,13 +73,13 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getSize(tickDelta);
 
-        for(int k = 0; k < 4; ++k) {
+        for (int k = 0; k < 4; ++k) {
             Vector3f vector3f2 = vector3fs[k];
             float tmpY = vector3f2.getY();
             vector3f2.set(vector3f2.getX(), 0, vector3f2.getZ());
             // rotate so it always faces the player
             vector3f2.rotate(quaternion2);
-            vector3f2.set(vector3f2.getX() / (1 + offsetY*offsetY), tmpY * offsetY, vector3f2.getZ() / (1 + offsetY*offsetY));
+            vector3f2.set(vector3f2.getX() / (1 + offsetY * offsetY), tmpY * offsetY, vector3f2.getZ() / (1 + offsetY * offsetY));
             vector3f2.scale(j);
             vector3f2.add(f, g, h);
         }
@@ -87,10 +91,10 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         int l = 15728880;
         float a = MathHelper.clamp(this.alpha, 0.0F, MAXIMUM_ALPHA);
 
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[0].getX(), (double) vector3fs[0].getY(), (double) vector3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[1].getX(), (double) vector3fs[1].getY(), (double) vector3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[2].getX(), (double) vector3fs[2].getY(), (double) vector3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[3].getX(), (double) vector3fs[3].getY(), (double) vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {

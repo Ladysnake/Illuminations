@@ -10,7 +10,7 @@ public class OverheadData {
 
     public OverheadData(OverheadEntityModel model, String textureName) {
         this.model = model;
-        this.texture = new Identifier(IlluminationsClient.MODID, "textures/entity/"+textureName+".png");
+        this.texture = new Identifier(IlluminationsClient.MODID, "textures/entity/" + textureName + ".png");
     }
 
     public OverheadEntityModel getModel() {

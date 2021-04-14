@@ -21,17 +21,17 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
         this.scale = 0.9f;
 
 
-        this.setPos(this.x + get_rando(), this.y + random.nextFloat()+0.5 * 1.5d, this.z + get_rando());
+        this.setPos(this.x + get_rando(), this.y + random.nextFloat() + 0.5 * 1.5d, this.z + get_rando());
     }
 
     private int elevation = 0;
 
     public double get_rando() {
-        double rando = (random.nextFloat()-0.5)*1.4;
+        double rando = (random.nextFloat() - 0.5) * 1.4;
         if (rando < 0.3 && rando > 0) {
-            rando+=0.3;
+            rando += 0.3;
         } else if (rando < 0 && rando > -0.3) {
-            rando-=0.3;
+            rando -= 0.3;
         }
         return rando;
     }
@@ -50,7 +50,7 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
     }
 
     public void tick() {
-        this.age+=2;
+        this.age += 2;
         if (this.age < this.maxAge) {
             this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
         }
@@ -70,7 +70,7 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
                 this.velocityY = -0.3;
                 elevation -= 1;
             }
-        } else if (Math.abs(this.velocityY) > 0.08){
+        } else if (Math.abs(this.velocityY) > 0.08) {
             this.velocityY *= 0.5;
         } else {
             this.velocityY = 0;
@@ -80,7 +80,7 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
         this.colorGreen *= 0.98;
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha-0.1f);
+            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
             if (this.colorAlpha <= 0f) {
                 this.markDead();
             }

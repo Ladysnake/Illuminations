@@ -2,7 +2,11 @@ package ladysnake.illuminations.client.particle.aura;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -21,11 +25,11 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
     private static final Random RANDOM = new Random();
 
     public SculkTendrilParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x + (RANDOM.nextFloat()*2f - 1.0f), y, z + (RANDOM.nextFloat()*2f - 1.0f), velocityX, velocityY, velocityZ);
+        super(world, x + (RANDOM.nextFloat() * 2f - 1.0f), y, z + (RANDOM.nextFloat() * 2f - 1.0f), velocityX, velocityY, velocityZ);
         this.setSprite(spriteProvider.getSprite(0, 1));
         provider = spriteProvider;
         this.maxAge = 100;
-        this.angle = RANDOM.nextFloat()*180f;
+        this.angle = RANDOM.nextFloat() * 180f;
 
         this.scale = 0f;
         this.collidesWithWorld = true;
@@ -43,6 +47,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
             return new SculkTendrilParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
+
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
@@ -71,7 +76,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
         vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
         vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
     }
-    
+
     @Override
     public void tick() {
         if (!this.onGround) {
@@ -92,7 +97,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
                 this.y += 0.05f;
             }
             if (this.age == 75) {
-                this.setSprite(provider.getSprite(1,1));
+                this.setSprite(provider.getSprite(1, 1));
             }
         }
         this.setBoundingBox(this.getBoundingBox().expand(0, 1, 0));
@@ -104,7 +109,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
         this.prevAngle = this.angle;
 
         if (this.age >= this.maxAge) {
-            this.scale = Math.max(0f, this.scale-0.05f);
+            this.scale = Math.max(0f, this.scale - 0.05f);
             this.y -= 0.05f;
 
             if (this.scale <= 0f) {
@@ -117,7 +122,7 @@ public class SculkTendrilParticle extends SpriteBillboardParticle {
     protected void repositionFromBoundingBox() {
         Box box = this.getBoundingBox();
         this.x = (box.minX + box.maxX) / 2.0D;
-        this.y = box.minY+0.4D;
+        this.y = box.minY + 0.4D;
         this.z = (box.minZ + box.maxZ) / 2.0D;
     }
 

@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "illuminations",
   "version": "${version}",
-
   "name": "Illuminations",
   "description": "Fireflies, other illuminations to make your world more enjoyable in darkness and player cosmetics.",
   "authors": [
@@ -13,16 +12,13 @@
     "sources": "https://github.com/Ladysnake/Illuminations",
     "issues": "https://github.com/Ladysnake/Illuminations/issues"
   },
-
   "license": "Code: GNU GPLv3; Art: ARR",
   "icon": "assets/illuminations/illuminations.png",
-
   "custom": {
     "vanguard": {
       "update-url": "https://illuminations.uuid.gg/latest?version="
     }
   },
-
   "environment": "client",
   "entrypoints": {
     "client": [
@@ -35,7 +31,6 @@
   "mixins": [
     "illuminations.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"

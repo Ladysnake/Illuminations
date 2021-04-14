@@ -9,7 +9,6 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
 public class ShadowbringerParticle extends ChorusPetalParticle {
@@ -23,8 +22,8 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 
         this.maxAge = 40 + random.nextInt(40);
         this.velocityY = (0.2 + random.nextFloat()) / 10;
-        this.velocityX = negateX ? -random.nextGaussian()/50 : random.nextGaussian()/50;
-        this.velocityZ = negateZ ? -random.nextGaussian()/50 : random.nextGaussian()/50;
+        this.velocityX = negateX ? -random.nextGaussian() / 50 : random.nextGaussian() / 50;
+        this.velocityZ = negateZ ? -random.nextGaussian() / 50 : random.nextGaussian() / 50;
         this.scale = (float) (scale + (random.nextGaussian() / 12.0));
         this.spriteProvider = spriteProvider;
 
@@ -62,13 +61,13 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 
         this.move(this.velocityX, this.velocityY, this.velocityZ);
 
-        if(age > 0 && maxAge > 0) {
+        if (age > 0 && maxAge > 0) {
             float agePercent = (float) ((float) age / maxAge * 1.5);
             this.setSprite(spriteProvider.getSprite(Math.min(3, (int) (agePercent * 4)), 3));
         }
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha-0.015f);
+            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.015f);
 
             if (this.colorAlpha <= 0f) {
                 this.markDead();

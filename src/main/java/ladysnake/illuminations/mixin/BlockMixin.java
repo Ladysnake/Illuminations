@@ -14,5 +14,6 @@ import java.util.Random;
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "randomDisplayTick", at = @At("RETURN"))
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {}
+    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    }
 }

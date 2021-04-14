@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.particle.aura;
+package ladysnake.illuminations.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,32 +18,57 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Random;
 
-public class AutumnLeavesParticle extends SpriteBillboardParticle {
-    private final int variant = RANDOM.nextInt(6);
-
-    private static final Random RANDOM = new Random();
+public class WispTrailParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
 
-    private final double beginX;
-    private final double beginY;
-    private final double beginZ;
-
-    public AutumnLeavesParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y + 0.05F, z, velocityX, velocityY, velocityZ);
+    protected WispTrailParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, SpriteProvider spriteProvider) {
+        super(clientWorld, d, e, f, g, h, i);
+        this.maxAge = 10 + this.random.nextInt(10);
+        this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
         this.spriteProvider = spriteProvider;
+        this.setSpriteForAge(spriteProvider);
+        this.velocityY = 0.1;
+    }
 
-        this.scale *= 0.5F + RANDOM.nextFloat() / 2.0F;
-        this.maxAge = 30 + RANDOM.nextInt(60);
-        this.collidesWithWorld = true;
-        this.setSprite(spriteProvider.getSprite(this.variant % 3, 2));
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
 
-        this.colorGreen = RANDOM.nextFloat() / 2f + 0.5f;
-        this.colorBlue = 0f;
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
 
-        beginX = x;
-        beginY = y;
-        beginZ = z;
-        this.angle = random.nextFloat() * 360f;
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new WispTrailParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+        }
+    }
+
+    @Override
+    public ParticleTextureSheet getType() {
+        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+    }
+
+    @Override
+    public void tick() {
+        this.prevPosX = this.x;
+        this.prevPosY = this.y;
+        this.prevPosZ = this.z;
+
+        // fade and die
+        if (this.age++ >= this.maxAge) {
+            colorAlpha -= 0.05f;
+        }
+        if (colorAlpha < 0f || this.scale <= 0f) {
+            this.markDead();
+        }
+
+        colorRed = Math.max(0, colorRed-0.05f);
+
+        this.velocityY -= 0.001;
+        this.velocityX = 0;
+        this.velocityZ = 0;
+        this.scale = Math.max(0, this.scale - 0.005f);
+        this.move(velocityX, velocityY, velocityZ);
     }
 
     @Override
@@ -57,8 +82,8 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
             quaternion2 = camera.getRotation();
         } else {
             quaternion2 = new Quaternion(camera.getRotation());
-            float i = this.angle;
-            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getDegreesQuaternion(i));
+            float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
+            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getRadialQuaternion(i));
         }
 
         Vector3f vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
@@ -85,46 +110,4 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
         vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
     }
 
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new AutumnLeavesParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
-    }
-
-    public void tick() {
-        if (this.age++ < this.maxAge - 10) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
-        }
-
-        this.prevPosX = this.x;
-        this.prevPosY = this.y;
-        this.prevPosZ = this.z;
-
-        this.colorGreen *= 0.98;
-
-        float fraction = this.age / (float) this.maxAge;
-        this.x = MathHelper.cos(this.age / 15.0F + 1.0471973f * (variant + 0.5f)) * fraction + beginX;
-        this.z = MathHelper.sin(this.age / 15.0F + 1.0471973f * (variant + 0.5f)) * fraction + beginZ;
-        this.y = this.age / 34.0F + beginY + 0.05F;
-
-        if (this.age >= this.maxAge - 10) {
-
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
-
-            if (this.colorAlpha <= 0f) {
-                this.markDead();
-            }
-        }
-    }
 }

@@ -19,6 +19,7 @@ public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
     private static final BipedEntityModel<AbstractClientPlayerEntity> playerModel = new BipedEntityModel<>(1.1F);
     private static final Identifier dripTexture = new Identifier("illuminations", "textures/entity/drip.png");
     private static final Identifier dripColorTexture = new Identifier("illuminations", "textures/entity/drip_color.png");
+
     public DripFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {
         super(context);
     }

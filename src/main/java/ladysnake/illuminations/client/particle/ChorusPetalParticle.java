@@ -2,7 +2,11 @@ package ladysnake.illuminations.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -35,13 +39,13 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         if (velocityY == 0f && velocityX == 0f && velocityZ == 0f) {
             this.colorAlpha = 0f;
         }
-        
-        this.velocityY = velocityY -0.15D - random.nextFloat()/10;
-        this.velocityX = velocityX -0.05D - random.nextFloat()/10;
-        this.velocityZ = velocityZ -0.05D - random.nextFloat()/10;
 
-        this.rotationFactor = ((float)Math.random() - 0.5F) * 0.01F;
-        this.angle = random.nextFloat()*360f;
+        this.velocityY = velocityY - 0.15D - random.nextFloat() / 10;
+        this.velocityX = velocityX - 0.05D - random.nextFloat() / 10;
+        this.velocityZ = velocityZ - 0.05D - random.nextFloat() / 10;
+
+        this.rotationFactor = ((float) Math.random() - 0.5F) * 0.01F;
+        this.angle = random.nextFloat() * 360f;
     }
 
     @Override
@@ -49,9 +53,9 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.colorRed = Math.max(this.colorGreen, 0.3f);
 
         Vec3d vec3d = camera.getPos();
-        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
@@ -79,10 +83,10 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(vector3fs[0].getX(), vector3fs[0].getY(), vector3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(vector3fs[1].getX(), vector3fs[1].getY(), vector3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -123,7 +127,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 //            this.colorRed *= 0.9;
 //            this.colorGreen *= 0.8;
 
-            this.colorAlpha = Math.max(0f, this.colorAlpha-0.1f);
+            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
 
             if (this.colorAlpha <= 0f) {
                 this.markDead();

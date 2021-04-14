@@ -2,19 +2,42 @@ package ladysnake.illuminations.client;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.particle.*;
-import ladysnake.illuminations.client.particle.aura.*;
+import ladysnake.illuminations.client.particle.ChorusPetalParticle;
+import ladysnake.illuminations.client.particle.EyesParticle;
+import ladysnake.illuminations.client.particle.FireflyParticle;
+import ladysnake.illuminations.client.particle.GlowwormParticle;
+import ladysnake.illuminations.client.particle.PlanktonParticle;
+import ladysnake.illuminations.client.particle.WillOWispParticle;
+import ladysnake.illuminations.client.particle.WispTrailParticle;
+import ladysnake.illuminations.client.particle.aura.AutumnLeavesParticle;
+import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
+import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
+import ladysnake.illuminations.client.particle.aura.GoldenrodAuraParticle;
+import ladysnake.illuminations.client.particle.aura.SculkTendrilParticle;
+import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
+import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
 import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.*;
+import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
+import ladysnake.illuminations.client.render.entity.model.HornEntityModel;
+import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
+import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
+import ladysnake.illuminations.client.render.entity.model.WorldweaverHaloEntityModel;
+import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -64,7 +87,8 @@ public class IlluminationsClient implements ClientModInitializer {
     // illuminations cosmetics
     private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
-    static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>(){}.getType();
+    static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
+    }.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> OLD_OVERHEADS_DATA;
@@ -79,6 +103,8 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType PLANKTON;
     public static DefaultParticleType EYES;
     public static DefaultParticleType CHORUS_PETAL;
+    public static DefaultParticleType WILL_O_WISP;
+    public static DefaultParticleType WISP_TRAIL;
 
     // aura particle types
     public static DefaultParticleType TWILIGHT_AURA;
@@ -107,7 +133,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // 0.25965086 --> 13000
         // 0.7403491 --> 23000
         return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
-            && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
+                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
     };
     public static final Predicate<Long> GLOWWORM_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
@@ -135,6 +161,10 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.EYES, EyesParticle.DefaultFactory::new);
         CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_petal", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
+        WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP, WillOWispParticle.DefaultFactory::new);
+        WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp_trail", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP_TRAIL, WispTrailParticle.DefaultFactory::new);
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
@@ -170,8 +200,8 @@ public class IlluminationsClient implements ClientModInitializer {
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
             if (entityType == EntityType.PLAYER) {
-  		        registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
-  	        }
+                registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
+            }
         });
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {

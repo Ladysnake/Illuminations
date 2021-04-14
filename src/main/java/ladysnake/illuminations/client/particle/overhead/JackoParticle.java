@@ -40,9 +40,9 @@ public class JackoParticle extends OverheadParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
-        float f = (float)(MathHelper.lerp((double)tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float)(MathHelper.lerp((double)tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float)(MathHelper.lerp((double)tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
@@ -57,7 +57,7 @@ public class JackoParticle extends OverheadParticle {
         Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getSize(tickDelta);
 
-        for(int k = 0; k < 4; ++k) {
+        for (int k = 0; k < 4; ++k) {
             Vector3f vector3f2 = vector3fs[k];
             vector3f2.rotate(quaternion2);
             vector3f2.scale(j);
@@ -74,16 +74,16 @@ public class JackoParticle extends OverheadParticle {
         float gl = Math.min(1f, Math.max(0f, this.glow));
 
         // pumpkin
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double) vector3fs[0].getX(), (double) vector3fs[0].getY(), (double) vector3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double) vector3fs[1].getX(), (double) vector3fs[1].getY(), (double) vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double) vector3fs[2].getX(), (double) vector3fs[2].getY(), (double) vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex((double) vector3fs[3].getX(), (double) vector3fs[3].getY(), (double) vector3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
 
         // pumpkin glow
-        vertexConsumer.vertex((double)vector3fs[0].getX(), (double)vector3fs[0].getY(), (double)vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[1].getX(), (double)vector3fs[1].getY(), (double)vector3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[2].getX(), (double)vector3fs[2].getY(), (double)vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double)vector3fs[3].getX(), (double)vector3fs[3].getY(), (double)vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[0].getX(), (double) vector3fs[0].getY(), (double) vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[1].getX(), (double) vector3fs[1].getY(), (double) vector3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[2].getX(), (double) vector3fs[2].getY(), (double) vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex((double) vector3fs[3].getX(), (double) vector3fs[3].getY(), (double) vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, gl).light(l).next();
     }
 
     @Override
@@ -113,7 +113,7 @@ public class JackoParticle extends OverheadParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age/12f)/12f, owner.getZ());
+            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ());
         } else {
             this.markDead();
         }

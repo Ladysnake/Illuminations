@@ -20,11 +20,15 @@ import java.util.Random;
 
 @Mixin(ParticleManager.class)
 public abstract class ParticleManagerMixin {
-    @Shadow protected ClientWorld world;
+    @Shadow
+    protected ClientWorld world;
 
-    @Shadow public abstract Particle addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ);
+    @Shadow
+    public abstract Particle addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ);
 
-    @Shadow @Final private Random random;
+    @Shadow
+    @Final
+    private Random random;
 
     @Inject(method = "addBlockBreakParticles", at = @At(value = "RETURN"))
     public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {

@@ -31,16 +31,16 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
             general.addEntry(entryBuilder
-                .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDark"), Config.EyesInTheDark.class, Config.getEyesInTheDark())
-                .setTooltip(
-                    new TranslatableText("option.tooltip.illuminations.eyesInTheDark"),
-                    new TranslatableText("option.tooltip.illuminations.eyesInTheDark.default"),
-                    new TranslatableText("option.tooltip.illuminations.eyesInTheDark.enable"),
-                    new TranslatableText("option.tooltip.illuminations.eyesInTheDark.disable"),
-                    new TranslatableText("option.tooltip.illuminations.eyesInTheDark.always"))
-                .setSaveConsumer(Config::setEyesInTheDark)
-                .setDefaultValue(Config.EyesInTheDark.ENABLE)
-                .build());
+                    .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDark"), Config.EyesInTheDark.class, Config.getEyesInTheDark())
+                    .setTooltip(
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDark"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDark.default"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDark.enable"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDark.disable"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDark.always"))
+                    .setSaveConsumer(Config::setEyesInTheDark)
+                    .setDefaultValue(Config.EyesInTheDark.ENABLE)
+                    .build());
 
             general.addEntry(entryBuilder
                     .startIntSlider(new TranslatableText("option.illuminations.density"), Config.getDensity(), 0, 1000)
