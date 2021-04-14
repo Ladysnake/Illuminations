@@ -62,7 +62,8 @@ public class WispTrailParticle extends SpriteBillboardParticle {
             this.markDead();
         }
 
-        colorRed = Math.max(0, colorRed-0.05f);
+        colorRed = Math.max(0, colorRed-0.1f);
+        colorGreen = Math.max(0, colorGreen-0.01f);
 
         this.velocityY -= 0.001;
         this.velocityX = 0;
