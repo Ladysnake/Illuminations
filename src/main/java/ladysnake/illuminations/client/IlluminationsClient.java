@@ -30,6 +30,7 @@ import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
+import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
 import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
@@ -106,7 +107,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType WILL_O_WISP;
     public static DefaultParticleType WISP_TRAIL;
 
-    // aura particle types
+    // aura, overhead and pet particle types
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
     public static DefaultParticleType CHORUS_AURA;
@@ -122,6 +123,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType ACE_PRIDE_OVERHEAD;
     public static DefaultParticleType NB_PRIDE_OVERHEAD;
     public static DefaultParticleType INTERSEX_PRIDE_OVERHEAD;
+    public static DefaultParticleType WILL_O_WISP_PET;
 
     // spawn biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -196,6 +198,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
         INTERSEX_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);  ///haha sex
+        WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, PlayerWispParticle.DefaultFactory::new);
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
@@ -250,7 +254,7 @@ public class IlluminationsClient implements ClientModInitializer {
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
-                .put("jacko", JACKO_OVERHEAD)
+                .put("jacko", WILL_O_WISP_PET)
                 .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
                 .put("bi_pride", BI_PRIDE_OVERHEAD)
                 .put("ace_pride", ACE_PRIDE_OVERHEAD)
