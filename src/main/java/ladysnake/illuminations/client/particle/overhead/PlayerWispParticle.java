@@ -14,13 +14,15 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class PlayerWispParticle extends WillOWispParticle {
     protected PlayerEntity owner;
 
     protected PlayerWispParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
-        this.maxAge = 40;
+        this.maxAge = 35;
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         if (this.owner == null) {
@@ -41,7 +43,11 @@ public class PlayerWispParticle extends WillOWispParticle {
     @Override
     public void tick() {
         if (this.age > 10) {
-            this.colorAlpha = 1;
+            this.colorAlpha = 1f;
+
+            for (int i = 0; i < 1; i++) {
+                this.world.addParticle(IlluminationsClient.WISP_TRAIL, this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0.2d, 0);
+            }
         } else {
             this.colorAlpha = 0;
         }
@@ -56,13 +62,12 @@ public class PlayerWispParticle extends WillOWispParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX() + 0.5, owner.getY() + owner.getHeight() + 0.5f, owner.getZ() +0.5);
-            this.pitch = owner.pitch;
-            this.yaw = owner.yaw;
+            this.setPos(owner.getX() + Math.cos(owner.bodyYaw/50) * 0.5, owner.getY() + owner.getHeight() + 0.5f  + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.sin(owner.bodyYaw/50) * 0.5);
 
-            for (int i = 0; i < 1; i++) {
-                this.world.addParticle(IlluminationsClient.WISP_TRAIL, this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0.2d, 0);
-            }
+            this.pitch = -owner.pitch;
+            this.prevPitch = -owner.prevPitch;
+            this.yaw = -owner.yaw;
+            this.prevYaw = -owner.prevYaw;
         } else {
             this.markDead();
         }

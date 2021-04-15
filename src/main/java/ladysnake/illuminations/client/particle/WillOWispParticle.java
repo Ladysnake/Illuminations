@@ -24,6 +24,7 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.ReusableStream;
 import net.minecraft.util.math.BlockPos;
@@ -83,7 +84,9 @@ public class WillOWispParticle extends Particle {
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
         VertexConsumer vertexConsumer2 = immediate.getBuffer(this.LAYER);
-        this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
+        if (colorAlpha > 0) {
+            this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
+        }
         immediate.draw();
     }
 
@@ -127,7 +130,6 @@ public class WillOWispParticle extends Particle {
 
         if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
             this.move(velocityX, velocityY, velocityZ);
-            this.onGround = false;
         }
 
         if (random.nextInt(20) == 0) {
@@ -151,7 +153,7 @@ public class WillOWispParticle extends Particle {
             this.repositionFromBoundingBox();
         }
 
-        this.onGround = dy != dy && e < 0.0D;
+        this.onGround = dy != dy && e < 0.0D && !this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
         if (d != dx) {
             this.velocityX = 0.0D;
         }
@@ -172,7 +174,7 @@ public class WillOWispParticle extends Particle {
         this.zTarget = this.z + random.nextGaussian() * 10;
 
         BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
-        if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)) {
+        if (this.world.getBlockState(targetPos).isFullCube(world, targetPos) && !this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
             this.selectBlockTarget();
         }
 

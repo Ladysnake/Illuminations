@@ -52,7 +52,9 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -125,11 +127,11 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType INTERSEX_PRIDE_OVERHEAD;
     public static DefaultParticleType WILL_O_WISP_PET;
 
-    // spawn biomes
+    // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+    public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
 
     // spawn predicates
-    public static final Predicate<Long> FIREFLY_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> {
         // sky angle --> time of day
         // 0.25965086 --> 13000
@@ -137,12 +139,10 @@ public class IlluminationsClient implements ClientModInitializer {
         return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
                 && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
     };
-    public static final Predicate<Long> GLOWWORM_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
-    public static final Predicate<Long> PLANKTON_TIME_PREDICATE = aLong -> true;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final Predicate<Long> EYES_TIME_PREDICATE = aLong -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS);
-    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
 
     @Override
     public void onInitializeClient() {
@@ -214,32 +214,38 @@ public class IlluminationsClient implements ClientModInitializer {
             }
         });
 
-        // spawn biomes for Illuminations
+        // spawn biome categories for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
                 .put(Biome.Category.JUNGLE, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
                 .put(Biome.Category.PLAINS, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
                 .put(Biome.Category.SAVANNA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
                 .put(Biome.Category.TAIGA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
                 .put(Biome.Category.FOREST, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
                 .put(Biome.Category.RIVER, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
                 .put(Biome.Category.SWAMP, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_TIME_PREDICATE, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
-                        new IlluminationData(GLOWWORM, GLOWWORM_TIME_PREDICATE, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
+                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
+                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
                 .put(Biome.Category.OCEAN, ImmutableSet.of(
-                        new IlluminationData(PLANKTON, PLANKTON_TIME_PREDICATE, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
+                        new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
                 .build();
+        // specific spawn biomes for Illuminations
+        ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
+                .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
+                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, 0.0001F))) //0.000001F
+                .build();
+
 
         // aura matching and spawn chances + overhead matching + crown matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
