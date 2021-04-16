@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.mojang.serialization.Codec;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
@@ -20,6 +21,7 @@ import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
 import ladysnake.illuminations.client.particle.WillOWispParticle;
+import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
 import ladysnake.illuminations.client.particle.WispTrailParticle;
 import ladysnake.illuminations.client.particle.aura.AutumnLeavesParticle;
 import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
@@ -52,6 +54,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
@@ -76,7 +79,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 @Environment(EnvType.CLIENT)
 public class IlluminationsClient implements ClientModInitializer {
@@ -107,7 +109,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType EYES;
     public static DefaultParticleType CHORUS_PETAL;
     public static DefaultParticleType WILL_O_WISP;
-    public static DefaultParticleType WISP_TRAIL;
+    public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
 
     // aura, overhead and pet particle types
     public static DefaultParticleType TWILIGHT_AURA;
@@ -166,8 +168,13 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
         WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP, WillOWispParticle.DefaultFactory::new);
-        WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp_trail", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP_TRAIL, WispTrailParticle.DefaultFactory::new);
+        WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp_trail", new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
+            @Override
+            public Codec<WispTrailParticleEffect> getCodec() {
+                return WispTrailParticleEffect.CODEC;
+            }
+        });
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP_TRAIL, WispTrailParticle.Factory::new);
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);

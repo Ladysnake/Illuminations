@@ -123,7 +123,7 @@ public class WillOWispParticle extends Particle {
         this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
 
         for (int i = 0; i < 10 * this.speedModifier; i++) {
-            this.world.addParticle(IlluminationsClient.WISP_TRAIL, this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0.2d, 0);
+            this.world.addParticle(new WispTrailParticleEffect(1.0f, 1.0f, 1.0f), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0.2d, 0);
         }
 
         if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
