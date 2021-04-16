@@ -207,9 +207,9 @@ public class IlluminationsClient implements ClientModInitializer {
         INTERSEX_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);  ///haha sex
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png")));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png")));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.01f, +0.1f, 0.0f));
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {

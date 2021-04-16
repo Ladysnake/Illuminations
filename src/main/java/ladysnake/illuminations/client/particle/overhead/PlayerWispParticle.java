@@ -17,7 +17,11 @@ import org.jetbrains.annotations.Nullable;
 public class PlayerWispParticle extends WillOWispParticle {
     protected PlayerEntity owner;
 
-    protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
+    private final float redEvolution;
+    private final float greenEvolution;
+    private final float blueEvolution;
+
+    protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
         super(world, x, y, z, texture);
         this.maxAge = 35;
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
@@ -25,20 +29,39 @@ public class PlayerWispParticle extends WillOWispParticle {
         if (this.owner == null) {
             this.markDead();
         }
+
+        this.colorRed = red;
+        this.colorGreen = green;
+        this.colorBlue = blue;
+        this.redEvolution = redEvolution;
+        this.blueEvolution = blueEvolution;
+        this.greenEvolution = greenEvolution;
     }
 
     @Environment(EnvType.CLIENT)
     public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
         private final Identifier texture;
+        private final float red;
+        private final float green;
+        private final float blue;
+        private final float redEvolution;
+        private final float greenEvolution;
+        private final float blueEvolution;
 
-        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture) {
+        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
             this.texture = texture;
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+            this.redEvolution = redEvolution;
+            this.greenEvolution = greenEvolution;
+            this.blueEvolution = blueEvolution;
         }
 
         @Nullable
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new PlayerWispParticle(world, x, y, z, this.texture);
+            return new PlayerWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
         }
     }
 
@@ -48,7 +71,7 @@ public class PlayerWispParticle extends WillOWispParticle {
             this.colorAlpha = 1f;
 
             for (int i = 0; i < 1; i++) {
-                this.world.addParticle(new WispTrailParticleEffect(1.0f, 0.0f, 0.0f), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+                this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
             }
         } else {
             this.colorAlpha = 0;
