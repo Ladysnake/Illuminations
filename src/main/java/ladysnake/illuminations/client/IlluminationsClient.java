@@ -129,6 +129,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType INTERSEX_PRIDE_OVERHEAD;
     public static DefaultParticleType WILL_O_WISP_PET;
     public static DefaultParticleType GOLDEN_WILL_PET;
+    public static DefaultParticleType FOUNDING_SKULL_PET;
 
     // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -209,7 +210,9 @@ public class IlluminationsClient implements ClientModInitializer {
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.01f, +0.1f, 0.0f));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.05f, -0.01f, 0.0f));
+        FOUNDING_SKULL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:founding_skull_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.0f, -0.01f, 0.0f, 0.0f));
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
@@ -270,7 +273,7 @@ public class IlluminationsClient implements ClientModInitializer {
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
-                .put("jacko", GOLDEN_WILL_PET)
+                .put("jacko", FOUNDING_SKULL_PET)
                 .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
                 .put("bi_pride", BI_PRIDE_OVERHEAD)
                 .put("ace_pride", ACE_PRIDE_OVERHEAD)
