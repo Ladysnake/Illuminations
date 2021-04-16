@@ -21,7 +21,6 @@ import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.BlockTags;
@@ -36,7 +35,7 @@ import java.util.stream.Stream;
 public class WillOWispParticle extends Particle {
     private final Model model;
     private final RenderLayer LAYER;
-    public static final Identifier TEXTURE = new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png");
+    public final Identifier texture;
 
     public float yaw;
     public float pitch;
@@ -45,10 +44,11 @@ public class WillOWispParticle extends Particle {
 
     public float speedModifier;
 
-    protected WillOWispParticle(ClientWorld world, double x, double y, double z) {
+    protected WillOWispParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
         super(world, x, y, z);
+        this.texture = texture;
         this.model = new WillOWispModel();
-        this.LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
+        this.LAYER = RenderLayer.getEntityTranslucent(texture);
         this.gravityStrength = 0.0F;
         this.maxAge = 9999;
         speedModifier = 0.1f + Math.max(0, random.nextFloat() - 0.1f);
@@ -60,7 +60,7 @@ public class WillOWispParticle extends Particle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new WillOWispParticle(clientWorld, d, e, f);
+            return new WillOWispParticle(clientWorld, d, e, f,  new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
         }
     }
 
@@ -94,8 +94,6 @@ public class WillOWispParticle extends Particle {
     protected double yTarget;
     protected double zTarget;
     protected int targetChangeCooldown = 0;
-    private boolean isAttractedByLight = false;
-    protected int maxHeight;
 
     @Override
     public void tick() {

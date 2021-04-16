@@ -11,17 +11,14 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerWispParticle extends WillOWispParticle {
     protected PlayerEntity owner;
 
-    protected PlayerWispParticle(ClientWorld world, double x, double y, double z) {
-        super(world, x, y, z);
+    protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
+        super(world, x, y, z, texture);
         this.maxAge = 35;
         this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
@@ -32,11 +29,16 @@ public class PlayerWispParticle extends WillOWispParticle {
 
     @Environment(EnvType.CLIENT)
     public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        public DefaultFactory(SpriteProvider spriteProvider) {
+        private final Identifier texture;
+
+        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture) {
+            this.texture = texture;
         }
 
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new PlayerWispParticle(clientWorld, d, e, f);
+        @Nullable
+        @Override
+        public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            return new PlayerWispParticle(world, x, y, z, this.texture);
         }
     }
 
