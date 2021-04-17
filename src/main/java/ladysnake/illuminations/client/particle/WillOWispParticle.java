@@ -143,8 +143,10 @@ public class WillOWispParticle extends Particle {
         }
 
         BlockPos pos = new BlockPos(this.x, this.y, this.z);
-        if (!this.world.getBlockState(pos).isAir() && timeInSolid > -1) {
-            timeInSolid+=1;
+        if (!this.world.getBlockState(pos).isAir()) {
+            if (timeInSolid > -1) {
+                timeInSolid += 1;
+            }
         } else {
             timeInSolid = 0;
         }

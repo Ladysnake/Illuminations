@@ -36,6 +36,7 @@ public class PlayerWispParticle extends WillOWispParticle {
         this.redEvolution = redEvolution;
         this.blueEvolution = blueEvolution;
         this.greenEvolution = greenEvolution;
+        this.colorAlpha = 0;
     }
 
     @Environment(EnvType.CLIENT)

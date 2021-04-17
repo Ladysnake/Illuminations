@@ -212,7 +212,7 @@ public class IlluminationsClient implements ClientModInitializer {
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.05f, -0.01f, 0.0f));
         FOUNDING_SKULL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:founding_skull_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.0f, -0.01f, 0.0f, 0.0f));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.25f, -0.03f, 0.0f, -0.01f));
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
@@ -273,7 +273,7 @@ public class IlluminationsClient implements ClientModInitializer {
         OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_OVERHEAD)
                 .put("trans_pride", TRANS_PRIDE_OVERHEAD)
-                .put("jacko", FOUNDING_SKULL_PET)
+                .put("jacko", GOLDEN_WILL_PET)
                 .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
                 .put("bi_pride", BI_PRIDE_OVERHEAD)
                 .put("ace_pride", ACE_PRIDE_OVERHEAD)

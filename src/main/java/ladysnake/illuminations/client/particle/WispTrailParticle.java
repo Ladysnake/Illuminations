@@ -58,9 +58,9 @@ public class WispTrailParticle extends SpriteBillboardParticle {
             this.markDead();
         }
 
-//        float redEv = -0.05f;
-//        float greenEv = -0.01f;
-//        float blueEv = 0.0f;
+//        float redEv = -0.03f;
+//        float greenEv = 0.0f;
+//        float blueEv = -0.01f;
 //        colorRed = MathHelper.clamp(colorRed+redEv, 0, 1);
 //        colorGreen = MathHelper.clamp(colorGreen+greenEv, 0, 1);
 //        colorBlue = MathHelper.clamp(colorBlue+blueEv, 0, 1);
