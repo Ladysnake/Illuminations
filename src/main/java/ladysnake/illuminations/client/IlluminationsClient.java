@@ -96,7 +96,7 @@ public class IlluminationsClient implements ClientModInitializer {
     }.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
-    public static ImmutableMap<String, DefaultParticleType> OLD_OVERHEADS_DATA;
+    public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
 
     // update information
@@ -270,19 +270,10 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
                 .build();
-        OLD_OVERHEADS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
-                .put("pride", PRIDE_OVERHEAD)
-                .put("trans_pride", TRANS_PRIDE_OVERHEAD)
-                .put("jacko", GOLDEN_WILL_PET)
-                .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
-                .put("bi_pride", BI_PRIDE_OVERHEAD)
-                .put("ace_pride", ACE_PRIDE_OVERHEAD)
-                .put("nb_pride", NB_PRIDE_OVERHEAD)
-                .put("intersex_pride", INTERSEX_PRIDE_OVERHEAD)
-                .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
                 .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
+                .put("pyro_crown", new OverheadData(new CrownEntityModel(), "pyro_crown"))
                 .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
                 .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
                 .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
@@ -296,6 +287,19 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
                 .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
                 .build();
+        PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
+                .put("pride", PRIDE_OVERHEAD)
+                .put("trans_pride", TRANS_PRIDE_OVERHEAD)
+                .put("jacko", JACKO_OVERHEAD)
+                .put("lesbian_pride", LESBIAN_PRIDE_OVERHEAD)
+                .put("bi_pride", BI_PRIDE_OVERHEAD)
+                .put("ace_pride", ACE_PRIDE_OVERHEAD)
+                .put("nb_pride", NB_PRIDE_OVERHEAD)
+                .put("intersex_pride", INTERSEX_PRIDE_OVERHEAD)
+                .put("will_o_wisp", WILL_O_WISP_PET)
+                .put("golden_will", GOLDEN_WILL_PET)
+                .put("founding_skull", FOUNDING_SKULL_PET)
+                .build();
     }
 
     public static void loadPlayerCosmetics() {
@@ -305,22 +309,22 @@ public class IlluminationsClient implements ClientModInitializer {
                 Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
                 return playerData;
             } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because of malformed URL: " + e.getMessage());
+                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
-                logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because of I/O Error: " + e.getMessage());
+                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
             }
 
             return null;
         }).exceptionally(throwable -> {
-            logger.log(Level.ERROR, "(Illuminations) Could not get player cosmetics because wtf is happening", throwable);
+            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "(Illuminations) Player cosmetics retrieved");
+                logger.log(Level.INFO, "Player cosmetics retrieved");
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "(Illuminations) Player cosmetics could not be retrieved, cosmetics will be ignored");
+                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
     }
@@ -332,7 +336,8 @@ public class IlluminationsClient implements ClientModInitializer {
             return new PlayerCosmeticData(jsonObject.get("aura")
                     , jsonObject.get("color")
                     , jsonObject.get("overhead")
-                    , jsonObject.get("drip"));
+                    , jsonObject.get("drip")
+                    , jsonObject.get("pet"));
         }
     }
 }

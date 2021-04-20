@@ -3,14 +3,15 @@ package ladysnake.illuminations.client.data;
 import com.google.gson.JsonElement;
 
 public class PlayerCosmeticData {
-    private String overhead;
     private String aura;
+    private String overhead;
     private boolean drip;
+    private String pet;
     private final int colorRed;
     private final int colorGreen;
     private final int colorBlue;
 
-    public PlayerCosmeticData(JsonElement aura, JsonElement color, JsonElement overhead, JsonElement drip) {
+    public PlayerCosmeticData(JsonElement aura, JsonElement color, JsonElement overhead, JsonElement drip, JsonElement pet) {
         if (aura.isJsonNull()) {
             this.aura = null;
         } else {
@@ -29,6 +30,11 @@ public class PlayerCosmeticData {
             this.overhead = null;
         } else {
             this.overhead = overhead.getAsString();
+        }
+        if (pet.isJsonNull()) {
+            this.pet = null;
+        } else {
+            this.pet = pet.getAsString();
         }
         if (drip.isJsonNull()) {
             this.drip = false;
@@ -59,5 +65,9 @@ public class PlayerCosmeticData {
 
     public String getOverhead() {
         return overhead;
+    }
+
+    public String getPet() {
+        return pet;
     }
 }

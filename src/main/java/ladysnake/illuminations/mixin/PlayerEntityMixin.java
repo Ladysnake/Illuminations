@@ -38,14 +38,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
             }
 
-            // player overhead
-            String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(this.getUuid()).getOverhead();
-            if (playerOverhead != null && IlluminationsClient.OLD_OVERHEADS_DATA.containsKey(playerOverhead)) {
+            // player pet
+            String playerPet = IlluminationsClient.PLAYER_COSMETICS.get(this.getUuid()).getPet();
+            if (playerPet != null && IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
                 if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
-                    if (IlluminationsClient.OLD_OVERHEADS_DATA.containsKey(playerOverhead)) {
-                        DefaultParticleType overhead = IlluminationsClient.OLD_OVERHEADS_DATA.get(playerOverhead);
+                    if (IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
+                        DefaultParticleType overhead = IlluminationsClient.PETS_DATA.get(playerPet);
                         if (this.age % 20 == 0) {
                             world.addParticle(overhead, this.getX() + Math.cos(this.bodyYaw/50) * 0.5, this.getY() + this.getHeight() + 0.5f  + Math.sin(this.age / 12f) / 12f, this.getZ() - Math.cos(this.bodyYaw/50) * 0.5, 0, 0, 0);
                         }
