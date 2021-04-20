@@ -131,6 +131,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType WILL_O_WISP_PET;
     public static DefaultParticleType GOLDEN_WILL_PET;
     public static DefaultParticleType FOUNDING_SKULL_PET;
+    public static DefaultParticleType DISSOLUTION_WISP_PET;
 
     // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
@@ -214,6 +215,8 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.05f, -0.01f, 0.0f));
         FOUNDING_SKULL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:founding_skull_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.25f, -0.03f, 0.0f, -0.01f));
+        DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:dissolution_wisp_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
@@ -300,6 +303,7 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("will_o_wisp", WILL_O_WISP_PET)
                 .put("golden_will", GOLDEN_WILL_PET)
                 .put("founding_skull", FOUNDING_SKULL_PET)
+                .put("dissolution_wisp", DISSOLUTION_WISP_PET)
                 .build();
     }
 

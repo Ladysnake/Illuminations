@@ -88,34 +88,15 @@ public class JackoParticle extends PetParticle {
 
     @Override
     public void tick() {
-        if (this.age > 10) {
-            alpha = 1;
-            if (owner != null) {
-                // if night or dark enough
-                if (!(world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
-                    glow = 1;
-                } else {
-                    glow = 0;
-                }
-            }
-        } else {
-            alpha = 0;
-            glow = 0;
-        }
+        super.tick();
 
         if (owner != null) {
-            this.prevPosX = this.x;
-            this.prevPosY = this.y;
-            this.prevPosZ = this.z;
-
-            // die if old enough
-            if (this.age++ >= this.maxAge) {
-                this.markDead();
+            // if night or dark enough
+            if (!(world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
+                glow = 1;
+            } else {
+                glow = 0;
             }
-
-            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ());
-        } else {
-            this.markDead();
         }
     }
 
