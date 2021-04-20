@@ -86,7 +86,7 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations constants
-    public static final float EYES_SPAWN_CHANCE = 0.001f;
+    public static final float EYES_SPAWN_CHANCE = 0.0001f;
     public static final int EYES_VANISHING_DISTANCE = 5;
 
     // illuminations cosmetics

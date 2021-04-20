@@ -5,6 +5,8 @@
 - Added pets for Illuminations donators:
     - Added Will o' Wisp, Golden Will, Founding Skull and the classic Dissolution Wisp pets 
     - All free pride overheads and Jacko have been converted into pets
+- Reduced eyes in the dark spawn chances tenfold
+- Fixed eyes in the dark not glowing
 
 ### Illuminations 1.4.9 - 1.16.5
 - Added the Lesbian, Bi, Ace, NB and Intersex pride free overheads thanks to JothGC
