@@ -1,5 +1,11 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.5 - 1.16.5
+- Added Will o' Wisps! Inhabiting Soul Sand Valleys, these wandering spirits roam the dead fields and will appear, phase through and disappear into soul sand.
+- Added pets for Illuminations donators:
+    - Added Will o' Wisp, Golden Will and Founding Skull pets
+    - All free pride overheads have been converted into pets
+
 ### Illuminations 1.4.9 - 1.16.5
 - Added the Lesbian, Bi, Ace, NB and Intersex pride free overheads thanks to JothGC
 Get them for free at https://illuminations.uuid.gg/pride

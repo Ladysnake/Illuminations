@@ -31,7 +31,7 @@ import ladysnake.illuminations.client.particle.aura.SculkTendrilParticle;
 import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
 import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
-import ladysnake.illuminations.client.particle.overhead.OverheadParticle;
+import ladysnake.illuminations.client.particle.overhead.PetParticle;
 import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
 import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
@@ -192,21 +192,21 @@ public class IlluminationsClient implements ClientModInitializer {
         GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
         PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         TRANS_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         JACKO_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_overhead", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_OVERHEAD, JackoParticle.DefaultFactory::new);
         LESBIAN_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.LESBIAN_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.LESBIAN_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         BI_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.BI_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.BI_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         ACE_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.ACE_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.ACE_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         NB_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);
         INTERSEX_PRIDE_OVERHEAD = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_overhead", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_OVERHEAD, OverheadParticle.DefaultFactory::new);  ///haha sex
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_OVERHEAD, PetParticle.DefaultFactory::new);  ///haha sex
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));

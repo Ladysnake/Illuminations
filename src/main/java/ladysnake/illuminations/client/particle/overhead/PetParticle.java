@@ -20,14 +20,14 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Random;
 
-public class OverheadParticle extends FireflyParticle {
+public class PetParticle extends FireflyParticle {
     protected final PlayerEntity owner;
     protected float alpha = 0f;
 
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
 
-    public OverheadParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    public PetParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
         this.spriteProvider = spriteProvider;
         this.setSpriteForAge(spriteProvider);
@@ -52,7 +52,7 @@ public class OverheadParticle extends FireflyParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new OverheadParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new PetParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -117,7 +117,7 @@ public class OverheadParticle extends FireflyParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX(), owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ());
+            this.setPos(owner.getX() + Math.cos(owner.bodyYaw/50) * 0.5, owner.getY() + owner.getHeight() + 0.5f  + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.cos(owner.bodyYaw/50) * 0.5);
         } else {
             this.markDead();
         }
