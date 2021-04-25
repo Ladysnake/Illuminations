@@ -43,11 +43,6 @@ repositories {
 		name = "CurseForge"
 		url = "https://minecraft.curseforge.com/api/maven"
 	}
-	// Ladysnake
-	maven {
-		name = "Ladysnake Libs"
-		url = "https://dl.bintray.com/ladysnake/libs"
-	}
 }
 
 dependencies {
@@ -79,9 +74,6 @@ dependencies {
 
 	// canvas renderer
 	modCompile "grondag:canvas-mc116:1.0.+"
-
-	// vanguard auto updater
-	include "io.github.ladysnake:vanguard:${vanguard_version}"
 }
 
 processResources {

@@ -41,12 +41,14 @@ import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
 import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
 import ladysnake.illuminations.client.render.entity.model.WorldweaverHaloEntityModel;
 import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
+import ladysnake.illuminations.updater.IlluminationsUpdater;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -98,9 +100,6 @@ public class IlluminationsClient implements ClientModInitializer {
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
-
-    // update information
-    private static final String UPDATES_URL = "https://illuminations.uuid.gg/latest?version=";
 
     // particle types
     public static DefaultParticleType FIREFLY;
@@ -157,6 +156,12 @@ public class IlluminationsClient implements ClientModInitializer {
 
         // get illuminations player cosmetics
         loadPlayerCosmetics();
+
+        // auto-updater
+        if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            logger.log(Level.INFO, "UPDATER INIT");
+            IlluminationsUpdater.init();
+        }
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));

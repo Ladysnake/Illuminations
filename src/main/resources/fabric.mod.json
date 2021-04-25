@@ -14,11 +14,6 @@
   },
   "license": "Code: GNU GPLv3; Art: ARR",
   "icon": "assets/illuminations/illuminations.png",
-  "custom": {
-    "vanguard": {
-      "update-url": "https://illuminations.uuid.gg/latest?version="
-    }
-  },
   "environment": "client",
   "entrypoints": {
     "client": [
