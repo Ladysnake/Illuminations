@@ -21,8 +21,8 @@ import ladysnake.illuminations.client.particle.FireflyParticle;
 import ladysnake.illuminations.client.particle.GlowwormParticle;
 import ladysnake.illuminations.client.particle.PlanktonParticle;
 import ladysnake.illuminations.client.particle.WillOWispParticle;
-import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
 import ladysnake.illuminations.client.particle.WispTrailParticle;
+import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
 import ladysnake.illuminations.client.particle.aura.AutumnLeavesParticle;
 import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
 import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
@@ -158,8 +158,7 @@ public class IlluminationsClient implements ClientModInitializer {
         loadPlayerCosmetics();
 
         // auto-updater
-        if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            logger.log(Level.INFO, "UPDATER INIT");
+        if (!FabricLoader.getInstance().isDevelopmentEnvironment() && Config.isAutoUpdate()) {
             IlluminationsUpdater.init();
         }
 

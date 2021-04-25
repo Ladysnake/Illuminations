@@ -42,9 +42,9 @@ public class IlluminationsUpdater {
 
     public static void init() {
         // delete uninstaller
-        if (Files.exists(Paths.get("mods/"+UNINSTALLER))) {
+        if (Files.exists(Paths.get("mods/" + UNINSTALLER))) {
             try {
-                Files.delete(Paths.get("mods/"+UNINSTALLER));
+                Files.delete(Paths.get("mods/" + UNINSTALLER));
             } catch (IOException e) {
                 IlluminationsClient.logger.log(Level.WARN, "Could not remove uninstaller because of I/O Error: " + e.getMessage());
             }

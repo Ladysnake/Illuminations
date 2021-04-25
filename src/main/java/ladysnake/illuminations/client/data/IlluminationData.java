@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 public class IlluminationData {
     private final DefaultParticleType illuminationType;

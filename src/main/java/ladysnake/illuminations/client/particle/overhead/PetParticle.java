@@ -117,7 +117,7 @@ public class PetParticle extends FireflyParticle {
                 this.markDead();
             }
 
-            this.setPos(owner.getX() + Math.cos(owner.bodyYaw/50) * 0.5, owner.getY() + owner.getHeight() + 0.5f  + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.cos(owner.bodyYaw/50) * 0.5);
+            this.setPos(owner.getX() + Math.cos(owner.bodyYaw / 50) * 0.5, owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.cos(owner.bodyYaw / 50) * 0.5);
         } else {
             this.markDead();
         }

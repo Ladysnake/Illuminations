@@ -14,6 +14,7 @@ public class Config {
     private static int density;
     private static int fireflyWhiteAlpha;
     private static boolean autoUpdate;
+    private static boolean displayGreetingScreen;
 
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
@@ -33,6 +34,8 @@ public class Config {
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
             setFireflyWhiteAlpha(100);
+            setAutoUpdate(false);
+            setDisplayGreetingScreen(true);
         }
 
         try {
@@ -40,11 +43,13 @@ public class Config {
             density = Integer.parseInt(config.getProperty("density"));
             fireflyWhiteAlpha = Integer.parseInt(config.getProperty("firefly-white-alpha"));
             autoUpdate = Boolean.parseBoolean(config.getProperty("auto-update"));
+            displayGreetingScreen = Boolean.parseBoolean(config.getProperty("display-greeting-screen"));
         } catch (Exception e) {
             setEyesInTheDark(EyesInTheDark.ENABLE);
             setDensity(100);
             setFireflyWhiteAlpha(100);
-            setAutoUpdate(true);
+            setAutoUpdate(false);
+            setDisplayGreetingScreen(true);
         }
     }
 
@@ -86,11 +91,24 @@ public class Config {
         Config.save();
     }
 
-    public static void setAutoUpdate(boolean value) {
-        autoUpdate = value;
-    }
-
     public static boolean isAutoUpdate() {
         return autoUpdate;
     }
+
+    public static void setAutoUpdate(boolean value) {
+        autoUpdate = value;
+        config.setProperty("auto-update", Boolean.toString(value));
+        Config.save();
+    }
+
+    public static boolean isDisplayGreetingScreen() {
+        return displayGreetingScreen;
+    }
+
+    public static void setDisplayGreetingScreen(boolean value) {
+        displayGreetingScreen = value;
+        config.setProperty("display-greeting-screen", Boolean.toString(value));
+        Config.save();
+    }
+
 }

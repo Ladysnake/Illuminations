@@ -4,7 +4,6 @@ import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
@@ -22,7 +21,6 @@ import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -63,7 +61,7 @@ public class WillOWispParticle extends Particle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new WillOWispParticle(clientWorld, d, e, f,  new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
+            return new WillOWispParticle(clientWorld, d, e, f, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
         }
     }
 
@@ -160,7 +158,7 @@ public class WillOWispParticle extends Particle {
     public void move(double dx, double dy, double dz) {
         double d = dx;
         double e = dy;
-        if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x+dx, this.y+dy, this.z+dz)).getBlock().isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
+        if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x + dx, this.y + dy, this.z + dz)).getBlock().isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
             Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream(Stream.empty()));
             dx = vec3d.x;
             dy = vec3d.y;

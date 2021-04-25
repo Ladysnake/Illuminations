@@ -14,7 +14,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
-import org.graalvm.compiler.loop.MathUtil;
 
 import java.util.Random;
 
@@ -65,9 +64,9 @@ public class WispTrailParticle extends SpriteBillboardParticle {
 //        colorGreen = MathHelper.clamp(colorGreen+greenEv, 0, 1);
 //        colorBlue = MathHelper.clamp(colorBlue+blueEv, 0, 1);
 
-        colorRed = MathHelper.clamp(colorRed+redEvolution, 0, 1);
-        colorGreen = MathHelper.clamp(colorGreen+greenEvolution, 0, 1);
-        colorBlue = MathHelper.clamp(colorBlue+blueEvolution, 0, 1);
+        colorRed = MathHelper.clamp(colorRed + redEvolution, 0, 1);
+        colorGreen = MathHelper.clamp(colorGreen + greenEvolution, 0, 1);
+        colorBlue = MathHelper.clamp(colorBlue + blueEvolution, 0, 1);
 
         this.velocityY -= 0.001;
         this.velocityX = 0;

@@ -8,11 +8,8 @@ import ladysnake.illuminations.client.IlluminationsClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 
 import java.util.Locale;
@@ -36,17 +33,17 @@ public class WispTrailParticleEffect implements ParticleEffect {
     public static final ParticleEffect.Factory<WispTrailParticleEffect> PARAMETERS_FACTORY = new ParticleEffect.Factory<WispTrailParticleEffect>() {
         public WispTrailParticleEffect read(ParticleType<WispTrailParticleEffect> particleType, StringReader stringReader) throws CommandSyntaxException {
             stringReader.expect(' ');
-            float r = (float)stringReader.readDouble();
+            float r = (float) stringReader.readDouble();
             stringReader.expect(' ');
-            float g = (float)stringReader.readDouble();
+            float g = (float) stringReader.readDouble();
             stringReader.expect(' ');
-            float b = (float)stringReader.readDouble();
+            float b = (float) stringReader.readDouble();
             stringReader.expect(' ');
-            float re = (float)stringReader.readDouble();
+            float re = (float) stringReader.readDouble();
             stringReader.expect(' ');
-            float ge = (float)stringReader.readDouble();
+            float ge = (float) stringReader.readDouble();
             stringReader.expect(' ');
-            float be = (float)stringReader.readDouble();
+            float be = (float) stringReader.readDouble();
             return new WispTrailParticleEffect(r, g, b, re, ge, be);
         }
 
