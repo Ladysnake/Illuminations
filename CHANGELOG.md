@@ -7,6 +7,9 @@
     - All free pride overheads and Jacko have been converted into pets
 - Reduced eyes in the dark spawn chances tenfold
 - Fixed eyes in the dark not glowing
+- Removed Vanguard and replaced it for an internal auto-updater
+- Made the auto-updates opt-in
+- Added a greeting screen for the user to choose if they want to enable the auto-updates or not
 
 ### Illuminations 1.4.9 - 1.16.5
 - Added the Lesbian, Bi, Ace, NB and Intersex pride free overheads thanks to JothGC
