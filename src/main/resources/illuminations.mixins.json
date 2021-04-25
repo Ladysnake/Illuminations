@@ -13,5 +13,8 @@
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "TitleScreenMixin"
+  ]
 }

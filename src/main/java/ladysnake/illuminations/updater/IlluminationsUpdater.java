@@ -38,6 +38,7 @@ public class IlluminationsUpdater {
     private static final String UPDATES_URL = "https://illuminations.uuid.gg/latest?version=";
     private static final String UNINSTALLER = "illuminations-uninstaller.jar";
     static final ArrayList<String> UNINSTALLER_PARAMS = new ArrayList<>();
+    public static boolean NEW_UPDATE = false;
 
     public static void init() {
         // delete uninstaller
@@ -107,7 +108,7 @@ public class IlluminationsUpdater {
                                             // add the new jar to uninstaller params
                                             UNINSTALLER_PARAMS.add(latestFileName);
 
-                                            IlluminationsClient.logger.log(Level.INFO, "Adding shutdown hook for uninstaller to update Illuminations: " + oldFile + ", " + latestFileName);
+                                            NEW_UPDATE = true;
                                         }
                                     }
                                 } catch (MalformedURLException e) {
@@ -126,6 +127,8 @@ public class IlluminationsUpdater {
                     }
                 }, MinecraftClient.getInstance());
             }
+
+            IlluminationsClient.logger.log(Level.INFO, "Adding shutdown hook for uninstaller to update Illuminations");
 
             // extract the uninstaller and add a shutdown hook to uninstall old files and install new ones
             InputStream in = IlluminationsClient.class.getResourceAsStream("/" + UNINSTALLER);
