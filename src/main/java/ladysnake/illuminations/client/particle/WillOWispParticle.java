@@ -4,6 +4,7 @@ import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
@@ -20,6 +21,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
@@ -51,7 +53,7 @@ public class WillOWispParticle extends Particle {
         this.model = new WillOWispModel();
         this.LAYER = RenderLayer.getEntityTranslucent(texture);
         this.gravityStrength = 0.0F;
-        this.maxAge = 9999;
+        this.maxAge = 600 + random.nextInt(600);
         speedModifier = 0.1f + Math.max(0, random.nextFloat() - 0.1f);
     }
 
@@ -102,6 +104,16 @@ public class WillOWispParticle extends Particle {
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
+
+        if (this.age++ >= this.maxAge) {
+            for (int i = 0; i < 25; i++) {
+                this.world.addParticle(new WispTrailParticleEffect(1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0.2d, 0);
+                this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.SOUL_SAND.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
+            }
+            this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.AMBIENT, 1.0f, 1.5f, true);
+            this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.BLOCK_SOUL_SAND_BREAK, SoundCategory.AMBIENT, 1.0f, 1.0f, true);
+            this.markDead();
+        }
 
         this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
 

@@ -5,6 +5,7 @@
   "client": [
     "BlockMixin",
     "ChorusFlowerBlockMixin",
+    "LanternBlockMixin",
     "ClientWorldMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",

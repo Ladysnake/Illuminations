@@ -2,14 +2,14 @@
 
 ### Illuminations 1.5 - 1.16.5
 - Added Will o' Wisps! Inhabiting Soul Sand Valleys, these wandering spirits roam the dead fields and will appear, phase through and disappear into soul sand.
+- Will o' Wisps can also spawn from Soul Lanterns so you can use them for an eerie or magical ambience outside of soul sand valleys
 - Added pets for Illuminations donators:
     - Added Will o' Wisp, Golden Will, Founding Skull and the classic Dissolution Wisp pets 
     - All free pride overheads and Jacko have been converted into pets
 - Reduced eyes in the dark spawn chances tenfold
 - Fixed eyes in the dark not glowing
-- Removed Vanguard and replaced it for an internal auto-updater
-- Made the auto-updates opt-in
-- Added a greeting screen for the user to choose if they want to enable the auto-updates or not
+- Removed Vanguard and replaced it for an internal auto-updater, as well as making that auto-updater opt-in
+- Added a first time greeting screen for the user to choose if they want to enable the auto-updates or not
 
 ### Illuminations 1.4.9 - 1.16.5
 - Added the Lesbian, Bi, Ace, NB and Intersex pride free overheads thanks to JothGC
