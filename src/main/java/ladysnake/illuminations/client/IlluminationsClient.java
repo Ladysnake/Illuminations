@@ -120,13 +120,13 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType GOLDENROD_AURA;
     // pets
     public static DefaultParticleType PRIDE_PET;
-    public static DefaultParticleType TRANS_PRIDE_PET;
+    public static DefaultParticleType PRIDE_PET_TRANSGENDER;
+    public static DefaultParticleType PRIDE_PET_LESBIAN;
+    public static DefaultParticleType PRIDE_PET_BISEXUAL;
+    public static DefaultParticleType PRIDE_PET_ASEXUAL;
+    public static DefaultParticleType PRIDE_PET_NONBINARY;
+    public static DefaultParticleType PRIDE_PET_INTERSEX;
     public static DefaultParticleType JACKO_PET;
-    public static DefaultParticleType LESBIAN_PRIDE_PET;
-    public static DefaultParticleType BI_PRIDE_PET;
-    public static DefaultParticleType ACE_PRIDE_PET;
-    public static DefaultParticleType NB_PRIDE_PET;
-    public static DefaultParticleType INTERSEX_PRIDE_PET;
     public static DefaultParticleType WILL_O_WISP_PET;
     public static DefaultParticleType GOLDEN_WILL_PET;
     public static DefaultParticleType FOUNDING_SKULL_PET;
@@ -182,7 +182,7 @@ public class IlluminationsClient implements ClientModInitializer {
             }
         });
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP_TRAIL, WispTrailParticle.Factory::new);
-        // aura particles
+        /* Aura Particles */
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
         GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ghostly_aura", FabricParticleTypes.simple(true));
@@ -197,22 +197,26 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
         GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
+        
+        /* LGBTQ+ Pride Pets */
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET, PetParticle.DefaultFactory::new);
-        TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_PET, PetParticle.DefaultFactory::new);
+        PRIDE_PET_TRANSGENDER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_transgender", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_TRANSGENDER, PetParticle.DefaultFactory::new);
+        PRIDE_PET_LESBIAN = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_lesbian", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_LESBIAN, PetParticle.DefaultFactory::new);
+        PRIDE_PET_BISEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_bisexual", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_BISEXUAL, PetParticle.DefaultFactory::new);
+        PRIDE_PET_ASEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_asexual", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_ASEXUAL, PetParticle.DefaultFactory::new);
+        PRIDE_PET_NONBINARY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_nonbinary", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_NONBINARY, PetParticle.DefaultFactory::new);
+        PRIDE_PET_INTERSEX = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_intersex", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_INTERSEX, PetParticle.DefaultFactory::new);  // haha sex
+        
+        /* Spooky Pets */
         JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_PET, JackoParticle.DefaultFactory::new);
-        LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.LESBIAN_PRIDE_PET, PetParticle.DefaultFactory::new);
-        BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.BI_PRIDE_PET, PetParticle.DefaultFactory::new);
-        ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.ACE_PRIDE_PET, PetParticle.DefaultFactory::new);
-        NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_PET, PetParticle.DefaultFactory::new);
-        INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_PET, PetParticle.DefaultFactory::new);  ///haha sex
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
@@ -222,7 +226,7 @@ public class IlluminationsClient implements ClientModInitializer {
         DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:dissolution_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
-        // crowns feature
+        /* Crowns */
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
             if (entityType == EntityType.PLAYER) {
                 registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
@@ -297,13 +301,13 @@ public class IlluminationsClient implements ClientModInitializer {
                 .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
-                .put("trans_pride", TRANS_PRIDE_PET)
+                .put("pride_transgender", PRIDE_PET_TRANSGENDER)
+                .put("pride_lesbian", PRIDE_PET_LESBIAN)
+                .put("pride_bisexual", PRIDE_PET_BISEXUAL)
+                .put("pride_asexual", PRIDE_PET_ASEXUAL)
+                .put("pride_nonbinary", PRIDE_PET_NONBINARY)
+                .put("pride_intersex", PRIDE_PET_INTERSEX)
                 .put("jacko", JACKO_PET)
-                .put("lesbian_pride", LESBIAN_PRIDE_PET)
-                .put("bi_pride", BI_PRIDE_PET)
-                .put("ace_pride", ACE_PRIDE_PET)
-                .put("nb_pride", NB_PRIDE_PET)
-                .put("intersex_pride", INTERSEX_PRIDE_PET)
                 .put("will_o_wisp", WILL_O_WISP_PET)
                 .put("golden_will", GOLDEN_WILL_PET)
                 .put("founding_skull", FOUNDING_SKULL_PET)
