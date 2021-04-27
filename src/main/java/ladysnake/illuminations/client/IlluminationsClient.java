@@ -94,8 +94,7 @@ public class IlluminationsClient implements ClientModInitializer {
     // illuminations cosmetics
     private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
-    static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
-    }.getType();
+    static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {}.getType();
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
@@ -118,14 +117,20 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType SCULK_TENDRIL_AURA;
     public static DefaultParticleType SHADOWBRINGER_AURA;
     public static DefaultParticleType GOLDENROD_AURA;
-    // pets
+    // Pride Pets
     public static DefaultParticleType PRIDE_PET;
-    public static DefaultParticleType PRIDE_PET_TRANSGENDER;
-    public static DefaultParticleType PRIDE_PET_LESBIAN;
-    public static DefaultParticleType PRIDE_PET_BISEXUAL;
+    public static DefaultParticleType PRIDE_PET_AGENDER;
+    public static DefaultParticleType PRIDE_PET_AROMANTIC;
     public static DefaultParticleType PRIDE_PET_ASEXUAL;
-    public static DefaultParticleType PRIDE_PET_NONBINARY;
+    public static DefaultParticleType PRIDE_PET_BISEXUAL;
+    public static DefaultParticleType PRIDE_PET_GENDERFLUID;
     public static DefaultParticleType PRIDE_PET_INTERSEX;
+    public static DefaultParticleType PRIDE_PET_LESBIAN;
+    public static DefaultParticleType PRIDE_PET_NONBINARY;
+    public static DefaultParticleType PRIDE_PET_PANSEXUAL;
+    public static DefaultParticleType PRIDE_PET_POLYAMOROUS;
+    public static DefaultParticleType PRIDE_PET_TRANSGENDER;
+    // Other Pets
     public static DefaultParticleType JACKO_PET;
     public static DefaultParticleType WILL_O_WISP_PET;
     public static DefaultParticleType GOLDEN_WILL_PET;
@@ -197,23 +202,33 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
         GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
-        
+    
         /* LGBTQ+ Pride Pets */
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET, PetParticle.DefaultFactory::new);
-        PRIDE_PET_TRANSGENDER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_transgender", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_TRANSGENDER, PetParticle.DefaultFactory::new);
-        PRIDE_PET_LESBIAN = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_lesbian", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_LESBIAN, PetParticle.DefaultFactory::new);
-        PRIDE_PET_BISEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_bisexual", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_BISEXUAL, PetParticle.DefaultFactory::new);
+        PRIDE_PET_AGENDER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_agender", FabricParticleTypes.simple(true));
+        PRIDE_PET_AROMANTIC = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_aromantic", FabricParticleTypes.simple(true));
         PRIDE_PET_ASEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_asexual", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_ASEXUAL, PetParticle.DefaultFactory::new);
-        PRIDE_PET_NONBINARY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_nonbinary", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_NONBINARY, PetParticle.DefaultFactory::new);
+        PRIDE_PET_BISEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_bisexual", FabricParticleTypes.simple(true));
+        PRIDE_PET_GENDERFLUID = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_genderfluid", FabricParticleTypes.simple(true));
         PRIDE_PET_INTERSEX = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_intersex", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_INTERSEX, PetParticle.DefaultFactory::new);  // haha sex
-        
+        PRIDE_PET_LESBIAN = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_lesbian", FabricParticleTypes.simple(true));
+        PRIDE_PET_NONBINARY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_nonbinary", FabricParticleTypes.simple(true));
+        PRIDE_PET_PANSEXUAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_pansexual", FabricParticleTypes.simple(true));
+        PRIDE_PET_POLYAMOROUS = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_polyamorous", FabricParticleTypes.simple(true));
+        PRIDE_PET_TRANSGENDER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet_transgender", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET, PetParticle.DefaultFactory::new);// haha sex
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_AGENDER, PetParticle.DefaultFactory::new);// ^ TRUE!!!! I agree.
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_AROMANTIC, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_ASEXUAL, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_BISEXUAL, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_GENDERFLUID, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_INTERSEX, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_LESBIAN, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_NONBINARY, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_PANSEXUAL, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_POLYAMOROUS, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET_TRANSGENDER, PetParticle.DefaultFactory::new);
+    
         /* Spooky Pets */
         JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_PET, JackoParticle.DefaultFactory::new);
@@ -238,81 +253,86 @@ public class IlluminationsClient implements ClientModInitializer {
                 registrationHelper.register(new DripFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
             }
         });
-
+    
         // spawn biome categories for Illuminations
         ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
-                .put(Biome.Category.JUNGLE, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.PLAINS, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.SAVANNA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.TAIGA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.FOREST, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.RIVER, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.SWAMP, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
-                .put(Biome.Category.OCEAN, ImmutableSet.of(
-                        new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
-                .build();
+                                                     .put(Biome.Category.JUNGLE, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                                                     .put(Biome.Category.PLAINS, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                                                     .put(Biome.Category.SAVANNA, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                                                     .put(Biome.Category.TAIGA, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
+                                                     .put(Biome.Category.FOREST, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                                                     .put(Biome.Category.RIVER, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
+                                                     .put(Biome.Category.SWAMP, ImmutableSet.of(
+                                                             new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
+                                                             new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
+                                                     .put(Biome.Category.OCEAN, ImmutableSet.of(
+                                                             new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
+                                                     .build();
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
-                .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
-                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, 0.0001F))) //0.000001F
-                .build();
+                                           .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
+                                                   new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, 0.0001F))) //0.000001F
+                                           .build();
 
 
         // aura matching and spawn chances + overhead matching + crown matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
-                .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
-                .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
-                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
-                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
-                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
-                .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
-                .build();
+                                 .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
+                                 .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
+                                 .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
+                                 .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
+                                 .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
+                                 .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
+                                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
+                                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
-                .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
-                .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
-                .put("pyro_crown", new OverheadData(new CrownEntityModel(), "pyro_crown"))
-                .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
-                .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
-                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
-                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
-                .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
-                .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
-                .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
-                .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
-                .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
-                .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
-                .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
-                .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
-                .build();
+                                     .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
+                                     .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
+                                     .put("pyro_crown", new OverheadData(new CrownEntityModel(), "pyro_crown"))
+                                     .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
+                                     .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
+                                     .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
+                                     .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
+                                     .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
+                                     .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
+                                     .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
+                                     .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
+                                     .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
+                                     .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
+                                     .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
+                                     .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
+                                     .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
-                .put("pride", PRIDE_PET)
-                .put("pride_transgender", PRIDE_PET_TRANSGENDER)
-                .put("pride_lesbian", PRIDE_PET_LESBIAN)
-                .put("pride_bisexual", PRIDE_PET_BISEXUAL)
-                .put("pride_asexual", PRIDE_PET_ASEXUAL)
-                .put("pride_nonbinary", PRIDE_PET_NONBINARY)
-                .put("pride_intersex", PRIDE_PET_INTERSEX)
-                .put("jacko", JACKO_PET)
-                .put("will_o_wisp", WILL_O_WISP_PET)
-                .put("golden_will", GOLDEN_WILL_PET)
-                .put("founding_skull", FOUNDING_SKULL_PET)
-                .put("dissolution_wisp", DISSOLUTION_WISP_PET)
-                .build();
+                                .put("pride", PRIDE_PET)
+                                .put("pride_agender", PRIDE_PET_AGENDER)
+                                .put("pride_aromantic", PRIDE_PET_AROMANTIC)
+                                .put("pride_asexual", PRIDE_PET_ASEXUAL)
+                                .put("pride_bisexual", PRIDE_PET_BISEXUAL)
+                                .put("pride_genderfluid", PRIDE_PET_GENDERFLUID)
+                                .put("pride_intersex", PRIDE_PET_INTERSEX)
+                                .put("pride_lesbian", PRIDE_PET_LESBIAN)
+                                .put("pride_nonbinary", PRIDE_PET_NONBINARY)
+                                .put("pride_pansexual", PRIDE_PET_PANSEXUAL)
+                                .put("pride_polyamorous", PRIDE_PET_POLYAMOROUS)
+                                .put("pride_transgender", PRIDE_PET_TRANSGENDER)
+                                .put("jacko", JACKO_PET)
+                                .put("will_o_wisp", WILL_O_WISP_PET)
+                                .put("golden_will", GOLDEN_WILL_PET)
+                                .put("founding_skull", FOUNDING_SKULL_PET)
+                                .put("dissolution_wisp", DISSOLUTION_WISP_PET)
+                                .build();
     }
 
     public static void loadPlayerCosmetics() {
