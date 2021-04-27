@@ -1,5 +1,6 @@
 package ladysnake.illuminations.mixin;
 
+import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.data.AuraData;
 import net.minecraft.client.MinecraftClient;
@@ -28,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (playerAura != null && IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
-                if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                     if (IlluminationsClient.AURAS_DATA.containsKey(playerAura)) {
                         AuraData aura = IlluminationsClient.AURAS_DATA.get(playerAura);
                         if (IlluminationsClient.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
@@ -43,7 +44,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (playerPet != null && IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
-                if ((MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson())|| MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                     if (IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
                         DefaultParticleType overhead = IlluminationsClient.PETS_DATA.get(playerPet);
                         if (this.age % 20 == 0) {

@@ -68,6 +68,13 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .setDefaultValue(false)
                     .build());
 
+            general.addEntry(entryBuilder
+                    .startBooleanToggle(new TranslatableText("option.illuminations.viewAurasFP"), Config.getViewAurasFP())
+                    .setTooltip(new TranslatableText("option.tooltip.illuminations.viewAurasFP"))
+                    .setSaveConsumer(Config::setViewAurasFP)
+                    .setDefaultValue(false)
+                    .build());
+
             // build and return the config screen
             return builder.build();
         };

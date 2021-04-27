@@ -13,6 +13,7 @@ public class Config {
     private static EyesInTheDark eyesInTheDark;
     private static int density;
     private static int fireflyWhiteAlpha;
+    private static boolean viewAurasFP;
     private static boolean autoUpdate;
     private static boolean displayGreetingScreen;
 
@@ -50,6 +51,12 @@ public class Config {
             setFireflyWhiteAlpha(100);
             setAutoUpdate(false);
             setDisplayGreetingScreen(true);
+            setViewAurasFP(false);
+        }
+        try {
+            viewAurasFP = Boolean.parseBoolean(config.getProperty("view-auras-fp"));
+        } catch (Exception e) {
+            setViewAurasFP(false);
         }
     }
 
@@ -88,6 +95,16 @@ public class Config {
     public static void setFireflyWhiteAlpha(int value) {
         fireflyWhiteAlpha = value;
         config.setProperty("firefly-white-alpha", Integer.toString(value));
+        Config.save();
+    }
+
+    public static boolean getViewAurasFP() {
+        return viewAurasFP;
+    }
+
+    public static void setViewAurasFP(boolean value) {
+        viewAurasFP = value;
+        config.setProperty("view-auras-fp", Boolean.toString(value));
         Config.save();
     }
 
