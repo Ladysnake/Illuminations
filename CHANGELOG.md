@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.5.1 - 1.16.5
+- Added a config option to see your own cosmetics in first person
+
 ### Illuminations 1.5: Souls and Wisps - 1.16.5
 - Added Will o' Wisps! Inhabiting Soul Sand Valleys, these wandering spirits roam the dead fields and will appear, phase through and disappear into soul sand.
 - Will o' Wisps can also spawn from Soul Lanterns so you can use them for an eerie or magical ambience outside of soul sand valleys
