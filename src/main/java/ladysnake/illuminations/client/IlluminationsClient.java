@@ -315,6 +315,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
+                logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
                 Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
                 return playerData;
             } catch (MalformedURLException e) {
@@ -328,12 +329,13 @@ public class IlluminationsClient implements ClientModInitializer {
             logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
+            logger.log(Level.INFO, "Retrieved data: "+playerData);
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics retrieved");
+                logger.log(Level.INFO, "Player cosmetics successfully registered");
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not be retrieved, cosmetics will be ignored");
+                logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
     }
