@@ -43,7 +43,7 @@ Also during the month of October, you may come across glowing eyes in absolutely
 
 #### Will o' Wisps
 
-**Wisps** are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand and Soul Soil.
+**Wisps** are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand.
 
 ![Wisps](https://user-images.githubusercontent.com/83953120/123545008-46357580-d756-11eb-87b1-0ff55518d65a.png)
 
@@ -91,6 +91,28 @@ This Aura will give you that little extra bit of sparkling, summoning Golden Rod
 
 ![GoldenRodAura](https://user-images.githubusercontent.com/83953120/123548877-f317ee80-d766-11eb-9a04-d6bc27b73c67.gif)
 
+#### Shadowbringer Soul Aura
+
+This dark Aura will strike fear in your enemies as you are sourrounded by a storm of shady ashes!
+
+![ShadowbringerSoulAura](https://user-images.githubusercontent.com/83953120/123550013-b13d7700-d76b-11eb-931f-19efd6dc509d.gif)
+
+#### Sculk Tendrils Aura
+
+Are you excited for 1.18? This Aura will summon Tendrils from the Deep Dark to follow you and grow around your feet.
+
+![SculkTendrilsAura](https://user-images.githubusercontent.com/83953120/123550344-5d339200-d76d-11eb-9803-e1d95d227bec.gif)
+
+#### Autumn Leaves Aura
+
+A whirl of orange Leaves following your footsteps to bring that cosy autumn feeling to your world!
+
+![AutumnLeavesAura](https://user-images.githubusercontent.com/83953120/123550892-d0d69e80-d76f-11eb-9ffb-002bd73c5a8f.gif)
+
+
+
+
+
 ## Configurability
 
 Illuminations possesses a few config options you can use to change how the mod behaves to better fit your needs.
@@ -107,6 +129,9 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
+### First Person Cosmetics
+
+Enable to see your cosmetics in first person! Disabled by default to not block your view.
 
 ## FAQ
 
