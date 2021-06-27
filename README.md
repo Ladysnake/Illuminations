@@ -1,7 +1,7 @@
 # Illuminations
 
 **Illuminations** is a client sided Minecraft Fabric mod that adds multiple ambient particles in order to make your world more enjoyable at night or in dark places.
-
+This mod is compatible with the [Canvas Renderer](https://www.curseforge.com/minecraft/mc-mods/canvas-renderer).
 
 ## Ambience
 
@@ -11,19 +11,19 @@
 
 **Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-[Fireflies](README.assets/Fireflies.png)
+![Fireflies](https://user-images.githubusercontent.com/83953120/123544977-2ef68800-d756-11eb-9356-6394353ce16f.png)
 
 #### Glowworms
 
 **Glowworms** are small larvae living in caves by sticking to the ceiling that will fall down if their support block is removed. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-[Glowworms](README.assets/Glowworms.png)
+![Glowworms](https://user-images.githubusercontent.com/83953120/123544983-328a0f00-d756-11eb-8e51-2ee132c07cc2.png)
 
 #### Plankton
 
 Glowing **plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
 
-[Plankton](README.assets/Plankton.png)
+![Plankton](https://user-images.githubusercontent.com/83953120/123544988-374ec300-d756-11eb-9c1a-8d427c9b3916.png)
 
 ### Halloween (October Specials)
 
@@ -31,34 +31,65 @@ Glowing **plankton** - even though difficult to notice because of its size - can
 
 During the month of October, fireflies will adopt an orange tint instead of their regular green one.
 
-[Autumnflies](README.assets/Autumnflies.png)
+![Autumnflies](https://user-images.githubusercontent.com/83953120/123544993-3ddd3a80-d756-11eb-9389-1bc08f971f0b.png)
 
 #### Eyes in the Dark
 
 Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
 
-[Eyes in the Dark](README.assets/EyesInTheDark.png)
+![EyesInTheDark](https://user-images.githubusercontent.com/83953120/123545003-42095800-d756-11eb-84a3-7f2e43843acc.png)
 
 ### Nether and End
 
 #### Will o' Wisps
 
-Wisps are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand and Soul Soil.
+**Wisps** are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand and Soul Soil.
 
-[Wisps](README.assets/Wisps.png)
+![Wisps](https://user-images.githubusercontent.com/83953120/123545008-46357580-d756-11eb-87b1-0ff55518d65a.png)
 
 #### Chorus Petals
 
 Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
 
-[Chorus Petals](README.assets/ChorusPetals)
+![ChorusPetals](https://user-images.githubusercontent.com/83953120/123545012-4afa2980-d756-11eb-9213-0e918dbc2e94.png)
 
 ## Cosmetics
 
 In addition to the ambience changes, Illuminations also features cosmetics, primarily for those who donated and contributed to the project, with the exception of the Pride Heart Collection that is available for all [Accounts](https://illuminations.uuid.gg/register). Cosmetics can be switched and customised using the [Illuminations Dashboard](https://illuminations.uuid.gg/). Since Illuminations is client-side you can use these cosmetics even on servers. Other players with Illuminations will be able to see your cosmetics.
 
+### Pride Hearts
 
+Every Illuminations Account automatically has access to these 7 Pride Hearts that will follow you as pets, hovering next to your head!
 
+![PrideHeartCollection](https://user-images.githubusercontent.com/83953120/123545463-68c88e00-d758-11eb-9e82-e13c0e69d95d.png)
+
+### Auras
+
+#### Twilight Aura
+
+The **Twilight aura** creates colored fireflies that will orbit around the player. The color of the fireflies can be changed to any color you want via the Illuminations dashboard. If the player moves, they will leave a trail of these fireflies. **This aura is available to tier 1 donators.**
+
+![TwilightAura](https://user-images.githubusercontent.com/83953120/123546435-c5c64300-d75c-11eb-8cc3-9021f969a9c1.gif)
+
+#### Auras (Donator Tier 2)
+
+#### Ghostly Aura
+
+The Ghostly Aura will summon the lost souls to scamper around you!
+
+![GhostlyAura](https://user-images.githubusercontent.com/83953120/123545812-52233680-d75a-11eb-933e-d767c203835f.gif)
+
+#### Chorus Aura
+
+The Chorus Aura makes you stand in a whirl of Chorus Petals, perfectly fit for your adventures in the end!
+
+![ChorusAura](https://user-images.githubusercontent.com/83953120/123547735-39b71a00-d762-11eb-8de4-ff3fb5e3fa24.gif)
+
+#### Golden Rod Aura
+
+This Aura will give you that little extra bit of sparkling, summoning Golden Rods all around you!
+
+![GoldenRodAura](https://user-images.githubusercontent.com/83953120/123548877-f317ee80-d766-11eb-9a04-d6bc27b73c67.gif)
 
 ## Configurability
 
@@ -76,53 +107,6 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
 
-## Cosmetics
-
-**Auras** are special Illuminations effects around the player visible to other players that have the mod. Auras currently serve as a bonus for donators that support the mod and are purely cosmetic with no other provided advantage whatsoever. They are visible to other players with Illuminations installed (even on vanilla servers).
-
-**Overheads** are cosmetics that float above player heads. They are visible to other players with Illuminations installed (even on vanilla servers).
-
-Auras and overheads can be selected and changed via the [Illuminations dashboard](https://illuminations.uuid.gg/).
-
-### Twilight aura
-
-The **Twilight** aura creates colored fireflies  that will orbit around the player. The color of the fireflies can be changed to any color you want via the Illuminations dashboard. If the player moves, they will leave a trail of these fireflies. This aura is available to tier 1 donators.
-
-![illuminations-1.0-twilight-aura](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-twilight-aura.gif)
-
-### Ghostly aura
-
-The **Ghostly** aura emanates little ghosts that fly upward and gradually appear and disappear. This aura is available to tier 2 donators.
-
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-ghostly-aura.gif)
-
-### Frost and Solar crowns
-
-3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
-
-![illuminations-1.3-crowns](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.3-crowns.png)
-
-### Bloodfiend, Dreadlich and Mooncult crowns
-
-*Designed by ArathainFarqoe!*
-
-![image-20210113112423799](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4.1-crowns.png)
-
-### Chorus aura and crown
-
-![illuminations-1.4-choruscosmetics](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4-choruscosmetics.gif)
-
-### Pride (and trans pride) heart
-
-Available for free to anyone that registers for an Illuminations account. https://illuminations.uuid.gg/pride
-
-![illuminations-1.1](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.1.png)
-
-### Jacko
-
-A happy jack o' lantern that lights up at night and in dark areas. Available to tier 2 donators.
-
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-jacko.gif)
 
 ## FAQ
 
