@@ -125,21 +125,21 @@ Other than the pride hearts tier 2 donators can also equip 5 other pets that wil
 
 #### Golden Wisp
 
-![GoldenWisp](https://user-images.githubusercontent.com/83953120/123555479-36ce2080-d786-11eb-8532-42e398833b39.png)
+![GoldenWispPet](https://user-images.githubusercontent.com/83953120/123556107-ba3d4100-d789-11eb-8a46-0c078e7dd3ef.gif)
 
 #### Founding Skull
 
-![FoundingSkull](https://user-images.githubusercontent.com/83953120/123555488-40578880-d786-11eb-976c-646fed194ef4.png)
+![FoundingSkullPet](https://user-images.githubusercontent.com/83953120/123556110-c0332200-d789-11eb-88ee-3bf9f868323a.gif)
 
 #### Dissolution Wisp
 
-![DissolutionWisp](https://user-images.githubusercontent.com/83953120/123555492-4a798700-d786-11eb-940c-29773d7b328d.png)
+![DissolutionWispPet](https://user-images.githubusercontent.com/83953120/123556124-c9bc8a00-d789-11eb-9e63-3f4f49db0371.gif)
 
 #### Jacko
 
 Jacko is a Jack o'Lantern that will light itself when it is night or dark, otherwise it will be extinguished.
 
-![Jacko](https://user-images.githubusercontent.com/83953120/123555543-b22fd200-d786-11eb-9089-92b59ae0f99a.png)
+![Jacko](https://user-images.githubusercontent.com/83953120/123556262-7c8ce800-d78a-11eb-98fb-d62ef2d3bd5f.png)
 
 ## Configurability
 
