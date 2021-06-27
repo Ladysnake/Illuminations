@@ -11,19 +11,19 @@
 
 **Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![Fireflies](https://user-images.githubusercontent.com/83953120/123540909-aff75480-d741-11eb-936f-7bc9bddac4b0.png)
+[Fireflies](README.assets/Fireflies.png)
 
 #### Glowworms
 
 **Glowworms** are small larvae living in caves by sticking to the ceiling that will fall down if their support block is removed. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![Glowworms](https://user-images.githubusercontent.com/83953120/123541029-77a44600-d742-11eb-8d14-ea60bfc5000f.png)
+[Glowworms](README.assets/Glowworms.png)
 
 #### Plankton
 
 Glowing **plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
 
-![Plankton](https://user-images.githubusercontent.com/83953120/123540905-a40b9280-d741-11eb-9518-1531526e2a08.png)
+[Plankton](README.assets/Plankton.png)
 
 ### Halloween (October Specials)
 
@@ -31,13 +31,13 @@ Glowing **plankton** - even though difficult to notice because of its size - can
 
 During the month of October, fireflies will adopt an orange tint instead of their regular green one.
 
-![Autumnflies](https://user-images.githubusercontent.com/83953120/123541449-f8644180-d744-11eb-8e8b-ebf64ffd54c0.png)
+[Autumnflies](README.assets/Autumnflies.png)
 
 #### Eyes in the Dark
 
 Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
 
-![EyesInTheDark](https://user-images.githubusercontent.com/83953120/123541457-02864000-d745-11eb-96aa-21c513c40b2d.png)
+[Eyes in the Dark](README.assets/EyesInTheDark.png)
 
 ### Nether and End
 
@@ -45,13 +45,13 @@ Also during the month of October, you may come across glowing eyes in absolutely
 
 Wisps are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand and Soul Soil.
 
-![Wisps](https://user-images.githubusercontent.com/83953120/123541464-0914b780-d745-11eb-9c97-abc8557a7c61.png)
+[Wisps](README.assets/Wisps.png)
 
 #### Chorus Petals
 
 Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
 
-![ChorusPetals](https://user-images.githubusercontent.com/83953120/123541477-15007980-d745-11eb-86ee-4c671c07f493.png)
+[Chorus Petals](README.assets/ChorusPetals)
 
 ## Cosmetics
 
