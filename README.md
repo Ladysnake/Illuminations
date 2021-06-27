@@ -2,45 +2,63 @@
 
 **Illuminations** is a client sided Minecraft Fabric mod that adds multiple ambient particles in order to make your world more enjoyable at night or in dark places.
 
-*(All screenshots with a bloom effect were taken with Canvas Renderer)*
 
-## Illuminations types
+## Ambience
 
-### Fireflies
+### Overworld
+
+#### Fireflies
 
 **Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![illuminations-1.0-fireflies](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-fireflies.png)
+![Fireflies](https://user-images.githubusercontent.com/83953120/123540909-aff75480-d741-11eb-936f-7bc9bddac4b0.png)
 
-### Chorus Petals
-
-Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
-
-![illuminations-1.4-choruspetals](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4-choruspetals.png)
-
-### Glowworms
+#### Glowworms
 
 **Glowworms** are small larvae living in caves by sticking to the ceiling that will fall down if their support block is removed. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![illuminations-1.0-glowworms](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-glowworms.png)
+![Glowworms](https://user-images.githubusercontent.com/83953120/123541029-77a44600-d742-11eb-8d14-ea60bfc5000f.png)
 
-### Plankton
+#### Plankton
 
 Glowing **plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
 
-![illuminations-1.0-plankton](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-plankton.png)
+![Plankton](https://user-images.githubusercontent.com/83953120/123540905-a40b9280-d741-11eb-9518-1531526e2a08.png)
 
-### "Autumnflies"
+### Halloween (October Specials)
+
+#### Autumnflies
 
 During the month of October, fireflies will adopt an orange tint instead of their regular green one.
 
-![illuminations-1.2-autumnflies](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-autumnflies.png)
+![Autumnflies](https://user-images.githubusercontent.com/83953120/123541449-f8644180-d744-11eb-8e8b-ebf64ffd54c0.png)
 
-### Eyes in the Dark
+#### Eyes in the Dark
 
 Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
 
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-eyes.png)
+![EyesInTheDark](https://user-images.githubusercontent.com/83953120/123541457-02864000-d745-11eb-96aa-21c513c40b2d.png)
+
+### Nether and End
+
+#### Will o' Wisps
+
+Wisps are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand and Soul Soil.
+
+![Wisps](https://user-images.githubusercontent.com/83953120/123541464-0914b780-d745-11eb-9c97-abc8557a7c61.png)
+
+#### Chorus Petals
+
+Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
+
+![ChorusPetals](https://user-images.githubusercontent.com/83953120/123541477-15007980-d745-11eb-86ee-4c671c07f493.png)
+
+## Cosmetics
+
+In addition to the ambience changes, Illuminations also features cosmetics, primarily for those who donated and contributed to the project, with the exception of the Pride Heart Collection that is available for all [Accounts](https://illuminations.uuid.gg/register). Cosmetics can be switched and customised using the [Illuminations Dashboard](https://illuminations.uuid.gg/). Since Illuminations is client-side you can use these cosmetics even on servers. Other players with Illuminations will be able to see your cosmetics.
+
+
+
 
 ## Configurability
 
