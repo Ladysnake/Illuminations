@@ -41,7 +41,7 @@ Also during the month of October, you may come across glowing eyes in absolutely
 
 ### Nether and End
 
-#### Will o' Wisps
+#### Will o'Wisps
 
 **Wisps** are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand.
 
@@ -109,9 +109,37 @@ A whirl of orange Leaves following your footsteps to bring that cosy autumn feel
 
 ![AutumnLeavesAura](https://user-images.githubusercontent.com/83953120/123550892-d0d69e80-d76f-11eb-9ffb-002bd73c5a8f.gif)
 
+### Overheads
 
+Overheads are different hats that tier 2 donators can decide to wear.
 
+![Crowns](https://user-images.githubusercontent.com/83953120/123554291-95dc6700-d77f-11eb-8208-58205e4922a0.png)
 
+### Pets
+
+Other than the pride hearts tier 2 donators can also equip 5 other pets that will hover next to them and look at what their owner is looking at.
+
+#### Will o'Wisp
+
+![WispPet](https://user-images.githubusercontent.com/83953120/123554894-a510e400-d782-11eb-8d18-251f68f232e5.gif)
+
+#### Golden Wisp
+
+![GoldenWisp](https://user-images.githubusercontent.com/83953120/123555479-36ce2080-d786-11eb-8532-42e398833b39.png)
+
+#### Founding Skull
+
+![FoundingSkull](https://user-images.githubusercontent.com/83953120/123555488-40578880-d786-11eb-976c-646fed194ef4.png)
+
+#### Dissolution Wisp
+
+![DissolutionWisp](https://user-images.githubusercontent.com/83953120/123555492-4a798700-d786-11eb-940c-29773d7b328d.png)
+
+#### Jacko
+
+Jacko is a Jack o'Lantern that will light itself when it is night or dark, otherwise it will be extinguished.
+
+![Jacko](https://user-images.githubusercontent.com/83953120/123555543-b22fd200-d786-11eb-9089-92b59ae0f99a.png)
 
 ## Configurability
 
@@ -128,6 +156,10 @@ Enable glowing eyes appearing in low light environments. Set on ENABLE by defaul
 
 The spawn rate percentage multiplier. Does not affect eyes in the dark.
 0% Disables illuminations, 1000% Multiplies the amount of illuminations appearing by 10.
+
+### Firefly White Alpha
+
+Changes the Alphachannel of the Firefly centre glow.
 
 ### First Person Cosmetics
 
