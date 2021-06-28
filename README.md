@@ -19,9 +19,9 @@ This mod is compatible with the [Canvas Renderer](https://www.curseforge.com/min
 
 ![Glowworms](https://user-images.githubusercontent.com/83953120/123544983-328a0f00-d756-11eb-8e51-2ee132c07cc2.png)
 
-#### Plankton
+#### Glowing Plankton
 
-Glowing **plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
+**Glowing Plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
 
 ![Plankton](https://user-images.githubusercontent.com/83953120/123544988-374ec300-d756-11eb-9c1a-8d427c9b3916.png)
 
@@ -41,9 +41,9 @@ Also during the month of October, you may come across glowing eyes in absolutely
 
 ### Nether and End
 
-#### Will o'Wisps
+#### Will o' Wisps
 
-**Wisps** are small ghost-like creatures that appear, even though a rare sight, in Soul Sand Valleys, flying through the air and phasing through Soul Sand.
+**Will o' Wisps** are rare small ghost-like creatures that appear in Soul Sand Valleys, flying through the air and phasing through Soul Sand. They also appear from Soul Lanterns, allowing the player to create a magical or eerie ambience by decorating their surroundings with those.
 
 ![Wisps](https://user-images.githubusercontent.com/83953120/123545008-46357580-d756-11eb-87b1-0ff55518d65a.png)
 
@@ -119,7 +119,7 @@ Overheads are different hats that tier 2 donators can decide to wear.
 
 Other than the pride hearts tier 2 donators can also equip 5 other pets that will hover next to them and look at what their owner is looking at.
 
-#### Will o'Wisp
+#### Will o' Wisp
 
 ![WispPet](https://user-images.githubusercontent.com/83953120/123554894-a510e400-d782-11eb-8d18-251f68f232e5.gif)
 
