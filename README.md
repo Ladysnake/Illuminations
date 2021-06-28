@@ -117,7 +117,7 @@ A whirl of orange Leaves following your footsteps to bring that cosy autumn feel
 
 Overheads are different hats that tier 2 donators can decide to wear.
 
-![Crowns](https://user-images.githubusercontent.com/83953120/123554291-95dc6700-d77f-11eb-8208-58205e4922a0.png)
+![OverheadsNames](https://user-images.githubusercontent.com/83953120/123702071-f8f2fa00-d862-11eb-821e-538595c5b355.png)
 
 ### Pets
 
