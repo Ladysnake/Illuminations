@@ -17,10 +17,6 @@ public class Config {
     private static boolean autoUpdate;
     private static boolean displayGreetingScreen;
 
-    public enum EyesInTheDark {
-        ENABLE, DISABLE, ALWAYS
-    }
-
     public static void load() {
         // if illuminations.properties exist, load it
         if (Files.isRegularFile(PROPERTIES_PATH)) {
@@ -126,6 +122,10 @@ public class Config {
         displayGreetingScreen = value;
         config.setProperty("display-greeting-screen", Boolean.toString(value));
         Config.save();
+    }
+
+    public enum EyesInTheDark {
+        ENABLE, DISABLE, ALWAYS
     }
 
 }

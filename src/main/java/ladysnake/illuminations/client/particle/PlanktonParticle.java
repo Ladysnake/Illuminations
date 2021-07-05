@@ -4,11 +4,7 @@ import ladysnake.illuminations.client.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteBillboardParticle;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -25,11 +21,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PlanktonParticle extends SpriteBillboardParticle {
     private static final float BLINK_STEP = 0.01f;
-    protected float nextAlphaGoal = 0f;
-
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
-
+    protected float nextAlphaGoal = 0f;
+    private BlockPos lightTarget;
+    private double xTarget;
+    private double yTarget;
+    private double zTarget;
+    private int targetChangeCooldown = 0;
     private PlanktonParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
@@ -47,19 +46,6 @@ public class PlanktonParticle extends SpriteBillboardParticle {
 
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new PlanktonParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
     }
 
     @Override
@@ -108,12 +94,6 @@ public class PlanktonParticle extends SpriteBillboardParticle {
         vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
         vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
     }
-
-    private BlockPos lightTarget;
-    private double xTarget;
-    private double yTarget;
-    private double zTarget;
-    private int targetChangeCooldown = 0;
 
     public void tick() {
         this.prevPosX = this.x;
@@ -191,6 +171,19 @@ public class PlanktonParticle extends SpriteBillboardParticle {
 
     public BlockPos getTargetPosition() {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new PlanktonParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+        }
     }
 
 }

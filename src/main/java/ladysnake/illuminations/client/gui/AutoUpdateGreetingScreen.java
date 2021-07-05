@@ -18,6 +18,10 @@ public class AutoUpdateGreetingScreen extends Screen {
         this.parent = parent;
     }
 
+    protected static int row(int index) {
+        return 40 + index * 13;
+    }
+
     protected void init() {
         this.addButton(new ButtonWidget(this.width / 2 - 125, this.height / 6 + 168, 100, 20, new TranslatableText("option.illuminations.disable").formatted(Formatting.RED), (button) -> {
             Config.setAutoUpdate(false);
@@ -48,9 +52,5 @@ public class AutoUpdateGreetingScreen extends Screen {
     public void onClose() {
         super.onClose();
         this.client.openScreen(this.parent);
-    }
-
-    protected static int row(int index) {
-        return 40 + index * 13;
     }
 }

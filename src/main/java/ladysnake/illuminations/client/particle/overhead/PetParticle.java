@@ -21,11 +21,10 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Random;
 
 public class PetParticle extends FireflyParticle {
-    protected final PlayerEntity owner;
-    protected float alpha = 0f;
-
     private static final Random RANDOM = new Random();
+    protected final PlayerEntity owner;
     private final SpriteProvider spriteProvider;
+    protected float alpha = 0f;
 
     public PetParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
@@ -40,19 +39,6 @@ public class PetParticle extends FireflyParticle {
 
         if (this.owner == null) {
             this.markDead();
-        }
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new PetParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 
@@ -120,6 +106,19 @@ public class PetParticle extends FireflyParticle {
             this.setPos(owner.getX() + Math.cos(owner.bodyYaw / 50) * 0.5, owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.cos(owner.bodyYaw / 50) * 0.5);
         } else {
             this.markDead();
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new PetParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 

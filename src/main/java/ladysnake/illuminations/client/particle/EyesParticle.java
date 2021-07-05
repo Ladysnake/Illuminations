@@ -4,11 +4,7 @@ import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteBillboardParticle;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -25,10 +21,9 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class EyesParticle extends SpriteBillboardParticle {
-    protected float alpha = 1f;
-
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
+    protected float alpha = 1f;
 
     public EyesParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -93,19 +88,6 @@ public class EyesParticle extends SpriteBillboardParticle {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new EyesParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
-    }
-
     public void tick() {
         if (this.age++ < this.maxAge) {
             if (this.age < 1) {
@@ -136,6 +118,19 @@ public class EyesParticle extends SpriteBillboardParticle {
         // disappear if light or if player gets too close
         if (this.maxAge > this.age && (world.getLightLevel(new BlockPos(x, y, z)) > 0 || world.getClosestPlayer(x, y, z, IlluminationsClient.EYES_VANISHING_DISTANCE, false) != null)) {
             this.maxAge = this.age;
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new EyesParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 

@@ -2,7 +2,7 @@ package ladysnake.illuminations.client.render.entity.feature;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.CrownRenderLayer;
-import ladysnake.illuminations.client.render.entity.model.OverheadEntityModel;
+import ladysnake.illuminations.client.render.entity.model.OverheadModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -23,7 +23,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
             String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
             if (playerOverhead != null && IlluminationsClient.OVERHEADS_DATA.containsKey(playerOverhead)) {
                 Identifier texture = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getTexture();
-                OverheadEntityModel model = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getModel();
+                OverheadModel model = IlluminationsClient.OVERHEADS_DATA.get(playerOverhead).getModel();
 
                 model.head.pivotX = this.getContextModel().head.pivotX;
                 model.head.pivotY = this.getContextModel().head.pivotY;

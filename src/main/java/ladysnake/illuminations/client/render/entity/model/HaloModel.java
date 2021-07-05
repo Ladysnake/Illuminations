@@ -5,24 +5,27 @@
 //// Paste this class into your mod and generate all required imports
 //package ladysnake.illuminations.client.render.entity.model;
 //import net.minecraft.client.model.Model;
-//public class WillOWispModel extends Model {
-//    private final ModelPart skull;
-//    public WillOWispModel(ModelPart root) {
-//this.skull = root.getChild("skull");
+//public class HaloModel extends Model {
+//    private final ModelPart head;
+//    private final ModelPart crown;
+//    public HaloModel(ModelPart root) {
+//this.head = root.getChild("head");
+//this.crown = this.head.getChild("crown");
 //}
 //public static TexturedModelData getTexturedModelData() {
 //ModelData modelData = new ModelData();
 //ModelPartData modelPartData = modelData.getRoot();
-//    }
-//modelPartData.addChild("skull", ModelPartBuilder.create().uv(0,0).cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F).uv(0,16).cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F, 0.25F, false), ModelTransform.pivot(0.0F,16.0F,0.0F));
+//ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0,32).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, true), ModelTransform.pivot(0.0F,0.0F,0.0F));
+//modelPartData1.addChild("crown", ModelPartBuilder.create().uv(0,0).cuboid(-8.0F, -11.0F, 5.0F, 16.0F, 16.0F, 0.0F, 0.0F, true), ModelTransform.pivot(0.0F,-4.0F,0.0F));
 //return TexturedModelData.of(modelData,32,32);
+//    }
 //    @Override
 //    public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 //        //previously the render function, render code was moved to a method below
 //    }
 //    @Override
 //    public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-//        skull.render(matrixStack, buffer, packedLight, packedOverlay);
+//        head.render(matrixStack, buffer, packedLight, packedOverlay);
 //    }
 //    public void setRotationAngle(ModelPart bone, float x, float y, float z) {
 //        bone.pitch = x;

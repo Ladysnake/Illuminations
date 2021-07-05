@@ -4,11 +4,7 @@ import ladysnake.illuminations.client.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteBillboardParticle;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.Vector3f;
@@ -28,11 +24,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
     protected static final float BLINK_STEP = 0.05f;
-    protected float nextAlphaGoal = 0f;
-
     private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
-
+    protected float nextAlphaGoal = 0f;
+    protected double xTarget;
+    protected double yTarget;
+    protected double zTarget;
+    protected int targetChangeCooldown = 0;
+    protected int maxHeight;
+    private BlockPos lightTarget;
+    private boolean isAttractedByLight = false;
     public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
@@ -56,19 +57,6 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new FireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
     }
 
     @Override
@@ -117,14 +105,6 @@ public class FireflyParticle extends SpriteBillboardParticle {
         vertexConsumer.vertex(vector3fs[2].getX(), vector3fs[2].getY(), vector3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
         vertexConsumer.vertex(vector3fs[3].getX(), vector3fs[3].getY(), vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
     }
-
-    private BlockPos lightTarget;
-    protected double xTarget;
-    protected double yTarget;
-    protected double zTarget;
-    protected int targetChangeCooldown = 0;
-    private boolean isAttractedByLight = false;
-    protected int maxHeight;
 
     public void tick() {
         this.prevPosX = this.x;
@@ -229,6 +209,19 @@ public class FireflyParticle extends SpriteBillboardParticle {
             randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
         }
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new FireflyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+        }
     }
 
 }

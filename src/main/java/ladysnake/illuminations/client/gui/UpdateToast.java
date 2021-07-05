@@ -11,6 +11,14 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 
 public class UpdateToast implements Toast {
+    public static void add() {
+        ToastManager toastManager = MinecraftClient.getInstance().getToastManager();
+        UpdateToast toast = toastManager.getToast(UpdateToast.class, Toast.TYPE);
+        if (toast == null) {
+            toastManager.add(new UpdateToast());
+        }
+    }
+
     @Override
     public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
         manager.getGame().getTextureManager().bindTexture(new Identifier(IlluminationsClient.MODID, "textures/gui/update_toast.png"));
@@ -35,13 +43,5 @@ public class UpdateToast implements Toast {
     @Override
     public int getHeight() {
         return 43;
-    }
-
-    public static void add() {
-        ToastManager toastManager = MinecraftClient.getInstance().getToastManager();
-        UpdateToast toast = toastManager.getToast(UpdateToast.class, Toast.TYPE);
-        if (toast == null) {
-            toastManager.add(new UpdateToast());
-        }
     }
 }

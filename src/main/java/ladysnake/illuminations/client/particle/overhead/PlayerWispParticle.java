@@ -15,11 +15,10 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerWispParticle extends WillOWispParticle {
-    protected PlayerEntity owner;
-
     private final float redEvolution;
     private final float greenEvolution;
     private final float blueEvolution;
+    protected PlayerEntity owner;
 
     protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
         super(world, x, y, z, texture);
@@ -37,33 +36,6 @@ public class PlayerWispParticle extends WillOWispParticle {
         this.blueEvolution = blueEvolution;
         this.greenEvolution = greenEvolution;
         this.colorAlpha = 0;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final Identifier texture;
-        private final float red;
-        private final float green;
-        private final float blue;
-        private final float redEvolution;
-        private final float greenEvolution;
-        private final float blueEvolution;
-
-        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
-            this.texture = texture;
-            this.red = red;
-            this.green = green;
-            this.blue = blue;
-            this.redEvolution = redEvolution;
-            this.greenEvolution = greenEvolution;
-            this.blueEvolution = blueEvolution;
-        }
-
-        @Nullable
-        @Override
-        public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new PlayerWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
-        }
     }
 
     @Override
@@ -96,6 +68,33 @@ public class PlayerWispParticle extends WillOWispParticle {
             this.prevYaw = -owner.prevYaw;
         } else {
             this.markDead();
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final Identifier texture;
+        private final float red;
+        private final float green;
+        private final float blue;
+        private final float redEvolution;
+        private final float greenEvolution;
+        private final float blueEvolution;
+
+        public DefaultFactory(SpriteProvider spriteProvider, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
+            this.texture = texture;
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+            this.redEvolution = redEvolution;
+            this.greenEvolution = greenEvolution;
+            this.blueEvolution = blueEvolution;
+        }
+
+        @Nullable
+        @Override
+        public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            return new PlayerWispParticle(world, x, y, z, this.texture, this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
         }
     }
 }

@@ -1,14 +1,13 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.matthewprenger.cursegradle' version '1.4.0'
 	id 'org.ajoberstar.grgit' version '3.1.1'
-	id 'com.github.breadmoirai.github-release' version '2.2.9'
-	id 'com.wynprice.cursemaven' version '1.2.3'
+	id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 // Adds a few utility methods like getProjectProperty
 apply from: 'https://raw.githubusercontent.com/NerdHubMC/Gradle-Scripts/master/scripts/utilities.gradle'
 apply from: 'https://raw.githubusercontent.com/NerdHubMC/Gradle-Scripts/master/scripts/fabric/publish/changelog.gradle'
@@ -17,7 +16,8 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-minecraft {
+loom {
+	accessWidener = file("src/main/resources/illuminations.accesswidener")
 }
 
 //def apiModules = [
@@ -37,22 +37,26 @@ repositories {
 	maven {
 		name = "Cotton"
 		url = "http://server.bbkr.space:8081/artifactory/libs-release/"
+		allowInsecureProtocol = true
 	}
 	// REI, odds and ends
 	maven {
 		name = "CurseForge"
 		url = "https://minecraft.curseforge.com/api/maven"
 	}
+
+	// cloth config
+	maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 //	apiModules.each {
 //		modImplementation include(fabricApi.module(it, project.fabric_version))
 //	}
@@ -62,10 +66,10 @@ dependencies {
 	// modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
 
 	// cloth config
-	modApi("me.shedaniel.cloth:config-2:4.8.2") {
+	modApi("me.shedaniel.cloth:cloth-config-fabric:5.0.34") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	include "me.shedaniel.cloth:config-2:4.8.2"
+	include "me.shedaniel.cloth:cloth-config-fabric:5.0.34"
 
 	// mod menu
 	modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {
@@ -73,7 +77,7 @@ dependencies {
 	}
 
 	// canvas renderer
-	modCompile "grondag:canvas-mc116:1.0.+"
+	modImplementation "grondag:canvas-mc117-1.17:1.0.1641"
 }
 
 processResources {

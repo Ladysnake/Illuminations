@@ -44,7 +44,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (playerPet != null && IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
-                if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson())|| MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
+                if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                     if (IlluminationsClient.PETS_DATA.containsKey(playerPet)) {
                         DefaultParticleType overhead = IlluminationsClient.PETS_DATA.get(playerPet);
                         if (this.age % 20 == 0) {

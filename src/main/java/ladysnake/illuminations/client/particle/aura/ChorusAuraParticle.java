@@ -22,19 +22,6 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
     }
 
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new ChorusAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
-    }
-
     public void tick() {
         if (this.age++ < this.maxAge) {
             this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
@@ -72,6 +59,19 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
 
         if (this.velocityY != 0) {
             this.angle += Math.PI * Math.sin(rotationFactor * this.age) / 2;
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new ChorusAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 

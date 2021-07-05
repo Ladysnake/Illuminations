@@ -13,9 +13,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class ShadowbringerParticle extends ChorusPetalParticle {
 
-    boolean negateX = random.nextBoolean(), negateZ = random.nextBoolean();
     private final SpriteProvider spriteProvider;
     private final float randEffect = random.nextFloat() + 0.5F;
+    boolean negateX = random.nextBoolean(), negateZ = random.nextBoolean();
 
     public ShadowbringerParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
@@ -32,19 +32,6 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 
 
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 1.5, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new ShadowbringerParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
     }
 
     public void tick() {
@@ -81,6 +68,19 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 
         if (this.velocityY != 0) {
             this.angle += Math.PI * Math.sin(rotationFactor * this.age) / 2;
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new ShadowbringerParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 }

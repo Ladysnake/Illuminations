@@ -12,6 +12,8 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
 public class GoldenrodAuraParticle extends ChorusPetalParticle {
+    private int elevation = 0;
+
     public GoldenrodAuraParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
@@ -24,8 +26,6 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
         this.setPos(this.x + get_rando(), this.y + random.nextFloat() + 0.5 * 1.5d, this.z + get_rando());
     }
 
-    private int elevation = 0;
-
     public double get_rando() {
         double rando = (random.nextFloat() - 0.5) * 1.4;
         if (rando < 0.3 && rando > 0) {
@@ -34,19 +34,6 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
             rando -= 0.3;
         }
         return rando;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new GoldenrodAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
     }
 
     public void tick() {
@@ -95,6 +82,19 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
 
         this.angle = 0;
 
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new GoldenrodAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+        }
     }
 
 }

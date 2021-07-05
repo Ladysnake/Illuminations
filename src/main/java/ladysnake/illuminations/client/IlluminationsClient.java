@@ -2,45 +2,21 @@ package ladysnake.illuminations.client;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.serialization.Codec;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.particle.ChorusPetalParticle;
-import ladysnake.illuminations.client.particle.EyesParticle;
-import ladysnake.illuminations.client.particle.FireflyParticle;
-import ladysnake.illuminations.client.particle.GlowwormParticle;
-import ladysnake.illuminations.client.particle.PlanktonParticle;
-import ladysnake.illuminations.client.particle.WillOWispParticle;
-import ladysnake.illuminations.client.particle.WispTrailParticle;
-import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
-import ladysnake.illuminations.client.particle.aura.AutumnLeavesParticle;
-import ladysnake.illuminations.client.particle.aura.ChorusAuraParticle;
-import ladysnake.illuminations.client.particle.aura.GhostlyParticle;
-import ladysnake.illuminations.client.particle.aura.GoldenrodAuraParticle;
-import ladysnake.illuminations.client.particle.aura.SculkTendrilParticle;
-import ladysnake.illuminations.client.particle.aura.ShadowbringerParticle;
-import ladysnake.illuminations.client.particle.aura.TwilightFireflyParticle;
+import ladysnake.illuminations.client.particle.*;
+import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
 import ladysnake.illuminations.client.particle.overhead.PetParticle;
 import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
 import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.CrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.HornEntityModel;
-import ladysnake.illuminations.client.render.entity.model.TiaraCrownEntityModel;
-import ladysnake.illuminations.client.render.entity.model.VoidheartTiaraEntityModel;
-import ladysnake.illuminations.client.render.entity.model.WorldweaverHaloEntityModel;
-import ladysnake.illuminations.client.render.entity.model.WreathEntityModel;
+import ladysnake.illuminations.client.render.entity.model.*;
 import ladysnake.illuminations.updater.IlluminationsUpdater;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -53,6 +29,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.DefaultParticleType;
@@ -90,17 +67,27 @@ public class IlluminationsClient implements ClientModInitializer {
     // illuminations constants
     public static final float EYES_SPAWN_CHANCE = 0.0001f;
     public static final int EYES_VANISHING_DISTANCE = 5;
-
-    // illuminations cosmetics
-    private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
+    // spawn predicates
+    public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> {
+        // sky angle --> time of day
+        // 0.25965086 --> 13000
+        // 0.7403491 --> 23000
+        return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
+                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
+    };
+    public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
+    public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
+    // illuminations cosmetics
+    private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
     public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
-
     // particle types
     public static DefaultParticleType FIREFLY;
     public static DefaultParticleType GLOWWORM;
@@ -109,7 +96,6 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType CHORUS_PETAL;
     public static DefaultParticleType WILL_O_WISP;
     public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
-
     // auras
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
@@ -131,23 +117,42 @@ public class IlluminationsClient implements ClientModInitializer {
     public static DefaultParticleType GOLDEN_WILL_PET;
     public static DefaultParticleType FOUNDING_SKULL_PET;
     public static DefaultParticleType DISSOLUTION_WISP_PET;
-
     // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
 
-    // spawn predicates
-    public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> {
-        // sky angle --> time of day
-        // 0.25965086 --> 13000
-        // 0.7403491 --> 23000
-        return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
-                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
-    };
-    public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
-    public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
-    public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
+    // register overhead models
+    public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
+
+
+    public static void loadPlayerCosmetics() {
+        // get illuminations player cosmetics
+        CompletableFuture.supplyAsync(() -> {
+            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
+                logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
+                return playerData;
+            } catch (MalformedURLException e) {
+                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+            } catch (IOException e) {
+                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+            }
+
+            return null;
+        }).exceptionally(throwable -> {
+            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            return null;
+        }).thenAcceptAsync(playerData -> {
+            logger.log(Level.INFO, "Retrieved data: " + playerData);
+            if (playerData != null) {
+                PLAYER_COSMETICS = playerData;
+                logger.log(Level.INFO, "Player cosmetics successfully registered");
+            } else {
+                PLAYER_COSMETICS = Collections.emptyMap();
+                logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+            }
+        }, MinecraftClient.getInstance());
+    }
 
     @Override
     public void onInitializeClient() {
@@ -223,15 +228,15 @@ public class IlluminationsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(IlluminationsClient.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
         // crowns feature
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
-                registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
+                registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer));
             }
         });
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, livingEntityRenderer, registrationHelper) -> {
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
-                registrationHelper.register(new DripFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) livingEntityRenderer));
+                registrationHelper.register(new DripFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer));
             }
         });
 
@@ -279,21 +284,20 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
-                .put("solar_crown", new OverheadData(new CrownEntityModel(), "solar_crown"))
-                .put("frost_crown", new OverheadData(new CrownEntityModel(), "frost_crown"))
-                .put("pyro_crown", new OverheadData(new CrownEntityModel(), "pyro_crown"))
-                .put("chorus_crown", new OverheadData(new CrownEntityModel(), "chorus_crown"))
-                .put("dragon_horns", new OverheadData(new CrownEntityModel(), "dragon_horns"))
-                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
-                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
-                .put("bloodfiend_crown", new OverheadData(new CrownEntityModel(), "bloodfiend_crown"))
-                .put("dreadlich_crown", new OverheadData(new CrownEntityModel(), "dreadlich_crown"))
-                .put("mooncult_crown", new OverheadData(new CrownEntityModel(), "mooncult_crown"))
-                .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
-                .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
-                .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
-                .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
-                .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
+                .put("solar_crown", new OverheadData(new CrownModel(), "solar_crown"))
+                .put("frost_crown", new OverheadData(new CrownModel(), "frost_crown"))
+                .put("pyro_crown", new OverheadData(new CrownModel(), "pyro_crown"))
+                .put("chorus_crown", new OverheadData(new CrownModel(), "chorus_crown"))
+//                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
+//                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
+//                .put("bloodfiend_crown", new OverheadData(new CrownModel(), "bloodfiend_crown"))
+//                .put("dreadlich_crown", new OverheadData(new CrownModel(), "dreadlich_crown"))
+//                .put("mooncult_crown", new OverheadData(new CrownModel(), "mooncult_crown"))
+//                .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
+//                .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
+//                .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
+//                .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
+//                .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
                 .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
@@ -309,35 +313,6 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("founding_skull", FOUNDING_SKULL_PET)
                 .put("dissolution_wisp", DISSOLUTION_WISP_PET)
                 .build();
-    }
-
-    public static void loadPlayerCosmetics() {
-        // get illuminations player cosmetics
-        CompletableFuture.supplyAsync(() -> {
-            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
-                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
-                return playerData;
-            } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
-            } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
-            }
-
-            return null;
-        }).exceptionally(throwable -> {
-            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
-            return null;
-        }).thenAcceptAsync(playerData -> {
-            logger.log(Level.INFO, "Retrieved data: "+playerData);
-            if (playerData != null) {
-                PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics successfully registered");
-            } else {
-                PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
-            }
-        }, MinecraftClient.getInstance());
     }
 
     private static class PlayerCosmeticDataParser implements JsonDeserializer<PlayerCosmeticData> {

@@ -5,8 +5,8 @@
   "client": [
     "BlockMixin",
     "ChorusFlowerBlockMixin",
-    "LanternBlockMixin",
     "ClientWorldMixin",
+    "LanternBlockMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
     "SodiumClientWorldMixin",
@@ -15,5 +15,8 @@
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "RenderLayerAccessor"
+  ]
 }

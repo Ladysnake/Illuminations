@@ -3,13 +3,13 @@ package ladysnake.illuminations.client.data;
 import com.google.gson.JsonElement;
 
 public class PlayerCosmeticData {
+    private final int colorRed;
+    private final int colorGreen;
+    private final int colorBlue;
     private String aura;
     private String overhead;
     private boolean drip;
     private String pet;
-    private final int colorRed;
-    private final int colorGreen;
-    private final int colorBlue;
 
     public PlayerCosmeticData(JsonElement aura, JsonElement color, JsonElement overhead, JsonElement drip, JsonElement pet) {
         if (aura.isJsonNull()) {

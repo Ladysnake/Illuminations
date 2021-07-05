@@ -12,18 +12,8 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.Level;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.JarURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
@@ -35,9 +25,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IlluminationsUpdater {
+    static final ArrayList<String> UNINSTALLER_PARAMS = new ArrayList<>();
     private static final String UPDATES_URL = "https://illuminations.uuid.gg/latest?version=";
     private static final String UNINSTALLER = "illuminations-uninstaller.jar";
-    static final ArrayList<String> UNINSTALLER_PARAMS = new ArrayList<>();
     public static boolean NEW_UPDATE = false;
 
     public static void init() {

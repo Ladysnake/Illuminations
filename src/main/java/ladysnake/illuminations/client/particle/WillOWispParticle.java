@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.particle;
 
 import ladysnake.illuminations.client.IlluminationsClient;
-import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -12,11 +11,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.client.world.ClientWorld;
@@ -36,17 +31,20 @@ import net.minecraft.util.math.Vec3d;
 import java.util.stream.Stream;
 
 public class WillOWispParticle extends Particle {
+    public final Identifier texture;
     private final Model model;
     private final RenderLayer LAYER;
-    public final Identifier texture;
-
     public float yaw;
     public float pitch;
     public float prevYaw;
     public float prevPitch;
 
     public float speedModifier;
-
+    protected double xTarget;
+    protected double yTarget;
+    protected double zTarget;
+    protected int targetChangeCooldown = 0;
+    protected int timeInSolid = -1;
     protected WillOWispParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
         super(world, x, y, z);
         this.texture = texture;
@@ -55,16 +53,6 @@ public class WillOWispParticle extends Particle {
         this.gravityStrength = 0.0F;
         this.maxAge = 600 + random.nextInt(600);
         speedModifier = 0.1f + Math.max(0, random.nextFloat() - 0.1f);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        public DefaultFactory(SpriteProvider spriteProvider) {
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new WillOWispParticle(clientWorld, d, e, f, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
-        }
     }
 
     @Override
@@ -92,12 +80,6 @@ public class WillOWispParticle extends Particle {
         }
         immediate.draw();
     }
-
-    protected double xTarget;
-    protected double yTarget;
-    protected double zTarget;
-    protected int targetChangeCooldown = 0;
-    protected int timeInSolid = -1;
 
     @Override
     public void tick() {
@@ -210,5 +192,15 @@ public class WillOWispParticle extends Particle {
 
         speedModifier = 0.1f + Math.max(0, random.nextFloat() - 0.1f);
         targetChangeCooldown = random.nextInt() % (int) (100 / this.speedModifier);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        public DefaultFactory(SpriteProvider spriteProvider) {
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new WillOWispParticle(clientWorld, d, e, f, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
+        }
     }
 }
