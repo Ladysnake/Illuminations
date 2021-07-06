@@ -2,20 +2,22 @@ package ladysnake.illuminations.client.data;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import ladysnake.illuminations.client.render.entity.model.OverheadModel;
-import net.minecraft.client.model.Model;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
 
+import java.util.function.Function;
+
 public class OverheadData {
-    private final OverheadModel model;
+    private final Function<EntityRendererFactory.Context, OverheadModel> model;
     private final Identifier texture;
 
-    public OverheadData(OverheadModel model, String textureName) {
+    public OverheadData(Function<EntityRendererFactory.Context, OverheadModel> model, String textureName) {
         this.model = model;
         this.texture = new Identifier(IlluminationsClient.MODID, "textures/entity/" + textureName + ".png");
     }
 
-    public OverheadModel getModel() {
-        return model;
+    public OverheadModel createModel(EntityRendererFactory.Context ctx) {
+        return model.apply(ctx);
     }
 
     public Identifier getTexture() {

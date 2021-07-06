@@ -130,8 +130,7 @@ public class IlluminationsClient implements ClientModInitializer {
         CompletableFuture.supplyAsync(() -> {
             try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
                 logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
-                Map<UUID, PlayerCosmeticData> playerData = COSMETICS_GSON.fromJson(reader, COSMETIC_SELECT_TYPE);
-                return playerData;
+                return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
             } catch (MalformedURLException e) {
                 logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
@@ -230,7 +229,7 @@ public class IlluminationsClient implements ClientModInitializer {
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
-                registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer));
+                registrationHelper.register(new OverheadFeatureRenderer((FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer, context));
             }
         });
 
@@ -284,20 +283,20 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
-                .put("solar_crown", new OverheadData(new CrownModel(), "solar_crown"))
-                .put("frost_crown", new OverheadData(new CrownModel(), "frost_crown"))
-                .put("pyro_crown", new OverheadData(new CrownModel(), "pyro_crown"))
-                .put("chorus_crown", new OverheadData(new CrownModel(), "chorus_crown"))
-//                .put("deepsculk_horns", new OverheadData(new HornEntityModel(), "deepsculk_horns"))
-//                .put("springfae_horns", new OverheadData(new HornEntityModel(), "springfae_horns"))
-//                .put("bloodfiend_crown", new OverheadData(new CrownModel(), "bloodfiend_crown"))
-//                .put("dreadlich_crown", new OverheadData(new CrownModel(), "dreadlich_crown"))
-//                .put("mooncult_crown", new OverheadData(new CrownModel(), "mooncult_crown"))
-//                .put("voidheart_tiara", new OverheadData(new VoidheartTiaraEntityModel(), "voidheart_tiara"))
-//                .put("worldweaver_halo", new OverheadData(new WorldweaverHaloEntityModel(), "worldweaver_halo"))
-//                .put("summerbreeze_wreath", new OverheadData(new WreathEntityModel(), "summerbreeze_wreath"))
-//                .put("glowsquid_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "glowsquid_cult_crown"))
-//                .put("timeaspect_cult_crown", new OverheadData(new TiaraCrownEntityModel(), "timeaspect_cult_crown"))
+                .put("solar_crown", new OverheadData(CrownModel::new, "solar_crown"))
+                .put("frost_crown", new OverheadData(CrownModel::new, "frost_crown"))
+                .put("pyro_crown", new OverheadData(CrownModel::new, "pyro_crown"))
+                .put("chorus_crown", new OverheadData(CrownModel::new, "chorus_crown"))
+//                .put("deepsculk_horns", new OverheadData(HornEntityModel::new, "deepsculk_horns"))
+//                .put("springfae_horns", new OverheadData(HornEntityModel::new, "springfae_horns"))
+                .put("bloodfiend_crown", new OverheadData(CrownModel::new, "bloodfiend_crown"))
+                .put("dreadlich_crown", new OverheadData(CrownModel::new, "dreadlich_crown"))
+                .put("mooncult_crown", new OverheadData(CrownModel::new, "mooncult_crown"))
+//                .put("voidheart_tiara", new OverheadData(VoidheartTiaraEntityModel::new, "voidheart_tiara"))
+//                .put("worldweaver_halo", new OverheadData(WorldweaverHaloEntityModel::new, "worldweaver_halo"))
+//                .put("summerbreeze_wreath", new OverheadData(WreathEntityModel::new, "summerbreeze_wreath"))
+//                .put("glowsquid_cult_crown", new OverheadData(TiaraCrownEntityModel::new, "glowsquid_cult_crown"))
+//                .put("timeaspect_cult_crown", new OverheadData(TiaraCrownEntityModel::new, "timeaspect_cult_crown"))
                 .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
