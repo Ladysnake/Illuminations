@@ -12,16 +12,25 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.Level;
 
-import java.io.*;
-import java.net.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IlluminationsUpdater {
@@ -43,27 +52,32 @@ public class IlluminationsUpdater {
         if (Config.isAutoUpdate()) {
             // .future file
             Pattern pattern = Pattern.compile("^illuminations.+\\.future$");
-            for (File mod : new File("mods").listFiles()) {
-                Matcher matcher = pattern.matcher(mod.getName());
-                if (matcher.find()) {
-                    mod.delete();
-                }
+            try {
+                Files.list(Path.of("mods")).filter(mod -> pattern.matcher(mod.getFileName().toString()).find()).forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        IlluminationsClient.logger.error("Failed to delete old mod file {}", path, e);
+                    }
+                });
+            } catch (IOException e) {
+                IlluminationsClient.logger.error("Failed to delete old mod files", e);
             }
 
             if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
                 IlluminationsClient.logger.info("Looking for updates for Illuminations");
 
                 String minecraftVersion = SharedConstants.getGameVersion().getName();
-                String modVersion = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).get().getMetadata().getVersion().getFriendlyString();
+                String modVersion = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).orElseThrow().getMetadata().getVersion().getFriendlyString();
                 CompletableFuture.supplyAsync(() -> {
                     try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + minecraftVersion).openStream())) {
                         JsonParser jp = new JsonParser();
                         JsonElement jsonElement = jp.parse(reader);
                         return jsonElement.getAsJsonObject();
                     } catch (MalformedURLException e) {
-                        IlluminationsClient.logger.log(Level.ERROR, "Could not get update information because of malformed URL: " + e.getMessage());
+                        IlluminationsClient.logger.error("Could not get update information because of malformed URL", e);
                     } catch (IOException e) {
-                        IlluminationsClient.logger.log(Level.ERROR, "Could not get update information because of I/O Error: " + e.getMessage());
+                        IlluminationsClient.logger.error("Could not get update information because of I/O Error", e);
                     }
 
                     return null;
@@ -84,7 +98,7 @@ public class IlluminationsUpdater {
                                     fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                                     IlluminationsClient.logger.log(Level.INFO, latestFileName + " downloaded");
 
-                                    ModContainer mod = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).get();
+                                    ModContainer mod = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).orElseThrow();
                                     URL rootUrl = mod.getRootPath().toUri().toURL();
                                     URLConnection connection = rootUrl.openConnection();
                                     if (connection instanceof JarURLConnection) {
