@@ -9,7 +9,7 @@ import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +33,7 @@ public class PetParticle extends FireflyParticle {
 
         this.alpha = 0;
         this.maxAge = 40;
-        this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale = 0.2f;
 
@@ -54,19 +54,19 @@ public class PetParticle extends FireflyParticle {
         } else {
             quaternion2 = new Quaternion(camera.getRotation());
             float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-            quaternion2.hamiltonProduct(Vector3f.POSITIVE_Z.getRadialQuaternion(i));
+            quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
         }
 
-        Vector3f vector3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        vector3f.rotate(quaternion2);
-        Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+        Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+        Vec3f.rotate(quaternion2);
+        Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
         float j = this.getSize(tickDelta);
 
         for (int k = 0; k < 4; ++k) {
-            Vector3f vector3f2 = vector3fs[k];
-            vector3f2.rotate(quaternion2);
-            vector3f2.scale(j);
-            vector3f2.add(f, g, h);
+            Vec3f Vec3f2 = Vec3fs[k];
+            Vec3f2.rotate(quaternion2);
+            Vec3f2.scale(j);
+            Vec3f2.add(f, g, h);
         }
 
         float minU = this.getMinU();
@@ -75,10 +75,10 @@ public class PetParticle extends FireflyParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex((double) vector3fs[0].getX(), (double) vector3fs[0].getY(), (double) vector3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double) vector3fs[1].getX(), (double) vector3fs[1].getY(), (double) vector3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double) vector3fs[2].getX(), (double) vector3fs[2].getY(), (double) vector3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
-        vertexConsumer.vertex((double) vector3fs[3].getX(), (double) vector3fs[3].getY(), (double) vector3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+        vertexConsumer.vertex((double) Vec3fs[0].getX(), (double) Vec3fs[0].getY(), (double) Vec3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
+        vertexConsumer.vertex((double) Vec3fs[1].getX(), (double) Vec3fs[1].getY(), (double) Vec3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+        vertexConsumer.vertex((double) Vec3fs[2].getX(), (double) Vec3fs[2].getY(), (double) Vec3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, alpha).light(l).next();
+        vertexConsumer.vertex((double) Vec3fs[3].getX(), (double) Vec3fs[3].getY(), (double) Vec3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {

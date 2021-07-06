@@ -12,7 +12,7 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.Vec3f;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,7 +31,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
         this.maxAge = 20;
-        this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
         if (owner != null && owner.getUuid() != null && IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()) != null) {

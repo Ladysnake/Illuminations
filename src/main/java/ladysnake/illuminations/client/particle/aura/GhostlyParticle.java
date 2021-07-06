@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.Vec3f;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +30,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     public GhostlyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
-        this.owner = world.getClosestPlayer((new TargetPredicate()).setBaseMaxDistance(1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale *= 1f + RANDOM.nextFloat();
         this.maxAge = RANDOM.nextInt(5) + 8;
@@ -50,9 +50,9 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
-        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
@@ -85,10 +85,10 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         int l = 15728880;
         float a = MathHelper.clamp(this.alpha, 0.0F, MAXIMUM_ALPHA);
 
-        vertexConsumer.vertex((double) Vec3fs[0].getX(), (double) Vec3fs[0].getY(), (double) Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[1].getX(), (double) Vec3fs[1].getY(), (double) Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[2].getX(), (double) Vec3fs[2].getY(), (double) Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[3].getX(), (double) Vec3fs[3].getY(), (double) Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {

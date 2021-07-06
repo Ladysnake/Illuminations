@@ -13,7 +13,7 @@ import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -69,8 +69,8 @@ public class WillOWispParticle extends Particle {
 
         MatrixStack matrixStack = new MatrixStack();
         matrixStack.translate(f, g, h);
-        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, this.prevYaw, this.yaw) - 180));
-        matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(g, this.prevPitch, this.pitch)));
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, this.prevYaw, this.yaw) - 180));
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(g, this.prevPitch, this.pitch)));
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
@@ -114,7 +114,7 @@ public class WillOWispParticle extends Particle {
         this.prevYaw = this.yaw;
         this.prevPitch = this.pitch;
         Vec3d vec3d = new Vec3d(velocityX, velocityY, velocityZ);
-        float f = MathHelper.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z);
+        float f = (float) Math.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z);
         this.yaw = (float) (MathHelper.atan2(vec3d.x, vec3d.z) * 57.2957763671875D);
         this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
 
@@ -152,7 +152,7 @@ public class WillOWispParticle extends Particle {
     public void move(double dx, double dy, double dz) {
         double d = dx;
         double e = dy;
-        if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x + dx, this.y + dy, this.z + dz)).getBlock().isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
+        if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x + dx, this.y + dy, this.z + dz)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
             Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream(Stream.empty()));
             dx = vec3d.x;
             dy = vec3d.y;
@@ -164,7 +164,7 @@ public class WillOWispParticle extends Particle {
             this.repositionFromBoundingBox();
         }
 
-        this.onGround = dy != dy && e < 0.0D && !this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).getBlock().isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
+        this.onGround = dy != dy && e < 0.0D && !this.world.getBlockState(new BlockPos(this.x, this.y, this.z)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
         if (d != dx) {
             this.velocityX = 0.0D;
         }
@@ -185,7 +185,7 @@ public class WillOWispParticle extends Particle {
         this.zTarget = this.z + random.nextGaussian() * 10;
 
         BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
-        if (this.world.getBlockState(targetPos).isFullCube(world, targetPos) && !this.world.getBlockState(targetPos).getBlock().isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
+        if (this.world.getBlockState(targetPos).isFullCube(world, targetPos) && !this.world.getBlockState(targetPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
             targetChangeCooldown = 0;
             return;
         }
