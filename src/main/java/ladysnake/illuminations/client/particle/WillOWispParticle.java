@@ -1,6 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
 import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -33,7 +34,7 @@ import java.util.stream.Stream;
 public class WillOWispParticle extends Particle {
     public final Identifier texture;
     private final Model model;
-    private final RenderLayer LAYER;
+    private final RenderLayer layer;
     public float yaw;
     public float pitch;
     public float prevYaw;
@@ -45,11 +46,12 @@ public class WillOWispParticle extends Particle {
     protected double zTarget;
     protected int targetChangeCooldown = 0;
     protected int timeInSolid = -1;
+
     protected WillOWispParticle(ClientWorld world, double x, double y, double z, Identifier texture) {
         super(world, x, y, z);
         this.texture = texture;
-        this.model = new WillOWispModel();
-        this.LAYER = RenderLayer.getEntityTranslucent(texture);
+        this.model = new WillOWispModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(WillOWispModel.MODEL_LAYER));
+        this.layer = RenderLayer.getEntityTranslucent(texture);
         this.gravityStrength = 0.0F;
         this.maxAge = 600 + random.nextInt(600);
         speedModifier = 0.1f + Math.max(0, random.nextFloat() - 0.1f);
@@ -74,7 +76,7 @@ public class WillOWispParticle extends Particle {
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer vertexConsumer2 = immediate.getBuffer(this.LAYER);
+        VertexConsumer vertexConsumer2 = immediate.getBuffer(this.layer);
         if (colorAlpha > 0) {
             this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
         }
@@ -153,7 +155,7 @@ public class WillOWispParticle extends Particle {
         double d = dx;
         double e = dy;
         if (this.collidesWithWorld && !this.world.getBlockState(new BlockPos(this.x + dx, this.y + dy, this.z + dz)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
-            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream(Stream.empty()));
+            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream<>(Stream.empty()));
             dx = vec3d.x;
             dy = vec3d.y;
             dz = vec3d.z;

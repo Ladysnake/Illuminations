@@ -22,7 +22,6 @@ public class UpdateToast implements Toast {
     @Override
     public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
         manager.getGame().getTextureManager().bindTexture(new Identifier(IlluminationsClient.MODID, "textures/gui/update_toast.png"));
-        RenderSystem.color3f(1.0F, 1.0F, 1.0F);
         manager.drawTexture(matrices, 0, 0, 0, 0, getWidth(), getHeight());
         manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations update available!"), 34, 7, -256);
         manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations automatically downloaded it"), 34, 18, -1);

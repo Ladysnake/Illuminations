@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 
 public class OverheadModel extends Model {
-    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(IlluminationsClient.MODID, "crown"), "main");
+    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(IlluminationsClient.MODID, "overhead"), "main");
     public final ModelPart head;
 
     public OverheadModel(EntityRendererFactory.Context ctx) {

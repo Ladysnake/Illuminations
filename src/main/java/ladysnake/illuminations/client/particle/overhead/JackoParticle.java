@@ -27,9 +27,9 @@ public class JackoParticle extends PetParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
-        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
@@ -55,22 +55,22 @@ public class JackoParticle extends PetParticle {
         float maxU = this.getMaxU();
         float minV = this.getMinV();
         float maxV = this.getMaxV();
-        int p = this.getColorMultiplier(tickDelta);
+        int p = this.getBrightness(tickDelta);
         int l = 15728880;
         float a = Math.min(1f, Math.max(0f, this.alpha));
         float gl = Math.min(1f, Math.max(0f, this.glow));
 
         // pumpkin
-        vertexConsumer.vertex((double) Vec3fs[0].getX(), (double) Vec3fs[0].getY(), (double) Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double) Vec3fs[1].getX(), (double) Vec3fs[1].getY(), (double) Vec3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double) Vec3fs[2].getX(), (double) Vec3fs[2].getY(), (double) Vec3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, a).light(p).next();
-        vertexConsumer.vertex((double) Vec3fs[3].getX(), (double) Vec3fs[3].getY(), (double) Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(1f, 1f, 1f, a).light(p).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, a).light(p).next();
 
         // pumpkin glow
-        vertexConsumer.vertex((double) Vec3fs[0].getX(), (double) Vec3fs[0].getY(), (double) Vec3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[1].getX(), (double) Vec3fs[1].getY(), (double) Vec3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[2].getX(), (double) Vec3fs[2].getY(), (double) Vec3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
-        vertexConsumer.vertex((double) Vec3fs[3].getX(), (double) Vec3fs[3].getY(), (double) Vec3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(1f, 1f, 1f, gl).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(1f, 1f, 1f, gl).light(l).next();
     }
 
     @Override
