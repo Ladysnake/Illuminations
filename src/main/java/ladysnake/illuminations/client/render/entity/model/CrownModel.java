@@ -1,8 +1,3 @@
-// Made with Model Converter by Globox_Z
-// Generate all required imports
-// Made with Blockbench 3.8.4
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
 package ladysnake.illuminations.client.render.entity.model;
 
 import ladysnake.illuminations.client.IlluminationsClient;
@@ -24,9 +19,9 @@ public class CrownModel extends OverheadModel {
         ModelPart east_r1 = crown.getChild("east_r1");
         ModelPart north_r1 = crown.getChild("north_r1");
         ModelPart west_r1 = crown.getChild("west_r1");
-        setRotationAngle(west_r1, -0.2618F, 1.5708F, 0.0F);
+        setRotationAngle(east_r1, -0.2618F, 1.5708F, 0.0F);
         setRotationAngle(north_r1, -0.2618F, 3.1416F, 0.0F);
-        setRotationAngle(east_r1, -0.2618F, -1.5708F, 0.0F);
+        setRotationAngle(west_r1, -0.2618F, -1.5708F, 0.0F);
         setRotationAngle(south_r1, -0.2618F, 0.0F, 0.0F);
     }
 

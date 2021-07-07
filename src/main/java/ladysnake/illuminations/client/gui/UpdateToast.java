@@ -1,6 +1,5 @@
 package ladysnake.illuminations.client.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;

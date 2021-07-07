@@ -81,6 +81,8 @@ public class IlluminationsClient implements ClientModInitializer {
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
     public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
     public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
+    // register overhead models
+    public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
     // illuminations cosmetics
@@ -121,10 +123,6 @@ public class IlluminationsClient implements ClientModInitializer {
     // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
-
-    // register overhead models
-    public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
-
 
     public static void loadPlayerCosmetics() {
         // get illuminations player cosmetics
@@ -167,7 +165,13 @@ public class IlluminationsClient implements ClientModInitializer {
             IlluminationsUpdater.init();
         }
 
+        // register model layers
         EntityModelLayerRegistry.registerModelLayer(CrownModel.MODEL_LAYER, CrownModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(HornsModel.MODEL_LAYER, HornsModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(HaloModel.MODEL_LAYER, HaloModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(TiaraModel.MODEL_LAYER, TiaraModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(VoidheartTiaraModel.MODEL_LAYER, VoidheartTiaraModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(WreathModel.MODEL_LAYER, WreathModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WillOWispModel.MODEL_LAYER, WillOWispModel::getTexturedModelData);
 
         // particles
@@ -287,16 +291,16 @@ public class IlluminationsClient implements ClientModInitializer {
                 .put("frost_crown", new OverheadData(CrownModel::new, "frost_crown"))
                 .put("pyro_crown", new OverheadData(CrownModel::new, "pyro_crown"))
                 .put("chorus_crown", new OverheadData(CrownModel::new, "chorus_crown"))
-//                .put("deepsculk_horns", new OverheadData(HornEntityModel::new, "deepsculk_horns"))
-//                .put("springfae_horns", new OverheadData(HornEntityModel::new, "springfae_horns"))
                 .put("bloodfiend_crown", new OverheadData(CrownModel::new, "bloodfiend_crown"))
                 .put("dreadlich_crown", new OverheadData(CrownModel::new, "dreadlich_crown"))
                 .put("mooncult_crown", new OverheadData(CrownModel::new, "mooncult_crown"))
-//                .put("voidheart_tiara", new OverheadData(VoidheartTiaraEntityModel::new, "voidheart_tiara"))
-//                .put("worldweaver_halo", new OverheadData(WorldweaverHaloEntityModel::new, "worldweaver_halo"))
-//                .put("summerbreeze_wreath", new OverheadData(WreathEntityModel::new, "summerbreeze_wreath"))
-//                .put("glowsquid_cult_crown", new OverheadData(TiaraCrownEntityModel::new, "glowsquid_cult_crown"))
-//                .put("timeaspect_cult_crown", new OverheadData(TiaraCrownEntityModel::new, "timeaspect_cult_crown"))
+                .put("deepsculk_horns", new OverheadData(HornsModel::new, "deepsculk_horns"))
+                .put("springfae_horns", new OverheadData(HornsModel::new, "springfae_horns"))
+                .put("voidheart_tiara", new OverheadData(VoidheartTiaraModel::new, "voidheart_tiara"))
+                .put("worldweaver_halo", new OverheadData(HaloModel::new, "worldweaver_halo"))
+                .put("summerbreeze_wreath", new OverheadData(WreathModel::new, "summerbreeze_wreath"))
+                .put("glowsquid_cult_crown", new OverheadData(TiaraModel::new, "glowsquid_cult_crown"))
+                .put("timeaspect_cult_crown", new OverheadData(TiaraModel::new, "timeaspect_cult_crown"))
                 .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
