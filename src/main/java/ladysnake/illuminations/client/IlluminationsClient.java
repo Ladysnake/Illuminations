@@ -168,7 +168,6 @@ public class IlluminationsClient implements ClientModInitializer {
         }
 
         EntityModelLayerRegistry.registerModelLayer(CrownModel.MODEL_LAYER, CrownModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(OverheadModel.MODEL_LAYER, OverheadModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WillOWispModel.MODEL_LAYER, WillOWispModel::getTexturedModelData);
 
         // particles
