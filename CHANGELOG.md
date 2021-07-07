@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.5.2 - 1.17
+- Updated to Minecraft 1.17
+
 ### Illuminations 1.5.1 - 1.16.5
 - Added a config option to see your own cosmetics in first person
 
