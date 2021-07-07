@@ -7,7 +7,6 @@ package ladysnake.illuminations.client.render.entity.model;
 
 import ladysnake.illuminations.client.IlluminationsClient;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
@@ -17,20 +16,14 @@ import net.minecraft.util.Identifier;
 public class CrownModel extends OverheadModel {
     public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(IlluminationsClient.MODID, "crown"), "main");
 
-    private final ModelPart crown;
-    private final ModelPart west_r1;
-    private final ModelPart north_r1;
-    private final ModelPart east_r1;
-    private final ModelPart south_r1;
-
     public CrownModel(EntityRendererFactory.Context ctx) {
         super(ctx);
 
-        this.crown = this.head.getChild("crown");
-        this.south_r1 = this.crown.getChild("south_r1");
-        this.east_r1 = this.crown.getChild("east_r1");
-        this.north_r1 = this.crown.getChild("north_r1");
-        this.west_r1 = this.crown.getChild("west_r1");
+        ModelPart crown = this.head.getChild("crown");
+        ModelPart south_r1 = crown.getChild("south_r1");
+        ModelPart east_r1 = crown.getChild("east_r1");
+        ModelPart north_r1 = crown.getChild("north_r1");
+        ModelPart west_r1 = crown.getChild("west_r1");
         setRotationAngle(west_r1, -0.2618F, 1.5708F, 0.0F);
         setRotationAngle(north_r1, -0.2618F, 3.1416F, 0.0F);
         setRotationAngle(east_r1, -0.2618F, -1.5708F, 0.0F);
@@ -41,12 +34,12 @@ public class CrownModel extends OverheadModel {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 7).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-        ModelPartData modelPartData2 = modelPartData1.addChild("crown", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -13.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
-        modelPartData2.addChild("west_r1", ModelPartBuilder.create().uv(7, 39).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
-        modelPartData2.addChild("north_r1", ModelPartBuilder.create().uv(7, 15).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
-        modelPartData2.addChild("east_r1", ModelPartBuilder.create().uv(7, 23).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
-        modelPartData2.addChild("south_r1", ModelPartBuilder.create().uv(7, 31).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
-        return TexturedModelData.of(modelData, 32, 32);
+        ModelPartData modelPartData2 = modelPartData1.addChild("crown", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -13.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.5f)), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
+        modelPartData2.addChild("west_r1", ModelPartBuilder.create().uv(7, 39).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
+        modelPartData2.addChild("north_r1", ModelPartBuilder.create().uv(7, 15).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
+        modelPartData2.addChild("east_r1", ModelPartBuilder.create().uv(7, 23).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
+        modelPartData2.addChild("south_r1", ModelPartBuilder.create().uv(7, 31).cuboid(-4.0F, -8.0F, 3.0F, 8.0F, 8.0F, 1.0F, new Dilation(-0.5F)), ModelTransform.pivot(0.0F, -7.0F, 0.0F));
+        return TexturedModelData.of(modelData, 32, 48);
     }
 
     @Override
