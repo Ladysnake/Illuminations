@@ -22,7 +22,7 @@ public class IlluminationsMixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.startsWith("ladysnake.illuminations.mixin.jeb")) {
-            return FabricLoader.getInstance().isModLoaded("satin");
+            return FabricLoader.getInstance().isModLoaded("satin") && !FabricLoader.getInstance().isModLoaded("iris");
         } else {
             return true;
         }
