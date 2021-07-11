@@ -141,7 +141,6 @@ public class Illuminations implements ClientModInitializer {
             logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
-            logger.log(Level.INFO, "Retrieved data: " + playerData);
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
                 logger.log(Level.INFO, "Player cosmetics successfully registered");
