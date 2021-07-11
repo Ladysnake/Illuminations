@@ -87,10 +87,10 @@ dependencies {
     }
 
     // canvas renderer
-    modImplementation "grondag:canvas-mc117-1.17:1.0.1641"
+//    modImplementation "grondag:canvas-mc117-1.17:1.0.1641"
 
 	// satin
-	modImplementation "io.github.ladysnake:satin:${satin_version}"
+	modCompileOnly "io.github.ladysnake:satin:${satin_version}"
 }
 
 processResources {

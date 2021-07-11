@@ -10,7 +10,6 @@
     "ParticleManagerMixin",
     "PlayerEntityMixin",
     "RenderLayerAccessor",
-    "SodiumClientWorldMixin",
     "TitleScreenMixin",
     "jeb.FeatureRendererMixin",
     "jeb.LivingEntityRendererMixin"

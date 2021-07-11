@@ -21,13 +21,7 @@ public class IlluminationsMixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        boolean sodiumLoaded = FabricLoader.getInstance().isModLoaded("sodium");
-
-        if (mixinClassName.equals("ladysnake.illuminations.mixin.SodiumClientWorldMixin")) {
-            return sodiumLoaded;
-        } else if (mixinClassName.equals("ladysnake.illuminations.mixin.ClientWorldMixin")) {
-            return !sodiumLoaded;
-        } else if (mixinClassName.startsWith("ladysnake.illuminations.mixin.jeb")) {
+        if (mixinClassName.startsWith("ladysnake.illuminations.mixin.jeb")) {
             return FabricLoader.getInstance().isModLoaded("satin");
         } else {
             return true;
