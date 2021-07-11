@@ -1,6 +1,6 @@
 package ladysnake.illuminations.mixin;
 
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
@@ -16,7 +16,7 @@ public abstract class LanternBlockMixin extends BlockMixin {
     @Override
     protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
         if (state.getBlock() == Blocks.SOUL_LANTERN && random.nextInt(100) == 0) {
-            world.addParticle(IlluminationsClient.WILL_O_WISP, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0f, 0f, 0f);
+            world.addParticle(Illuminations.WILL_O_WISP, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0f, 0f, 0f);
         }
     }
 }

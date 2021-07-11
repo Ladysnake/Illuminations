@@ -61,7 +61,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
 
 @Environment(EnvType.CLIENT)
-public class IlluminationsClient implements ClientModInitializer {
+public class Illuminations implements ClientModInitializer {
     public static final String MODID = "illuminations";
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
@@ -165,6 +165,11 @@ public class IlluminationsClient implements ClientModInitializer {
             IlluminationsUpdater.init();
         }
 
+        // load jeb shader
+        if (FabricLoader.getInstance().isModLoaded("satin")) {
+            Rainbowlluminations.init();
+        }
+
         // register model layers
         EntityModelLayerRegistry.registerModelLayer(CrownModel.MODEL_LAYER, CrownModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HornsModel.MODEL_LAYER, HornsModel::getTexturedModelData);
@@ -176,63 +181,63 @@ public class IlluminationsClient implements ClientModInitializer {
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FIREFLY, FireflyParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.FIREFLY, FireflyParticle.DefaultFactory::new);
         GLOWWORM = Registry.register(Registry.PARTICLE_TYPE, "illuminations:glowworm", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GLOWWORM, GlowwormParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GLOWWORM, GlowwormParticle.DefaultFactory::new);
         PLANKTON = Registry.register(Registry.PARTICLE_TYPE, "illuminations:plankton", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PLANKTON, PlanktonParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PLANKTON, PlanktonParticle.DefaultFactory::new);
         EYES = Registry.register(Registry.PARTICLE_TYPE, "illuminations:eyes", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.EYES, EyesParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.EYES, EyesParticle.DefaultFactory::new);
         CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_petal", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
         WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP, WillOWispParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP, WillOWispParticle.DefaultFactory::new);
         WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp_trail", new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
             @Override
             public Codec<WispTrailParticleEffect> getCodec() {
                 return WispTrailParticleEffect.CODEC;
             }
         });
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WISP_TRAIL, WispTrailParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.WISP_TRAIL, WispTrailParticle.Factory::new);
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
         GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ghostly_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
         CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
         AUTUMN_LEAVES_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:autumn_leaves", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.AUTUMN_LEAVES_AURA, AutumnLeavesParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.AUTUMN_LEAVES_AURA, AutumnLeavesParticle.DefaultFactory::new);
         SCULK_TENDRIL_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:sculk_tendril", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SCULK_TENDRIL_AURA, SculkTendrilParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.SCULK_TENDRIL_AURA, SculkTendrilParticle.DefaultFactory::new);
         SHADOWBRINGER_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:shadowbringer_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
         GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, PetParticle.DefaultFactory::new);
         TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.TRANS_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.TRANS_PRIDE_PET, PetParticle.DefaultFactory::new);
         JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.JACKO_PET, JackoParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.JACKO_PET, JackoParticle.DefaultFactory::new);
         LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.LESBIAN_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.LESBIAN_PRIDE_PET, PetParticle.DefaultFactory::new);
         BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.BI_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.BI_PRIDE_PET, PetParticle.DefaultFactory::new);
         ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.ACE_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.ACE_PRIDE_PET, PetParticle.DefaultFactory::new);
         NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.NB_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.NB_PRIDE_PET, PetParticle.DefaultFactory::new);
         INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.INTERSEX_PRIDE_PET, PetParticle.DefaultFactory::new);  ///haha sex
+        ParticleFactoryRegistry.getInstance().register(Illuminations.INTERSEX_PRIDE_PET, PetParticle.DefaultFactory::new);  ///haha sex
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.05f, -0.01f, 0.0f));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GOLDEN_WILL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/golden_will.png"), 1.0f, 0.3f, 1.0f, -0.05f, -0.01f, 0.0f));
         FOUNDING_SKULL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:founding_skull_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(IlluminationsClient.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.25f, -0.03f, 0.0f, -0.01f));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.FOUNDING_SKULL_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/founding_skull.png"), 1.0f, 0.0f, 0.25f, -0.03f, 0.0f, -0.01f));
         DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:dissolution_wisp_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(IlluminationsClient.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {

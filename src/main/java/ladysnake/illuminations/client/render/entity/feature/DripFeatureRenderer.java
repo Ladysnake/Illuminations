@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.render.entity.feature;
 
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -29,14 +29,14 @@ public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (!IlluminationsClient.PLAYER_COSMETICS.containsKey(entity.getUuid()) || entity.isInvisible() || !IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).isDrip()) {
+        if (!Illuminations.PLAYER_COSMETICS.containsKey(entity.getUuid()) || entity.isInvisible() || !Illuminations.PLAYER_COSMETICS.get(entity.getUuid()).isDrip()) {
             return;
         }
         this.getContextModel().setAttributes(playerModel);
         playerModel.setVisible(false);
         playerModel.rightLeg.visible = true;
         playerModel.leftLeg.visible = true;
-        PlayerCosmeticData data = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid());
+        PlayerCosmeticData data = Illuminations.PLAYER_COSMETICS.get(entity.getUuid());
         float r = data.getColorRed() / 255.0F;
         float g = data.getColorGreen() / 255.0F;
         float b = data.getColorBlue() / 255.0F;

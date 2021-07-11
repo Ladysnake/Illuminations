@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.render.entity.feature;
 
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import ladysnake.illuminations.client.render.entity.model.OverheadModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -21,14 +21,14 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
     public OverheadFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext, EntityRendererFactory.Context loader) {
         super(featureRendererContext);
-        this.models = IlluminationsClient.OVERHEADS_DATA.entrySet().stream()
+        this.models = Illuminations.OVERHEADS_DATA.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, data -> new ResolvedOverheadData(data.getValue().getTexture(), data.getValue().createModel(loader))));
     }
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()) != null && !entity.isInvisible()) {
-            String playerOverhead = IlluminationsClient.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
+        if (Illuminations.PLAYER_COSMETICS.get(entity.getUuid()) != null && !entity.isInvisible()) {
+            String playerOverhead = Illuminations.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
             if (playerOverhead != null) {
                 ResolvedOverheadData resolvedOverheadData = this.models.get(playerOverhead);
                 if (resolvedOverheadData != null) {

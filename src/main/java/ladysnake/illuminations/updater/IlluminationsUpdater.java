@@ -3,7 +3,7 @@ package ladysnake.illuminations.updater;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import ladysnake.illuminations.client.Config;
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.SemanticVersion;
@@ -36,7 +36,7 @@ public class IlluminationsUpdater {
             try {
                 Files.delete(Paths.get("mods/" + UNINSTALLER));
             } catch (IOException e) {
-                IlluminationsClient.logger.log(Level.WARN, "Could not remove uninstaller because of I/O Error: " + e.getMessage());
+                Illuminations.logger.log(Level.WARN, "Could not remove uninstaller because of I/O Error: " + e.getMessage());
             }
         }
 
@@ -48,27 +48,27 @@ public class IlluminationsUpdater {
                     try {
                         Files.delete(path);
                     } catch (IOException e) {
-                        IlluminationsClient.logger.error("Failed to delete old mod file {}", path, e);
+                        Illuminations.logger.error("Failed to delete old mod file {}", path, e);
                     }
                 });
             } catch (IOException e) {
-                IlluminationsClient.logger.error("Failed to delete old mod files", e);
+                Illuminations.logger.error("Failed to delete old mod files", e);
             }
 
             if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
-                IlluminationsClient.logger.info("Looking for updates for Illuminations");
+                Illuminations.logger.info("Looking for updates for Illuminations");
 
                 String minecraftVersion = SharedConstants.getGameVersion().getName();
-                String modVersion = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).orElseThrow().getMetadata().getVersion().getFriendlyString();
+                String modVersion = FabricLoader.getInstance().getModContainer(Illuminations.MODID).orElseThrow().getMetadata().getVersion().getFriendlyString();
                 CompletableFuture.supplyAsync(() -> {
                     try (Reader reader = new InputStreamReader(new URL(UPDATES_URL + minecraftVersion).openStream())) {
                         JsonParser jp = new JsonParser();
                         JsonElement jsonElement = jp.parse(reader);
                         return jsonElement.getAsJsonObject();
                     } catch (MalformedURLException e) {
-                        IlluminationsClient.logger.error("Could not get update information because of malformed URL", e);
+                        Illuminations.logger.error("Could not get update information because of malformed URL", e);
                     } catch (IOException e) {
-                        IlluminationsClient.logger.error("Could not get update information because of I/O Error", e);
+                        Illuminations.logger.error("Could not get update information because of I/O Error", e);
                     }
 
                     return null;
@@ -79,7 +79,7 @@ public class IlluminationsUpdater {
                         // if not the latest version, update toast
                         try {
                             if (SemanticVersion.parse(latestVersion).compareTo(SemanticVersion.parse(modVersion)) > 0) {
-                                IlluminationsClient.logger.log(Level.INFO, "Currently present version of Illuminations is " + modVersion + " while the latest version is " + latestVersion + "; downloading update");
+                                Illuminations.logger.log(Level.INFO, "Currently present version of Illuminations is " + modVersion + " while the latest version is " + latestVersion + "; downloading update");
 
                                 try {
                                     // download new jar
@@ -87,9 +87,9 @@ public class IlluminationsUpdater {
                                     ReadableByteChannel rbc = Channels.newChannel(website.openStream());
                                     FileOutputStream fos = new FileOutputStream("mods/" + latestFileName);
                                     fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-                                    IlluminationsClient.logger.log(Level.INFO, latestFileName + " downloaded");
+                                    Illuminations.logger.log(Level.INFO, latestFileName + " downloaded");
 
-                                    ModContainer mod = FabricLoader.getInstance().getModContainer(IlluminationsClient.MODID).orElseThrow();
+                                    ModContainer mod = FabricLoader.getInstance().getModContainer(Illuminations.MODID).orElseThrow();
                                     URL rootUrl = mod.getRootPath().toUri().toURL();
                                     URLConnection connection = rootUrl.openConnection();
                                     if (connection instanceof JarURLConnection) {
@@ -107,26 +107,26 @@ public class IlluminationsUpdater {
                                         }
                                     }
                                 } catch (MalformedURLException e) {
-                                    IlluminationsClient.logger.log(Level.ERROR, "Could not download update because of malformed URL: " + e.getMessage());
+                                    Illuminations.logger.log(Level.ERROR, "Could not download update because of malformed URL: " + e.getMessage());
                                 } catch (IOException e) {
-                                    IlluminationsClient.logger.log(Level.ERROR, "Could not download update because of I/O Error: " + e.getMessage());
+                                    Illuminations.logger.log(Level.ERROR, "Could not download update because of I/O Error: " + e.getMessage());
                                 } catch (URISyntaxException e) {
-                                    IlluminationsClient.logger.log(Level.ERROR, "Could not download update because of URI Syntax Error: " + e.getMessage());
+                                    Illuminations.logger.log(Level.ERROR, "Could not download update because of URI Syntax Error: " + e.getMessage());
                                 }
                             }
                         } catch (VersionParsingException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        IlluminationsClient.logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
+                        Illuminations.logger.log(Level.WARN, "Update information could not be retrieved, auto-update will not be available");
                     }
                 }, MinecraftClient.getInstance());
             }
 
-            IlluminationsClient.logger.log(Level.INFO, "Adding shutdown hook for uninstaller to update Illuminations");
+            Illuminations.logger.log(Level.INFO, "Adding shutdown hook for uninstaller to update Illuminations");
 
             // extract the uninstaller and add a shutdown hook to uninstall old files and install new ones
-            InputStream in = IlluminationsClient.class.getResourceAsStream("/" + UNINSTALLER);
+            InputStream in = Illuminations.class.getResourceAsStream("/" + UNINSTALLER);
             try {
                 Files.copy(in, Paths.get("mods/" + UNINSTALLER), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
@@ -135,7 +135,7 @@ public class IlluminationsUpdater {
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
-                    IlluminationsClient.logger.log(Level.INFO, "Minecraft instance shutting down, starting the Illuminations uninstaller");
+                    Illuminations.logger.log(Level.INFO, "Minecraft instance shutting down, starting the Illuminations uninstaller");
 
                     StringBuilder commandParams = new StringBuilder();
                     for (String uninstallerParam : UNINSTALLER_PARAMS) {
@@ -144,7 +144,7 @@ public class IlluminationsUpdater {
 
                     Runtime.getRuntime().exec("java -jar mods/" + UNINSTALLER + commandParams);
                 } catch (IOException e) {
-                    IlluminationsClient.logger.log(Level.ERROR, "Could not run uninstaller");
+                    Illuminations.logger.log(Level.ERROR, "Could not run uninstaller");
                     e.printStackTrace();
                 }
             }));

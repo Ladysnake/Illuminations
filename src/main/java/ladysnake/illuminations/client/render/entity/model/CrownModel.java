@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.render.entity.model;
 
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class CrownModel extends OverheadModel {
-    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(IlluminationsClient.MODID, "crown"), "main");
+    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Illuminations.MODID, "crown"), "main");
 
     public CrownModel(EntityRendererFactory.Context ctx) {
         super(ctx, MODEL_LAYER);

@@ -1,7 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
 import ladysnake.illuminations.client.Config;
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -112,7 +112,7 @@ public class EyesParticle extends SpriteBillboardParticle {
         this.prevPosZ = this.z;
 
         // disappear if light or if player gets too close
-        if (this.maxAge > this.age && (world.getLightLevel(new BlockPos(x, y, z)) > 0 || world.getClosestPlayer(x, y, z, IlluminationsClient.EYES_VANISHING_DISTANCE, false) != null)) {
+        if (this.maxAge > this.age && (world.getLightLevel(new BlockPos(x, y, z)) > 0 || world.getClosestPlayer(x, y, z, Illuminations.EYES_VANISHING_DISTANCE, false) != null)) {
             this.maxAge = this.age;
         }
     }

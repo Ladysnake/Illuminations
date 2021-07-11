@@ -1,7 +1,7 @@
 package ladysnake.illuminations.mixin;
 
 import com.google.common.collect.ImmutableSet;
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.IlluminationData;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -37,8 +37,8 @@ public abstract class ClientWorldMixin extends World {
         Biome.Category biomeCategory = this.getBiome(pos).getCategory();
         Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(this.getBiome(pos));
 
-        if (IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
-            ImmutableSet<IlluminationData> illuminationDataSet = IlluminationsClient.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
+        if (Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
+            ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
             illuminationDataSet.forEach(illuminationData -> {
                 if (illuminationData.getLocationSpawnPredicate().test(this, pos)
                         && illuminationData.shouldAddParticle(this.random)) {
@@ -47,8 +47,8 @@ public abstract class ClientWorldMixin extends World {
             });
         }
 
-        if (IlluminationsClient.ILLUMINATIONS_BIOMES.containsKey(biome)) {
-            ImmutableSet<IlluminationData> illuminationDataSet = IlluminationsClient.ILLUMINATIONS_BIOMES.get(biome);
+        if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
+            ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOMES.get(biome);
             illuminationDataSet.forEach(illuminationData -> {
                 if (illuminationData.getLocationSpawnPredicate().test(this, pos)
                         && illuminationData.shouldAddParticle(this.random)) {
@@ -58,15 +58,15 @@ public abstract class ClientWorldMixin extends World {
         }
 
         // spooky eyes
-        if (IlluminationsClient.EYES_LOCATION_PREDICATE.test(this, pos)
-                && random.nextFloat() <= IlluminationsClient.EYES_SPAWN_CHANCE) {
-            this.addParticle(IlluminationsClient.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+        if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
+                && random.nextFloat() <= Illuminations.EYES_SPAWN_CHANCE) {
+            this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }
 
     @Inject(method = "addPlayer", at = @At(value = "RETURN"))
     public void addPlayer(int id, AbstractClientPlayerEntity player, CallbackInfo ci) {
-        IlluminationsClient.loadPlayerCosmetics();
+        Illuminations.loadPlayerCosmetics();
     }
 
 }

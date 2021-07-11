@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -202,7 +202,7 @@ public class WillOWispParticle extends Particle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new WillOWispParticle(clientWorld, d, e, f, new Identifier(IlluminationsClient.MODID, "textures/entity/will_o_wisp.png"));
+            return new WillOWispParticle(clientWorld, d, e, f, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"));
         }
     }
 }

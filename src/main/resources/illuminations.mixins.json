@@ -9,14 +9,14 @@
     "LanternBlockMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
+    "RenderLayerAccessor",
     "SodiumClientWorldMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "jeb.FeatureRendererMixin",
+    "jeb.LivingEntityRendererMixin"
   ],
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "RenderLayerAccessor"
-  ]
+  }
 }

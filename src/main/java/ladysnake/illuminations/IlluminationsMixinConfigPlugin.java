@@ -27,6 +27,8 @@ public class IlluminationsMixinConfigPlugin implements IMixinConfigPlugin {
             return sodiumLoaded;
         } else if (mixinClassName.equals("ladysnake.illuminations.mixin.ClientWorldMixin")) {
             return !sodiumLoaded;
+        } else if (mixinClassName.startsWith("ladysnake.illuminations.mixin.jeb")) {
+            return FabricLoader.getInstance().isModLoaded("satin");
         } else {
             return true;
         }

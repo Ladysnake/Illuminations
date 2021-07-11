@@ -1,7 +1,7 @@
 package ladysnake.illuminations.client.particle.aura;
 
 import ladysnake.illuminations.client.Config;
-import ladysnake.illuminations.client.IlluminationsClient;
+import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;
@@ -30,8 +30,8 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
-        if (owner != null && owner.getUuid() != null && IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid()) != null) {
-            PlayerCosmeticData data = IlluminationsClient.PLAYER_COSMETICS.get(owner.getUuid());
+        if (owner != null && owner.getUuid() != null && Illuminations.PLAYER_COSMETICS.get(owner.getUuid()) != null) {
+            PlayerCosmeticData data = Illuminations.PLAYER_COSMETICS.get(owner.getUuid());
             this.colorRed = data.getColorRed() / 255f;
             this.colorGreen = data.getColorGreen() / 255f;
             this.colorBlue = data.getColorBlue() / 255f;
