@@ -1,5 +1,15 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.6 - 1.17.1
+- Added "jeb_" mobs:
+    - Any mob named jeb will be applied a glowing rainbow effect shifting its colors gradually
+    - Requires Satin API (https://www.curseforge.com/minecraft/mc-mods/satin-api). If Satin API is present, the functionality will be enabled. If Satin is not present, the functionality will be disabled.
+    - The functionality will not work if Canvas Renderer is present.
+    - The functionality is incompatible with Iris. If Iris is present, the functionality will be disabled.
+- Fixed the game crashing on startup if Iris is loaded
+- Removed an annoying log spam every time the player reloads Illuminations cosmetics
+- Updated to Minecraft 1.17.1
+
 ### Illuminations 1.5.2 - 1.17
 - Updated to Minecraft 1.17
 
