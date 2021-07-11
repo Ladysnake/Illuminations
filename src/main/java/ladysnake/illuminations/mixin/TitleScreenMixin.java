@@ -17,7 +17,7 @@ public abstract class TitleScreenMixin {
     @Inject(at = @At(value = "RETURN"), method = "render")
     protected void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (Config.isDisplayGreetingScreen()) {
-            MinecraftClient.getInstance().openScreen(new AutoUpdateGreetingScreen((TitleScreen) (Object) this));
+            MinecraftClient.getInstance().setScreen(new AutoUpdateGreetingScreen((TitleScreen) (Object) this));
         } else {
             if (IlluminationsUpdater.NEW_UPDATE) {
                 UpdateToast.add();
