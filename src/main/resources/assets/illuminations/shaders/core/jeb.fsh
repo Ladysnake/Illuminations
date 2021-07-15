@@ -37,6 +37,6 @@ void main() {
     vec4 rgb = texture(Sampler0, texCoord0);
     if (rgb.a == 0) discard;
     vec3 hsv = rgb2hsv(rgb.rgb);
-    hsv.x = fract(hsv.x + Time/5f);
+    hsv.x = fract(hsv.x + Time/5.0);
     fragColor = vec4(hsv2rgb(hsv), 1.0);
 }

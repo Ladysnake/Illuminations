@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.6.1 - 1.17.1
+- Fixed a crash that would sometimes occur with Satin API installed
+
 ### Illuminations 1.6 - 1.17.1
 - Added "jeb_" mobs:
     - Any mob named jeb will be applied a glowing rainbow effect shifting its colors gradually
