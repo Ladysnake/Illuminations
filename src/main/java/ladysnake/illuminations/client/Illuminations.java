@@ -107,6 +107,8 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType SCULK_TENDRIL_AURA;
     public static DefaultParticleType SHADOWBRINGER_AURA;
     public static DefaultParticleType GOLDENROD_AURA;
+    public static DefaultParticleType CONFETTI_AURA;
+    public static DefaultParticleType PRISMATIC_CONFETTI_AURA;
     // pets
     public static DefaultParticleType PRIDE_PET;
     public static DefaultParticleType TRANS_PRIDE_PET;
@@ -213,6 +215,11 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.SHADOWBRINGER_AURA, ShadowbringerParticle.DefaultFactory::new);
         GOLDENROD_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:goldenrod_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.GOLDENROD_AURA, GoldenrodAuraParticle.DefaultFactory::new);
+        CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:confetti", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.CONFETTI_AURA, ConfettiParticle.DefaultFactory::new);
+        PRISMATIC_CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:prismatic_confetti", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMATIC_CONFETTI_AURA, PrismaticConfettiParticle.DefaultFactory::new);
+
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, PetParticle.DefaultFactory::new);
         TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_pet", FabricParticleTypes.simple(true));
@@ -289,6 +296,8 @@ public class Illuminations implements ClientModInitializer {
                 .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
                 .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
+                .put("confetti", new AuraData(CONFETTI_AURA, 0.1f, 1))
+                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, 0.1f, 1))
                 .build();
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(CrownModel::new, "solar_crown"))
