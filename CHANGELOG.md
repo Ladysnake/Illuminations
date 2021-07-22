@@ -1,5 +1,11 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.6.2 - 1.17.1
+- Added two new auras for tier 2 donators: Confetti and Prismatic Confetti
+    - These auras will sprinkle confetti around the player, that will stay on the ground for around 20 seconds!
+    - Normal confetti aura will spawn randomly colored confetti, prismatic confetti aura will spawn confetti according to the player's color
+- Fixed config button not showing up in Mod Menu
+
 ### Illuminations 1.6.1 - 1.17.1
 - Fixed a crash that would sometimes occur with Satin API installed
 

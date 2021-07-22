@@ -16,14 +16,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ConfettiParticle extends SpriteBillboardParticle {
 
     private static final Random RANDOM = new Random();
-
-    private float rotationX;
-    private float rotationY;
-    private float rotationZ;
     private final double rotationXmod;
     private final double rotationYmod;
     private final double rotationZmod;
     private final float groundOffset;
+    private float rotationX;
+    private float rotationY;
+    private float rotationZ;
 
     public ConfettiParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -58,19 +57,6 @@ public class ConfettiParticle extends SpriteBillboardParticle {
 
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
-
-        public DefaultFactory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new ConfettiParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-        }
     }
 
     @Override
@@ -155,6 +141,19 @@ public class ConfettiParticle extends SpriteBillboardParticle {
             } else {
                 this.markDead();
             }
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public DefaultFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new ConfettiParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 }

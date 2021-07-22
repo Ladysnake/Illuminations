@@ -1,13 +1,11 @@
 package ladysnake.illuminations.client;
 
+import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TranslatableText;
-
-import java.util.function.Function;
 
 public class IlluminationsModMenuIntegration implements ModMenuApi {
     @Override
@@ -16,7 +14,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
     }
 
     @Override
-    public Function<Screen, ? extends Screen> getConfigScreenFactory() {
+    public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> {
             // load config
             Config.load();

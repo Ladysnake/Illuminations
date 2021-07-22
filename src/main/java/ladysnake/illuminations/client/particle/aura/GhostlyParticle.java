@@ -30,7 +30,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     public GhostlyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
-        this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(0.1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale *= 1f + RANDOM.nextFloat();
         this.maxAge = RANDOM.nextInt(5) + 8;

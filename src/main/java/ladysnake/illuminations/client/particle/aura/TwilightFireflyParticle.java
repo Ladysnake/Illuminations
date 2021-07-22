@@ -27,7 +27,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
         this.maxAge = 20;
-        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(0.1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
         if (owner != null && owner.getUuid() != null && Illuminations.PLAYER_COSMETICS.get(owner.getUuid()) != null) {

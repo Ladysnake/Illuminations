@@ -33,7 +33,7 @@ public class PetParticle extends FireflyParticle {
 
         this.alpha = 0;
         this.maxAge = 40;
-        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(0.1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         this.scale = 0.2f;
 

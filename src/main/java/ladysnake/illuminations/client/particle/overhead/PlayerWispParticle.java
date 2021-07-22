@@ -23,7 +23,7 @@ public class PlayerWispParticle extends WillOWispParticle {
     protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
         super(world, x, y, z, texture);
         this.maxAge = 35;
-        this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(0.1D), this.x, this.y, this.z);
+        this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
         if (this.owner == null) {
             this.markDead();
