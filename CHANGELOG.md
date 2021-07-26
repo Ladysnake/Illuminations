@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.6.3 - 1.17.1
+- Made a minor refactor for eventual mod compatibility features
+
 ### Illuminations 1.6.2 - 1.17.1
 - Added two new auras for tier 2 donators: Confetti and Prismatic Confetti
     - These auras will sprinkle confetti around the player, that will stay on the ground for around 20 seconds!
