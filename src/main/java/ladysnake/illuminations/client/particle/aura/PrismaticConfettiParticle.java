@@ -12,14 +12,16 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 
+import java.util.Objects;
+
 public class PrismaticConfettiParticle extends ConfettiParticle {
     public PrismaticConfettiParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
 
         PlayerEntity owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
 
-        if (owner != null && owner.getUuid() != null && Illuminations.PLAYER_COSMETICS.get(owner.getUuid()) != null) {
-            PlayerCosmeticData data = Illuminations.PLAYER_COSMETICS.get(owner.getUuid());
+        if (owner != null && owner.getUuid() != null && Illuminations.getCosmeticData(owner) != null) {
+            PlayerCosmeticData data = Objects.requireNonNull(Illuminations.getCosmeticData(owner));
             this.colorRed = data.getColorRed() / 255f;
             this.colorGreen = data.getColorGreen() / 255f;
             this.colorBlue = data.getColorBlue() / 255f;
