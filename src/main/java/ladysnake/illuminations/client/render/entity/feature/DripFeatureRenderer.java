@@ -29,17 +29,17 @@ public class DripFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (!Illuminations.PLAYER_COSMETICS.containsKey(entity.getUuid()) || entity.isInvisible() || !Illuminations.PLAYER_COSMETICS.get(entity.getUuid()).isDrip()) {
+        PlayerCosmeticData cosmeticData = Illuminations.getCosmeticData(entity);
+        if (cosmeticData == null || entity.isInvisible() || !cosmeticData.isDrip()) {
             return;
         }
         this.getContextModel().setAttributes(playerModel);
         playerModel.setVisible(false);
         playerModel.rightLeg.visible = true;
         playerModel.leftLeg.visible = true;
-        PlayerCosmeticData data = Illuminations.PLAYER_COSMETICS.get(entity.getUuid());
-        float r = data.getColorRed() / 255.0F;
-        float g = data.getColorGreen() / 255.0F;
-        float b = data.getColorBlue() / 255.0F;
+        float r = cosmeticData.getColorRed() / 255.0F;
+        float g = cosmeticData.getColorGreen() / 255.0F;
+        float b = cosmeticData.getColorBlue() / 255.0F;
         playerModel.render(matrices, ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(dripTexture), false, false), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         playerModel.render(matrices, vertexConsumers.getBuffer(GlowyRenderLayer.get(dripColorTexture)), 15728880, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
     }

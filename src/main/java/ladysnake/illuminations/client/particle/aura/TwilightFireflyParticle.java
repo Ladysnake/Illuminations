@@ -18,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.*;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class TwilightFireflyParticle extends FireflyParticle {
@@ -30,15 +31,15 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.owner = world.getClosestPlayer(TargetPredicate.createNonAttackable().setBaseMaxDistance(1D), this.x, this.y, this.z);
         this.maxHeight = 2;
 
-        if (owner != null && owner.getUuid() != null && Illuminations.PLAYER_COSMETICS.get(owner.getUuid()) != null) {
-            PlayerCosmeticData data = Illuminations.PLAYER_COSMETICS.get(owner.getUuid());
-            this.colorRed = data.getColorRed() / 255f;
-            this.colorGreen = data.getColorGreen() / 255f;
-            this.colorBlue = data.getColorBlue() / 255f;
-            this.nextAlphaGoal = 1f;
-        } else {
-            this.markDead();
-        }
+        Optional.ofNullable(owner).map(Illuminations::getCosmeticData).ifPresentOrElse(
+                data -> {
+                    this.colorRed = data.getColorRed() / 255f;
+                    this.colorGreen = data.getColorGreen() / 255f;
+                    this.colorBlue = data.getColorBlue() / 255f;
+                    this.nextAlphaGoal = 1f;
+                },
+                this::markDead
+        );
 
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
     }
@@ -50,9 +51,9 @@ public class TwilightFireflyParticle extends FireflyParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         Vec3d vec3d = camera.getPos();
-        float f = (float) (MathHelper.lerp((double) tickDelta, this.prevPosX, this.x) - vec3d.getX());
-        float g = (float) (MathHelper.lerp((double) tickDelta, this.prevPosY, this.y) - vec3d.getY());
-        float h = (float) (MathHelper.lerp((double) tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
+        float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
+        float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
+        float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
         Quaternion quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();

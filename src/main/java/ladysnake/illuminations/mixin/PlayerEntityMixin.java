@@ -3,6 +3,7 @@ package ladysnake.illuminations.mixin;
 import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.AuraData;
+import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -22,10 +23,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo callbackInfo) {
+        PlayerCosmeticData cosmeticData = Illuminations.getCosmeticData((PlayerEntity) (Object) this);
         // if player has cosmetics
-        if (Illuminations.PLAYER_COSMETICS.containsKey(this.getUuid())) {
+        if (cosmeticData != null) {
             // player aura
-            String playerAura = Illuminations.PLAYER_COSMETICS.get(this.getUuid()).getAura();
+            String playerAura = cosmeticData.getAura();
             if (playerAura != null && Illuminations.AURAS_DATA.containsKey(playerAura)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
@@ -40,7 +42,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             }
 
             // player pet
-            String playerPet = Illuminations.PLAYER_COSMETICS.get(this.getUuid()).getPet();
+            String playerPet = cosmeticData.getPet();
             if (playerPet != null && Illuminations.PETS_DATA.containsKey(playerPet)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
@@ -55,5 +57,4 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             }
         }
     }
-
 }

@@ -33,6 +33,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.tag.BlockTags;
@@ -45,6 +46,7 @@ import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -87,7 +89,7 @@ public class Illuminations implements ClientModInitializer {
     }.getType();
     // illuminations cosmetics
     private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
-    public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
+    private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
@@ -125,6 +127,10 @@ public class Illuminations implements ClientModInitializer {
     // spawn biome categories and biomes
     public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
+
+    public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
+        return PLAYER_COSMETICS.get(player.getUuid());
+    }
 
     public static void loadPlayerCosmetics() {
         // get illuminations player cosmetics

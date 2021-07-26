@@ -1,6 +1,7 @@
 package ladysnake.illuminations.client.render.entity.feature;
 
 import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import ladysnake.illuminations.client.render.entity.model.OverheadModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -27,8 +28,9 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (Illuminations.PLAYER_COSMETICS.get(entity.getUuid()) != null && !entity.isInvisible()) {
-            String playerOverhead = Illuminations.PLAYER_COSMETICS.get(entity.getUuid()).getOverhead();
+        PlayerCosmeticData cosmeticData = Illuminations.getCosmeticData(entity);
+        if (cosmeticData != null && !entity.isInvisible()) {
+            String playerOverhead = cosmeticData.getOverhead();
             if (playerOverhead != null) {
                 ResolvedOverheadData resolvedOverheadData = this.models.get(playerOverhead);
                 if (resolvedOverheadData != null) {
