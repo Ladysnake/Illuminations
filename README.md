@@ -10,37 +10,37 @@
 
 **Fireflies** are small flying insects that come out during the night and disappear when the sun rises. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![illuminations-1.0-fireflies](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-fireflies.png)
+![illuminations-1.0-fireflies](./README.assets/illuminations-1.0-fireflies.png)
 
 ### Chorus Petals
 
 Appearing near Chorus flowers, these beautiful petals will twirl down to the ground, to the winds of the End, transitioning from a beautiful white to a majestic purple. The younger the flower is, the more petals will appear, and breaking a Chorus flower will provoke a burst of petals (again, the younger the flower, the more petals will burst).
 
-![illuminations-1.4-choruspetals](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4-choruspetals.png)
+![illuminations-1.4-choruspetals](./README.assets/illuminations-1.4-choruspetals.png)
 
 ### Glowworms
 
 **Glowworms** are small larvae living in caves by sticking to the ceiling that will fall down if their support block is removed. They will appear in small quantities in jungle, plains, savanna and taiga type biomes, medium quantities in forest and river type biomes and great quantity in swamp type biomes.
 
-![illuminations-1.0-glowworms](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-glowworms.png)
+![illuminations-1.0-glowworms](./README.assets/illuminations-1.0-glowworms.png)
 
 ### Plankton
 
 Glowing **plankton** - even though difficult to notice because of its size - can be found floating around in the dark parts of the oceanic depths. They appear in any ocean biome as long as the light is sufficiently low.
 
-![illuminations-1.0-plankton](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-plankton.png)
+![illuminations-1.0-plankton](./README.assets/illuminations-1.0-plankton.png)
 
 ### "Autumnflies"
 
 During the month of October, fireflies will adopt an orange tint instead of their regular green one.
 
-![illuminations-1.2-autumnflies](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-autumnflies.png)
+![illuminations-1.2-autumnflies](./README.assets/illuminations-1.2-autumnflies.png)
 
 ### Eyes in the Dark
 
 Also during the month of October, you may come across glowing eyes in absolutely dark spots. These eyes will disappear if you come too close or if their darkness is disturbed by a light source.
 
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-eyes.png)
+![](./README.assets/illuminations-1.2-eyes.png)
 
 ## Configurability
 
@@ -70,41 +70,41 @@ Auras and overheads can be selected and changed via the [Illuminations dashboard
 
 The **Twilight** aura creates colored fireflies  that will orbit around the player. The color of the fireflies can be changed to any color you want via the Illuminations dashboard. If the player moves, they will leave a trail of these fireflies. This aura is available to tier 1 donators.
 
-![illuminations-1.0-twilight-aura](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.0-twilight-aura.gif)
+![illuminations-1.0-twilight-aura](./README.assets/illuminations-1.0-twilight-aura.gif)
 
 ### Ghostly aura
 
 The **Ghostly** aura emanates little ghosts that fly upward and gradually appear and disappear. This aura is available to tier 2 donators.
 
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-ghostly-aura.gif)
+![](./README.assets/illuminations-1.2-ghostly-aura.gif)
 
 ### Frost and Solar crowns
 
 3D overheads fit for a king or queen, that will either make you insanely cool, or astoundingly hot, depending on your choice.
 
-![illuminations-1.3-crowns](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.3-crowns.png)
+![illuminations-1.3-crowns](./README.assets/illuminations-1.3-crowns.png)
 
 ### Bloodfiend, Dreadlich and Mooncult crowns
 
 *Designed by ArathainFarqoe!*
 
-![image-20210113112423799](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4.1-crowns.png)
+![image-20210113112423799](./README.assets/illuminations-1.4.1-crowns.png)
 
 ### Chorus aura and crown
 
-![illuminations-1.4-choruscosmetics](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.4-choruscosmetics.gif)
+![illuminations-1.4-choruscosmetics](./README.assets/illuminations-1.4-choruscosmetics.gif)
 
 ### Pride (and trans pride) heart
 
 Available for free to anyone that registers for an Illuminations account. https://illuminations.uuid.gg/pride
 
-![illuminations-1.1](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.1.png)
+![illuminations-1.1](./README.assets/illuminations-1.1.png)
 
 ### Jacko
 
 A happy jack o' lantern that lights up at night and in dark areas. Available to tier 2 donators.
 
-![](https://raw.githubusercontent.com/Ladysnake/Illuminations/main/README.assets/illuminations-1.2-jacko.gif)
+![](./README.assets/illuminations-1.2-jacko.gif)
 
 ## FAQ
 

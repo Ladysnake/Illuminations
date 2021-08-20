@@ -57,10 +57,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
 public class Illuminations implements ClientModInitializer {
@@ -261,35 +264,23 @@ public class Illuminations implements ClientModInitializer {
         });
 
         // spawn biome categories for Illuminations
-        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
-                .put(Biome.Category.JUNGLE, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.PLAINS, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.SAVANNA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.TAIGA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.FOREST, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.RIVER, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.SWAMP, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
-                .put(Biome.Category.OCEAN, ImmutableSet.of(
-                        new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
-                .build();
+        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.copyOf(
+                Config.getBiomeSettings()
+                        .entrySet()
+                        .stream()
+                        .collect(Collectors.toMap(Map.Entry::getKey, entry -> {
+                            Biome.Category biome = entry.getKey();
+                            return ImmutableSet.<IlluminationData>builder()
+                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).fireflySpawnChance()))
+                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).glowwormSpawnChance()))
+                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).planktonSpawnChance()))
+                                    .build();
+                        })));
+
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
                 .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
-                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, 0.0001F))) //0.000001F
+                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, () -> 0.0001F))) //0.000001F
                 .build();
 
 

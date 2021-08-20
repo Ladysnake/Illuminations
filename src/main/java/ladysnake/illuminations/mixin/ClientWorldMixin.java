@@ -39,22 +39,12 @@ public abstract class ClientWorldMixin extends World {
 
         if (Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.containsKey(biomeCategory)) {
             ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory);
-            illuminationDataSet.forEach(illuminationData -> {
-                if (illuminationData.getLocationSpawnPredicate().test(this, pos)
-                        && illuminationData.shouldAddParticle(this.random)) {
-                    this.addParticle(illuminationData.getIlluminationType(), (double) pos.getX() + this.random.nextDouble(), (double) pos.getY() + this.random.nextDouble(), (double) pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
-                }
-            });
+            spawnParticles(pos, illuminationDataSet);
         }
 
         if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
             ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOMES.get(biome);
-            illuminationDataSet.forEach(illuminationData -> {
-                if (illuminationData.getLocationSpawnPredicate().test(this, pos)
-                        && illuminationData.shouldAddParticle(this.random)) {
-                    this.addParticle(illuminationData.getIlluminationType(), (double) pos.getX() + this.random.nextDouble(), (double) pos.getY() + this.random.nextDouble(), (double) pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
-                }
-            });
+            spawnParticles(pos, illuminationDataSet);
         }
 
         // spooky eyes
@@ -62,6 +52,15 @@ public abstract class ClientWorldMixin extends World {
                 && random.nextFloat() <= Illuminations.EYES_SPAWN_CHANCE) {
             this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    private void spawnParticles(BlockPos.Mutable pos, ImmutableSet<IlluminationData> illuminationDataSet) {
+        illuminationDataSet.forEach(illuminationData -> {
+            if (illuminationData.locationSpawnPredicate().test(this, pos)
+                    && illuminationData.shouldAddParticle(this.random)) {
+                this.addParticle(illuminationData.illuminationType(), (double) pos.getX() + this.random.nextDouble(), (double) pos.getY() + this.random.nextDouble(), (double) pos.getZ() + this.random.nextDouble(), 0.0D, 0.0D, 0.0D);
+            }
+        });
     }
 
     @Inject(method = "addPlayer", at = @At(value = "RETURN"))
