@@ -57,9 +57,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
@@ -71,7 +69,6 @@ public class Illuminations implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations constants
-    public static final float EYES_SPAWN_CHANCE = 0.0001f;
     public static final int EYES_VANISHING_DISTANCE = 5;
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
     // spawn predicates
@@ -271,31 +268,32 @@ public class Illuminations implements ClientModInitializer {
                         .collect(Collectors.toMap(Map.Entry::getKey, entry -> {
                             Biome.Category biome = entry.getKey();
                             return ImmutableSet.<IlluminationData>builder()
-                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).fireflySpawnChance()))
-                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).glowwormSpawnChance()))
-                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(entry.getKey()).planktonSpawnChance()))
+                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate()))
+                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate()))
+                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate()))
                                     .build();
                         })));
 
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
                 .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
-                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, () -> 0.0001F))) //0.000001F
+                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, Config::getWillOWispsSpawnRate))) //0.000001F
                 .build();
 
 
         // aura matching and spawn chances + overhead matching + crown matching
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
-                .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
-                .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
-                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
-                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
-                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
-                .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
-                .put("confetti", new AuraData(CONFETTI_AURA, 0.1f, 1))
-                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, 0.1f, 1))
+                .put("twilight", new AuraData(TWILIGHT_AURA, () -> Config.getAuraSettings("twilight")))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> Config.getAuraSettings("ghostly")))
+                .put("chorus", new AuraData(CHORUS_AURA, () -> Config.getAuraSettings("chorus")))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> Config.getAuraSettings("autumn_leaves")))
+                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> Config.getAuraSettings("sculk_tendrils")))
+                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> Config.getAuraSettings("shadowbringer_soul")))
+                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> Config.getAuraSettings("goldenrod")))
+                .put("confetti", new AuraData(CONFETTI_AURA, () -> Config.getAuraSettings("confetti")))
+                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> Config.getAuraSettings("prismatic_confetti")))
                 .build();
+
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(CrownModel::new, "solar_crown"))
                 .put("frost_crown", new OverheadData(CrownModel::new, "frost_crown"))

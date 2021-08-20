@@ -1,26 +1,17 @@
 package ladysnake.illuminations.client.data;
 
+import ladysnake.illuminations.client.Config.AuraSettings;
 import net.minecraft.particle.DefaultParticleType;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
-public class AuraData {
-    private final DefaultParticleType particle;
-    private final float chance;
-    private final int delay;
-
-    public AuraData(DefaultParticleType particle, float chance, int delay) {
-        this.particle = particle;
-        this.chance = chance;
-        this.delay = delay;
-    }
-
-    public DefaultParticleType getParticle() {
-        return particle;
-    }
+public record AuraData(DefaultParticleType particle, Supplier<AuraSettings> auraSettingsSupplier) {
 
     public boolean shouldAddParticle(Random random, int age) {
+        AuraSettings settings = auraSettingsSupplier().get();
+        if (settings.spawnRate() == 0) return false;
         float rand = random.nextFloat();
-        return rand <= this.chance && (age % delay == 0);
+        return rand <= settings.spawnRate() && (age % settings.delay() == 0);
     }
 }

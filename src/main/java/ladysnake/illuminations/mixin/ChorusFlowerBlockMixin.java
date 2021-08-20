@@ -1,5 +1,6 @@
 package ladysnake.illuminations.mixin;
 
+import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.Illuminations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChorusFlowerBlock;
@@ -14,7 +15,7 @@ import java.util.Random;
 public abstract class ChorusFlowerBlockMixin extends BlockMixin {
     @Override
     protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
-        for (int i = 0; i < 6 - state.get(ChorusFlowerBlock.AGE); i++) {
+        for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * Config.getChorusPetalsSpawnMultiplier(); i++) {
             world.addParticle(Illuminations.CHORUS_PETAL, true, pos.getX() + 0.5 + random.nextGaussian() * 5, pos.getY() + 0.5 + random.nextGaussian() * 5, pos.getZ() + 0.5 + random.nextGaussian() * 5, 0f, 0f, 0f);
         }
     }

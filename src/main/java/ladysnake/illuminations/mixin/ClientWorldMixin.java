@@ -1,6 +1,7 @@
 package ladysnake.illuminations.mixin;
 
 import com.google.common.collect.ImmutableSet;
+import ladysnake.illuminations.client.Config;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.IlluminationData;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -49,7 +50,7 @@ public abstract class ClientWorldMixin extends World {
 
         // spooky eyes
         if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
-                && random.nextFloat() <= Illuminations.EYES_SPAWN_CHANCE) {
+                && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate()) {
             this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }
