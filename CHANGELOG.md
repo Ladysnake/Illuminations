@@ -1,5 +1,9 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.6.4 - 1.17.1
+- Optimized mod assets thanks to RDKRACZ!
+- Added indonesian localization thanks to suryomujahid!
+
 ### Illuminations 1.6.3 - 1.17.1
 - Made a minor refactor for eventual mod compatibility features
 
