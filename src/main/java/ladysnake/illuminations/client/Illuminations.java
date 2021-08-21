@@ -282,16 +282,18 @@ public class Illuminations implements ClientModInitializer {
 
 
         // aura matching and spawn chances + overhead matching + crown matching
+        // Currently set to default aura settings.
+        // Uncomment settings related to auras in Config.java and change getDefaultAuraSettings to getAuraSettings to restore.
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, () -> Config.getAuraSettings("twilight")))
-                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> Config.getAuraSettings("ghostly")))
-                .put("chorus", new AuraData(CHORUS_AURA, () -> Config.getAuraSettings("chorus")))
-                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> Config.getAuraSettings("autumn_leaves")))
-                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> Config.getAuraSettings("sculk_tendrils")))
-                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> Config.getAuraSettings("shadowbringer_soul")))
-                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> Config.getAuraSettings("goldenrod")))
-                .put("confetti", new AuraData(CONFETTI_AURA, () -> Config.getAuraSettings("confetti")))
-                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> Config.getAuraSettings("prismatic_confetti")))
+                .put("twilight", new AuraData(TWILIGHT_AURA, () -> Config.getDefaultAuraSettings("twilight")))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> Config.getDefaultAuraSettings("ghostly")))
+                .put("chorus", new AuraData(CHORUS_AURA, () -> Config.getDefaultAuraSettings("chorus")))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> Config.getDefaultAuraSettings("autumn_leaves")))
+                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> Config.getDefaultAuraSettings("sculk_tendrils")))
+                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> Config.getDefaultAuraSettings("shadowbringer_soul")))
+                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> Config.getDefaultAuraSettings("goldenrod")))
+                .put("confetti", new AuraData(CONFETTI_AURA, () -> Config.getDefaultAuraSettings("confetti")))
+                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> Config.getDefaultAuraSettings("prismatic_confetti")))
                 .build();
 
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()

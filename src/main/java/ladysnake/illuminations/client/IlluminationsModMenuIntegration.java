@@ -38,7 +38,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             // config categories and entries
             ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category.illuminations.general"));
             ConfigCategory biomeSettings = builder.getOrCreateCategory(new TranslatableText("category.illuminations.biomeSettings"));
-            ConfigCategory auraSettings = builder.getOrCreateCategory(new TranslatableText("category.illuminations.auraSettings"));
+            // ConfigCategory auraSettings = builder.getOrCreateCategory(new TranslatableText("category.illuminations.auraSettings"));
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
             general.addEntry(entryBuilder
@@ -184,7 +184,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .build());
             }
 
-            List<String> auras = List.of("twilight", "ghostly", "chorus", "autumn_leaves", "sculk_tendrils",
+            /*List<String> auras = List.of("twilight", "ghostly", "chorus", "autumn_leaves", "sculk_tendrils",
                     "shadowbringer_soul", "goldenrod", "confetti", "prismatic_confetti");
 
             for (String aura : auras) {
@@ -215,7 +215,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .startSubCategory(new TranslatableText("option.illuminations.aura." + CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, aura)),
                                 List.of(auraSpawnRate, auraDelay))
                         .build());
-            }
+            }*/
 
             // build and return the config screen
             return builder.build();

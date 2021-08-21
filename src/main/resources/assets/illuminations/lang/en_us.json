@@ -84,21 +84,5 @@
   "option.illuminations.biome.mushroom": "Mushroom",
   "option.illuminations.biome.nether": "Nether",
   "option.illuminations.biome.theend": "The End",
-  "option.illuminations.auraSpawnRate": "Aura Spawn Rate",
-  "option.tooltip.illuminations.auraSpawnRate": "The spawn rate percentage.",
-  "option.tooltip.illuminations.auraSpawnRate.lowest": "0%: Disables aura",
-  "option.tooltip.illuminations.auraSpawnRate.highest": "100%: Spawns aura effect at every interval. This interval is determined by the aura delay",
-  "option.tooltip.illuminations.auraDelay": "The aura delay.",
-  "option.tooltip.illuminations.auraDelay.lowest": "1 tick: No delay",
-  "option.tooltip.illuminations.auraDelay.highest": "100 ticks: Tries to spawn an aura effect every 5 seconds.",
-  "option.illuminations.auraDelay": "Aura Delay",
-  "option.illuminations.aura.twilight": "Twilight",
-  "option.illuminations.aura.ghostly": "Ghostly",
-  "option.illuminations.aura.chorus": "Chorus",
-  "option.illuminations.aura.autumnLeaves": "Autumn Leaves",
-  "option.illuminations.aura.sculkTendrils": "Sculk Tendrils",
-  "option.illuminations.aura.shadowbringerSoul": "Shadowbringer Soul",
-  "option.illuminations.aura.goldenrod": "Goldenrod",
-  "option.illuminations.aura.confetti": "Confetti",
-  "option.illuminations.aura.prismaticConfetti": "Prismatic Confetti"
+  "option.illuminations.auraSpawnRate": "Aura Spawn Rate"
 }

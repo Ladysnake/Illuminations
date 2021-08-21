@@ -61,7 +61,7 @@ public class Config {
     private static boolean autoUpdate;
     private static boolean displayGreetingScreen;
     private static HashMap<Category, BiomeSettings> biomeSettings;
-    private static HashMap<String, AuraSettings> auraSettings;
+    // private static HashMap<String, AuraSettings> auraSettings;
 
     private static final ImmutableMap<Category, BiomeSettings> defaultBiomeSettings = ImmutableMap.<Category, BiomeSettings>builder()
             .put(JUNGLE, new BiomeSettings(FireflySpawnRate.LOW, GlowwormSpawnRate.LOW, PlanktonSpawnRate.DISABLE))
@@ -120,8 +120,10 @@ public class Config {
             biomeSettings = new HashMap<>();
             defaultBiomeSettings.forEach(Config::setBiomeSettings);
 
+            /*
             auraSettings = new HashMap<>();
             defaultAuraSettings.forEach(Config::setAuraSettings);
+            */
 
             Config.save();
             return;
@@ -151,6 +153,7 @@ public class Config {
                     }, v))
         );
 
+        /*
         auraSettings = new HashMap<>();
         defaultAuraSettings.forEach((aura, v) ->
                 setAuraSettings(aura,
@@ -160,6 +163,7 @@ public class Config {
                             int d = Integer.parseInt(config.getProperty(name + "-aura-delay"));
                             return new AuraSettings(s, d);
                         }, v)));
+        */
 
         Config.save();
     }
@@ -349,6 +353,7 @@ public class Config {
         return defaultAuraSettings.get(aura);
     }
 
+    /*
     public static Map<String, AuraSettings> getAuraSettings()
     {
         return auraSettings;
@@ -381,7 +386,7 @@ public class Config {
         auraSettings.put(aura, settings.withDelay(value));
         String name = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, aura);
         config.setProperty(name + "-aura-delay", Integer.toString(value));
-    }
+    }*/
 
     //endregion
     //region Enums/Records
