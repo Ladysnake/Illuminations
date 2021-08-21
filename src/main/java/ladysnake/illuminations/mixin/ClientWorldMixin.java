@@ -50,7 +50,7 @@ public abstract class ClientWorldMixin extends World {
 
         // spooky eyes
         if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
-                && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate()) {
+                && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate) {
             this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }

@@ -50,8 +50,8 @@ public class Config {
         }
     };
     private static EyesInTheDark eyesInTheDark;
-    private static float eyesInTheDarkSpawnRate;
-    private static float willOWispsSpawnRate;
+    private static EyesInTheDarkSpawnRate eyesInTheDarkSpawnRate;
+    private static WillOWispsSpawnRate willOWispsSpawnRate;
     private static int chorusPetalsSpawnMultiplier;
     private static int density;
     private static boolean doFireflySpawnAlways;
@@ -64,22 +64,22 @@ public class Config {
     private static HashMap<String, AuraSettings> auraSettings;
 
     private static final ImmutableMap<Category, BiomeSettings> defaultBiomeSettings = ImmutableMap.<Category, BiomeSettings>builder()
-            .put(JUNGLE, new BiomeSettings(.00002f, .00004f, 0f))
-            .put(PLAINS, new BiomeSettings(.00002f, .00004f, 0f))
-            .put(SAVANNA, new BiomeSettings(.00002f, .00004f, 0f))
-            .put(TAIGA, new BiomeSettings(.00002f, .00004f, 0f))
-            .put(FOREST, new BiomeSettings(.00010f, .00020f, 0f))
-            .put(RIVER, new BiomeSettings(.00010f, .00020f, 0f))
-            .put(SWAMP, new BiomeSettings(.00025f, .00050f, 0f))
-            .put(OCEAN, new BiomeSettings(0f, 0f, .00250f))
-            .put(BEACH, new BiomeSettings(0f, 0f, 0f))
-            .put(DESERT, new BiomeSettings(0f, 0f, 0f))
-            .put(EXTREME_HILLS, new BiomeSettings(0f, 0f, 0f))
-            .put(ICY, new BiomeSettings(0f, 0f, 0f))
-            .put(MESA, new BiomeSettings(0f, 0f, 0f))
-            .put(MUSHROOM, new BiomeSettings(0f, 0f, 0f))
-            .put(NETHER, new BiomeSettings(0f, 0f, 0f))
-            .put(THEEND, new BiomeSettings(0f, 0f, 0f))
+            .put(JUNGLE, new BiomeSettings(FireflySpawnRate.LOW, GlowwormSpawnRate.LOW, PlanktonSpawnRate.DISABLE))
+            .put(PLAINS, new BiomeSettings(FireflySpawnRate.LOW, GlowwormSpawnRate.LOW, PlanktonSpawnRate.DISABLE))
+            .put(SAVANNA, new BiomeSettings(FireflySpawnRate.LOW, GlowwormSpawnRate.LOW, PlanktonSpawnRate.DISABLE))
+            .put(TAIGA, new BiomeSettings(FireflySpawnRate.LOW, GlowwormSpawnRate.LOW, PlanktonSpawnRate.DISABLE))
+            .put(FOREST, new BiomeSettings(FireflySpawnRate.MEDIUM, GlowwormSpawnRate.MEDIUM, PlanktonSpawnRate.DISABLE))
+            .put(RIVER, new BiomeSettings(FireflySpawnRate.MEDIUM, GlowwormSpawnRate.MEDIUM, PlanktonSpawnRate.DISABLE))
+            .put(SWAMP, new BiomeSettings(FireflySpawnRate.HIGH, GlowwormSpawnRate.HIGH, PlanktonSpawnRate.DISABLE))
+            .put(OCEAN, new BiomeSettings(FireflySpawnRate.DISABLE, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.HIGH))
+            .put(BEACH, new BiomeSettings()) // Default = everything disabled
+            .put(DESERT, new BiomeSettings())
+            .put(EXTREME_HILLS, new BiomeSettings())
+            .put(ICY, new BiomeSettings())
+            .put(MESA, new BiomeSettings())
+            .put(MUSHROOM, new BiomeSettings())
+            .put(NETHER, new BiomeSettings())
+            .put(THEEND, new BiomeSettings())
             .build();
 
     private static final ImmutableMap<String, AuraSettings> defaultAuraSettings = ImmutableMap.<String, AuraSettings>builder()
@@ -106,8 +106,8 @@ public class Config {
         } else { // if no illuminations.properties, load default values
             // define default properties
             setEyesInTheDark(EyesInTheDark.ENABLE);
-            setEyesInTheDarkSpawnRate(0.0001f);
-            setWillOWispsSpawnRate(0.0001f);
+            setEyesInTheDarkSpawnRate(EyesInTheDarkSpawnRate.MEDIUM);
+            setWillOWispsSpawnRate(WillOWispsSpawnRate.MEDIUM);
             setChorusPetalsSpawnMultiplier(1);
             setDensity(100);
             setDoFireflySpawnAlways(false);
@@ -128,8 +128,8 @@ public class Config {
         }
 
         setEyesInTheDark(tryOrDefault(() -> EyesInTheDark.valueOf(config.getProperty("eyes-in-the-dark")), EyesInTheDark.ENABLE));
-        setEyesInTheDarkSpawnRate(tryOrDefault(() -> Float.parseFloat(config.getProperty("eyes-in-the-dark-spawn-rate")), 0.0001f));
-        setWillOWispsSpawnRate(tryOrDefault(() -> Float.parseFloat(config.getProperty("will-o-wisps-spawn-rate")), 0.0001f));
+        setEyesInTheDarkSpawnRate(tryOrDefault(() -> EyesInTheDarkSpawnRate.valueOf(config.getProperty("eyes-in-the-dark-spawn-rate")), EyesInTheDarkSpawnRate.MEDIUM));
+        setWillOWispsSpawnRate(tryOrDefault(() -> WillOWispsSpawnRate.valueOf(config.getProperty("will-o-wisps-spawn-rate")), WillOWispsSpawnRate.MEDIUM));
         setChorusPetalsSpawnMultiplier(tryOrDefault(() -> Integer.parseInt(config.getProperty("chorus-petal-spawn-multiplier")), 1));
         setDensity(tryOrDefault(() -> Integer.parseInt(config.getProperty("density")), 100));
         setDoFireflySpawnAlways(tryOrDefault(() -> Boolean.parseBoolean(config.getProperty("firefly-spawn-always")), false));
@@ -144,9 +144,9 @@ public class Config {
             setBiomeSettings(biome,
                     tryOrDefault(() -> {
                         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
-                        float f = Float.parseFloat(config.getProperty(name + "-firefly-spawn-rate"));
-                        float g = Float.parseFloat(config.getProperty(name + "-glowworm-spawn-rate"));
-                        float p = Float.parseFloat(config.getProperty(name + "-plankton-spawn-rate"));
+                        FireflySpawnRate f = FireflySpawnRate.valueOf(config.getProperty(name + "-firefly-spawn-rate"));
+                        GlowwormSpawnRate g = GlowwormSpawnRate.valueOf(config.getProperty(name + "-glowworm-spawn-rate"));
+                        PlanktonSpawnRate p = PlanktonSpawnRate.valueOf(config.getProperty(name + "-plankton-spawn-rate"));
                         return new BiomeSettings(f, g, p);
                     }, v))
         );
@@ -181,6 +181,8 @@ public class Config {
         }
     }
 
+    //region Getters/Setters
+
     public static EyesInTheDark getEyesInTheDark() {
         return eyesInTheDark;
     }
@@ -190,24 +192,24 @@ public class Config {
         config.setProperty("eyes-in-the-dark", value.toString());
     }
 
-    public static float getEyesInTheDarkSpawnRate() {
+    public static EyesInTheDarkSpawnRate getEyesInTheDarkSpawnRate() {
         return eyesInTheDarkSpawnRate;
     }
 
-    public static void setEyesInTheDarkSpawnRate(float value)
+    public static void setEyesInTheDarkSpawnRate(EyesInTheDarkSpawnRate value)
     {
         eyesInTheDarkSpawnRate = value;
-        config.setProperty("eyes-in-the-dark-spawn-rate", Float.toString(value));
+        config.setProperty("eyes-in-the-dark-spawn-rate", value.name());
     }
 
-    public static float getWillOWispsSpawnRate() {
+    public static WillOWispsSpawnRate getWillOWispsSpawnRate() {
         return willOWispsSpawnRate;
     }
 
-    public static void setWillOWispsSpawnRate(float value)
+    public static void setWillOWispsSpawnRate(WillOWispsSpawnRate value)
     {
         willOWispsSpawnRate = value;
-        config.setProperty("will-o-wisps-spawn-rate", Float.toString(value));
+        config.setProperty("will-o-wisps-spawn-rate", value.name());
     }
 
     public static int getChorusPetalsSpawnMultiplier() {
@@ -308,33 +310,33 @@ public class Config {
     {
         biomeSettings.put(biome, settings);
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
-        config.setProperty(name + "-firefly-spawn-rate", Float.toString(settings.fireflySpawnRate));
-        config.setProperty(name + "-glowworm-spawn-rate", Float.toString(settings.glowwormSpawnRate));
-        config.setProperty(name + "-plankton-spawn-rate", Float.toString(settings.planktonSpawnRate));
+        config.setProperty(name + "-firefly-spawn-rate", settings.fireflySpawnRate.name());
+        config.setProperty(name + "-glowworm-spawn-rate", settings.glowwormSpawnRate.name());
+        config.setProperty(name + "-plankton-spawn-rate", settings.planktonSpawnRate.name());
     }
 
-    public static void setFireflySettings(Category biome, float value)
+    public static void setFireflySettings(Category biome, FireflySpawnRate value)
     {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withFireflySpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
-        config.setProperty(name + "-firefly-spawn-rate", Float.toString(value));
+        config.setProperty(name + "-firefly-spawn-rate", value.name());
     }
 
-    public static void setGlowwormSettings(Category biome, float value)
+    public static void setGlowwormSettings(Category biome, GlowwormSpawnRate value)
     {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withGlowwormSpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
-        config.setProperty(name + "-glowworm-spawn-rate", Float.toString(value));
+        config.setProperty(name + "-glowworm-spawn-rate", value.name());
     }
 
-    public static void setPlanktonSettings(Category biome, float value)
+    public static void setPlanktonSettings(Category biome, PlanktonSpawnRate value)
     {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withPlanktonSpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
-        config.setProperty(name + "-plankton-spawn-rate", Float.toString(value));
+        config.setProperty(name + "-plankton-spawn-rate", value.name());
     }
 
     public static ImmutableMap<String, AuraSettings> getDefaultAuraSettings()
@@ -381,23 +383,90 @@ public class Config {
         config.setProperty(name + "-aura-delay", Integer.toString(value));
     }
 
+    //endregion
+    //region Enums/Records
+
     public enum EyesInTheDark {
         ENABLE, DISABLE, ALWAYS
     }
 
-    public record BiomeSettings(float fireflySpawnRate, float glowwormSpawnRate, float planktonSpawnRate) {
+    public enum EyesInTheDarkSpawnRate {
+        LOW(0.00002f), MEDIUM(0.00010f), HIGH(0.00025f);
 
-        public BiomeSettings withFireflySpawnRate(float value)
+        public final float spawnRate;
+
+        EyesInTheDarkSpawnRate(float spawnRate)
+        {
+            this.spawnRate = spawnRate;
+        }
+    }
+
+    public enum WillOWispsSpawnRate {
+        DISABLE(0f), LOW(0.00002f), MEDIUM(0.00010f), HIGH(0.00025f);
+
+        public final float spawnRate;
+
+        WillOWispsSpawnRate(float spawnRate) {
+            this.spawnRate = spawnRate;
+        }
+    }
+
+    public enum FireflySpawnRate
+    {
+        DISABLE(0f),
+        LOW(0.00002f),
+        MEDIUM(0.00010f),
+        HIGH(0.00025f);
+
+        public final float spawnRate;
+
+        FireflySpawnRate(float spawnRate)
+        {
+            this.spawnRate = spawnRate;
+        }
+    }
+
+    public enum GlowwormSpawnRate
+    {
+        DISABLE(0f), LOW(0.00004f), MEDIUM(0.00020f), HIGH(0.00050f);
+
+        public final float spawnRate;
+
+        GlowwormSpawnRate(float spawnRate)
+        {
+            this.spawnRate = spawnRate;
+        }
+    }
+
+    public enum PlanktonSpawnRate
+    {
+        DISABLE(0f), LOW(0.00020f), MEDIUM(0.00100f), HIGH(0.00250f);
+
+        public final float spawnRate;
+
+        PlanktonSpawnRate(float spawnRate)
+        {
+            this.spawnRate = spawnRate;
+        }
+    }
+
+    public record BiomeSettings(FireflySpawnRate fireflySpawnRate, GlowwormSpawnRate glowwormSpawnRate, PlanktonSpawnRate planktonSpawnRate) {
+
+        public BiomeSettings() {
+            this(FireflySpawnRate.DISABLE, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE);
+        }
+
+        public BiomeSettings withFireflySpawnRate(FireflySpawnRate value)
         {
             return new BiomeSettings(value, glowwormSpawnRate, planktonSpawnRate);
         }
 
-        public BiomeSettings withGlowwormSpawnRate(float value)
+        public BiomeSettings withGlowwormSpawnRate(GlowwormSpawnRate value)
         {
             return new BiomeSettings(fireflySpawnRate, value, planktonSpawnRate);
         }
 
-        public BiomeSettings withPlanktonSpawnRate(float value)
+        public BiomeSettings withPlanktonSpawnRate(PlanktonSpawnRate value)
         {
             return new BiomeSettings(fireflySpawnRate, glowwormSpawnRate, value);
         }
@@ -412,7 +481,9 @@ public class Config {
 
         public AuraSettings withDelay(int value)
         {
-            return new AuraSettings(spawnRate, delay);
+            return new AuraSettings(spawnRate, value);
         }
     }
+
+    //endregion
 }

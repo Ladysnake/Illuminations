@@ -268,16 +268,16 @@ public class Illuminations implements ClientModInitializer {
                         .collect(Collectors.toMap(Map.Entry::getKey, entry -> {
                             Biome.Category biome = entry.getKey();
                             return ImmutableSet.<IlluminationData>builder()
-                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate()))
-                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate()))
-                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate()))
+                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate))
+                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate))
+                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate))
                                     .build();
                         })));
 
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
                 .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
-                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, Config::getWillOWispsSpawnRate))) //0.000001F
+                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, () -> Config.getWillOWispsSpawnRate().spawnRate)))
                 .build();
 
 

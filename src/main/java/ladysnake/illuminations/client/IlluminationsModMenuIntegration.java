@@ -7,6 +7,11 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import ladysnake.illuminations.client.Config.AuraSettings;
 import ladysnake.illuminations.client.Config.BiomeSettings;
+import ladysnake.illuminations.client.Config.EyesInTheDarkSpawnRate;
+import ladysnake.illuminations.client.Config.FireflySpawnRate;
+import ladysnake.illuminations.client.Config.GlowwormSpawnRate;
+import ladysnake.illuminations.client.Config.PlanktonSpawnRate;
+import ladysnake.illuminations.client.Config.WillOWispsSpawnRate;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -49,28 +54,33 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .build());
 
             general.addEntry(entryBuilder
-                    .startIntSlider(new TranslatableText("option.illuminations.eyesInTheDarkSpawnRate"), Math.round(Config.getEyesInTheDarkSpawnRate() * 100000), 0, 50)
+                    .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDarkSpawnRate"), EyesInTheDarkSpawnRate.class, Config.getEyesInTheDarkSpawnRate())
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate"),
-                            new TranslatableText("option.tooltip.illuminations.spawnRate.affected"))
-                    .setSaveConsumer(x -> Config.setEyesInTheDarkSpawnRate(x * 0.00001f))
-                    .setDefaultValue(10)
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.default"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.low"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.high"))
+                    .setSaveConsumer(Config::setEyesInTheDarkSpawnRate)
+                    .setDefaultValue(EyesInTheDarkSpawnRate.MEDIUM)
                     .build());
 
             general.addEntry(entryBuilder
-                    .startIntSlider(new TranslatableText("option.illuminations.willOWispsSpawnRate"), Math.round(Config.getWillOWispsSpawnRate() * 100000), 0, 50)
+                    .startEnumSelector(new TranslatableText("option.illuminations.willOWispsSpawnRate"), WillOWispsSpawnRate.class, Config.getWillOWispsSpawnRate())
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate"),
-                            new TranslatableText("option.tooltip.illuminations.spawnRate.affected"))
-                    .setSaveConsumer(x -> Config.setWillOWispsSpawnRate(x * 0.00001f))
-                    .setDefaultValue(10)
+                            new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.default"),
+                            new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.disable"),
+                            new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.low"),
+                            new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.medium"),
+                            new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.high"))
+                    .setSaveConsumer(Config::setWillOWispsSpawnRate)
+                    .setDefaultValue(WillOWispsSpawnRate.MEDIUM)
                     .build());
 
             general.addEntry(entryBuilder
                     .startIntSlider(new TranslatableText("option.illuminations.chorusPetalsSpawnMultiplier"), Config.getChorusPetalsSpawnMultiplier(), 0, 10)
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier"),
-                            new TranslatableText("option.tooltip.illuminations.spawnRate.notAffected"),
                             new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.lowest"),
                             new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.highest"))
                     .setSaveConsumer(Config::setChorusPetalsSpawnMultiplier)
@@ -132,31 +142,40 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 BiomeSettings defaultSettings = Config.getDefaultBiomeSettings(biome);
                 BiomeSettings settings = Config.getBiomeSettings(biome);
 
-                AbstractConfigListEntry<Integer> fireflySpawnRate = entryBuilder
-                        .startIntSlider(new TranslatableText("option.illuminations.fireflySpawnRate"), Math.round(settings.fireflySpawnRate() * 100000), 0, 50)
+                AbstractConfigListEntry<FireflySpawnRate> fireflySpawnRate = entryBuilder
+                        .startEnumSelector(new TranslatableText("option.illuminations.fireflySpawnRate"), FireflySpawnRate.class, settings.fireflySpawnRate())
                         .setTooltip(
                                 new TranslatableText("option.tooltip.illuminations.fireflySpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.spawnRate.affected"))
-                        .setSaveConsumer(x -> Config.setFireflySettings(biome, x * 0.00001f))
-                        .setDefaultValue(Math.round(defaultSettings.fireflySpawnRate() * 100000))
+                                new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.disable"),
+                                new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.low"),
+                                new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.medium"),
+                                new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.high"))
+                        .setSaveConsumer(x -> Config.setFireflySettings(biome, x))
+                        .setDefaultValue(defaultSettings.fireflySpawnRate())
                         .build();
 
-                AbstractConfigListEntry<Integer> glowwormSpawnRate = entryBuilder
-                        .startIntSlider(new TranslatableText("option.illuminations.glowwormSpawnRate"), Math.round(settings.glowwormSpawnRate() * 100000), 0, 50)
+                AbstractConfigListEntry<GlowwormSpawnRate> glowwormSpawnRate = entryBuilder
+                        .startEnumSelector(new TranslatableText("option.illuminations.glowwormSpawnRate"), GlowwormSpawnRate.class, settings.glowwormSpawnRate())
                         .setTooltip(
                                 new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.spawnRate.affected"))
-                        .setSaveConsumer(x -> Config.setGlowwormSettings(biome, x * 0.00001f))
-                        .setDefaultValue(Math.round(settings.glowwormSpawnRate() * 100000))
+                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.disable"),
+                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.low"),
+                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.medium"),
+                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.high"))
+                        .setSaveConsumer(x -> Config.setGlowwormSettings(biome, x))
+                        .setDefaultValue(defaultSettings.glowwormSpawnRate())
                         .build();
 
-                AbstractConfigListEntry<Integer> planktonSpawnRate = entryBuilder
-                        .startIntSlider(new TranslatableText("option.illuminations.planktonSpawnRate"), Math.round(settings.planktonSpawnRate() * 100000), 0, 250)
+                AbstractConfigListEntry<PlanktonSpawnRate> planktonSpawnRate = entryBuilder
+                        .startEnumSelector(new TranslatableText("option.illuminations.planktonSpawnRate"), PlanktonSpawnRate.class, settings.planktonSpawnRate())
                         .setTooltip(
                                 new TranslatableText("option.tooltip.illuminations.planktonSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.spawnRate.affected"))
-                        .setSaveConsumer(x -> Config.setPlanktonSettings(biome, x * 0.00001f))
-                        .setDefaultValue(Math.round(defaultSettings.planktonSpawnRate() * 100000))
+                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.disable"),
+                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.low"),
+                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.medium"),
+                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.high"))
+                        .setSaveConsumer(x -> Config.setPlanktonSettings(biome, x))
+                        .setDefaultValue(defaultSettings.planktonSpawnRate())
                         .build();
 
                 biomeSettings.addEntry(entryBuilder
