@@ -178,9 +178,14 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .setDefaultValue(defaultSettings.planktonSpawnRate())
                         .build();
 
+                List<AbstractConfigListEntry> entries = (biome == NETHER)
+                        ? List.of(fireflySpawnRate)
+                        : (biome == THEEND)
+                        ? List.of(fireflySpawnRate, planktonSpawnRate)
+                        : List.of(fireflySpawnRate, glowwormSpawnRate, planktonSpawnRate);
+
                 biomeSettings.addEntry(entryBuilder
-                        .startSubCategory(new TranslatableText("option.illuminations.biome." + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, biome.name())),
-                                List.of(fireflySpawnRate, glowwormSpawnRate, planktonSpawnRate))
+                        .startSubCategory(new TranslatableText("option.illuminations.biome." + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, biome.name())), entries)
                         .build());
             }
 
