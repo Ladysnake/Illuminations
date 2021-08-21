@@ -35,7 +35,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     if (Illuminations.AURAS_DATA.containsKey(playerAura)) {
                         AuraData aura = Illuminations.AURAS_DATA.get(playerAura);
                         if (Illuminations.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
-                            world.addParticle(aura.getParticle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                            world.addParticle(aura.particle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                         }
                     }
                 }

@@ -25,18 +25,20 @@ public class AutoUpdateGreetingScreen extends Screen {
     protected void init() {
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 125, this.height / 6 + 168, 100, 20, new TranslatableText("option.illuminations.disable").formatted(Formatting.RED), (button) -> {
             Config.setAutoUpdate(false);
+            Config.save();
             this.client.setScreen(this.parent);
         }));
 
         this.addDrawableChild(new ButtonWidget(this.width / 2 + 25, this.height / 6 + 168, 100, 20, new TranslatableText("option.illuminations.enable").formatted(Formatting.GREEN), (button) -> {
             Config.setAutoUpdate(true);
+            Config.save();
             this.client.setScreen(this.parent);
         }));
     }
 
     public void removed() {
-        Config.save();
         Config.setDisplayGreetingScreen(false);
+        Config.save();
     }
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {

@@ -108,8 +108,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        // fade and die on daytime or if old enough
-        if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
+        // fade and die on daytime or if old enough unless fireflies can spawn any time of day
+        if ((!Config.isDoFireflySpawnAlways() && !world.getDimension().hasFixedTime() && (world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000)) || this.age++ >= this.maxAge) {
             nextAlphaGoal = 0;
             if (colorAlpha < 0f) {
                 this.markDead();

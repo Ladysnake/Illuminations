@@ -7,32 +7,16 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 
-public class IlluminationData {
-    private final DefaultParticleType illuminationType;
-    private final BiPredicate<World, BlockPos> locationSpawnPredicate;
-    private final float chance;
-
-    public IlluminationData(DefaultParticleType illuminationType, BiPredicate<World, BlockPos> locationSpawnPredicate, float chance) {
-        this.illuminationType = illuminationType;
-        this.locationSpawnPredicate = locationSpawnPredicate;
-        this.chance = chance;
-    }
-
-    public DefaultParticleType getIlluminationType() {
-        return illuminationType;
-    }
-
-    public BiPredicate<World, BlockPos> getLocationSpawnPredicate() {
-        return locationSpawnPredicate;
-    }
-
-    public float getChance() {
-        return chance;
-    }
+public record IlluminationData(DefaultParticleType illuminationType,
+                               BiPredicate<World, BlockPos> locationSpawnPredicate,
+                               Supplier<Float> chanceSupplier) {
 
     public boolean shouldAddParticle(Random random) {
+        float chance = chanceSupplier.get();
+        if (chance <= 0f) return false;
         float density = Config.getDensity() / 100f;
-        return random.nextFloat() <= this.chance * density;
+        return random.nextFloat() <= chance * density;
     }
 }
