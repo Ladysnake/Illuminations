@@ -76,8 +76,8 @@ public class Illuminations implements ClientModInitializer {
         // sky angle --> time of day
         // 0.25965086 --> 13000
         // 0.7403491 --> 23000
-        return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
-                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
+        return (Config.isDoFireflySpawnAlways() || ((world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)))
+                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && (Config.isDoFireflySpawnUnderground() || world.isSkyVisible(blockPos));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;

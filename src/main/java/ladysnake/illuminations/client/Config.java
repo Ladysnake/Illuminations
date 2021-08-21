@@ -54,6 +54,8 @@ public class Config {
     private static float willOWispsSpawnRate;
     private static int chorusPetalsSpawnMultiplier;
     private static int density;
+    private static boolean doFireflySpawnAlways;
+    private static boolean doFireflySpawnUnderground;
     private static int fireflyWhiteAlpha;
     private static boolean viewAurasFP;
     private static boolean autoUpdate;
@@ -108,6 +110,8 @@ public class Config {
             setWillOWispsSpawnRate(0.0001f);
             setChorusPetalsSpawnMultiplier(1);
             setDensity(100);
+            setDoFireflySpawnAlways(false);
+            setDoFireflySpawnUnderground(false);
             setFireflyWhiteAlpha(100);
             setAutoUpdate(false);
             setDisplayGreetingScreen(true);
@@ -128,6 +132,8 @@ public class Config {
         setWillOWispsSpawnRate(tryOrDefault(() -> Float.parseFloat(config.getProperty("will-o-wisps-spawn-rate")), 0.0001f));
         setChorusPetalsSpawnMultiplier(tryOrDefault(() -> Integer.parseInt(config.getProperty("chorus-petal-spawn-multiplier")), 1));
         setDensity(tryOrDefault(() -> Integer.parseInt(config.getProperty("density")), 100));
+        setDoFireflySpawnAlways(tryOrDefault(() -> Boolean.parseBoolean(config.getProperty("firefly-spawn-always")), false));
+        setDoFireflySpawnUnderground(tryOrDefault(() -> Boolean.parseBoolean(config.getProperty("firefly-spawn-underground")), false));
         setFireflyWhiteAlpha(tryOrDefault(() -> Integer.parseInt(config.getProperty("firefly-white-alpha")), 100));
         setAutoUpdate(tryOrDefault(() -> Boolean.parseBoolean(config.getProperty("auto-update")), false));
         setDisplayGreetingScreen(tryOrDefault(() -> Boolean.parseBoolean(config.getProperty("display-greeting-screen")), true));
@@ -220,6 +226,26 @@ public class Config {
     public static void setDensity(int value) {
         density = value;
         config.setProperty("density", Integer.toString(value));
+    }
+
+    public static boolean isDoFireflySpawnAlways() {
+        return doFireflySpawnAlways;
+    }
+
+    public static void setDoFireflySpawnAlways(boolean value) {
+        doFireflySpawnAlways = value;
+        config.setProperty("firefly-spawn-always", Boolean.toString(value));
+    }
+
+    public static boolean isDoFireflySpawnUnderground()
+    {
+        return doFireflySpawnUnderground;
+    }
+
+    public static void setDoFireflySpawnUnderground(boolean value)
+    {
+        doFireflySpawnUnderground = value;
+        config.setProperty("firefly-spawn-underground", Boolean.toString(value));
     }
 
     public static int getFireflyWhiteAlpha() {

@@ -88,6 +88,20 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .build());
 
             general.addEntry(entryBuilder
+                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnAlways"), Config.isDoFireflySpawnAlways())
+                    .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnAlways"))
+                    .setSaveConsumer(Config::setDoFireflySpawnAlways)
+                    .setDefaultValue(false)
+                    .build());
+
+            general.addEntry(entryBuilder
+                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnUnderground"), Config.isDoFireflySpawnUnderground())
+                    .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnUnderground"))
+                    .setSaveConsumer(Config::setDoFireflySpawnUnderground)
+                    .setDefaultValue(false)
+                    .build());
+
+            general.addEntry(entryBuilder
                     .startIntSlider(new TranslatableText("option.illuminations.fireflyWhiteAlpha"), Config.getFireflyWhiteAlpha(), 0, 100)
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.fireflyWhiteAlpha"))
