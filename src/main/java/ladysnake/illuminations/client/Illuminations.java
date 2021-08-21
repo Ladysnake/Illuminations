@@ -26,6 +26,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistr
 import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -43,6 +44,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,11 +75,12 @@ public class Illuminations implements ClientModInitializer {
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
     // spawn predicates
     public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> {
-        // sky angle --> time of day
-        // 0.25965086 --> 13000
-        // 0.7403491 --> 23000
-        return (Config.isDoFireflySpawnAlways() || ((world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)))
-                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && (Config.isDoFireflySpawnUnderground() || world.isSkyVisible(blockPos));
+        Block block = world.getBlockState(blockPos).getBlock();
+        return world.getDimension().hasFixedTime()
+                ? (block == Blocks.AIR || block == Blocks.VOID_AIR)
+                : block == Blocks.AIR
+                && (Config.isDoFireflySpawnAlways() || (world.getTimeOfDay() >= 13000 && world.getTimeOfDay() <= 23000))
+                && (Config.isDoFireflySpawnUnderground() || world.isSkyVisible(blockPos));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
@@ -125,7 +128,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType FOUNDING_SKULL_PET;
     public static DefaultParticleType DISSOLUTION_WISP_PET;
     // spawn biome categories and biomes
-    public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+    public static ImmutableMap<Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
@@ -266,7 +269,7 @@ public class Illuminations implements ClientModInitializer {
                         .entrySet()
                         .stream()
                         .collect(Collectors.toMap(Map.Entry::getKey, entry -> {
-                            Biome.Category biome = entry.getKey();
+                            Category biome = entry.getKey();
                             return ImmutableSet.<IlluminationData>builder()
                                     .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate))
                                     .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate))
