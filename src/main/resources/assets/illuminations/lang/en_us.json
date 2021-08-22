@@ -56,6 +56,8 @@
   "option.tooltip.illuminations.fireflySpawnRate.low": "LOW: Fireflies appear in low quantities",
   "option.tooltip.illuminations.fireflySpawnRate.medium": "MEDIUM: Fireflies appear in medium quantities",
   "option.tooltip.illuminations.fireflySpawnRate.high": "HIGH: Fireflies appear in high quantities",
+  "option.illuminations.fireflyColor": "Firefly Color",
+  "option.tooltip.illuminations.fireflyColor": "The color of fireflies.",
   "option.illuminations.glowwormSpawnRate": "Glowworm Spawn Rate",
   "option.tooltip.illuminations.glowwormSpawnRate.disable": "DISABLE: Glowworms don't appear",
   "option.tooltip.illuminations.glowwormSpawnRate.low": "LOW: Glowworms appear in low quantities",

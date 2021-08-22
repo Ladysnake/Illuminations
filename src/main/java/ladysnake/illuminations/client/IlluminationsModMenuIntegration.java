@@ -16,6 +16,7 @@ import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.math.Color;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.biome.Biome.Category;
 
@@ -137,8 +138,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             List<Category> biomes = List.of(JUNGLE, PLAINS, SAVANNA, TAIGA, FOREST, RIVER, SWAMP, OCEAN, BEACH, DESERT,
                     EXTREME_HILLS, ICY, MESA, MUSHROOM, NETHER, THEEND);
 
-            for (Category biome : biomes)
-            {
+            for (Category biome : biomes) {
                 BiomeSettings defaultSettings = Config.getDefaultBiomeSettings(biome);
                 BiomeSettings settings = Config.getBiomeSettings(biome);
 
@@ -152,6 +152,15 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                                 new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.high"))
                         .setSaveConsumer(x -> Config.setFireflySettings(biome, x))
                         .setDefaultValue(defaultSettings.fireflySpawnRate())
+                        .build();
+
+                int color = settings.fireflyColor();
+                int dColor = defaultSettings.fireflyColor();
+                AbstractConfigListEntry<Integer> fireflyColor = entryBuilder
+                        .startColorField(new TranslatableText("option.illuminations.fireflyColor"), color)
+                        .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflyColor"))
+                        .setSaveConsumer(x -> Config.setFireflyColorSettings(biome, x))
+                        .setDefaultValue(dColor)
                         .build();
 
                 AbstractConfigListEntry<GlowwormSpawnRate> glowwormSpawnRate = entryBuilder
@@ -179,10 +188,10 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .build();
 
                 List<AbstractConfigListEntry> entries = (biome == NETHER)
-                        ? List.of(fireflySpawnRate)
+                        ? List.of(fireflySpawnRate, fireflyColor)
                         : (biome == THEEND)
-                        ? List.of(fireflySpawnRate, planktonSpawnRate)
-                        : List.of(fireflySpawnRate, glowwormSpawnRate, planktonSpawnRate);
+                        ? List.of(fireflySpawnRate, fireflyColor, planktonSpawnRate)
+                        : List.of(fireflySpawnRate, fireflyColor, glowwormSpawnRate, planktonSpawnRate);
 
                 biomeSettings.addEntry(entryBuilder
                         .startSubCategory(new TranslatableText("option.illuminations.biome." + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, biome.name())), entries)
