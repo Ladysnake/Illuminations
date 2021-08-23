@@ -165,23 +165,17 @@ public class Config {
     private static void parseProperty(String biome, Consumer<BiomeSettings> setter, BiomeSettings defaultValue) {
         try {
             String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome);
+
             FireflySpawnRate fireflySpawnRate = FireflySpawnRate.valueOf(config.getProperty(name + "-firefly-spawn-rate"));
-            GlowwormSpawnRate glowwormSpawnRate = GlowwormSpawnRate.valueOf(config.getProperty(name + "-glowworm-spawn-rate"));
-            PlanktonSpawnRate planktonSpawnRate = PlanktonSpawnRate.valueOf(config.getProperty(name + "-plankton-spawn-rate"));
+            GlowwormSpawnRate glowwormSpawnRate = defaultValue.glowwormSpawnRate() == null ? null
+                    : GlowwormSpawnRate.valueOf(config.getProperty(name + "-glowworm-spawn-rate"));
+            PlanktonSpawnRate planktonSpawnRate = defaultValue.planktonSpawnRate() == null ? null
+                    : PlanktonSpawnRate.valueOf(config.getProperty(name + "-plankton-spawn-rate"));
             int fireflyColor = Integer.parseInt(config.getProperty(name + "-firefly-color"), 16);
 
             setter.accept(new BiomeSettings(fireflySpawnRate, fireflyColor, glowwormSpawnRate, planktonSpawnRate));
         } catch (Exception e) {
             setter.accept(defaultValue);
-        }
-    }
-
-    private static <T> T tryOrDefault(Supplier<? extends T> supplier, T defaultValue)
-    {
-        try {
-            return supplier.get();
-        } catch (Exception e) {
-            return defaultValue;
         }
     }
 
@@ -313,8 +307,9 @@ public class Config {
         biomeSettings.put(biome, settings);
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
         config.setProperty(name + "-firefly-spawn-rate", settings.fireflySpawnRate().name());
-        config.setProperty(name + "-glowworm-spawn-rate", settings.glowwormSpawnRate().name());
-        config.setProperty(name + "-plankton-spawn-rate", settings.planktonSpawnRate().name());
+        config.setProperty(name + "-firefly-color", Integer.toString(settings.fireflyColor(), 16));
+        if (settings.glowwormSpawnRate() != null) config.setProperty(name + "-glowworm-spawn-rate", settings.glowwormSpawnRate().name());
+        if (settings.planktonSpawnRate() != null) config.setProperty(name + "-plankton-spawn-rate", settings.planktonSpawnRate().name());
     }
 
     public static void setFireflySettings(BiomeCategory biome, FireflySpawnRate value)

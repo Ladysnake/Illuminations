@@ -22,6 +22,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.default"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.low"),
+                            new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.medium"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.high"))
                     .setSaveConsumer(Config::setEyesInTheDarkSpawnRate)
                     .setDefaultValue(EyesInTheDarkSpawnRate.MEDIUM)
@@ -143,6 +145,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 BiomeSettings defaultSettings = DefaultConfig.getBiomeSettings(biome);
                 BiomeSettings settings = Config.getBiomeSettings(biome);
 
+                // Firefly spawn rate
                 AbstractConfigListEntry<FireflySpawnRate> fireflySpawnRate = entryBuilder
                         .startEnumSelector(new TranslatableText("option.illuminations.fireflySpawnRate"), FireflySpawnRate.class, settings.fireflySpawnRate())
                         .setTooltip(
@@ -155,6 +158,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .setDefaultValue(defaultSettings.fireflySpawnRate())
                         .build();
 
+                // Firefly color
                 int color = settings.fireflyColor();
                 int dColor = defaultSettings.fireflyColor();
                 AbstractConfigListEntry<Integer> fireflyColor = entryBuilder
@@ -164,47 +168,50 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .setDefaultValue(dColor)
                         .build();
 
-                AbstractConfigListEntry<GlowwormSpawnRate> glowwormSpawnRate = entryBuilder
-                        .startEnumSelector(new TranslatableText("option.illuminations.glowwormSpawnRate"), GlowwormSpawnRate.class, settings.glowwormSpawnRate())
-                        .setTooltip(
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.disable"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.low"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.medium"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.high"))
-                        .setSaveConsumer(x -> Config.setGlowwormSettings(biome, x))
-                        .setDefaultValue(defaultSettings.glowwormSpawnRate())
-                        .build();
+                // Glowworm spawn rate
+                AbstractConfigListEntry<GlowwormSpawnRate> glowwormSpawnRate = null;
+                if (settings.glowwormSpawnRate() != null)
+                    glowwormSpawnRate = entryBuilder
+                            .startEnumSelector(new TranslatableText("option.illuminations.glowwormSpawnRate"), GlowwormSpawnRate.class, settings.glowwormSpawnRate())
+                            .setTooltip(
+                                    new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate"),
+                                    new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.disable"),
+                                    new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.low"),
+                                    new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.medium"),
+                                    new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.high"))
+                            .setSaveConsumer(x -> Config.setGlowwormSettings(biome, x))
+                            .setDefaultValue(defaultSettings.glowwormSpawnRate())
+                            .build();
 
-                AbstractConfigListEntry<PlanktonSpawnRate> planktonSpawnRate = entryBuilder
-                        .startEnumSelector(new TranslatableText("option.illuminations.planktonSpawnRate"), PlanktonSpawnRate.class, settings.planktonSpawnRate())
-                        .setTooltip(
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.disable"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.low"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.medium"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.high"))
-                        .setSaveConsumer(x -> Config.setPlanktonSettings(biome, x))
-                        .setDefaultValue(defaultSettings.planktonSpawnRate())
-                        .build();
+                AbstractConfigListEntry<PlanktonSpawnRate> planktonSpawnRate = null;
+                if (settings.planktonSpawnRate() != null)
+                    planktonSpawnRate = entryBuilder
+                            .startEnumSelector(new TranslatableText("option.illuminations.planktonSpawnRate"), PlanktonSpawnRate.class, settings.planktonSpawnRate())
+                            .setTooltip(
+                                    new TranslatableText("option.tooltip.illuminations.planktonSpawnRate"),
+                                    new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.disable"),
+                                    new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.low"),
+                                    new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.medium"),
+                                    new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.high"))
+                            .setSaveConsumer(x -> Config.setPlanktonSettings(biome, x))
+                            .setDefaultValue(defaultSettings.planktonSpawnRate())
+                            .build();
 
+                // Biome tooltip
                 Text[] tooltip = new Text[biome.getValues().length + 1];
-                tooltip[0] = new TranslatableText("option.tooltip.illuminations.biome");
+                tooltip[0] = new TranslatableText(biome != OTHER ? "option.tooltip.illuminations.biome" : "option.tooltip.illuminations.biome.other");
                 for (int i = 0; i < biome.getValues().length; i++) {
                     tooltip[i + 1] = new TranslatableText("biome.minecraft." + biome.getValues()[i].getPath());
                 }
 
-                if (biome == OTHER) {
-                    tooltip[0] = new TranslatableText("option.tooltip.illuminations.biome.other");
-                }
+                List<AbstractConfigListEntry> biomeEntries = new ArrayList<>(4);
+                biomeEntries.add(fireflySpawnRate);
+                biomeEntries.add(fireflyColor);
+                if (glowwormSpawnRate != null) biomeEntries.add(glowwormSpawnRate);
+                if (settings.planktonSpawnRate() != null) biomeEntries.add(planktonSpawnRate);
 
                 biomeSettings.addEntry(entryBuilder
-                        .startSubCategory(new TranslatableText("option.illuminations.biome." + name),
-                                (biome == THE_NETHER)
-                                ? List.of(fireflySpawnRate, fireflyColor)
-                                : (biome == THE_END)
-                                ? List.of(fireflySpawnRate, fireflyColor, planktonSpawnRate)
-                                : List.of(fireflySpawnRate, fireflyColor, glowwormSpawnRate, planktonSpawnRate))
+                        .startSubCategory(new TranslatableText("option.illuminations.biome." + name), biomeEntries)
                         .setTooltip(tooltip)
                         .build());
             }

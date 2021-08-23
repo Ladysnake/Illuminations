@@ -264,15 +264,19 @@ public class Illuminations implements ClientModInitializer {
             }
         });
 
-        ImmutableMap.Builder<BiomeCategory, ImmutableSet<IlluminationData>> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<BiomeCategory, ImmutableSet<IlluminationData>> biomeBuilder = ImmutableMap.builder();
         Config.getBiomeSettings().forEach((biome, settings) -> {
-            builder.put(biome, ImmutableSet.<IlluminationData>builder()
-                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate))
-                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate))
-                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate))
-                    .build());
+            ImmutableSet.Builder<IlluminationData> illuminationDataBuilder = ImmutableSet.builder();
+
+            illuminationDataBuilder.add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate));
+            if (settings.glowwormSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate));
+            if (settings.planktonSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate));
+
+            biomeBuilder.put(biome, illuminationDataBuilder.build());
         });
-        ILLUMINATIONS_BIOME_CATEGORIES = builder.build();
+        ILLUMINATIONS_BIOME_CATEGORIES = biomeBuilder.build();
 
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
