@@ -55,7 +55,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark.disable"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark.always"))
                     .setSaveConsumer(Config::setEyesInTheDark)
-                    .setDefaultValue(EyesInTheDark.ENABLE)
+                    .setDefaultValue(DefaultConfig.EYES_IN_THE_DARK)
                     .build());
 
             general.addEntry(entryBuilder
@@ -67,7 +67,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.medium"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.high"))
                     .setSaveConsumer(Config::setEyesInTheDarkSpawnRate)
-                    .setDefaultValue(EyesInTheDarkSpawnRate.MEDIUM)
+                    .setDefaultValue(DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE)
                     .build());
 
             general.addEntry(entryBuilder
@@ -80,7 +80,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.medium"),
                             new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.high"))
                     .setSaveConsumer(Config::setWillOWispsSpawnRate)
-                    .setDefaultValue(WillOWispsSpawnRate.MEDIUM)
+                    .setDefaultValue(DefaultConfig.WILL_O_WISPS_SPAWN_RATE)
                     .build());
 
             general.addEntry(entryBuilder
@@ -90,7 +90,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.lowest"),
                             new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.highest"))
                     .setSaveConsumer(Config::setChorusPetalsSpawnMultiplier)
-                    .setDefaultValue(1)
+                    .setDefaultValue(DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER)
                     .build());
 
             general.addEntry(entryBuilder
@@ -100,21 +100,21 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.density.lowest"),
                             new TranslatableText("option.tooltip.illuminations.density.highest"))
                     .setSaveConsumer(Config::setDensity)
-                    .setDefaultValue(100)
+                    .setDefaultValue(DefaultConfig.DENSITY)
                     .build());
 
             general.addEntry(entryBuilder
                     .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnAlways"), Config.doesFireflySpawnAlways())
                     .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnAlways"))
                     .setSaveConsumer(Config::setFireflySpawnAlways)
-                    .setDefaultValue(false)
+                    .setDefaultValue(DefaultConfig.FIREFLY_SPAWN_ALWAYS)
                     .build());
 
             general.addEntry(entryBuilder
                     .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnUnderground"), Config.doesFireflySpawnUnderground())
                     .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnUnderground"))
                     .setSaveConsumer(Config::setFireflySpawnUnderground)
-                    .setDefaultValue(false)
+                    .setDefaultValue(DefaultConfig.FIREFLY_SPAWN_UNDERGROUND)
                     .build());
 
             general.addEntry(entryBuilder
@@ -122,7 +122,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.fireflyWhiteAlpha"))
                     .setSaveConsumer(Config::setFireflyWhiteAlpha)
-                    .setDefaultValue(100)
+                    .setDefaultValue(DefaultConfig.FIREFLY_WHITE_ALPHA)
                     .build());
 
             general.addEntry(entryBuilder
@@ -130,14 +130,14 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.autoUpdate"))
                     .setSaveConsumer(Config::setAutoUpdate)
-                    .setDefaultValue(false)
+                    .setDefaultValue(DefaultConfig.AUTO_UPDATE)
                     .build());
 
             general.addEntry(entryBuilder
                     .startBooleanToggle(new TranslatableText("option.illuminations.viewAurasFP"), Config.getViewAurasFP())
                     .setTooltip(new TranslatableText("option.tooltip.illuminations.viewAurasFP"))
                     .setSaveConsumer(Config::setViewAurasFP)
-                    .setDefaultValue(false)
+                    .setDefaultValue(DefaultConfig.VIEW_AURAS_FP)
                     .build());
 
             for (BiomeCategory biome : values()) {

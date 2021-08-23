@@ -13,7 +13,7 @@ import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
 import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
 
-public class DefaultConfig {
+public final class DefaultConfig {
 
     public static final EyesInTheDark EYES_IN_THE_DARK = EyesInTheDark.ENABLE;
     public static final EyesInTheDarkSpawnRate EYES_IN_THE_DARK_SPAWN_RATE = EyesInTheDarkSpawnRate.MEDIUM;
@@ -68,5 +68,9 @@ public class DefaultConfig {
 
     public static AuraSettings getAuraSettings(String aura) {
         return AURA_SETTINGS.get(aura);
+    }
+
+    private DefaultConfig() {
+        throw new UnsupportedOperationException();
     }
 }
