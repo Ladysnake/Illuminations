@@ -40,13 +40,25 @@ public final class DefaultConfig {
             .put(RIVER, new BiomeSettings(FireflySpawnRate.MEDIUM, 0xBFFF00, GlowwormSpawnRate.MEDIUM, PlanktonSpawnRate.DISABLE))
             .put(OCEAN, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.HIGH))
             .put(WARM_OCEAN, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.HIGH))
-            .put(THE_NETHER, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
-            .put(THE_END, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, PlanktonSpawnRate.DISABLE))
             .put(BADLANDS, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
             .put(MOUNTAINS, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
             .put(DRIPSTONE_CAVES, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
             .put(LUSH_CAVES, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
             .put(MUSHROOM, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
+            // Nether Biomes
+            .put(NETHER_WASTES, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
+            .put(CRIMSON_FOREST, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
+            .put(WARPED_FOREST, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
+            .put(SOUL_SAND_VALLEY, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
+            .put(BASALT_DELTAS, new BiomeSettings(FireflySpawnRate.DISABLE, 0xFF8000, null, null))
+            // End Biomes
+            .put(THE_END, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            .put(SMALL_END_ISLANDS, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            .put(END_MIDLANDS, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            .put(END_HIGHLANDS, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            .put(END_BARRENS, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            .put(THE_VOID, new BiomeSettings(FireflySpawnRate.DISABLE, 0x8000FF, null, null))
+            // Other Biomes
             .put(OTHER, new BiomeSettings(FireflySpawnRate.DISABLE, 0xBFFF00, GlowwormSpawnRate.DISABLE, PlanktonSpawnRate.DISABLE))
             .build();
 
