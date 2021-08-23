@@ -1,6 +1,6 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.config.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;

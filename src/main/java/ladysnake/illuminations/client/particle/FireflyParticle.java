@@ -1,6 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.config.Config;
+import ladysnake.illuminations.client.enums.BiomeCategory;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -9,13 +10,12 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.LightType;
-import net.minecraft.world.biome.Biome.Category;
 
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,7 +43,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.colorAlpha = 0f;
 
         // Get color for current biome
-        Category biomeCategory = world.getBiome(new BlockPos(x, y, z)).getCategory();
+        Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(world.getBiome(new BlockPos(x, y, z)));
+        BiomeCategory biomeCategory = BiomeCategory.find(biome);
         int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
         float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
         // Shift hue by random ±30 deg angle
@@ -122,7 +123,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.prevPosZ = this.z;
 
         // fade and die on daytime or if old enough unless fireflies can spawn any time of day
-        if ((!Config.isDoFireflySpawnAlways() && !world.getDimension().hasFixedTime() && (world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000)) || this.age++ >= this.maxAge) {
+        if ((!Config.doesFireflySpawnAlways() && !world.getDimension().hasFixedTime() && (world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000)) || this.age++ >= this.maxAge) {
             nextAlphaGoal = 0;
             if (colorAlpha < 0f) {
                 this.markDead();

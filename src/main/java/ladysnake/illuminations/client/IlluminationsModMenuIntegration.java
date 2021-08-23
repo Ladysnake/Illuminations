@@ -1,25 +1,28 @@
 package ladysnake.illuminations.client;
 
-import static net.minecraft.world.biome.Biome.Category.*;
+import static ladysnake.illuminations.client.enums.BiomeCategory.*;
 
 import com.google.common.base.CaseFormat;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import ladysnake.illuminations.client.Config.AuraSettings;
-import ladysnake.illuminations.client.Config.BiomeSettings;
-import ladysnake.illuminations.client.Config.EyesInTheDarkSpawnRate;
-import ladysnake.illuminations.client.Config.FireflySpawnRate;
-import ladysnake.illuminations.client.Config.GlowwormSpawnRate;
-import ladysnake.illuminations.client.Config.PlanktonSpawnRate;
-import ladysnake.illuminations.client.Config.WillOWispsSpawnRate;
+import ladysnake.illuminations.client.config.Config;
+import ladysnake.illuminations.client.config.DefaultConfig;
+import ladysnake.illuminations.client.data.BiomeSettings;
+import ladysnake.illuminations.client.enums.BiomeCategory;
+import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
+import ladysnake.illuminations.client.enums.FireflySpawnRate;
+import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
+import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
+import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
+import ladysnake.illuminations.client.enums.EyesInTheDark;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import me.shedaniel.math.Color;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.world.biome.Biome.Category;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class IlluminationsModMenuIntegration implements ModMenuApi {
@@ -43,7 +46,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
             general.addEntry(entryBuilder
-                    .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDark"), Config.EyesInTheDark.class, Config.getEyesInTheDark())
+                    .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDark"), EyesInTheDark.class, Config.getEyesInTheDark())
                     .setTooltip(
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark.default"),
@@ -51,7 +54,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark.disable"),
                             new TranslatableText("option.tooltip.illuminations.eyesInTheDark.always"))
                     .setSaveConsumer(Config::setEyesInTheDark)
-                    .setDefaultValue(Config.EyesInTheDark.ENABLE)
+                    .setDefaultValue(EyesInTheDark.ENABLE)
                     .build());
 
             general.addEntry(entryBuilder
@@ -99,16 +102,16 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .build());
 
             general.addEntry(entryBuilder
-                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnAlways"), Config.isDoFireflySpawnAlways())
+                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnAlways"), Config.doesFireflySpawnAlways())
                     .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnAlways"))
-                    .setSaveConsumer(Config::setDoFireflySpawnAlways)
+                    .setSaveConsumer(Config::setFireflySpawnAlways)
                     .setDefaultValue(false)
                     .build());
 
             general.addEntry(entryBuilder
-                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnUnderground"), Config.isDoFireflySpawnUnderground())
+                    .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnUnderground"), Config.doesFireflySpawnUnderground())
                     .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnUnderground"))
-                    .setSaveConsumer(Config::setDoFireflySpawnUnderground)
+                    .setSaveConsumer(Config::setFireflySpawnUnderground)
                     .setDefaultValue(false)
                     .build());
 
@@ -135,11 +138,9 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                     .setDefaultValue(false)
                     .build());
 
-            List<Category> biomes = List.of(JUNGLE, PLAINS, SAVANNA, TAIGA, FOREST, RIVER, SWAMP, OCEAN, BEACH, DESERT,
-                    EXTREME_HILLS, ICY, MESA, MUSHROOM, NETHER, THEEND);
-
-            for (Category biome : biomes) {
-                BiomeSettings defaultSettings = Config.getDefaultBiomeSettings(biome);
+            for (BiomeCategory biome : values()) {
+                String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, biome.name());
+                BiomeSettings defaultSettings = DefaultConfig.getBiomeSettings(biome);
                 BiomeSettings settings = Config.getBiomeSettings(biome);
 
                 AbstractConfigListEntry<FireflySpawnRate> fireflySpawnRate = entryBuilder
@@ -187,14 +188,24 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                         .setDefaultValue(defaultSettings.planktonSpawnRate())
                         .build();
 
-                List<AbstractConfigListEntry> entries = (biome == NETHER)
-                        ? List.of(fireflySpawnRate, fireflyColor)
-                        : (biome == THEEND)
-                        ? List.of(fireflySpawnRate, fireflyColor, planktonSpawnRate)
-                        : List.of(fireflySpawnRate, fireflyColor, glowwormSpawnRate, planktonSpawnRate);
+                Text[] tooltip = new Text[biome.getValues().length + 1];
+                tooltip[0] = new TranslatableText("option.tooltip.illuminations.biome");
+                for (int i = 0; i < biome.getValues().length; i++) {
+                    tooltip[i + 1] = new TranslatableText("biome.minecraft." + biome.getValues()[i].getPath());
+                }
+
+                if (biome == OTHER) {
+                    tooltip[0] = new TranslatableText("option.tooltip.illuminations.biome.other");
+                }
 
                 biomeSettings.addEntry(entryBuilder
-                        .startSubCategory(new TranslatableText("option.illuminations.biome." + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, biome.name())), entries)
+                        .startSubCategory(new TranslatableText("option.illuminations.biome." + name),
+                                (biome == THE_NETHER)
+                                ? List.of(fireflySpawnRate, fireflyColor)
+                                : (biome == THE_END)
+                                ? List.of(fireflySpawnRate, fireflyColor, planktonSpawnRate)
+                                : List.of(fireflySpawnRate, fireflyColor, glowwormSpawnRate, planktonSpawnRate))
+                        .setTooltip(tooltip)
                         .build());
             }
 
