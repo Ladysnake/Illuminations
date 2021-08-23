@@ -26,6 +26,7 @@ public enum BiomeCategory {
     DRIPSTONE_CAVES("minecraft:overworld", "minecraft:dripstone_caves"),
     LUSH_CAVES("minecraft:overworld", "minecraft:lush_caves"),
     MUSHROOM("minecraft:overworld", "minecraft:mushroom_fields", "minecraft:mushroom_field_shore"),
+    THE_VOID("minecraft:overworld", "minecraft:the_void"),
     // Nether Biomes
     NETHER_WASTES("minecraft:the_nether", "minecraft:nether_wastes"),
     CRIMSON_FOREST("minecraft:the_nether", "minecraft:crimson_forest"),
@@ -38,7 +39,6 @@ public enum BiomeCategory {
     END_MIDLANDS("minecraft:the_end", "minecraft:end_midlands"),
     END_HIGHLANDS("minecraft:the_end", "minecraft:end_highlands"),
     END_BARRENS("minecraft:the_end", "minecraft:end_barrens"),
-    THE_VOID("minecraft:the_end", "minecraft:the_void"),
     // Other Biomes
     OTHER("minecraft:other");
 

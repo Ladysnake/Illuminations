@@ -96,6 +96,7 @@
   "option.illuminations.biome.dripstoneCaves": "Dripstone Caves",
   "option.illuminations.biome.lushCaves": "Lush Caves",
   "option.illuminations.biome.mushroom": "Mushroom",
+  "option.illuminations.biome.theVoid":  "The Void",
   "option.illuminations.biome.netherWastes": "Nether Wastes",
   "option.illuminations.biome.crimsonForest": "Crimson Forest",
   "option.illuminations.biome.warpedForest":  "Warped Forest",
@@ -106,7 +107,6 @@
   "option.illuminations.biome.endMidlands": "End Midlands",
   "option.illuminations.biome.endHighlands":  "End Highlands",
   "option.illuminations.biome.endBarrens": "End Barrens",
-  "option.illuminations.biome.theVoid":  "The Void",
   "option.illuminations.biome.other": "Other",
   "option.tooltip.illuminations.biome": "Biomes in this category:"
 }
