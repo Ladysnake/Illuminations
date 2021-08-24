@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.LightType;
+import net.minecraft.world.biome.Biome;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -43,8 +44,9 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.colorAlpha = 0f;
 
         // Get color for current biome
-        Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(world.getBiome(new BlockPos(x, y, z)));
-        BiomeCategory biomeCategory = BiomeCategory.find(biome);
+        Biome b = world.getBiome(new BlockPos(x, y, z));
+        Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
+        BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory());
         int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
         float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
         // Shift hue by random ±30 deg angle

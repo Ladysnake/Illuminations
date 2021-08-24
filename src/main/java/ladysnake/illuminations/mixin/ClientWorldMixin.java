@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,10 +36,11 @@ public abstract class ClientWorldMixin extends World {
     @Inject(method = "randomBlockDisplayTick", slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;")),
             at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
     private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, @Coerce Object blockParticle, BlockPos.Mutable pos, CallbackInfo ci) {
-        Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(this.getBiome(pos));
+        Biome b = this.getBiome(pos);
+        Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
 
         // Main biome settings
-        BiomeCategory biomeCategory = BiomeCategory.find(biome); // Returns OTHER if no association for this biome was found.
+        BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory()); // Returns OTHER if no association for this biome was found.
         spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory));
 
         // Other miscellaneous biome settings
