@@ -43,16 +43,21 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.setSpriteForAge(spriteProvider);
         this.colorAlpha = 0f;
 
-        // Get color for current biome
-        Biome b = world.getBiome(new BlockPos(x, y, z));
-        Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
-        BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory());
-        int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
-        float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
-        // Shift hue by random ±30 deg angle
-        hsb[0] += (random.nextFloat() - 0.5f) * 30/360f;
-        // Convert back to rgb
-        Color c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+        Color c;
+        if (Config.getFireflyRainbow()) {
+            c = Color.getHSBColor(random.nextFloat(), 1f, 1f);
+        } else {
+            // Get color for current biome
+            Biome b = world.getBiome(new BlockPos(x, y, z));
+            Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
+            BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory());
+            int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
+            float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
+            // Shift hue by random ±30 deg angle
+            hsb[0] += (random.nextFloat() - 0.5f) * 30/360f;
+            // Convert back to rgb
+            c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+        }
 
         this.colorRed = c.getRed() / 255f;
         this.colorGreen = c.getGreen() / 255f;

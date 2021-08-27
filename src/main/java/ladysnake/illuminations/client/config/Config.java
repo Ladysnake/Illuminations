@@ -66,6 +66,7 @@ public class Config {
     private static boolean fireflySpawnAlways;
     private static boolean fireflySpawnUnderground;
     private static int fireflyWhiteAlpha;
+    private static boolean fireflyRainbow;
     private static boolean viewAurasFP;
     private static boolean autoUpdate;
     private static boolean displayGreetingScreen;
@@ -115,6 +116,7 @@ public class Config {
         parseProperty("firefly-spawn-always", Config::setFireflySpawnAlways, DefaultConfig.FIREFLY_SPAWN_ALWAYS);
         parseProperty("firefly-spawn-underground", Config::setFireflySpawnUnderground, DefaultConfig.FIREFLY_SPAWN_UNDERGROUND);
         parseProperty("firefly-white-alpha", Config::setFireflyWhiteAlpha, DefaultConfig.FIREFLY_WHITE_ALPHA);
+        parseProperty("firefly-rainbow", Config::setFireflyRainbow, DefaultConfig.FIREFLY_RAINBOW);
         parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
         parseProperty("view-auras-fp", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
         parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
@@ -263,6 +265,15 @@ public class Config {
     public static void setFireflyWhiteAlpha(int value) {
         fireflyWhiteAlpha = value;
         config.setProperty("firefly-white-alpha", Integer.toString(value));
+    }
+
+    public static boolean getFireflyRainbow() {
+        return fireflyRainbow;
+    }
+
+    public static void setFireflyRainbow(boolean value) {
+        fireflyRainbow = value;
+        config.setProperty("firefly-rainbow", Boolean.toString(value));
     }
 
     public static boolean getViewAurasFP() {

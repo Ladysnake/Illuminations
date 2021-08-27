@@ -136,6 +136,12 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .build());
 
         general.addEntry(entryBuilder
+                .startBooleanToggle(new TranslatableText("option.illuminations.fireflyRainbow"), Config.getFireflyRainbow())
+                .setSaveConsumer(Config::setFireflyRainbow)
+                .setDefaultValue(DefaultConfig.FIREFLY_RAINBOW)
+                .build());
+
+        general.addEntry(entryBuilder
                 .startBooleanToggle(new TranslatableText("option.illuminations.autoUpdate"), Config.isAutoUpdate())
                 .setTooltip(new TranslatableText("option.tooltip.illuminations.autoUpdate"))
                 .setSaveConsumer(Config::setAutoUpdate)
