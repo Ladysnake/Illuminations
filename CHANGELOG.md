@@ -1,5 +1,13 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.7: Configuminations - 1.17.1
+- Added new biome settings tabs for Overworld, Nether, End and Other dimensions to modify firefly, glowworm and plankton spawn rates and firefly colors for each biome category!
+- Added spawn rate settings for eyes in the dark, will o' wisps and chorus petals
+- Added options for fireflies to spawn every time of day and underground
+- Added a custom rainbow mode options for fireflies!
+
+All of this update was entirely made by a community member: Boerdereinar, so big kudos and thanks to them!
+
 ### Illuminations 1.6.4 - 1.17.1
 - Optimized mod assets thanks to RDKRACZ!
 - Added indonesian localization thanks to suryomujahid!
