@@ -1,6 +1,6 @@
 package ladysnake.illuminations.mixin;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

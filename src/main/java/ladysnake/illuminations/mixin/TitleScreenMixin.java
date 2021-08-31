@@ -1,6 +1,6 @@
 package ladysnake.illuminations.mixin;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.gui.AutoUpdateGreetingScreen;
 import ladysnake.illuminations.client.gui.UpdateToast;
 import ladysnake.illuminations.updater.IlluminationsUpdater;

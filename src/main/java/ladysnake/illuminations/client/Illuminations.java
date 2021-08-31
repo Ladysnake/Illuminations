@@ -5,10 +5,14 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.serialization.Codec;
+import ladysnake.illuminations.client.config.Config;
+import ladysnake.illuminations.client.config.DefaultConfig;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
+import ladysnake.illuminations.client.enums.BiomeCategory;
+import ladysnake.illuminations.client.enums.EyesInTheDark;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.overhead.JackoParticle;
@@ -43,8 +47,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,7 +65,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
-import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
 public class Illuminations implements ClientModInitializer {
@@ -79,12 +80,12 @@ public class Illuminations implements ClientModInitializer {
         return world.getDimension().hasFixedTime()
                 ? (block == Blocks.AIR || block == Blocks.VOID_AIR)
                 : block == Blocks.AIR
-                && (Config.isDoFireflySpawnAlways() || (world.getTimeOfDay() >= 13000 && world.getTimeOfDay() <= 23000))
-                && (Config.isDoFireflySpawnUnderground() || world.isSkyVisible(blockPos));
+                && (Config.doesFireflySpawnAlways() || (world.getTimeOfDay() >= 13000 && world.getTimeOfDay() <= 23000))
+                && (Config.doesFireflySpawnUnderground() || world.isSkyVisible(blockPos));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
     public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
     // register overhead models
     public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
@@ -128,7 +129,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType FOUNDING_SKULL_PET;
     public static DefaultParticleType DISSOLUTION_WISP_PET;
     // spawn biome categories and biomes
-    public static ImmutableMap<Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+    public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
@@ -263,19 +264,19 @@ public class Illuminations implements ClientModInitializer {
             }
         });
 
-        // spawn biome categories for Illuminations
-        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.copyOf(
-                Config.getBiomeSettings()
-                        .entrySet()
-                        .stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey, entry -> {
-                            Category biome = entry.getKey();
-                            return ImmutableSet.<IlluminationData>builder()
-                                    .add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate))
-                                    .add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate))
-                                    .add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate))
-                                    .build();
-                        })));
+        ImmutableMap.Builder<BiomeCategory, ImmutableSet<IlluminationData>> biomeBuilder = ImmutableMap.builder();
+        Config.getBiomeSettings().forEach((biome, settings) -> {
+            ImmutableSet.Builder<IlluminationData> illuminationDataBuilder = ImmutableSet.builder();
+
+            illuminationDataBuilder.add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate));
+            if (settings.glowwormSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate));
+            if (settings.planktonSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate));
+
+            biomeBuilder.put(biome, illuminationDataBuilder.build());
+        });
+        ILLUMINATIONS_BIOME_CATEGORIES = biomeBuilder.build();
 
         // specific spawn biomes for Illuminations
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
@@ -288,15 +289,15 @@ public class Illuminations implements ClientModInitializer {
         // Currently set to default aura settings.
         // Uncomment settings related to auras in Config.java and change getDefaultAuraSettings to getAuraSettings to restore.
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, () -> Config.getDefaultAuraSettings("twilight")))
-                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> Config.getDefaultAuraSettings("ghostly")))
-                .put("chorus", new AuraData(CHORUS_AURA, () -> Config.getDefaultAuraSettings("chorus")))
-                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> Config.getDefaultAuraSettings("autumn_leaves")))
-                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> Config.getDefaultAuraSettings("sculk_tendrils")))
-                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> Config.getDefaultAuraSettings("shadowbringer_soul")))
-                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> Config.getDefaultAuraSettings("goldenrod")))
-                .put("confetti", new AuraData(CONFETTI_AURA, () -> Config.getDefaultAuraSettings("confetti")))
-                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> Config.getDefaultAuraSettings("prismatic_confetti")))
+                .put("twilight", new AuraData(TWILIGHT_AURA, () -> DefaultConfig.getAuraSettings("twilight")))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> DefaultConfig.getAuraSettings("ghostly")))
+                .put("chorus", new AuraData(CHORUS_AURA, () -> DefaultConfig.getAuraSettings("chorus")))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> DefaultConfig.getAuraSettings("autumn_leaves")))
+                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> DefaultConfig.getAuraSettings("sculk_tendrils")))
+                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> DefaultConfig.getAuraSettings("shadowbringer_soul")))
+                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> DefaultConfig.getAuraSettings("goldenrod")))
+                .put("confetti", new AuraData(CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("confetti")))
+                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("prismatic_confetti")))
                 .build();
 
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
