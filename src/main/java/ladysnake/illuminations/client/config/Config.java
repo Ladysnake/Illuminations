@@ -1,25 +1,6 @@
 package ladysnake.illuminations.client.config;
 
-import static net.minecraft.world.biome.Biome.Category.BEACH;
-import static net.minecraft.world.biome.Biome.Category.DESERT;
-import static net.minecraft.world.biome.Biome.Category.EXTREME_HILLS;
-import static net.minecraft.world.biome.Biome.Category.FOREST;
-import static net.minecraft.world.biome.Biome.Category.ICY;
-import static net.minecraft.world.biome.Biome.Category.JUNGLE;
-import static net.minecraft.world.biome.Biome.Category.MESA;
-import static net.minecraft.world.biome.Biome.Category.MUSHROOM;
-import static net.minecraft.world.biome.Biome.Category.NETHER;
-import static net.minecraft.world.biome.Biome.Category.OCEAN;
-import static net.minecraft.world.biome.Biome.Category.PLAINS;
-import static net.minecraft.world.biome.Biome.Category.RIVER;
-import static net.minecraft.world.biome.Biome.Category.SAVANNA;
-import static net.minecraft.world.biome.Biome.Category.SWAMP;
-import static net.minecraft.world.biome.Biome.Category.TAIGA;
-import static net.minecraft.world.biome.Biome.Category.THEEND;
-
 import com.google.common.base.CaseFormat;
-import com.google.common.collect.ImmutableMap;
-import ladysnake.illuminations.client.data.AuraSettings;
 import ladysnake.illuminations.client.data.BiomeSettings;
 import ladysnake.illuminations.client.enums.BiomeCategory;
 import ladysnake.illuminations.client.enums.EyesInTheDark;
@@ -42,7 +23,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class Config {
     public static final Path PROPERTIES_PATH = FabricLoader.getInstance().getConfigDir().resolve("illuminations.properties");
@@ -118,7 +98,7 @@ public class Config {
         parseProperty("firefly-white-alpha", Config::setFireflyWhiteAlpha, DefaultConfig.FIREFLY_WHITE_ALPHA);
         parseProperty("firefly-rainbow", Config::setFireflyRainbow, DefaultConfig.FIREFLY_RAINBOW);
         parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
-        parseProperty("view-auras-fp", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
+        parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
         parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
 
         biomeSettings = new HashMap<>();
