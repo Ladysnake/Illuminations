@@ -80,7 +80,7 @@ public class Illuminations implements ClientModInitializer {
         return world.getDimension().hasFixedTime()
                 ? (block == Blocks.AIR || block == Blocks.VOID_AIR)
                 : block == Blocks.AIR
-                && (Config.doesFireflySpawnAlways() || (world.getTimeOfDay() >= 13000 && world.getTimeOfDay() <= 23000))
+                && (Config.doesFireflySpawnAlways() || Illuminations.isNightTime(world))
                 && (Config.doesFireflySpawnUnderground() || world.isSkyVisible(blockPos));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
@@ -342,5 +342,9 @@ public class Illuminations implements ClientModInitializer {
                     , jsonObject.get("drip")
                     , jsonObject.get("pet"));
         }
+    }
+
+    public static boolean isNightTime(World world) {
+        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 }

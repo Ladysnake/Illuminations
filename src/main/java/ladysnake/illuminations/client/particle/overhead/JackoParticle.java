@@ -1,5 +1,6 @@
 package ladysnake.illuminations.client.particle.overhead;
 
+import ladysnake.illuminations.client.Illuminations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.Particle;
@@ -75,7 +76,7 @@ public class JackoParticle extends PetParticle {
 
         if (owner != null) {
             // if night or dark enough
-            if (!(world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
+            if (!Illuminations.isNightTime(world) || (this.world.getLightLevel(new BlockPos(this.x, this.y, this.z)) < 10)) {
                 glow = 1;
             } else {
                 glow = 0;
