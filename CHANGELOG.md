@@ -1,5 +1,9 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.7.1 - 1.17.1
+- Fixed an issue that cause the greeting screen to always show
+- Fixed fireflies not spawning at night if the world time is invalid
+
 ### Illuminations 1.7: Configuminations - 1.17.1
 - Added new biome settings tabs for Overworld, Nether, End and Other dimensions to modify firefly, glowworm and plankton spawn rates and firefly colors for each biome category!
 - Added spawn rate settings for eyes in the dark, will o' wisps and chorus petals
