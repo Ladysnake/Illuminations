@@ -1,5 +1,12 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.7.2 - 1.17.1
+- Illuminations will now be able to spawn much further from the player.
+    - This change dilutes illumination density and dispersion them more, but also increases the ambient immersion, as you will no longer have the feeling illuminations only appear in a 16 block radius around you!
+- Fixed illuminations spawning in blocks other than air
+- Fixed fireflies dying during the night and not during the day
+- Fixed Jacko pet lighting up during the day and lighting off during the night
+
 ### Illuminations 1.7.1 - 1.17.1
 - Fixed an issue that cause the greeting screen to always show
 - Fixed fireflies not spawning at night if the world time is invalid
