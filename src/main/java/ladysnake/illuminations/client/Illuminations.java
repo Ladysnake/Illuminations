@@ -105,6 +105,8 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType CHORUS_PETAL;
     public static DefaultParticleType WILL_O_WISP;
     public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
+    public static DefaultParticleType EMBER;
+    public static DefaultParticleType EMBER_TRAIL;
     // auras
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
@@ -210,6 +212,8 @@ public class Illuminations implements ClientModInitializer {
             }
         });
         ParticleFactoryRegistry.getInstance().register(Illuminations.WISP_TRAIL, WispTrailParticle.Factory::new);
+        EMBER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ember", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.EMBER, EmberParticle.DefaultFactory::new);
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);

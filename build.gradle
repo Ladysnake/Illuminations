@@ -96,7 +96,7 @@ dependencies {
     }
 
     // canvas renderer
-    modImplementation "grondag:canvas-mc117-1.17:1.0.1641"
+//    modImplementation "grondag:canvas-mc117-1.17:1.0.2033"
 
 	// satin
 	modCompileOnly "io.github.ladysnake:satin:${satin_version}"

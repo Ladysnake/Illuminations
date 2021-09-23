@@ -31,7 +31,9 @@ import java.util.function.Supplier;
 
 @Mixin(ClientWorld.class)
 public abstract class ClientWorldMixin extends World {
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
     protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
         super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
@@ -41,27 +43,25 @@ public abstract class ClientWorldMixin extends World {
     @Inject(method = "randomBlockDisplayTick", slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;")),
             at = @At(value = "INVOKE", target = "Ljava/util/Optional;ifPresent(Ljava/util/function/Consumer;)V", ordinal = 0, shift = At.Shift.AFTER))
     private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, @Coerce Object blockParticle, BlockPos.Mutable blockPos, CallbackInfo ci) {
-        BlockPos.Mutable pos = blockPos.add(this.random.nextGaussian()*50, this.random.nextGaussian()*25, this.random.nextGaussian()*50).mutableCopy();
+        BlockPos.Mutable pos = blockPos.add(this.random.nextGaussian() * 50, this.random.nextGaussian() * 25, this.random.nextGaussian() * 50).mutableCopy();
 
-        if (client.world.getBlockState(pos).isAir()) {
-            Biome b = this.getBiome(pos);
-            Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
+        Biome b = this.getBiome(pos);
+        Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
 
-            // Main biome settings
-            BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory()); // Returns OTHER if no association for this biome was found.
-            spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory));
+        // Main biome settings
+        BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory()); // Returns OTHER if no association for this biome was found.
+        spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory));
 
-            // Other miscellaneous biome settings
-            if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
-                ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOMES.get(biome);
-                spawnParticles(pos, illuminationDataSet);
-            }
+        // Other miscellaneous biome settings
+        if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
+            ImmutableSet<IlluminationData> illuminationDataSet = Illuminations.ILLUMINATIONS_BIOMES.get(biome);
+            spawnParticles(pos, illuminationDataSet);
+        }
 
-            // spooky eyes
-            if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
-                    && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate) {
-                this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
-            }
+        // spooky eyes
+        if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
+                && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate) {
+            this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
         }
     }
 
