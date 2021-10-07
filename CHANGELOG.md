@@ -2,8 +2,9 @@
 
 ### Illuminations 1.8 - 1.17.1
 - Added Pumpkin Spirits! These mischievous entities take the form of small flying Jack o' Lanterns and will act like Will o' Wisps, appearing from Jack o' Lanterns at night
-- Added Poltergeists! These devious flying skulls will appear from placed skeleton skulls at night, and may also appear when you kill an undead entity at night
-- Transformed the Eyes in the Dark option to Halloween Features. Eyes in the dark, Pumpkin spirits and poltergeists will now be controlled by this setting. If you want Pumpkin spirits 
+- Added Poltergeists! These devious flying skulls will appear from placed skeleton skulls at night, and may also appear when you kill undead at night
+- These two new spirits are also available as pets for Illuminations supporters
+- Transformed the Eyes in the Dark option to Halloween Features. Eyes in the dark, Pumpkin spirits and poltergeists will now be controlled by this setting.
 - Fixed an issue that caused very transparent particles to not appear ruining the intended design of several auras and effects
 
 ### Illuminations 1.7.2 - 1.17.1
