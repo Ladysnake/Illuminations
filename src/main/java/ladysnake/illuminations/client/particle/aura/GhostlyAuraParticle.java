@@ -16,7 +16,7 @@ import net.minecraft.util.math.Vec3f;
 
 import java.util.Random;
 
-public class GhostlyParticle extends SpriteBillboardParticle {
+public class GhostlyAuraParticle extends SpriteBillboardParticle {
     private static final Random RANDOM = new Random();
     private final float MAXIMUM_ALPHA = 0.02f;
     private final PlayerEntity owner;
@@ -27,7 +27,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
     protected float offsetZ = RANDOM.nextFloat() * .7f - 0.35f;
     protected float offsetY = 0;
 
-    public GhostlyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+    public GhostlyAuraParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
         this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
@@ -83,7 +83,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         float minV = this.getMinV();
         float maxV = this.getMaxV();
         int l = 15728880;
-        float a = MathHelper.clamp(this.alpha, 0.0F, MAXIMUM_ALPHA);
+//        float a = MathHelper.clamp(this.alpha, 0.0F, MAXIMUM_ALPHA);
 
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
         vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, alpha).light(l).next();
@@ -126,7 +126,7 @@ public class GhostlyParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new GhostlyParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            return new GhostlyAuraParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }
 

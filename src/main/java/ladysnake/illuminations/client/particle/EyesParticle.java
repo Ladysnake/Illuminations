@@ -2,7 +2,7 @@ package ladysnake.illuminations.client.particle;
 
 import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.enums.EyesInTheDark;
+import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -39,7 +39,7 @@ public class EyesParticle extends SpriteBillboardParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         // disable if night vision or config is set to disabled
-        if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || Config.getEyesInTheDark() == EyesInTheDark.DISABLE) {
+        if (camera.getFocusedEntity() instanceof LivingEntity && ((LivingEntity) camera.getFocusedEntity()).hasStatusEffect(StatusEffects.NIGHT_VISION) || Config.getHalloweenFeatures() == HalloweenFeatures.DISABLE) {
             this.markDead();
         }
 

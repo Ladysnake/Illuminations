@@ -30,7 +30,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             String playerAura = cosmeticData.getAura();
             if (playerAura != null && Illuminations.AURAS_DATA.containsKey(playerAura)) {
                 // do not render in first person or if the player is invisible
-                //noinspection ConstantConditions
+                // noinspection ConstantConditions
                 if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                     if (Illuminations.AURAS_DATA.containsKey(playerAura)) {
                         AuraData aura = Illuminations.AURAS_DATA.get(playerAura);

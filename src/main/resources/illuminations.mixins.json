@@ -7,6 +7,9 @@
     "ChorusFlowerBlockMixin",
     "ClientWorldMixin",
     "LanternBlockMixin",
+    "CarvedPumpkinBlockMixin",
+    "SkullBlockMixin",
+    "LivingEntityMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
     "RenderLayerAccessor",
@@ -17,8 +20,5 @@
   "plugin": "ladysnake.illuminations.IlluminationsMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "CampfireBlockEntityRendererMixin"
-  ]
+  }
 }

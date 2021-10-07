@@ -14,7 +14,7 @@ import ladysnake.illuminations.client.enums.FireflySpawnRate;
 import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
 import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
-import ladysnake.illuminations.client.enums.EyesInTheDark;
+import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -58,15 +58,15 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category.illuminations.general"));
 
         general.addEntry(entryBuilder
-                .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDark"), EyesInTheDark.class, Config.getEyesInTheDark())
+                .startEnumSelector(new TranslatableText("option.illuminations.halloweenFeatures"), HalloweenFeatures.class, Config.getHalloweenFeatures())
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDark"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDark.default"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDark.enable"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDark.disable"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDark.always"))
-                .setSaveConsumer(Config::setEyesInTheDark)
-                .setDefaultValue(DefaultConfig.EYES_IN_THE_DARK)
+                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures"),
+                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.default"),
+                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.enable"),
+                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.disable"),
+                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.always"))
+                .setSaveConsumer(Config::setHalloweenFeatures)
+                .setDefaultValue(DefaultConfig.HALLOWEEN_FEATURES)
                 .build());
 
         general.addEntry(entryBuilder

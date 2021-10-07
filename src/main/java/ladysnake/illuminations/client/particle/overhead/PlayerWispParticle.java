@@ -15,13 +15,11 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerWispParticle extends WillOWispParticle {
-    private final float redEvolution;
-    private final float greenEvolution;
-    private final float blueEvolution;
     protected PlayerEntity owner;
 
     protected PlayerWispParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
-        super(world, x, y, z, texture);
+        super(world, x, y, z, texture, red, green, blue, redEvolution, greenEvolution, blueEvolution);
+
         this.maxAge = 35;
         this.owner = world.getClosestPlayer((TargetPredicate.createNonAttackable()).setBaseMaxDistance(1D), this.x, this.y, this.z);
 
@@ -32,9 +30,6 @@ public class PlayerWispParticle extends WillOWispParticle {
         this.colorRed = red;
         this.colorGreen = green;
         this.colorBlue = blue;
-        this.redEvolution = redEvolution;
-        this.blueEvolution = blueEvolution;
-        this.greenEvolution = greenEvolution;
         this.colorAlpha = 0;
     }
 

@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import ladysnake.illuminations.client.data.AuraSettings;
 import ladysnake.illuminations.client.data.BiomeSettings;
 import ladysnake.illuminations.client.enums.BiomeCategory;
-import ladysnake.illuminations.client.enums.EyesInTheDark;
+import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
 import ladysnake.illuminations.client.enums.FireflySpawnRate;
 import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
@@ -15,7 +15,7 @@ import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
 
 public final class DefaultConfig {
 
-    public static final EyesInTheDark EYES_IN_THE_DARK = EyesInTheDark.ENABLE;
+    public static final HalloweenFeatures HALLOWEEN_FEATURES = HalloweenFeatures.ENABLE;
     public static final EyesInTheDarkSpawnRate EYES_IN_THE_DARK_SPAWN_RATE = EyesInTheDarkSpawnRate.MEDIUM;
     public static final WillOWispsSpawnRate WILL_O_WISPS_SPAWN_RATE = WillOWispsSpawnRate.MEDIUM;
     public static final int CHORUS_PETALS_SPAWN_MULTIPLIER = 1;

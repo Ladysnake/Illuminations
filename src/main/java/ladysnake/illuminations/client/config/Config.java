@@ -3,7 +3,7 @@ package ladysnake.illuminations.client.config;
 import com.google.common.base.CaseFormat;
 import ladysnake.illuminations.client.data.BiomeSettings;
 import ladysnake.illuminations.client.enums.BiomeCategory;
-import ladysnake.illuminations.client.enums.EyesInTheDark;
+import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
 import ladysnake.illuminations.client.enums.FireflySpawnRate;
 import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
@@ -38,7 +38,7 @@ public class Config {
             return temp;
         }
     };
-    private static EyesInTheDark eyesInTheDark;
+    private static HalloweenFeatures halloweenFeatures;
     private static EyesInTheDarkSpawnRate eyesInTheDarkSpawnRate;
     private static WillOWispsSpawnRate willOWispsSpawnRate;
     private static int chorusPetalsSpawnMultiplier;
@@ -64,7 +64,7 @@ public class Config {
             }
         } else { // if no illuminations.properties, load default values
             // define default properties
-            setEyesInTheDark(DefaultConfig.EYES_IN_THE_DARK);
+            setHalloweenFeatures(DefaultConfig.HALLOWEEN_FEATURES);
             setEyesInTheDarkSpawnRate(DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
             setWillOWispsSpawnRate(DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
             setChorusPetalsSpawnMultiplier(DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
@@ -88,7 +88,7 @@ public class Config {
             return;
         }
 
-        parseProperty("eyes-in-the-dark", Config::setEyesInTheDark, DefaultConfig.EYES_IN_THE_DARK);
+        parseProperty("halloween-features", Config::setHalloweenFeatures, DefaultConfig.HALLOWEEN_FEATURES);
         parseProperty("eyes-in-the-dark-spawn-rate", Config::setEyesInTheDarkSpawnRate, DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE);
         parseProperty("will-o-wisps-spawn-rate", Config::setWillOWispsSpawnRate, DefaultConfig.WILL_O_WISPS_SPAWN_RATE);
         parseProperty("chorus-petal-spawn-multiplier", Config::setChorusPetalsSpawnMultiplier, DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER);
@@ -171,13 +171,13 @@ public class Config {
 
     //region Getters/Setters
 
-    public static EyesInTheDark getEyesInTheDark() {
-        return eyesInTheDark;
+    public static HalloweenFeatures getHalloweenFeatures() {
+        return halloweenFeatures;
     }
 
-    public static void setEyesInTheDark(EyesInTheDark value) {
-        eyesInTheDark = value;
-        config.setProperty("eyes-in-the-dark", value.toString());
+    public static void setHalloweenFeatures(HalloweenFeatures value) {
+        halloweenFeatures = value;
+        config.setProperty("halloween-features", value.toString());
     }
 
     public static EyesInTheDarkSpawnRate getEyesInTheDarkSpawnRate() {

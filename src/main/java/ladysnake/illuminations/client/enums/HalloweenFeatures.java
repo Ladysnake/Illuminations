@@ -1,5 +1,5 @@
 package ladysnake.illuminations.client.enums;
 
-public enum EyesInTheDark {
+public enum HalloweenFeatures {
     ENABLE, DISABLE, ALWAYS
 }
