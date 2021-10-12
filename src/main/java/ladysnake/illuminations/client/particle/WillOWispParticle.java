@@ -1,7 +1,5 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
 import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,7 +15,6 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;

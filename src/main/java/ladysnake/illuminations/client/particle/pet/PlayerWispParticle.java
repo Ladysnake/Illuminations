@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.particle.overhead;
+package ladysnake.illuminations.client.particle.pet;
 
 import ladysnake.illuminations.client.particle.WillOWispParticle;
 import ladysnake.illuminations.client.particle.WispTrailParticleEffect;

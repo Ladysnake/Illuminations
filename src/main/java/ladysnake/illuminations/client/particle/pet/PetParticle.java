@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.particle.overhead;
+package ladysnake.illuminations.client.particle.pet;
 
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.fabricmc.api.EnvType;

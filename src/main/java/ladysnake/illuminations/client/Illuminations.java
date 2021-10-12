@@ -15,9 +15,7 @@ import ladysnake.illuminations.client.enums.BiomeCategory;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
-import ladysnake.illuminations.client.particle.overhead.JackoParticle;
-import ladysnake.illuminations.client.particle.overhead.PetParticle;
-import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
+import ladysnake.illuminations.client.particle.pet.*;
 import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.model.*;
@@ -121,6 +119,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType PRISMATIC_CONFETTI_AURA;
     // pets
     public static DefaultParticleType PRIDE_PET;
+    public static DefaultParticleType GAY_PRIDE_PET;
     public static DefaultParticleType TRANS_PRIDE_PET;
     public static DefaultParticleType JACKO_PET;
     public static DefaultParticleType LESBIAN_PRIDE_PET;
@@ -134,6 +133,8 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType DISSOLUTION_WISP_PET;
     public static DefaultParticleType PUMPKIN_SPIRIT_PET;
     public static DefaultParticleType POLTERGEIST_PET;
+    public static DefaultParticleType LANTERN_PET;
+    public static DefaultParticleType SOUL_LANTERN_PET;
     // spawn biome categories and biomes
     public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
@@ -195,6 +196,8 @@ public class Illuminations implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(VoidheartTiaraModel.MODEL_LAYER, VoidheartTiaraModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WreathModel.MODEL_LAYER, WreathModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WillOWispModel.MODEL_LAYER, WillOWispModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(LanternModel.MODEL_LAYER, LanternModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PrideHeartModel.MODEL_LAYER, PrideHeartModel::getTexturedModelData);
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
@@ -244,21 +247,23 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMATIC_CONFETTI_AURA, PrismaticConfettiParticle.DefaultFactory::new);
 
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        GAY_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:gay_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GAY_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/gay_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.TRANS_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.TRANS_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/trans_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.LESBIAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/lesbian_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.BI_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/bi_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.ACE_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/ace_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.NB_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/nb_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.INTERSEX_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/intersex_pride_heart.png"), 1.0f, 1.0f, 1.0f));  ///haha sex
         JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.JACKO_PET, JackoParticle.DefaultFactory::new);
-        LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.LESBIAN_PRIDE_PET, PetParticle.DefaultFactory::new);
-        BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.BI_PRIDE_PET, PetParticle.DefaultFactory::new);
-        ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.ACE_PRIDE_PET, PetParticle.DefaultFactory::new);
-        NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.NB_PRIDE_PET, PetParticle.DefaultFactory::new);
-        INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.INTERSEX_PRIDE_PET, PetParticle.DefaultFactory::new);  ///haha sex
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
@@ -271,6 +276,10 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.PUMPKIN_SPIRIT_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
         POLTERGEIST_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:poltergeist_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.POLTERGEIST_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0f, 0f, 0f));
+        LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/lantern.png"), 1.0f, 1.0f, 1.0f));
+        SOUL_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:soul_lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.SOUL_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/soul_lantern.png"), 1.0f, 1.0f, 1.0f));
 
         // crowns feature
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
@@ -335,19 +344,22 @@ public class Illuminations implements ClientModInitializer {
                 .build();
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
+                .put("gay_pride", GAY_PRIDE_PET)
                 .put("trans_pride", TRANS_PRIDE_PET)
-                .put("jacko", JACKO_PET)
                 .put("lesbian_pride", LESBIAN_PRIDE_PET)
                 .put("bi_pride", BI_PRIDE_PET)
                 .put("ace_pride", ACE_PRIDE_PET)
                 .put("nb_pride", NB_PRIDE_PET)
                 .put("intersex_pride", INTERSEX_PRIDE_PET)
+                .put("jacko", JACKO_PET)
                 .put("will_o_wisp", WILL_O_WISP_PET)
                 .put("golden_will", GOLDEN_WILL_PET)
                 .put("founding_skull", FOUNDING_SKULL_PET)
                 .put("dissolution_wisp", DISSOLUTION_WISP_PET)
                 .put("pumpkin_spirit", PUMPKIN_SPIRIT_PET)
                 .put("poltergeist", POLTERGEIST_PET)
+                .put("lantern", LANTERN_PET)
+                .put("soul_lantern", SOUL_LANTERN_PET)
                 .build();
     }
 
