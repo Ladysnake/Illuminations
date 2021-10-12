@@ -1,12 +1,9 @@
 package ladysnake.illuminations.client.particle.pet;
 
-import ladysnake.illuminations.client.particle.WispTrailParticleEffect;
-import ladysnake.illuminations.client.render.entity.model.LanternModel;
-import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
+import ladysnake.illuminations.client.render.GlowyRenderLayer;
+import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.particle.Particle;
@@ -16,24 +13,14 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.ReusableStream;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.Stream;
 
 public class PlayerLanternParticle extends Particle {
     public final Identifier texture;
@@ -85,7 +72,7 @@ public class PlayerLanternParticle extends Particle {
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer vertexConsumer2 = immediate.getBuffer(this.layer);
+        VertexConsumer vertexConsumer2 = immediate.getBuffer(GlowyRenderLayer.get(texture));
         if (colorAlpha > 0) {
             this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
         }

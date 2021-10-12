@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.particle.pet;
 
-import ladysnake.illuminations.client.render.entity.model.LanternModel;
-import ladysnake.illuminations.client.render.entity.model.PrideHeartModel;
+import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

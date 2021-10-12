@@ -16,9 +16,11 @@ import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
 import ladysnake.illuminations.client.particle.pet.*;
-import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.*;
+import ladysnake.illuminations.client.render.entity.model.hat.*;
+import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
+import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
+import ladysnake.illuminations.client.render.entity.model.pet.WillOWispModel;
 import ladysnake.illuminations.updater.IlluminationsUpdater;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -286,7 +288,6 @@ public class Illuminations implements ClientModInitializer {
             if (entityType == EntityType.PLAYER) {
                 @SuppressWarnings("unchecked") var playerRenderer = (FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer;
                 registrationHelper.register(new OverheadFeatureRenderer(playerRenderer, context));
-                registrationHelper.register(new DripFeatureRenderer(playerRenderer, context));
             }
         });
 

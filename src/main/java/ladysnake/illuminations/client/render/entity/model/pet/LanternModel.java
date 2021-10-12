@@ -3,7 +3,7 @@
 /// Made with Blockbench 3.8.4
 /// Exported for Minecraft version 1.15
 /// Paste this class into your mod and generate all required imports
-package ladysnake.illuminations.client.render.entity.model;
+package ladysnake.illuminations.client.render.entity.model.pet;
 
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
@@ -13,24 +13,27 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class WillOWispModel extends Model {
-    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Illuminations.MODID, "will_o_wisp"), "main");
+public class LanternModel extends Model {
+    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(new Identifier(Illuminations.MODID, "lantern"), "main");
 
-    private final ModelPart skull;
+    private final ModelPart lantern;
 
-    public WillOWispModel(ModelPart root) {
+    public LanternModel(ModelPart root) {
         super(GlowyRenderLayer::get);
-        this.skull = root.getChild("skull");
+        this.lantern = root.getChild("lantern");
     }
 
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild("skull", ModelPartBuilder.create()
+
+        modelPartData.addChild("lantern", ModelPartBuilder.create()
                         .uv(0, 0)
-                        .cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F)
-                        .uv(0, 16)
-                        .cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F, new Dilation(0.25F)),
+                        .cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 7.0F, 6.0F)
+                        .uv(0, 13)
+                        .cuboid(-2.0F, -5.0F, -2.0F, 4.0F, 2.0F, 4.0F)
+                        .uv(16, 13)
+                        .cuboid(-2.5F, -8.0F, 0.0F, 5.0F, 4.0F, 0.0F),
                 ModelTransform.pivot(0.0F, 16.0F, 0.0F)
         );
         return TexturedModelData.of(modelData, 32, 32);
@@ -38,6 +41,6 @@ public class WillOWispModel extends Model {
 
     @Override
     public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        skull.render(matrixStack, buffer, packedLight, packedOverlay);
+        lantern.render(matrixStack, buffer, packedLight, packedOverlay);
     }
 }

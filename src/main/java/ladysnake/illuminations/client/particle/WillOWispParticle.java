@@ -1,6 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.render.entity.model.WillOWispModel;
+import ladysnake.illuminations.client.render.GlowyRenderLayer;
+import ladysnake.illuminations.client.render.entity.model.pet.WillOWispModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -87,7 +88,7 @@ public class WillOWispParticle extends Particle {
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer vertexConsumer2 = immediate.getBuffer(this.layer);
+        VertexConsumer vertexConsumer2 = immediate.getBuffer(GlowyRenderLayer.get(texture));
         if (colorAlpha > 0) {
             this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
         }

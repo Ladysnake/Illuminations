@@ -3,7 +3,7 @@ package ladysnake.illuminations.client.render.entity.feature;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
-import ladysnake.illuminations.client.render.entity.model.OverheadModel;
+import ladysnake.illuminations.client.render.entity.model.hat.OverheadModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;

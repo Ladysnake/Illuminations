@@ -3,7 +3,7 @@
 /// Made with Blockbench 3.8.4
 /// Exported for Minecraft version 1.15
 /// Paste this class into your mod and generate all required imports
-package ladysnake.illuminations.client.render.entity.model;
+package ladysnake.illuminations.client.render.entity.model.pet;
 
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;

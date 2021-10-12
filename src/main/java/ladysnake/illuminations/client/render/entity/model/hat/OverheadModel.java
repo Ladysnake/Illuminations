@@ -1,4 +1,4 @@
-package ladysnake.illuminations.client.render.entity.model;
+package ladysnake.illuminations.client.render.entity.model.hat;
 
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import net.minecraft.client.model.Model;
