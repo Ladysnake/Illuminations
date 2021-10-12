@@ -1,5 +1,11 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.9: Hearts and Lanterns - 1.17.1
+- Reworked all pride hearts to now be in 3D, better looking, and spinning!
+- Added Gay, Aromantic, Pansexual and Agender pride hearts
+- Added 4 new pets for supporters: the floating lanterns! Available in normal lantern, soul lantern as well as crying lantern and soothing lantern (from Spawn Lanterns). They also have two cute faces and spin!
+- All 3D particles are no longer shaded
+
 ### Illuminations 1.8 - 1.17.1
 - Added Pumpkin Spirits! These mischievous entities take the form of small flying Jack o' Lanterns and will act like Will o' Wisps, appearing from Jack o' Lanterns at night
 - Added Poltergeists! These devious flying skulls will appear from placed skeleton skulls at night, and may also appear when you kill undead at night
@@ -11,7 +17,6 @@
 - Illuminations will now be able to spawn much further from the player.
     - This change dilutes illumination density and dispersion them more, but also increases the ambient immersion, as you will no longer have the feeling illuminations only appear in a 16 block radius around you!
 - Fixed illuminations spawning in blocks other than air
-- 
 - Fixed Jacko pet lighting up during the day and lighting off during the night
 
 ### Illuminations 1.7.1 - 1.17.1
