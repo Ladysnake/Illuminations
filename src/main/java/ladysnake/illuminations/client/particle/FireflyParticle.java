@@ -1,6 +1,8 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.config.Config;
+import ladysnake.illuminations.client.enums.BiomeCategory;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -9,18 +11,18 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.LightType;
+import net.minecraft.world.biome.Biome;
 
-import java.time.LocalDate;
-import java.time.Month;
+import java.awt.*;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FireflyParticle extends SpriteBillboardParticle {
     protected static final float BLINK_STEP = 0.05f;
-    private static final Random RANDOM = new Random();
     private final SpriteProvider spriteProvider;
     protected float nextAlphaGoal = 0f;
     protected double xTarget;
@@ -35,21 +37,41 @@ public class FireflyParticle extends SpriteBillboardParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
 
-        this.scale *= 0.25f + new Random().nextFloat() * 0.50f;
+        this.scale *= 0.25f + random.nextFloat() * 0.50f;
         this.maxAge = ThreadLocalRandom.current().nextInt(400, 1201); // live between 20 seconds and one minute
         this.maxHeight = 4;
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
         this.colorAlpha = 0f;
 
-        if (LocalDate.now().getMonth() == Month.OCTOBER) {
+        Color c;
+        if (Config.getFireflyRainbow()) {
+            c = Color.getHSBColor(random.nextFloat(), 1f, 1f);
+        } else {
+            // Get color for current biome
+            Biome b = world.getBiome(new BlockPos(x, y, z));
+            Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
+            BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory());
+            int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
+            float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
+            // Shift hue by random ±30 deg angle
+            hsb[0] += (random.nextFloat() - 0.5f) * 30/360f;
+            // Convert back to rgb
+            c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+        }
+
+        this.colorRed = c.getRed() / 255f;
+        this.colorGreen = c.getGreen() / 255f;
+        this.colorBlue = c.getBlue() / 255f;
+
+        /*if (LocalDate.now().getMonth() == Month.OCTOBER) {
             this.colorRed = 1f;
             this.colorGreen = 0.25f + new Random().nextFloat() * 0.25f;
         } else {
             this.colorRed = 0.5f + new Random().nextFloat() * 0.5f;
             this.colorGreen = 1f;
         }
-        this.colorBlue = 0f;
+        this.colorBlue = 0f;*/
     }
 
     public ParticleTextureSheet getType() {
@@ -108,8 +130,8 @@ public class FireflyParticle extends SpriteBillboardParticle {
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        // fade and die on daytime or if old enough
-        if ((world.getTimeOfDay() >= 1000 && world.getTimeOfDay() < 13000) || this.age++ >= this.maxAge) {
+        // fade and die on daytime or if old enough unless fireflies can spawn any time of day
+        if ((!Config.doesFireflySpawnAlways() && !world.getDimension().hasFixedTime() && !Illuminations.isNightTime(world)) || this.age++ >= this.maxAge) {
             nextAlphaGoal = 0;
             if (colorAlpha < 0f) {
                 this.markDead();
@@ -118,7 +140,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
 
         // blinking
         if (colorAlpha > nextAlphaGoal - BLINK_STEP && colorAlpha < nextAlphaGoal + BLINK_STEP) {
-            nextAlphaGoal = new Random().nextFloat();
+            nextAlphaGoal = random.nextFloat();
         } else {
             if (nextAlphaGoal > colorAlpha) {
                 colorAlpha = Math.min(colorAlpha + BLINK_STEP, 1f);

@@ -1,7 +1,7 @@
 package ladysnake.illuminations.client.data;
 
 import ladysnake.illuminations.client.Illuminations;
-import ladysnake.illuminations.client.render.entity.model.OverheadModel;
+import ladysnake.illuminations.client.render.entity.model.hat.OverheadModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
 

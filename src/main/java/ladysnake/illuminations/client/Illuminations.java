@@ -5,18 +5,22 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.serialization.Codec;
+import ladysnake.illuminations.client.config.Config;
+import ladysnake.illuminations.client.config.DefaultConfig;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
+import ladysnake.illuminations.client.enums.BiomeCategory;
+import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
-import ladysnake.illuminations.client.particle.overhead.JackoParticle;
-import ladysnake.illuminations.client.particle.overhead.PetParticle;
-import ladysnake.illuminations.client.particle.overhead.PlayerWispParticle;
-import ladysnake.illuminations.client.render.entity.feature.DripFeatureRenderer;
+import ladysnake.illuminations.client.particle.pet.*;
 import ladysnake.illuminations.client.render.entity.feature.OverheadFeatureRenderer;
-import ladysnake.illuminations.client.render.entity.model.*;
+import ladysnake.illuminations.client.render.entity.model.hat.*;
+import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
+import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
+import ladysnake.illuminations.client.render.entity.model.pet.WillOWispModel;
 import ladysnake.illuminations.updater.IlluminationsUpdater;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -26,6 +30,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistr
 import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -42,7 +47,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,20 +72,20 @@ public class Illuminations implements ClientModInitializer {
     public static final Logger logger = LogManager.getLogger("Illuminations");
 
     // illuminations constants
-    public static final float EYES_SPAWN_CHANCE = 0.0001f;
     public static final int EYES_VANISHING_DISTANCE = 5;
     public static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();
     // spawn predicates
     public static final BiPredicate<World, BlockPos> FIREFLY_LOCATION_PREDICATE = (world, blockPos) -> {
-        // sky angle --> time of day
-        // 0.25965086 --> 13000
-        // 0.7403491 --> 23000
-        return (world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491)
-                && world.getBlockState(blockPos).getBlock() == Blocks.AIR && world.isSkyVisible(blockPos);
+        Block block = world.getBlockState(blockPos).getBlock();
+        return world.getDimension().hasFixedTime()
+                ? (block == Blocks.AIR || block == Blocks.VOID_AIR)
+                : block == Blocks.AIR
+                && (Config.doesFireflySpawnAlways() || Illuminations.isNightTime(world))
+                && (Config.doesFireflySpawnUnderground() || world.isSkyVisible(blockPos));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getEyesInTheDark() == Config.EyesInTheDark.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getEyesInTheDark() == Config.EyesInTheDark.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
     public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
     // register overhead models
     public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
@@ -101,6 +105,10 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType CHORUS_PETAL;
     public static DefaultParticleType WILL_O_WISP;
     public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
+    public static DefaultParticleType PUMPKIN_SPIRIT;
+    public static DefaultParticleType POLTERGEIST;
+    //    public static DefaultParticleType EMBER;
+//    public static DefaultParticleType EMBER_TRAIL;
     // auras
     public static DefaultParticleType TWILIGHT_AURA;
     public static DefaultParticleType GHOSTLY_AURA;
@@ -113,6 +121,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType PRISMATIC_CONFETTI_AURA;
     // pets
     public static DefaultParticleType PRIDE_PET;
+    public static DefaultParticleType GAY_PRIDE_PET;
     public static DefaultParticleType TRANS_PRIDE_PET;
     public static DefaultParticleType JACKO_PET;
     public static DefaultParticleType LESBIAN_PRIDE_PET;
@@ -120,12 +129,21 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType ACE_PRIDE_PET;
     public static DefaultParticleType NB_PRIDE_PET;
     public static DefaultParticleType INTERSEX_PRIDE_PET;
+    public static DefaultParticleType ARO_PRIDE_PET;
+    public static DefaultParticleType PAN_PRIDE_PET;
+    public static DefaultParticleType AGENDER_PRIDE_PET;
     public static DefaultParticleType WILL_O_WISP_PET;
     public static DefaultParticleType GOLDEN_WILL_PET;
     public static DefaultParticleType FOUNDING_SKULL_PET;
     public static DefaultParticleType DISSOLUTION_WISP_PET;
+    public static DefaultParticleType PUMPKIN_SPIRIT_PET;
+    public static DefaultParticleType POLTERGEIST_PET;
+    public static DefaultParticleType LANTERN_PET;
+    public static DefaultParticleType SOUL_LANTERN_PET;
+    public static DefaultParticleType CRYING_LANTERN_PET;
+    public static DefaultParticleType SOOTHING_LANTERN_PET;
     // spawn biome categories and biomes
-    public static ImmutableMap<Biome.Category, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+    public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
@@ -185,6 +203,8 @@ public class Illuminations implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(VoidheartTiaraModel.MODEL_LAYER, VoidheartTiaraModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WreathModel.MODEL_LAYER, WreathModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WillOWispModel.MODEL_LAYER, WillOWispModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(LanternModel.MODEL_LAYER, LanternModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PrideHeartModel.MODEL_LAYER, PrideHeartModel::getTexturedModelData);
 
         // particles
         FIREFLY = Registry.register(Registry.PARTICLE_TYPE, "illuminations:firefly", FabricParticleTypes.simple(true));
@@ -198,7 +218,7 @@ public class Illuminations implements ClientModInitializer {
         CHORUS_PETAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_petal", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.CHORUS_PETAL, ChorusPetalParticle.DefaultFactory::new);
         WILL_O_WISP = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP, WillOWispParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP, fabricSpriteProvider -> new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         WISP_TRAIL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:wisp_trail", new ParticleType<WispTrailParticleEffect>(true, WispTrailParticleEffect.PARAMETERS_FACTORY) {
             @Override
             public Codec<WispTrailParticleEffect> getCodec() {
@@ -206,11 +226,18 @@ public class Illuminations implements ClientModInitializer {
             }
         });
         ParticleFactoryRegistry.getInstance().register(Illuminations.WISP_TRAIL, WispTrailParticle.Factory::new);
+        PUMPKIN_SPIRIT = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pumpkin_spirit", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PUMPKIN_SPIRIT, fabricSpriteProvider -> new PumpkinSpiritParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
+        POLTERGEIST = Registry.register(Registry.PARTICLE_TYPE, "illuminations:poltergeist", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.POLTERGEIST, fabricSpriteProvider -> new PoltergeistParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f));
+
+//        EMBER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ember", FabricParticleTypes.simple(true));
+//        ParticleFactoryRegistry.getInstance().register(Illuminations.EMBER, EmberParticle.DefaultFactory::new);
         // aura particles
         TWILIGHT_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:twilight_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.TWILIGHT_AURA, TwilightFireflyParticle.DefaultFactory::new);
         GHOSTLY_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ghostly_aura", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.GHOSTLY_AURA, GhostlyParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GHOSTLY_AURA, GhostlyAuraParticle.DefaultFactory::new);
         CHORUS_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:chorus_aura", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.CHORUS_AURA, ChorusAuraParticle.DefaultFactory::new);
         AUTUMN_LEAVES_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:autumn_leaves", FabricParticleTypes.simple(true));
@@ -226,22 +253,35 @@ public class Illuminations implements ClientModInitializer {
         PRISMATIC_CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:prismatic_confetti", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMATIC_CONFETTI_AURA, PrismaticConfettiParticle.DefaultFactory::new);
 
+        /*
+                PRIDE PETS
+         */
         PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        GAY_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:gay_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GAY_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/gay_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         TRANS_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:trans_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.TRANS_PRIDE_PET, PetParticle.DefaultFactory::new);
-        JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.JACKO_PET, JackoParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.TRANS_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/trans_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         LESBIAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lesbian_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.LESBIAN_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.LESBIAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/lesbian_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         BI_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:bi_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.BI_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.BI_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/bi_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         ACE_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ace_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.ACE_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.ACE_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/ace_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         NB_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:nb_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.NB_PRIDE_PET, PetParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(Illuminations.NB_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/nb_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         INTERSEX_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:intersex_pride_pet", FabricParticleTypes.simple(true));
-        ParticleFactoryRegistry.getInstance().register(Illuminations.INTERSEX_PRIDE_PET, PetParticle.DefaultFactory::new);  ///haha sex
+        ParticleFactoryRegistry.getInstance().register(Illuminations.INTERSEX_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/intersex_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        ARO_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:aro_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.ARO_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/aro_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        PAN_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pan_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pan_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+        AGENDER_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:agender_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.AGENDER_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/agender_pride_heart.png"), 1.0f, 1.0f, 1.0f));
+
+        /*
+                WILL O' WISP PETS
+         */
         WILL_O_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:will_o_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.WILL_O_WISP_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/will_o_wisp.png"), 1.0f, 1.0f, 1.0f, -0.1f, -0.01f, 0.0f));
         GOLDEN_WILL_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:golden_will_pet", FabricParticleTypes.simple(true));
@@ -251,60 +291,76 @@ public class Illuminations implements ClientModInitializer {
         DISSOLUTION_WISP_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:dissolution_wisp_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.DISSOLUTION_WISP_PET, PetParticle.DefaultFactory::new);
 
-        // crowns feature
+        /*
+                SPOOKY PETS
+         */
+        JACKO_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:jacko_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.JACKO_PET, JackoParticle.DefaultFactory::new);
+        PUMPKIN_SPIRIT_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:pumpkin_spirit_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PUMPKIN_SPIRIT_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
+        POLTERGEIST_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:poltergeist_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.POLTERGEIST_PET, fabricSpriteProvider -> new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0f, 0f, 0f));
+        LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/lantern.png"), 1.0f, 1.0f, 1.0f));
+        SOUL_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:soul_lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.SOUL_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/soul_lantern.png"), 1.0f, 1.0f, 1.0f));
+        CRYING_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:crying_lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.CRYING_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/crying_lantern.png"), 1.0f, 1.0f, 1.0f));
+        SOOTHING_LANTERN_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:soothing_lantern_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.SOOTHING_LANTERN_PET, fabricSpriteProvider -> new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/soothing_lantern.png"), 1.0f, 1.0f, 1.0f));
+
+        /*
+                CROWNS FEATURE RENDERER REGISTRATION
+         */
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
                 @SuppressWarnings("unchecked") var playerRenderer = (FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer;
                 registrationHelper.register(new OverheadFeatureRenderer(playerRenderer, context));
-                registrationHelper.register(new DripFeatureRenderer(playerRenderer, context));
             }
         });
 
-        // spawn biome categories for Illuminations
-        ILLUMINATIONS_BIOME_CATEGORIES = ImmutableMap.<Biome.Category, ImmutableSet<IlluminationData>>builder()
-                .put(Biome.Category.JUNGLE, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.PLAINS, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.SAVANNA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.TAIGA, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00002F), // few
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00004F))) // few
-                .put(Biome.Category.FOREST, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.RIVER, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00010F), // some
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00020F))) // some
-                .put(Biome.Category.SWAMP, ImmutableSet.of(
-                        new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, 0.00025F), // many
-                        new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, 0.00050F))) // many
-                .put(Biome.Category.OCEAN, ImmutableSet.of(
-                        new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, 0.00250F))) // many
-                .build();
-        // specific spawn biomes for Illuminations
+        /*
+                ADDING FIRFLY, GLOWWORM AND PLANKTON BIOMES SPAWN RATES
+         */
+        ImmutableMap.Builder<BiomeCategory, ImmutableSet<IlluminationData>> biomeBuilder = ImmutableMap.builder();
+        Config.getBiomeSettings().forEach((biome, settings) -> {
+            ImmutableSet.Builder<IlluminationData> illuminationDataBuilder = ImmutableSet.builder();
+
+            illuminationDataBuilder.add(new IlluminationData(FIREFLY, FIREFLY_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate));
+            if (settings.glowwormSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(GLOWWORM, GLOWWORM_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate));
+            if (settings.planktonSpawnRate() != null)
+                illuminationDataBuilder.add(new IlluminationData(PLANKTON, PLANKTON_LOCATION_PREDICATE, () -> Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate));
+
+            biomeBuilder.put(biome, illuminationDataBuilder.build());
+        });
+        ILLUMINATIONS_BIOME_CATEGORIES = biomeBuilder.build();
+
+        /*
+                WILL O' WISP BIOME SPAWN
+         */
         ILLUMINATIONS_BIOMES = ImmutableMap.<Identifier, ImmutableSet<IlluminationData>>builder()
                 .put(new Identifier("minecraft:soul_sand_valley"), ImmutableSet.of(
-                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, 0.0001F))) //0.000001F
+                        new IlluminationData(WILL_O_WISP, WISP_LOCATION_PREDICATE, () -> Config.getWillOWispsSpawnRate().spawnRate)))
                 .build();
 
-
-        // aura matching and spawn chances + overhead matching + crown matching
+        /*
+             Aura matching and spawn chances + overhead matching + crown matching
+             Currently set to default aura settings.
+             Uncomment settings related to auras in Config.java and change getDefaultAuraSettings to getAuraSettings to restore.
+         */
         AURAS_DATA = ImmutableMap.<String, AuraData>builder()
-                .put("twilight", new AuraData(TWILIGHT_AURA, 0.1f, 1))
-                .put("ghostly", new AuraData(GHOSTLY_AURA, 0.1f, 1))
-                .put("chorus", new AuraData(CHORUS_AURA, 0.1f, 1))
-                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, 0.3f, 1))
-                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, 0.1f, 1))
-                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, 0.1f, 1))
-                .put("goldenrod", new AuraData(GOLDENROD_AURA, 0.4f, 1))
-                .put("confetti", new AuraData(CONFETTI_AURA, 0.1f, 1))
-                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, 0.1f, 1))
+                .put("twilight", new AuraData(TWILIGHT_AURA, () -> DefaultConfig.getAuraSettings("twilight")))
+                .put("ghostly", new AuraData(GHOSTLY_AURA, () -> DefaultConfig.getAuraSettings("ghostly")))
+                .put("chorus", new AuraData(CHORUS_AURA, () -> DefaultConfig.getAuraSettings("chorus")))
+                .put("autumn_leaves", new AuraData(AUTUMN_LEAVES_AURA, () -> DefaultConfig.getAuraSettings("autumn_leaves")))
+                .put("sculk_tendrils", new AuraData(SCULK_TENDRIL_AURA, () -> DefaultConfig.getAuraSettings("sculk_tendrils")))
+                .put("shadowbringer_soul", new AuraData(SHADOWBRINGER_AURA, () -> DefaultConfig.getAuraSettings("shadowbringer_soul")))
+                .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> DefaultConfig.getAuraSettings("goldenrod")))
+                .put("confetti", new AuraData(CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("confetti")))
+                .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("prismatic_confetti")))
                 .build();
+
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("solar_crown", new OverheadData(CrownModel::new, "solar_crown"))
                 .put("frost_crown", new OverheadData(CrownModel::new, "frost_crown"))
@@ -321,19 +377,30 @@ public class Illuminations implements ClientModInitializer {
                 .put("glowsquid_cult_crown", new OverheadData(TiaraModel::new, "glowsquid_cult_crown"))
                 .put("timeaspect_cult_crown", new OverheadData(TiaraModel::new, "timeaspect_cult_crown"))
                 .build();
+
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
                 .put("pride", PRIDE_PET)
+                .put("gay_pride", GAY_PRIDE_PET)
                 .put("trans_pride", TRANS_PRIDE_PET)
-                .put("jacko", JACKO_PET)
                 .put("lesbian_pride", LESBIAN_PRIDE_PET)
                 .put("bi_pride", BI_PRIDE_PET)
                 .put("ace_pride", ACE_PRIDE_PET)
                 .put("nb_pride", NB_PRIDE_PET)
                 .put("intersex_pride", INTERSEX_PRIDE_PET)
+                .put("aro_pride", ARO_PRIDE_PET)
+                .put("pan_pride", PAN_PRIDE_PET)
+                .put("agender_pride", AGENDER_PRIDE_PET)
+                .put("jacko", JACKO_PET)
                 .put("will_o_wisp", WILL_O_WISP_PET)
                 .put("golden_will", GOLDEN_WILL_PET)
                 .put("founding_skull", FOUNDING_SKULL_PET)
                 .put("dissolution_wisp", DISSOLUTION_WISP_PET)
+                .put("pumpkin_spirit", PUMPKIN_SPIRIT_PET)
+                .put("poltergeist", POLTERGEIST_PET)
+                .put("lantern", LANTERN_PET)
+                .put("soul_lantern", SOUL_LANTERN_PET)
+                .put("crying_lantern", CRYING_LANTERN_PET)
+                .put("soothing_lantern", SOOTHING_LANTERN_PET)
                 .build();
     }
 
@@ -347,5 +414,9 @@ public class Illuminations implements ClientModInitializer {
                     , jsonObject.get("drip")
                     , jsonObject.get("pet"));
         }
+    }
+
+    public static boolean isNightTime(World world) {
+        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 }

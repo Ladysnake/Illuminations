@@ -57,6 +57,12 @@ repositories {
             includeGroupByRegex 'io\\.github\\.onyxstudios.*'
         }
     }
+
+    // mod menu
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/'
+    }
 }
 
 dependencies {
@@ -72,7 +78,6 @@ dependencies {
 //	}
 
     // Sodium
-    // modRuntime 'io.github.prospector:modmenu:1.14.6+build.31'
     // modRuntime 'com.github.jellysquid3:sodium-fabric:mc1.16.1-0.1.0'
 
     // cloth config
@@ -82,12 +87,16 @@ dependencies {
     include "me.shedaniel.cloth:cloth-config-fabric:5.0.34"
 
     // mod menu
-    modCompileOnly("io.github.prospector:modmenu:1.+") {
-        exclude(group: "net.fabricmc.fabric-api")
+    modCompileOnly("com.terraformersmc:modmenu:2.0.5") {
+        exclude module: "fabric-api"
     }
 
+//    modRuntime("com.terraformersmc:modmenu:2.0.5") {
+//        exclude module: "fabric-api"
+//    }
+
     // canvas renderer
-    modImplementation "grondag:canvas-mc117-1.17:1.0.1641"
+//    modImplementation "grondag:canvas-mc117-1.17:1.0.2033"
 
 	// satin
 	modCompileOnly "io.github.ladysnake:satin:${satin_version}"

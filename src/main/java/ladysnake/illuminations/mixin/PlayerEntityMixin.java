@@ -1,6 +1,6 @@
 package ladysnake.illuminations.mixin;
 
-import ladysnake.illuminations.client.Config;
+import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
@@ -30,12 +30,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             String playerAura = cosmeticData.getAura();
             if (playerAura != null && Illuminations.AURAS_DATA.containsKey(playerAura)) {
                 // do not render in first person or if the player is invisible
-                //noinspection ConstantConditions
+                // noinspection ConstantConditions
                 if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
                     if (Illuminations.AURAS_DATA.containsKey(playerAura)) {
                         AuraData aura = Illuminations.AURAS_DATA.get(playerAura);
                         if (Illuminations.AURAS_DATA.get(playerAura).shouldAddParticle(this.random, this.age)) {
-                            world.addParticle(aura.getParticle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                            world.addParticle(aura.particle(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                         }
                     }
                 }
