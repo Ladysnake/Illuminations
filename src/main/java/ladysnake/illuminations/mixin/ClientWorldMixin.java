@@ -1,6 +1,7 @@
 package ladysnake.illuminations.mixin;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.objects.Object2ReferenceLinkedOpenHashMap;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.data.IlluminationData;
@@ -69,7 +70,7 @@ public abstract class ClientWorldMixin extends World {
         illuminationDataSet.forEach(illuminationData -> {
             if (illuminationData.locationSpawnPredicate().test(this, pos)
                     && illuminationData.shouldAddParticle(this.random)) {
-                this.addParticle(illuminationData.illuminationType(), (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), 0.0D, 0.0D, 0.0D);
+                this.addParticle(illuminationData.illuminationType(), pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
             }
         });
     }
