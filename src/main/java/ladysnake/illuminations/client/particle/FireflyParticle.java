@@ -31,7 +31,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
     protected int targetChangeCooldown = 0;
     protected int maxHeight;
     private BlockPos lightTarget;
-    private boolean isAttractedByLight = false;
+    private final boolean isAttractedByLight = true;
 
     public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -55,7 +55,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
             float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
             // Shift hue by random ±30 deg angle
-            hsb[0] += (random.nextFloat() - 0.5f) * 30/360f;
+            hsb[0] += (random.nextFloat() - 0.5f) * 30 / 360f;
             // Convert back to rgb
             c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
         }
@@ -175,7 +175,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
     }
 
     private void selectBlockTarget() {
-        if (this.lightTarget == null || !this.isAttractedByLight) {
+        if (this.lightTarget == null) {
             // Behaviour
             double groundLevel = 0;
             for (int i = 0; i < 20; i++) {
@@ -196,22 +196,23 @@ public class FireflyParticle extends SpriteBillboardParticle {
                 this.yTarget += 1;
             }
 
-            if (this.world.getLightLevel(LightType.SKY, new BlockPos(x, y, z)) > 8 && !this.world.isDay()) {
-                this.lightTarget = getRandomLitBlockAround();
+            if (this.isAttractedByLight) {
+                this.lightTarget = getMostLitBlockAround();
             }
         } else {
             this.xTarget = this.lightTarget.getX() + random.nextGaussian();
             this.yTarget = this.lightTarget.getY() + random.nextGaussian();
             this.zTarget = this.lightTarget.getZ() + random.nextGaussian();
 
-            if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) > 8) {
-                BlockPos possibleTarget = getRandomLitBlockAround();
-                if (this.world.getLightLevel(LightType.BLOCK, possibleTarget) > this.world.getLightLevel(LightType.BLOCK, this.lightTarget))
-                    this.lightTarget = possibleTarget;
-            }
+            this.x = this.lightTarget.getX();
+            this.y = this.lightTarget.getY()+1;
+            this.z = this.lightTarget.getZ();
 
-            if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) <= 8 || this.world.isDay())
+            if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) > 0 && !this.world.isDay()) {
+                this.lightTarget = getMostLitBlockAround();
+            } else {
                 this.lightTarget = null;
+            }
         }
 
         targetChangeCooldown = random.nextInt() % 100;
@@ -221,12 +222,25 @@ public class FireflyParticle extends SpriteBillboardParticle {
         return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
     }
 
-    private BlockPos getRandomLitBlockAround() {
+    private BlockPos getMostLitBlockAround() {
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
+
+        // get blocks adjacent to the fly
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for (int z = -1; z <= 1; z++) {
+                    BlockPos bp = new BlockPos(this.x + x, this.y + y, this.z + z);
+                    randBlocks.put(bp, this.world.getLightLevel(LightType.BLOCK, bp));
+                }
+            }
+        }
+
+        // get other random blocks to find a different light source
         for (int i = 0; i < 15; i++) {
             BlockPos randBP = new BlockPos(this.x + random.nextGaussian() * 10, this.y + random.nextGaussian() * 10, this.z + random.nextGaussian() * 10);
             randBlocks.put(randBP, this.world.getLightLevel(LightType.BLOCK, randBP));
         }
+
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
     }
 
