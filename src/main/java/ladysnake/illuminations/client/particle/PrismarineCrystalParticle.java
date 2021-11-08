@@ -18,6 +18,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
     protected final float rotationFactor;
     private final int variant = RANDOM.nextInt(3);
     private final SpriteProvider spriteProvider;
+    private final float groundOffset;
 
     public PrismarineCrystalParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -35,6 +36,8 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         this.velocityX = random.nextFloat() * 0.01d;
         this.velocityY = -random.nextFloat() * 0.01d;
         this.velocityZ = random.nextFloat() * 0.01d;
+
+        this.groundOffset = RANDOM.nextFloat() / 100f + 0.001f;
 
         this.rotationFactor = ((float) Math.random() - 0.5F) * 0.01F;
         this.angle = random.nextFloat() * 360f;
@@ -62,9 +65,13 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 
         for (int k = 0; k < 4; ++k) {
             Vec3f Vec3f2 = Vec3fs[k];
-            Vec3f2.rotate(quaternion2);
+            if (this.onGround) {
+                Vec3f2.rotate(new Quaternion(90f, 0f, quaternion2.getZ(), true));
+            } else {
+                Vec3f2.rotate(quaternion2);
+            }
             Vec3f2.scale(j);
-            Vec3f2.add(f, g, h);
+            Vec3f2.add(f, g + this.groundOffset, h);
         }
 
         float minU = this.getMinU();
@@ -73,7 +80,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        this.colorRed = 0.8f + (float) Math.sin(this.age/100f) * 0.2f;
+        this.colorRed = 0.8f + (float) Math.sin(this.age / 100f) * 0.2f;
 //        this.colorBlue = 0.9f + (float) Math.cos(this.age/100f) * 0.1f;
 
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
