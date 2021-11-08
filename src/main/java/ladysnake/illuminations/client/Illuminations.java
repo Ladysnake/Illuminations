@@ -150,6 +150,10 @@ public class Illuminations implements ClientModInitializer {
         return PLAYER_COSMETICS.get(player.getUuid());
     }
 
+    public static @Nullable PlayerCosmeticData getCosmeticData(UUID uuid) {
+        return PLAYER_COSMETICS.get(uuid);
+    }
+
     public static void loadPlayerCosmetics() {
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {

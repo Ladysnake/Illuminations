@@ -50,6 +50,7 @@ public class Config {
     private static boolean viewAurasFP;
     private static boolean autoUpdate;
     private static boolean displayGreetingScreen;
+    private static boolean displayDonationToast;
     private static HashMap<BiomeCategory, BiomeSettings> biomeSettings;
     // private static HashMap<String, AuraSettings> auraSettings;
 
@@ -75,6 +76,7 @@ public class Config {
             setAutoUpdate(DefaultConfig.AUTO_UPDATE);
             setViewAurasFP(DefaultConfig.VIEW_AURAS_FP);
             setDisplayGreetingScreen(DefaultConfig.DISPLAY_GREETING_SCREEN);
+            setDisplayDonationToast(DefaultConfig.DISPLAY_DONATION_TOAST);
 
             biomeSettings = new HashMap<>();
             DefaultConfig.BIOME_SETTINGS.forEach(Config::setBiomeSettings);
@@ -100,6 +102,7 @@ public class Config {
         parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
         parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
         parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
+        parseProperty("display-donation-toast", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_DONATION_TOAST);
 
         biomeSettings = new HashMap<>();
         DefaultConfig.BIOME_SETTINGS.forEach((biome, defaultValue) ->
@@ -281,6 +284,15 @@ public class Config {
     public static void setDisplayGreetingScreen(boolean value) {
         displayGreetingScreen = value;
         config.setProperty("display-greeting-screen", Boolean.toString(value));
+    }
+
+    public static boolean isDisplayDonationToast() {
+        return displayDonationToast;
+    }
+
+    public static void setDisplayDonationToast(boolean value) {
+        displayDonationToast = value;
+        config.setProperty("display-donation-toast", Boolean.toString(value));
     }
 
     public static Map<BiomeCategory, BiomeSettings> getBiomeSettings()
