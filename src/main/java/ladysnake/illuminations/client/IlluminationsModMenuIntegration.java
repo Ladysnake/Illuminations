@@ -154,6 +154,13 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .setSaveConsumer(Config::setViewAurasFP)
                 .setDefaultValue(DefaultConfig.VIEW_AURAS_FP)
                 .build());
+
+        general.addEntry(entryBuilder
+                .startBooleanToggle(new TranslatableText("option.illuminations.displayDonationToast"), Config.isDisplayDonationToast())
+                .setTooltip(new TranslatableText("option.tooltip.illuminations.displayDonationToast"))
+                .setSaveConsumer(Config::setDisplayDonationToast)
+                .setDefaultValue(DefaultConfig.DISPLAY_DONATION_TOAST)
+                .build());
     }
 
     private void GenerateBiomeSettings() {

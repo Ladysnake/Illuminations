@@ -102,7 +102,7 @@ public class Config {
         parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
         parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
         parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
-        parseProperty("display-donation-toast", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_DONATION_TOAST);
+        parseProperty("display-donation-toast", Config::setDisplayDonationToast, DefaultConfig.DISPLAY_DONATION_TOAST);
 
         biomeSettings = new HashMap<>();
         DefaultConfig.BIOME_SETTINGS.forEach((biome, defaultValue) ->

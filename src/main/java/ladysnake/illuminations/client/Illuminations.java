@@ -107,6 +107,7 @@ public class Illuminations implements ClientModInitializer {
     public static ParticleType<WispTrailParticleEffect> WISP_TRAIL;
     public static DefaultParticleType PUMPKIN_SPIRIT;
     public static DefaultParticleType POLTERGEIST;
+    public static DefaultParticleType PRISMARINE_CRYSTAL;
     //    public static DefaultParticleType EMBER;
 //    public static DefaultParticleType EMBER_TRAIL;
     // auras
@@ -234,6 +235,8 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.PUMPKIN_SPIRIT, fabricSpriteProvider -> new PumpkinSpiritParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pumpkin_spirit.png"), 1.0f, 0.95f, 0.0f, 0.0f, -0.03f, 0.0f));
         POLTERGEIST = Registry.register(Registry.PARTICLE_TYPE, "illuminations:poltergeist", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.POLTERGEIST, fabricSpriteProvider -> new PoltergeistParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/poltergeist.png"), 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f));
+        PRISMARINE_CRYSTAL = Registry.register(Registry.PARTICLE_TYPE, "illuminations:prismarine_crystal", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMARINE_CRYSTAL, PrismarineCrystalParticle.DefaultFactory::new);
 
 //        EMBER = Registry.register(Registry.PARTICLE_TYPE, "illuminations:ember", FabricParticleTypes.simple(true));
 //        ParticleFactoryRegistry.getInstance().register(Illuminations.EMBER, EmberParticle.DefaultFactory::new);
