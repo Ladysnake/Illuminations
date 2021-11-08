@@ -4,6 +4,8 @@ import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.gui.AutoUpdateGreetingScreen;
 import ladysnake.illuminations.client.gui.UpdateToast;
 import ladysnake.illuminations.updater.IlluminationsUpdater;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loom.configuration.FabricApiExtension;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -19,7 +21,7 @@ public abstract class TitleScreenMixin {
         if (Config.isDisplayGreetingScreen()) {
             MinecraftClient.getInstance().setScreen(new AutoUpdateGreetingScreen((TitleScreen) (Object) this));
         } else {
-            if (IlluminationsUpdater.NEW_UPDATE) {
+            if (IlluminationsUpdater.NEW_UPDATE || FabricLoader.getInstance().isDevelopmentEnvironment()) {
                 UpdateToast.add();
             }
         }
