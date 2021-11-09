@@ -74,6 +74,7 @@ public final class DefaultConfig {
             .put("goldenrod", new AuraSettings(0.4f, 1))
             .put("confetti", new AuraSettings(0.1f, 1))
             .put("prismatic_confetti", new AuraSettings(0.1f, 1))
+            .put("prismarine", new AuraSettings(0.1f, 1))
             .build();
 
     public static BiomeSettings getBiomeSettings(BiomeCategory biome) {

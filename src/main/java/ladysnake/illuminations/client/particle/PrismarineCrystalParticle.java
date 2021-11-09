@@ -80,9 +80,6 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        this.colorRed = 0.8f + (float) Math.sin(this.age / 100f) * 0.2f;
-//        this.colorBlue = 0.9f + (float) Math.cos(this.age/100f) * 0.1f;
-
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
         vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
         vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
@@ -118,6 +115,9 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
                 this.markDead();
             }
         }
+
+        this.colorRed = 0.8f + (float) Math.sin(this.age / 100f) * 0.2f;
+//        this.colorBlue = 0.9f + (float) Math.cos(this.age/100f) * 0.1f;
 
         this.prevAngle = this.angle;
         if (this.onGround) {

@@ -120,6 +120,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType GOLDENROD_AURA;
     public static DefaultParticleType CONFETTI_AURA;
     public static DefaultParticleType PRISMATIC_CONFETTI_AURA;
+    public static DefaultParticleType PRISMARINE_AURA;
     // pets
     public static DefaultParticleType PRIDE_PET;
     public static DefaultParticleType GAY_PRIDE_PET;
@@ -259,6 +260,8 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.CONFETTI_AURA, ConfettiParticle.DefaultFactory::new);
         PRISMATIC_CONFETTI_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:prismatic_confetti", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMATIC_CONFETTI_AURA, PrismaticConfettiParticle.DefaultFactory::new);
+        PRISMARINE_AURA = Registry.register(Registry.PARTICLE_TYPE, "illuminations:prismarine_aura", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.PRISMARINE_AURA, PrismarineAuraParticle.DefaultFactory::new);
 
         /*
                 PRIDE PETS
@@ -366,6 +369,7 @@ public class Illuminations implements ClientModInitializer {
                 .put("goldenrod", new AuraData(GOLDENROD_AURA, () -> DefaultConfig.getAuraSettings("goldenrod")))
                 .put("confetti", new AuraData(CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("confetti")))
                 .put("prismatic_confetti", new AuraData(PRISMATIC_CONFETTI_AURA, () -> DefaultConfig.getAuraSettings("prismatic_confetti")))
+                .put("prismarine", new AuraData(PRISMARINE_AURA, () -> DefaultConfig.getAuraSettings("prismarine")))
                 .build();
 
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
@@ -383,6 +387,7 @@ public class Illuminations implements ClientModInitializer {
                 .put("summerbreeze_wreath", new OverheadData(WreathModel::new, "summerbreeze_wreath"))
                 .put("glowsquid_cult_crown", new OverheadData(TiaraModel::new, "glowsquid_cult_crown"))
                 .put("timeaspect_cult_crown", new OverheadData(TiaraModel::new, "timeaspect_cult_crown"))
+                .put("prismarine_crown", new OverheadData(CrownModel::new, "prismarine_crown"))
                 .build();
 
         PETS_DATA = ImmutableMap.<String, DefaultParticleType>builder()
