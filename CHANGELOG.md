@@ -1,5 +1,12 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10 - 1.17.1
+- Added a new Illuminations type: Prismarine Crystals. Spawning in the shade of sea lanterns, these crystals will float underwater and oscillate between white, cyan and green.
+- Added a new aura for tier 2 donators: Prismarine aura
+- Added a new crown for tier 2 donators: Prismarine crown
+- Fixed the texture issue with the auto-update toast
+- Added a new donation toast to inform users of donation perks
+
 ### Illuminations 1.9: Hearts and Lanterns - 1.17.1
 - Reworked all pride hearts to now be in 3D, better looking, and spinning!
 - Added Gay, Aromantic, Pansexual and Agender pride hearts
