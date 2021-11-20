@@ -155,7 +155,7 @@ public class Illuminations implements ClientModInitializer {
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                /* logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard..."); */
                 return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
             } catch (MalformedURLException e) {
                 logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
@@ -170,10 +170,10 @@ public class Illuminations implements ClientModInitializer {
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics successfully registered");
+                /* logger.log(Level.INFO, "Player cosmetics successfully registered"); */
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+                logger.log(Level.WARN, "Player cosmetics could not be registered, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
     }
