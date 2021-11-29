@@ -91,9 +91,9 @@ dependencies {
         exclude module: "fabric-api"
     }
 
-//    modRuntime("com.terraformersmc:modmenu:2.0.5") {
-//        exclude module: "fabric-api"
-//    }
+    modRuntime("com.terraformersmc:modmenu:2.0.5") {
+        exclude module: "fabric-api"
+    }
 
     // canvas renderer
 //    modImplementation "grondag:canvas-mc117-1.17:1.0.2033"
