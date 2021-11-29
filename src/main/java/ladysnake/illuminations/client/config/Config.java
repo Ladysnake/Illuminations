@@ -49,6 +49,7 @@ public class Config {
     private static boolean fireflyRainbow;
     private static boolean viewAurasFP;
     private static boolean autoUpdate;
+    private static boolean debugMode;
     private static boolean displayGreetingScreen;
     private static boolean displayDonationToast;
     private static HashMap<BiomeCategory, BiomeSettings> biomeSettings;
@@ -100,6 +101,7 @@ public class Config {
         parseProperty("firefly-white-alpha", Config::setFireflyWhiteAlpha, DefaultConfig.FIREFLY_WHITE_ALPHA);
         parseProperty("firefly-rainbow", Config::setFireflyRainbow, DefaultConfig.FIREFLY_RAINBOW);
         parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
+        parseProperty("debug-mode", Config::setDebugMode, DefaultConfig.DEBUG_MODE);
         parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
         parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
         parseProperty("display-donation-toast", Config::setDisplayDonationToast, DefaultConfig.DISPLAY_DONATION_TOAST);
@@ -275,6 +277,15 @@ public class Config {
     public static void setAutoUpdate(boolean value) {
         autoUpdate = value;
         config.setProperty("auto-update", Boolean.toString(value));
+    }
+
+    public static boolean isDebugMode() {
+        return debugMode;
+    }
+
+    public static void setDebugMode(boolean value) {
+        debugMode = value;
+        config.setProperty("debug-mode", Boolean.toString(value));
     }
 
     public static boolean isDisplayGreetingScreen() {

@@ -29,6 +29,8 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -160,25 +162,25 @@ public class Illuminations implements ClientModInitializer {
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                if (Config.isDebugMode()) logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
                 return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
             } catch (MalformedURLException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+                if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
-                logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+                if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
             }
 
             return null;
         }).exceptionally(throwable -> {
-            logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
                 PLAYER_COSMETICS = playerData;
-                logger.log(Level.INFO, "Player cosmetics successfully registered");
+                if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+                if (Config.isDebugMode()) logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
     }
@@ -200,6 +202,12 @@ public class Illuminations implements ClientModInitializer {
         if (FabricLoader.getInstance().isModLoaded("satin")) {
             Rainbowlluminations.init();
         }
+
+        // register resource packs
+        FabricLoader.getInstance().getModContainer(MODID).ifPresent(modContainer -> {
+            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier(MODID, "lowerres"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier(MODID, "pixelaccurate"), modContainer, ResourcePackActivationType.NORMAL);
+        });
 
         // register model layers
         EntityModelLayerRegistry.registerModelLayer(CrownModel.MODEL_LAYER, CrownModel::getTexturedModelData);

@@ -161,6 +161,13 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .setSaveConsumer(Config::setDisplayDonationToast)
                 .setDefaultValue(DefaultConfig.DISPLAY_DONATION_TOAST)
                 .build());
+
+        general.addEntry(entryBuilder
+                .startBooleanToggle(new TranslatableText("option.illuminations.debugMode"), Config.isDebugMode())
+                .setTooltip(new TranslatableText("option.tooltip.illuminations.debugMode"))
+                .setSaveConsumer(Config::setDebugMode)
+                .setDefaultValue(DefaultConfig.DEBUG_MODE)
+                .build());
     }
 
     private void GenerateBiomeSettings() {

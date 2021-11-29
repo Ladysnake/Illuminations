@@ -25,6 +25,7 @@ public final class DefaultConfig {
     public static final int FIREFLY_WHITE_ALPHA = 100;
     public static final boolean FIREFLY_RAINBOW = false;
     public static final boolean AUTO_UPDATE = false;
+    public static final boolean DEBUG_MODE = false;
     public static final boolean VIEW_AURAS_FP = false;
     public static final boolean DISPLAY_GREETING_SCREEN = true;
     public static final boolean DISPLAY_DONATION_TOAST = true;
