@@ -3,7 +3,6 @@ package ladysnake.illuminations.client.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -22,14 +21,13 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.ReusableStream;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 public class PoltergeistParticle extends WillOWispParticle {
     protected PoltergeistParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
@@ -138,7 +136,8 @@ public class PoltergeistParticle extends WillOWispParticle {
         double d = dx;
         double e = dy;
         if (this.collidesWithWorld && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
-            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream<>(Stream.empty()));
+            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, List.of());
+
             dx = vec3d.x;
             dy = vec3d.y;
             dz = vec3d.z;

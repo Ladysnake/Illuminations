@@ -95,7 +95,6 @@ public class Illuminations implements ClientModInitializer {
     }.getType();
     // illuminations cosmetics
     private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
-    private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
@@ -149,6 +148,7 @@ public class Illuminations implements ClientModInitializer {
     // spawn biome categories and biomes
     public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
+    private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
         return PLAYER_COSMETICS.get(player.getUuid());
@@ -162,17 +162,21 @@ public class Illuminations implements ClientModInitializer {
         // get illuminations player cosmetics
         CompletableFuture.supplyAsync(() -> {
             try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                if (Config.isDebugMode()) logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                if (Config.isDebugMode())
+                    logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
                 return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
             } catch (MalformedURLException e) {
-                if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+                if (Config.isDebugMode())
+                    logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
             } catch (IOException e) {
-                if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+                if (Config.isDebugMode())
+                    logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
             }
 
             return null;
         }).exceptionally(throwable -> {
-            if (Config.isDebugMode()) logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            if (Config.isDebugMode())
+                logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
             return null;
         }).thenAcceptAsync(playerData -> {
             if (playerData != null) {
@@ -180,9 +184,14 @@ public class Illuminations implements ClientModInitializer {
                 if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
             } else {
                 PLAYER_COSMETICS = Collections.emptyMap();
-                if (Config.isDebugMode()) logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+                if (Config.isDebugMode())
+                    logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
             }
         }, MinecraftClient.getInstance());
+    }
+
+    public static boolean isNightTime(World world) {
+        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 
     @Override
@@ -434,9 +443,5 @@ public class Illuminations implements ClientModInitializer {
                     , jsonObject.get("drip")
                     , jsonObject.get("pet"));
         }
-    }
-
-    public static boolean isNightTime(World world) {
-        return world.getSkyAngle(world.getTimeOfDay()) >= 0.25965086 && world.getSkyAngle(world.getTimeOfDay()) <= 0.7403491;
     }
 }

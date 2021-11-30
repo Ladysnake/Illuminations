@@ -4,15 +4,15 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "BlockMixin",
+    "CarvedPumpkinBlockMixin",
     "ChorusFlowerBlockMixin",
     "ClientWorldMixin",
     "LanternBlockMixin",
-    "CarvedPumpkinBlockMixin",
-    "SkullBlockMixin",
     "LivingEntityMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
     "RenderLayerAccessor",
+    "SkullBlockMixin",
     "TitleScreenMixin",
     "jeb.FeatureRendererMixin",
     "jeb.LivingEntityRendererMixin"

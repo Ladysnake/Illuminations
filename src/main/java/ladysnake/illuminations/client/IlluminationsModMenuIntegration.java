@@ -1,20 +1,12 @@
 package ladysnake.illuminations.client;
 
-import static ladysnake.illuminations.client.enums.BiomeCategory.*;
-
 import com.google.common.base.CaseFormat;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.config.DefaultConfig;
 import ladysnake.illuminations.client.data.BiomeSettings;
-import ladysnake.illuminations.client.enums.BiomeCategory;
-import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
-import ladysnake.illuminations.client.enums.FireflySpawnRate;
-import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
-import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
-import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
+import ladysnake.illuminations.client.enums.*;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -25,6 +17,8 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
+
+import static ladysnake.illuminations.client.enums.BiomeCategory.OTHER;
 
 public class IlluminationsModMenuIntegration implements ModMenuApi {
 
@@ -175,7 +169,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
         for (Identifier dimension : BiomeCategory.getDimensions()) {
             String name = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, dimension.getPath());
             ConfigCategory category = builder.getOrCreateCategory(new TranslatableText("category.illuminations." + name));
-            category.setDescription(new StringVisitable[] { new TranslatableText("category.illuminations." + name + ".description") });
+            category.setDescription(new StringVisitable[]{new TranslatableText("category.illuminations." + name + ".description")});
             biomeCategories.put(dimension, category);
         }
 

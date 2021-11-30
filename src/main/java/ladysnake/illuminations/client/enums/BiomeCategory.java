@@ -3,11 +3,7 @@ package ladysnake.illuminations.client.enums;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public enum BiomeCategory {
     FOREST("minecraft:overworld", Biome.Category.FOREST, "minecraft:forest", "minecraft:wooded_hills", "minecraft:flower_forest", "minecraft:birch_forest", "minecraft:birch_forest_hills", "minecraft:tall_birch_forest", "minecraft:tall_birch_hills", "minecraft:dark_forest", "minecraft:dark_forest_hills"),
@@ -43,14 +39,14 @@ public enum BiomeCategory {
     // Other Biomes
     OTHER("minecraft:other", Biome.Category.NONE);
 
-    private final Identifier dimension;
-    private final Biome.Category fallback;
-    private final Identifier[] biomes;
     private static final Set<Identifier> dimensions = Collections.unmodifiableSet(initializeDimensions());
     private static final Map<Identifier, BiomeCategory> lookUp = Collections.unmodifiableMap(initializeLookUp());
     private static final Map<Biome.Category, BiomeCategory> fallbackLookUp = Collections.unmodifiableMap(initializeFallbackLookUp());
+    private final Identifier dimension;
+    private final Biome.Category fallback;
+    private final Identifier[] biomes;
 
-    BiomeCategory(String dimension, Biome.Category fallback, String ... biomes) {
+    BiomeCategory(String dimension, Biome.Category fallback, String... biomes) {
         this.dimension = new Identifier(dimension);
         this.fallback = fallback;
         this.biomes = new Identifier[biomes.length];
@@ -60,14 +56,6 @@ public enum BiomeCategory {
 
     public static Set<Identifier> getDimensions() {
         return dimensions;
-    }
-
-    public Identifier getDimension() {
-        return dimension;
-    }
-
-    public Identifier[] getBiomes() {
-        return biomes;
     }
 
     private static Set<Identifier> initializeDimensions() {
@@ -102,5 +90,13 @@ public enum BiomeCategory {
         return lookUp.containsKey(biome)
                 ? lookUp.get(biome)
                 : fallbackLookUp.getOrDefault(biomeCategory, OTHER);
+    }
+
+    public Identifier getDimension() {
+        return dimension;
+    }
+
+    public Identifier[] getBiomes() {
+        return biomes;
     }
 }

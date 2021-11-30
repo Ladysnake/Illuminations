@@ -41,7 +41,7 @@ public class ConfettiParticle extends SpriteBillboardParticle {
         this.velocityX = velocityX * 10f;
         this.velocityY = velocityY * 10f;
         this.velocityZ = velocityZ * 10f;
-        this.field_28786 = 0.5f;
+        this.velocityMultiplier = 0.5f;
 
         this.rotationX = RANDOM.nextFloat() * 360f;
         this.rotationY = RANDOM.nextFloat() * 360f;
@@ -127,11 +127,11 @@ public class ConfettiParticle extends SpriteBillboardParticle {
                         this.velocityZ *= 1.1D;
                     }
 
-                    this.velocityX *= this.field_28786;
-                    this.velocityY *= this.field_28786;
-                    this.velocityZ *= this.field_28786;
+                    this.velocityX *= this.velocityMultiplier;
+                    this.velocityY *= this.velocityMultiplier;
+                    this.velocityZ *= this.velocityMultiplier;
 
-                    this.field_28786 = Math.min(0.98f, this.field_28786 * 1.15f);
+                    this.velocityMultiplier = Math.min(0.98f, this.velocityMultiplier * 1.15f);
 
                     if (this.onGround) {
                         this.velocityX *= 0.699999988079071D;

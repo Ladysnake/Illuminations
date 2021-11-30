@@ -16,7 +16,8 @@ import java.util.Random;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
-    @Shadow public abstract BlockState getDefaultState();
+    @Shadow
+    public abstract BlockState getDefaultState();
 
     @Inject(method = "randomDisplayTick", at = @At("RETURN"))
     protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
@@ -24,7 +25,7 @@ public abstract class BlockMixin {
             for (int i = 0; i < 10; i++) {
                 BlockPos blockPos = new BlockPos(pos.getX() + 0.5 + random.nextGaussian() * 15, pos.getY() + 0.5 + random.nextGaussian() * 15, pos.getZ() + 0.5 + random.nextGaussian() * 15);
 
-                if (world.getBlockState(blockPos).getBlock() == Blocks.WATER && random.nextInt(1+world.getLightLevel(blockPos)) == 0) {
+                if (world.getBlockState(blockPos).getBlock() == Blocks.WATER && random.nextInt(1 + world.getLightLevel(blockPos)) == 0) {
                     world.addParticle(Illuminations.PRISMARINE_CRYSTAL, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0f, 0f, 0f);
                 }
             }

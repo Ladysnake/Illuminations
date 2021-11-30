@@ -1,6 +1,5 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.Illuminations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -92,10 +91,10 @@ public class EmberParticle extends SpriteBillboardParticle {
         for (int i = 0; i < 5; i++) {
             Block blockUnder = world.getBlockState(new BlockPos(this.x, this.y - i, this.z)).getBlock();
             if (blockUnder instanceof CampfireBlock || blockUnder instanceof FireBlock) {
-                this.velocityY += 0.01f / (i+1);
+                this.velocityY += 0.01f / (i + 1);
                 break;
             } else {
-                this.velocityY = Math.max(this.velocityY-0.001f, 0.05f);
+                this.velocityY = Math.max(this.velocityY - 0.001f, 0.05f);
             }
         }
 
@@ -103,7 +102,7 @@ public class EmberParticle extends SpriteBillboardParticle {
             if (this.colorAlpha <= 0f) {
                 this.markDead();
             } else {
-                this.colorAlpha-= 0.1f;
+                this.colorAlpha -= 0.1f;
             }
         } else {
             this.colorAlpha += 0.1f;

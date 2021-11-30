@@ -1,7 +1,7 @@
 package ladysnake.illuminations.mixin;
 
-import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.config.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChorusFlowerBlock;
 import net.minecraft.util.math.BlockPos;

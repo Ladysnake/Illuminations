@@ -5,7 +5,6 @@ import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CarvedPumpkinBlock;
 import net.minecraft.block.SkullBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

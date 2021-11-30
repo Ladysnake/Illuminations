@@ -1,17 +1,11 @@
 package ladysnake.illuminations.client.config;
 
-import static ladysnake.illuminations.client.enums.BiomeCategory.*;
-
 import com.google.common.collect.ImmutableMap;
 import ladysnake.illuminations.client.data.AuraSettings;
 import ladysnake.illuminations.client.data.BiomeSettings;
-import ladysnake.illuminations.client.enums.BiomeCategory;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
-import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
-import ladysnake.illuminations.client.enums.FireflySpawnRate;
-import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
-import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
-import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
+import ladysnake.illuminations.client.enums.*;
+
+import static ladysnake.illuminations.client.enums.BiomeCategory.*;
 
 public final class DefaultConfig {
 
@@ -78,15 +72,15 @@ public final class DefaultConfig {
             .put("prismarine", new AuraSettings(0.1f, 1))
             .build();
 
+    private DefaultConfig() {
+        throw new UnsupportedOperationException();
+    }
+
     public static BiomeSettings getBiomeSettings(BiomeCategory biome) {
         return BIOME_SETTINGS.get(biome);
     }
 
     public static AuraSettings getAuraSettings(String aura) {
         return AURA_SETTINGS.get(aura);
-    }
-
-    private DefaultConfig() {
-        throw new UnsupportedOperationException();
     }
 }

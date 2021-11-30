@@ -24,14 +24,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerLanternParticle extends Particle {
     public final Identifier texture;
-    Model model;
     final RenderLayer layer;
     public float yaw;
     public float pitch;
     public float prevYaw;
     public float prevPitch;
-
     protected PlayerEntity owner;
+    Model model;
 
     protected PlayerLanternParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue) {
         super(world, x, y, z);
@@ -100,7 +99,7 @@ public class PlayerLanternParticle extends Particle {
             this.setPos(owner.getX() + Math.cos(owner.bodyYaw / 50) * 0.5, owner.getY() + owner.getHeight() + 0.5f + Math.sin(owner.age / 12f) / 12f, owner.getZ() - Math.cos(owner.bodyYaw / 50) * 0.5);
 
             this.prevYaw = this.yaw;
-            this.yaw = owner.age*2;
+            this.yaw = owner.age * 2;
         } else {
             this.markDead();
         }

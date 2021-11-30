@@ -1,7 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
-import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

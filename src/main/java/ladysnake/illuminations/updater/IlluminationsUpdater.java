@@ -2,8 +2,8 @@ package ladysnake.illuminations.updater;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.Illuminations;
+import ladysnake.illuminations.client.config.Config;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.SemanticVersion;

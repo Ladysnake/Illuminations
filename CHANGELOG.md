@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.2 - 1.18
+- Update to Minecraft 1.18
+
 ### Illuminations 1.10.1 - 1.17.1
 - Added two integrated resource packs that control the firefly, glowworm and plankton texture. Two options are now available: "lowerres", a lower resolution of the firefly texture, and "pixelaccurate", a firefly texture made to look like the Minecraft Live 2021 firefly announced for the Wild Update
 - Added a debug mode config option to enable debug mode logs to troubleshoot issues with cosmetics loading

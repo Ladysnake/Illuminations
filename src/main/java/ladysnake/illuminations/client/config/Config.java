@@ -2,26 +2,14 @@ package ladysnake.illuminations.client.config;
 
 import com.google.common.base.CaseFormat;
 import ladysnake.illuminations.client.data.BiomeSettings;
-import ladysnake.illuminations.client.enums.BiomeCategory;
-import ladysnake.illuminations.client.enums.HalloweenFeatures;
-import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
-import ladysnake.illuminations.client.enums.FireflySpawnRate;
-import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
-import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
-import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
+import ladysnake.illuminations.client.enums.*;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Config {
@@ -189,8 +177,7 @@ public class Config {
         return eyesInTheDarkSpawnRate;
     }
 
-    public static void setEyesInTheDarkSpawnRate(EyesInTheDarkSpawnRate value)
-    {
+    public static void setEyesInTheDarkSpawnRate(EyesInTheDarkSpawnRate value) {
         eyesInTheDarkSpawnRate = value;
         config.setProperty("eyes-in-the-dark-spawn-rate", value.name());
     }
@@ -199,8 +186,7 @@ public class Config {
         return willOWispsSpawnRate;
     }
 
-    public static void setWillOWispsSpawnRate(WillOWispsSpawnRate value)
-    {
+    public static void setWillOWispsSpawnRate(WillOWispsSpawnRate value) {
         willOWispsSpawnRate = value;
         config.setProperty("will-o-wisps-spawn-rate", value.name());
     }
@@ -232,13 +218,11 @@ public class Config {
         config.setProperty("firefly-spawn-always", Boolean.toString(value));
     }
 
-    public static boolean doesFireflySpawnUnderground()
-    {
+    public static boolean doesFireflySpawnUnderground() {
         return fireflySpawnUnderground;
     }
 
-    public static void setFireflySpawnUnderground(boolean value)
-    {
+    public static void setFireflySpawnUnderground(boolean value) {
         fireflySpawnUnderground = value;
         config.setProperty("firefly-spawn-underground", Boolean.toString(value));
     }
@@ -306,52 +290,47 @@ public class Config {
         config.setProperty("display-donation-toast", Boolean.toString(value));
     }
 
-    public static Map<BiomeCategory, BiomeSettings> getBiomeSettings()
-    {
+    public static Map<BiomeCategory, BiomeSettings> getBiomeSettings() {
         return biomeSettings;
     }
 
-    public static BiomeSettings getBiomeSettings(BiomeCategory biome)
-    {
+    public static BiomeSettings getBiomeSettings(BiomeCategory biome) {
         return biomeSettings.get(biome);
     }
 
-    public static void setBiomeSettings(BiomeCategory biome, BiomeSettings settings)
-    {
+    public static void setBiomeSettings(BiomeCategory biome, BiomeSettings settings) {
         biomeSettings.put(biome, settings);
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
         config.setProperty(name + "-firefly-spawn-rate", settings.fireflySpawnRate().name());
         config.setProperty(name + "-firefly-color", Integer.toString(settings.fireflyColor(), 16));
-        if (settings.glowwormSpawnRate() != null) config.setProperty(name + "-glowworm-spawn-rate", settings.glowwormSpawnRate().name());
-        if (settings.planktonSpawnRate() != null) config.setProperty(name + "-plankton-spawn-rate", settings.planktonSpawnRate().name());
+        if (settings.glowwormSpawnRate() != null)
+            config.setProperty(name + "-glowworm-spawn-rate", settings.glowwormSpawnRate().name());
+        if (settings.planktonSpawnRate() != null)
+            config.setProperty(name + "-plankton-spawn-rate", settings.planktonSpawnRate().name());
     }
 
-    public static void setFireflySettings(BiomeCategory biome, FireflySpawnRate value)
-    {
+    public static void setFireflySettings(BiomeCategory biome, FireflySpawnRate value) {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withFireflySpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
         config.setProperty(name + "-firefly-spawn-rate", value.name());
     }
 
-    public static void setFireflyColorSettings(BiomeCategory biome, int color)
-    {
+    public static void setFireflyColorSettings(BiomeCategory biome, int color) {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withFireflyColor(color));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
         config.setProperty(name + "-firefly-color", Integer.toString(color, 16));
     }
 
-    public static void setGlowwormSettings(BiomeCategory biome, GlowwormSpawnRate value)
-    {
+    public static void setGlowwormSettings(BiomeCategory biome, GlowwormSpawnRate value) {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withGlowwormSpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());
         config.setProperty(name + "-glowworm-spawn-rate", value.name());
     }
 
-    public static void setPlanktonSettings(BiomeCategory biome, PlanktonSpawnRate value)
-    {
+    public static void setPlanktonSettings(BiomeCategory biome, PlanktonSpawnRate value) {
         BiomeSettings settings = biomeSettings.get(biome);
         biomeSettings.put(biome, settings.withPlanktonSpawnRate(value));
         String name = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, biome.name());

@@ -3,7 +3,6 @@ package ladysnake.illuminations.client.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
@@ -14,17 +13,15 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.ReusableStream;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class PumpkinSpiritParticle extends WillOWispParticle{
+public class PumpkinSpiritParticle extends WillOWispParticle {
     protected PumpkinSpiritParticle(ClientWorld world, double x, double y, double z, Identifier texture, float red, float green, float blue, float redEvolution, float greenEvolution, float blueEvolution) {
         super(world, x, y, z, texture, red, green, blue, redEvolution, greenEvolution, blueEvolution);
     }
@@ -78,7 +75,7 @@ public class PumpkinSpiritParticle extends WillOWispParticle{
         this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
 
         for (int i = 0; i < 10 * this.speedModifier; i++) {
-                this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+            this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
         }
 
         if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {
@@ -108,7 +105,8 @@ public class PumpkinSpiritParticle extends WillOWispParticle{
         double d = dx;
         double e = dy;
         if (this.collidesWithWorld && (dx != 0.0D || dy != 0.0D || dz != 0.0D)) {
-            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, ShapeContext.absent(), new ReusableStream<>(Stream.empty()));
+            Vec3d vec3d = Entity.adjustMovementForCollisions(null, new Vec3d(dx, dy, dz), this.getBoundingBox(), this.world, List.of());
+
             dx = vec3d.x;
             dy = vec3d.y;
             dz = vec3d.z;

@@ -28,9 +28,9 @@ public class UpdateToast implements Toast {
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         manager.drawTexture(matrices, 0, 0, 0, 0, getWidth(), getHeight());
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations update available!"), 34, 7, -256);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Illuminations automatically downloaded it"), 34, 18, -1);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Restart your game to finish installing"), 34, 29, -1);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("Illuminations update available!"), 34, 7, -256);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("Illuminations automatically downloaded it"), 34, 18, -1);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("Restart your game to finish installing"), 34, 29, -1);
         return MinecraftClient.getInstance().currentScreen instanceof TitleScreen ? Visibility.SHOW : Visibility.HIDE;
     }
 

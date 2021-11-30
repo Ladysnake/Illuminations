@@ -30,9 +30,9 @@ public class DonateToast implements Toast {
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         manager.drawTexture(matrices, 0, 0, 0, 0, getWidth(), getHeight());
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Wish to support Illuminations?"), 34, 7, -256);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("Get cool cosmetics for only 5€!"), 34, 18, -1);
-        manager.getGame().textRenderer.draw(matrices, new LiteralText("More info: illuminations.uuid.gg/donators").setStyle(Style.EMPTY.withColor(Formatting.GREEN)), 34, 29, -1);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("Wish to support Illuminations?"), 34, 7, -256);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("Get cool cosmetics for only 5€!"), 34, 18, -1);
+        manager.getClient().textRenderer.draw(matrices, new LiteralText("More info: illuminations.uuid.gg/donators").setStyle(Style.EMPTY.withColor(Formatting.GREEN)), 34, 29, -1);
         return MinecraftClient.getInstance().currentScreen instanceof TitleScreen ? Visibility.SHOW : Visibility.HIDE;
     }
 

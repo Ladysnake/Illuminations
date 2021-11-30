@@ -24,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class FireflyParticle extends SpriteBillboardParticle {
     protected static final float BLINK_STEP = 0.05f;
     private final SpriteProvider spriteProvider;
+    private final boolean isAttractedByLight = true;
     protected float nextAlphaGoal = 0f;
     protected double xTarget;
     protected double yTarget;
@@ -31,7 +32,6 @@ public class FireflyParticle extends SpriteBillboardParticle {
     protected int targetChangeCooldown = 0;
     protected int maxHeight;
     private BlockPos lightTarget;
-    private final boolean isAttractedByLight = true;
 
     public FireflyParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
@@ -205,7 +205,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             this.zTarget = this.lightTarget.getZ() + random.nextGaussian();
 
             this.x = this.lightTarget.getX();
-            this.y = this.lightTarget.getY()+1;
+            this.y = this.lightTarget.getY() + 1;
             this.z = this.lightTarget.getZ();
 
             if (this.world.getLightLevel(LightType.BLOCK, new BlockPos(x, y, z)) > 0 && !this.world.isDay()) {
