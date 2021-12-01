@@ -145,6 +145,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType SOUL_LANTERN_PET;
     public static DefaultParticleType CRYING_LANTERN_PET;
     public static DefaultParticleType SOOTHING_LANTERN_PET;
+    public static DefaultParticleType GENDERFLUID_PRIDE_PET;
     // spawn biome categories and biomes
     public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
@@ -305,7 +306,8 @@ public class Illuminations implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(Illuminations.PAN_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/pan_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         AGENDER_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:agender_pride_pet", FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(Illuminations.AGENDER_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/agender_pride_heart.png"), 1.0f, 1.0f, 1.0f));
-
+        GENDERFLUID_PRIDE_PET = Registry.register(Registry.PARTICLE_TYPE, "illuminations:genderfluid_pride_pet", FabricParticleTypes.simple(true));
+        ParticleFactoryRegistry.getInstance().register(Illuminations.GENDERFLUID_PRIDE_PET, fabricSpriteProvider -> new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new Identifier(Illuminations.MODID, "textures/entity/genderfluid_pride_heart.png"), 1.0f, 1.0f, 1.0f));
         /*
                 WILL O' WISP PETS
          */
@@ -419,6 +421,7 @@ public class Illuminations implements ClientModInitializer {
                 .put("aro_pride", ARO_PRIDE_PET)
                 .put("pan_pride", PAN_PRIDE_PET)
                 .put("agender_pride", AGENDER_PRIDE_PET)
+                .put("genderfluid_pride", GENDERFLUID_PRIDE_PET)
                 .put("jacko", JACKO_PET)
                 .put("will_o_wisp", WILL_O_WISP_PET)
                 .put("golden_will", GOLDEN_WILL_PET)
