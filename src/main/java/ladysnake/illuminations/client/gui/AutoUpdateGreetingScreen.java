@@ -51,8 +51,8 @@ public class AutoUpdateGreetingScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
-        super.onClose();
+    public void close() {
+        super.close();
         this.client.setScreen(this.parent);
     }
 }

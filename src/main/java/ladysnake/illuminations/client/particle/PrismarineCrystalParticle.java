@@ -30,7 +30,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         this.setSprite(spriteProvider.getSprite(variant, 2));
 
         if (velocityY == 0f && velocityX == 0f && velocityZ == 0f) {
-            this.colorAlpha = 0f;
+            this.alpha = 0f;
         }
 
         this.velocityX = random.nextFloat() * 0.01d;
@@ -80,10 +80,10 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -92,7 +92,7 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.01f);
+            this.alpha = Math.min(1f, this.alpha + 0.01f);
         }
 
         this.prevPosX = this.x;
@@ -109,15 +109,15 @@ public class PrismarineCrystalParticle extends SpriteBillboardParticle {
         }
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.01f);
+            this.alpha = Math.max(0f, this.alpha - 0.01f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }
 
-        this.colorRed = 0.8f + (float) Math.sin(this.age / 100f) * 0.2f;
-//        this.colorBlue = 0.9f + (float) Math.cos(this.age/100f) * 0.1f;
+        this.red = 0.8f + (float) Math.sin(this.age / 100f) * 0.2f;
+//        this.blue = 0.9f + (float) Math.cos(this.age/100f) * 0.1f;
 
         this.prevAngle = this.angle;
         if (this.onGround) {
