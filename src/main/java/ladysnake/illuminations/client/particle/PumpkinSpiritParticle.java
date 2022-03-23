@@ -35,7 +35,7 @@ public class PumpkinSpiritParticle extends WillOWispParticle {
 
         if (this.age < 5) {
             for (int i = 0; i < 25; i++) {
-                this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+                this.world.addParticle(new WispTrailParticleEffect(this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
             }
         }
 
@@ -45,7 +45,7 @@ public class PumpkinSpiritParticle extends WillOWispParticle {
 
         if (this.age++ >= this.maxAge) {
             for (int i = 0; i < 25; i++) {
-                this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+                this.world.addParticle(new WispTrailParticleEffect(this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
                 this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.JACK_O_LANTERN.getDefaultState()), this.x + random.nextGaussian() / 10, this.y + random.nextGaussian() / 10, this.z + random.nextGaussian() / 10, random.nextGaussian() / 20, random.nextGaussian() / 20, random.nextGaussian() / 20);
             }
             this.world.playSound(new BlockPos(this.x, this.y, this.z), SoundEvents.ENTITY_VEX_DEATH, SoundCategory.AMBIENT, 1.0f, 0.8f, true);
@@ -75,7 +75,7 @@ public class PumpkinSpiritParticle extends WillOWispParticle {
         this.pitch = (float) (MathHelper.atan2(vec3d.y, f) * 57.2957763671875D);
 
         for (int i = 0; i < 10 * this.speedModifier; i++) {
-            this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+            this.world.addParticle(new WispTrailParticleEffect(this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
         }
 
         if (!new BlockPos(x, y, z).equals(this.getTargetPosition())) {

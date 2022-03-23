@@ -37,10 +37,10 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
 
-        this.colorRed = 0f;
-        this.colorGreen = 0.75f + new Random().nextFloat() * 0.25f;
-        this.colorBlue = 1f;
-        this.colorAlpha = 0f;
+        this.red = 0f;
+        this.green = 0.75f + new Random().nextFloat() * 0.25f;
+        this.blue = 1f;
+        this.alpha = 0f;
 
         this.velocityX = 0;
         this.velocityY = 0;
@@ -84,13 +84,13 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         float minV = this.getMinV();
         float maxV = this.getMaxV();
         int l = 15728880;
-        float a = Math.min(1f, Math.max(0f, this.colorAlpha));
+        float a = Math.min(1f, Math.max(0f, this.alpha));
 
         // colored layer
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.red, this.green, this.blue, a).light(l).next();
 
         // white center
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
@@ -107,7 +107,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         // if old enough, fade and die
         if (this.age++ >= this.maxAge) {
             nextAlphaGoal = -BLINK_STEP;
-            if (colorAlpha < 0f) {
+            if (alpha < 0f) {
                 this.markDead();
             }
         }
@@ -124,13 +124,13 @@ public class GlowwormParticle extends SpriteBillboardParticle {
         }
 
         // blinking
-        if (colorAlpha > nextAlphaGoal - BLINK_STEP && colorAlpha < nextAlphaGoal + BLINK_STEP) {
+        if (alpha > nextAlphaGoal - BLINK_STEP && alpha < nextAlphaGoal + BLINK_STEP) {
             nextAlphaGoal = new Random().nextFloat();
         } else {
-            if (nextAlphaGoal > colorAlpha) {
-                colorAlpha += BLINK_STEP;
-            } else if (nextAlphaGoal < colorAlpha) {
-                colorAlpha -= BLINK_STEP;
+            if (nextAlphaGoal > alpha) {
+                alpha += BLINK_STEP;
+            } else if (nextAlphaGoal < alpha) {
+                alpha -= BLINK_STEP;
             }
         }
 
@@ -171,7 +171,7 @@ public class GlowwormParticle extends SpriteBillboardParticle {
     private void initOnCeiling() {
         this.onCeiling = true;
         this.y = (float) Math.ceil(this.y) - 0.025;
-        this.colorAlpha = 0f;
+        this.alpha = 0f;
 
         while (this.world.getBlockState(new BlockPos(this.x, this.y + 1, this.z)).isAir()) {
             if (this.y++ > 255) {

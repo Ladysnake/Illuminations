@@ -27,22 +27,22 @@ public class PlayerWispParticle extends WillOWispParticle {
             this.markDead();
         }
 
-        this.colorRed = red;
-        this.colorGreen = green;
-        this.colorBlue = blue;
-        this.colorAlpha = 0;
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        this.alpha = 0;
     }
 
     @Override
     public void tick() {
         if (this.age > 10) {
-            this.colorAlpha = 1f;
+            this.alpha = 1f;
 
             for (int i = 0; i < 1; i++) {
-                this.world.addParticle(new WispTrailParticleEffect(this.colorRed, this.colorGreen, this.colorBlue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
+                this.world.addParticle(new WispTrailParticleEffect(this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + random.nextGaussian() / 15, this.y + random.nextGaussian() / 15, this.z + random.nextGaussian() / 15, 0, 0, 0);
             }
         } else {
-            this.colorAlpha = 0;
+            this.alpha = 0;
         }
 
         if (owner != null) {

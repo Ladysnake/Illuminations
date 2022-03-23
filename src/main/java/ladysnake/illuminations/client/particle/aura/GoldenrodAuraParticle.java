@@ -39,7 +39,7 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
     public void tick() {
         this.age += 2;
         if (this.age < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
+            this.alpha = Math.min(1f, this.alpha + 0.1f);
         }
         this.scale *= 0.9;
 
@@ -63,12 +63,12 @@ public class GoldenrodAuraParticle extends ChorusPetalParticle {
             this.velocityY = 0;
         }
 
-        this.colorBlue *= 0.96;
-        this.colorGreen *= 0.98;
+        this.blue *= 0.96;
+        this.green *= 0.98;
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
-            if (this.colorAlpha <= 0f) {
+            this.alpha = Math.max(0f, this.alpha - 0.1f);
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }

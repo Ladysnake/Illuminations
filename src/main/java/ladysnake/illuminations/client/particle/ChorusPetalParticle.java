@@ -28,7 +28,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.setSprite(spriteProvider.getSprite(variant, 2));
 
         if (velocityY == 0f && velocityX == 0f && velocityZ == 0f) {
-            this.colorAlpha = 0f;
+            this.alpha = 0f;
         }
 
         this.velocityY = velocityY - 0.15D - random.nextFloat() / 10;
@@ -41,7 +41,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        this.colorRed = Math.max(this.colorGreen, 0.3f);
+        this.red = Math.max(this.green, 0.3f);
 
         Vec3d vec3d = camera.getPos();
         float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
@@ -74,10 +74,10 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -86,7 +86,7 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
+            this.alpha = Math.min(1f, this.alpha + 0.1f);
         }
 
         this.prevPosX = this.x;
@@ -98,16 +98,16 @@ public class ChorusPetalParticle extends SpriteBillboardParticle {
         this.velocityY *= 0.99D;
         this.velocityZ *= 0.99D;
 
-        this.colorRed *= 0.99;
-        this.colorGreen *= 0.98;
+        this.red *= 0.99;
+        this.green *= 0.98;
 
         if (this.age >= this.maxAge) {
-//            this.colorRed *= 0.9;
-//            this.colorGreen *= 0.8;
+//            this.red *= 0.9;
+//            this.green *= 0.8;
 
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
+            this.alpha = Math.max(0f, this.alpha - 0.1f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }

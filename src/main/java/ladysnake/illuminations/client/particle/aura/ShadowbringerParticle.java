@@ -28,7 +28,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
         this.spriteProvider = spriteProvider;
 
         this.setSprite(spriteProvider.getSprite(0, 3));
-        colorAlpha = 0;
+        alpha = 0;
 
 
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 1.5, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
@@ -36,7 +36,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.045f);
+            this.alpha = Math.min(1f, this.alpha + 0.045f);
         }
 
         this.prevPosX = this.x;
@@ -54,9 +54,9 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
         }
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.015f);
+            this.alpha = Math.max(0f, this.alpha - 0.015f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }

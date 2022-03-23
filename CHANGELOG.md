@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.3 - 1.18.2
+= Update to Minecraft 1.18.2
+
 ### Illuminations 1.10.2 - 1.18
 - Update to Minecraft 1.18
 

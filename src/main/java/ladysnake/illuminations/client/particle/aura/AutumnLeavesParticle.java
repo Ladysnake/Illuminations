@@ -32,8 +32,8 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
         this.collidesWithWorld = true;
         this.setSprite(spriteProvider.getSprite(this.variant % 3, 2));
 
-        this.colorGreen = RANDOM.nextFloat() / 2f + 0.5f;
-        this.colorBlue = 0f;
+        this.green = RANDOM.nextFloat() / 2f + 0.5f;
+        this.blue = 0f;
 
         beginX = x;
         beginY = y;
@@ -74,10 +74,10 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, colorAlpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
     }
 
     public ParticleTextureSheet getType() {
@@ -86,14 +86,14 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge - 10) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
+            this.alpha = Math.min(1f, this.alpha + 0.1f);
         }
 
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        this.colorGreen *= 0.98;
+        this.green *= 0.98;
 
         float fraction = this.age / (float) this.maxAge;
         this.x = MathHelper.cos(this.age / 15.0F + 1.0471973f * (variant + 0.5f)) * fraction + beginX;
@@ -102,9 +102,9 @@ public class AutumnLeavesParticle extends SpriteBillboardParticle {
 
         if (this.age >= this.maxAge - 10) {
 
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
+            this.alpha = Math.max(0f, this.alpha - 0.1f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }
