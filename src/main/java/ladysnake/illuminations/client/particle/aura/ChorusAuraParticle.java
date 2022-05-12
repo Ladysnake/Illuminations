@@ -24,7 +24,7 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
+            this.alpha = Math.min(1f, this.alpha + 0.1f);
         }
 
         this.prevPosX = this.x;
@@ -36,16 +36,16 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
         this.velocityY *= 0.99D;
         this.velocityZ *= 0.99D;
 
-        this.colorRed *= 0.99;
-        this.colorGreen *= 0.98;
+        this.red *= 0.99;
+        this.green *= 0.98;
 
         if (this.age >= this.maxAge) {
-//            this.colorRed *= 0.9;
-//            this.colorGreen *= 0.8;
+//            this.red *= 0.9;
+//            this.green *= 0.8;
 
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
+            this.alpha = Math.max(0f, this.alpha - 0.1f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }

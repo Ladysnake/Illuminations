@@ -3,9 +3,9 @@ package ladysnake.illuminations.client.data;
 import com.google.gson.JsonElement;
 
 public class PlayerCosmeticData {
-    private final int colorRed;
-    private final int colorGreen;
-    private final int colorBlue;
+    private final int red;
+    private final int green;
+    private final int blue;
     private String aura;
     private String overhead;
     private boolean drip;
@@ -18,13 +18,13 @@ public class PlayerCosmeticData {
             this.aura = aura.getAsString();
         }
         if (color.isJsonNull()) {
-            this.colorRed = 0;
-            this.colorGreen = 0;
-            this.colorBlue = 0;
+            this.red = 0;
+            this.green = 0;
+            this.blue = 0;
         } else {
-            this.colorRed = Integer.valueOf(color.getAsString().substring(1, 3), 16);
-            this.colorGreen = Integer.valueOf(color.getAsString().substring(3, 5), 16);
-            this.colorBlue = Integer.valueOf(color.getAsString().substring(5), 16);
+            this.red = Integer.valueOf(color.getAsString().substring(1, 3), 16);
+            this.green = Integer.valueOf(color.getAsString().substring(3, 5), 16);
+            this.blue = Integer.valueOf(color.getAsString().substring(5), 16);
         }
         if (overhead.isJsonNull()) {
             this.overhead = null;
@@ -48,15 +48,15 @@ public class PlayerCosmeticData {
     }
 
     public int getColorRed() {
-        return colorRed;
+        return red;
     }
 
     public int getColorBlue() {
-        return colorBlue;
+        return blue;
     }
 
     public int getColorGreen() {
-        return colorGreen;
+        return green;
     }
 
     public boolean isDrip() {

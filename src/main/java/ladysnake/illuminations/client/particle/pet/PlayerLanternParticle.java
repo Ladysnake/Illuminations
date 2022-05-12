@@ -46,10 +46,10 @@ public class PlayerLanternParticle extends Particle {
             this.markDead();
         }
 
-        this.colorRed = red;
-        this.colorGreen = green;
-        this.colorBlue = blue;
-        this.colorAlpha = 0;
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        this.alpha = 0;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PlayerLanternParticle extends Particle {
         matrixStack.translate(0, -1, 0);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
         VertexConsumer vertexConsumer2 = immediate.getBuffer(GlowyRenderLayer.get(texture));
-        if (colorAlpha > 0) {
+        if (alpha > 0) {
             this.model.render(matrixStack, vertexConsumer2, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0f);
         }
         immediate.draw();
@@ -81,9 +81,9 @@ public class PlayerLanternParticle extends Particle {
     @Override
     public void tick() {
         if (this.age > 10) {
-            this.colorAlpha = 1f;
+            this.alpha = 1f;
         } else {
-            this.colorAlpha = 0;
+            this.alpha = 0;
         }
 
         if (owner != null) {
