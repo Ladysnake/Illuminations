@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
@@ -35,7 +36,7 @@ public abstract class ClientWorldMixin extends World {
     @Final
     private MinecraftClient client;
 
-    protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
+    protected ClientWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, RegistryEntry<DimensionType> dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
         super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
     }
 
@@ -45,11 +46,11 @@ public abstract class ClientWorldMixin extends World {
     private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, @Coerce Object blockParticle, BlockPos.Mutable blockPos, CallbackInfo ci) {
         BlockPos.Mutable pos = blockPos.add(this.random.nextGaussian() * 50, this.random.nextGaussian() * 25, this.random.nextGaussian() * 50).mutableCopy();
 
-        Biome b = this.getBiome(pos);
-        Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b);
+        RegistryEntry<Biome> b = this.getBiome(pos);
+        Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b.value());
 
         // Main biome settings
-        BiomeCategory biomeCategory = BiomeCategory.find(biome, b.getCategory()); // Returns OTHER if no association for this biome was found.
+        BiomeCategory biomeCategory = BiomeCategory.find(biome, Biome.getCategory(b)); // Returns OTHER if no association for this biome was found.
         spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory));
 
         // Other miscellaneous biome settings
