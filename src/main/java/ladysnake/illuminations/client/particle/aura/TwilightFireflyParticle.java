@@ -32,9 +32,9 @@ public class TwilightFireflyParticle extends FireflyParticle {
 
         Optional.ofNullable(owner).map(Illuminations::getCosmeticData).ifPresentOrElse(
                 data -> {
-                    this.colorRed = data.getColorRed() / 255f;
-                    this.colorGreen = data.getColorGreen() / 255f;
-                    this.colorBlue = data.getColorBlue() / 255f;
+                    this.red = data.getColorRed() / 255f;
+                    this.green = data.getColorGreen() / 255f;
+                    this.blue = data.getColorBlue() / 255f;
                     this.nextAlphaGoal = 1f;
                 },
                 this::markDead
@@ -79,13 +79,13 @@ public class TwilightFireflyParticle extends FireflyParticle {
         float minV = this.getMinV();
         float maxV = this.getMaxV();
         int l = 15728880;
-        float a = Math.min(1f, Math.max(0f, this.colorAlpha));
+        float a = Math.min(1f, Math.max(0f, this.alpha));
 
         // colored layer
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.colorRed, this.colorGreen, this.colorBlue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, minV + (maxV - minV) / 2.0F).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(this.red, this.green, this.blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, minV + (maxV - minV) / 2.0F).color(this.red, this.green, this.blue, a).light(l).next();
 
         // white center
         vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(1f, 1f, 1f, (a * Config.getFireflyWhiteAlpha()) / 100f).light(l).next();
@@ -105,19 +105,19 @@ public class TwilightFireflyParticle extends FireflyParticle {
             // fade and die on daytime or if old enough
             if (this.age++ >= this.maxAge) {
                 nextAlphaGoal = -BLINK_STEP;
-                if (colorAlpha < 0f) {
+                if (alpha < 0f) {
                     this.markDead();
                 }
             }
 
             // blinking
-            if (colorAlpha > nextAlphaGoal - BLINK_STEP && colorAlpha < nextAlphaGoal + BLINK_STEP) {
+            if (alpha > nextAlphaGoal - BLINK_STEP && alpha < nextAlphaGoal + BLINK_STEP) {
                 nextAlphaGoal = new Random().nextFloat();
             } else {
-                if (nextAlphaGoal > colorAlpha) {
-                    colorAlpha = Math.min(colorAlpha + BLINK_STEP, 1f);
-                } else if (nextAlphaGoal < colorAlpha) {
-                    colorAlpha = Math.max(colorAlpha - BLINK_STEP, 0f);
+                if (nextAlphaGoal > alpha) {
+                    alpha = Math.min(alpha + BLINK_STEP, 1f);
+                } else if (nextAlphaGoal < alpha) {
+                    alpha = Math.max(alpha - BLINK_STEP, 0f);
                 }
             }
 

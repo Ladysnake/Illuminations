@@ -22,7 +22,7 @@ public class PrismarineAuraParticle extends PrismarineCrystalParticle {
 
     public void tick() {
         if (this.age++ < this.maxAge) {
-            this.colorAlpha = Math.min(1f, this.colorAlpha + 0.1f);
+            this.alpha = Math.min(1f, this.alpha + 0.1f);
         }
 
         this.prevPosX = this.x;
@@ -32,14 +32,14 @@ public class PrismarineAuraParticle extends PrismarineCrystalParticle {
         this.move(this.velocityX, this.velocityY, this.velocityZ);
 
         if (this.age >= this.maxAge) {
-            this.colorAlpha = Math.max(0f, this.colorAlpha - 0.1f);
+            this.alpha = Math.max(0f, this.alpha - 0.1f);
 
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             }
         }
 
-        this.colorRed = 0.8f + (float) Math.sin(this.age / 10f) * 0.2f;
+        this.red = 0.8f + (float) Math.sin(this.age / 10f) * 0.2f;
 //        this.colorBlue = 0.9f + (float) Math.cos(this.age/10f) * 0.1f;
 
         this.prevAngle = this.angle;

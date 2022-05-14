@@ -29,14 +29,14 @@ public class EmberParticle extends SpriteBillboardParticle {
         this.maxAge = 100;
         this.collidesWithWorld = true;
         this.setSpriteForAge(spriteProvider);
-        this.colorAlpha = 0f;
+        this.alpha = 0f;
         this.nextAlphaGoal = 1f;
 
         this.scale = 0.01f;
 
-        this.colorRed = 1.0f;
-        this.colorGreen = 106f / 255f;
-        this.colorBlue = 0f / 255f;
+        this.red = 1.0f;
+        this.green = 106f / 255f;
+        this.blue = 0f / 255f;
     }
 
     public ParticleTextureSheet getType() {
@@ -75,12 +75,12 @@ public class EmberParticle extends SpriteBillboardParticle {
         float minV = this.getMinV();
         float maxV = this.getMaxV();
         int l = 15728880;
-        float a = Math.min(1f, Math.max(0f, this.colorAlpha));
+        float a = Math.min(1f, Math.max(0f, this.alpha));
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(colorRed, colorGreen, colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(colorRed, colorGreen, colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(colorRed, colorGreen, colorBlue, a).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(colorRed, colorGreen, colorBlue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, a).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, a).light(l).next();
     }
 
     public void tick() {
@@ -99,19 +99,19 @@ public class EmberParticle extends SpriteBillboardParticle {
         }
 
         if (this.age++ >= this.maxAge) {
-            if (this.colorAlpha <= 0f) {
+            if (this.alpha <= 0f) {
                 this.markDead();
             } else {
-                this.colorAlpha -= 0.1f;
+                this.alpha -= 0.1f;
             }
         } else {
-            this.colorAlpha += 0.1f;
+            this.alpha += 0.1f;
         }
 
-        if (nextAlphaGoal > colorAlpha) {
-            colorAlpha = Math.min(colorAlpha + BLINK_STEP, 1f);
-        } else if (nextAlphaGoal < colorAlpha) {
-            colorAlpha = Math.max(colorAlpha - BLINK_STEP, 0f);
+        if (nextAlphaGoal > alpha) {
+            alpha = Math.min(alpha + BLINK_STEP, 1f);
+        } else if (nextAlphaGoal < alpha) {
+            alpha = Math.max(alpha - BLINK_STEP, 0f);
         }
 
         this.targetChangeCooldown -= (new Vec3d(x, y, z).squaredDistanceTo(prevPosX, prevPosY, prevPosZ) < 0.0125) ? 10 : 1;
