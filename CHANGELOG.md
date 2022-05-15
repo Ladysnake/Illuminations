@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.4 - 1.18.2
+- Fixed log spam
+
 ### Illuminations 1.10.3 - 1.18.2
 - Update to Minecraft 1.18.2
 - Removed the auto-updater, auto-update greeting screen and config options relating to it

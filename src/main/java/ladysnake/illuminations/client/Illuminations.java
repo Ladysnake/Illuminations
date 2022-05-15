@@ -434,7 +434,6 @@ public class Illuminations implements ClientModInitializer {
         @Override
         public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
-            System.out.println(jsonObject);
             return new PlayerCosmeticData(jsonObject.get("aura")
                     , jsonObject.get("color")
                     , jsonObject.get("overhead")
