@@ -136,10 +136,10 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.autoUpdate"), Config.isAutoUpdate())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.autoUpdate"))
-                .setSaveConsumer(Config::setAutoUpdate)
-                .setDefaultValue(DefaultConfig.AUTO_UPDATE)
+                .startBooleanToggle(new TranslatableText("option.illuminations.displayCosmetics"), Config.shouldDisplayCosmetics())
+                .setTooltip(new TranslatableText("option.tooltip.illuminations.displayCosmetics"))
+                .setSaveConsumer(Config::setDisplayCosmetics)
+                .setDefaultValue(DefaultConfig.DISPLAY_COSMETICS)
                 .build());
 
         general.addEntry(entryBuilder
@@ -150,7 +150,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.displayDonationToast"), Config.isDisplayDonationToast())
+                .startBooleanToggle(new TranslatableText("option.illuminations.displayDonationToast"), Config.shouldDisplayDonationToast())
                 .setTooltip(new TranslatableText("option.tooltip.illuminations.displayDonationToast"))
                 .setSaveConsumer(Config::setDisplayDonationToast)
                 .setDefaultValue(DefaultConfig.DISPLAY_DONATION_TOAST)

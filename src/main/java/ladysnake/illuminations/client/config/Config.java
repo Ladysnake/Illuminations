@@ -36,9 +36,8 @@ public class Config {
     private static int fireflyWhiteAlpha;
     private static boolean fireflyRainbow;
     private static boolean viewAurasFP;
-    private static boolean autoUpdate;
     private static boolean debugMode;
-    private static boolean displayGreetingScreen;
+    private static boolean displayCosmetics;
     private static boolean displayDonationToast;
     private static HashMap<BiomeCategory, BiomeSettings> biomeSettings;
     // private static HashMap<String, AuraSettings> auraSettings;
@@ -62,9 +61,8 @@ public class Config {
             setFireflySpawnAlways(DefaultConfig.FIREFLY_SPAWN_ALWAYS);
             setFireflySpawnUnderground(DefaultConfig.FIREFLY_SPAWN_UNDERGROUND);
             setFireflyWhiteAlpha(DefaultConfig.FIREFLY_WHITE_ALPHA);
-            setAutoUpdate(DefaultConfig.AUTO_UPDATE);
+            setDisplayCosmetics(DefaultConfig.DISPLAY_COSMETICS);
             setViewAurasFP(DefaultConfig.VIEW_AURAS_FP);
-            setDisplayGreetingScreen(DefaultConfig.DISPLAY_GREETING_SCREEN);
             setDisplayDonationToast(DefaultConfig.DISPLAY_DONATION_TOAST);
 
             biomeSettings = new HashMap<>();
@@ -88,10 +86,9 @@ public class Config {
         parseProperty("firefly-spawn-underground", Config::setFireflySpawnUnderground, DefaultConfig.FIREFLY_SPAWN_UNDERGROUND);
         parseProperty("firefly-white-alpha", Config::setFireflyWhiteAlpha, DefaultConfig.FIREFLY_WHITE_ALPHA);
         parseProperty("firefly-rainbow", Config::setFireflyRainbow, DefaultConfig.FIREFLY_RAINBOW);
-        parseProperty("auto-update", Config::setAutoUpdate, DefaultConfig.AUTO_UPDATE);
+        parseProperty("display-cosmetics", Config::setDisplayCosmetics, DefaultConfig.DISPLAY_COSMETICS);
         parseProperty("debug-mode", Config::setDebugMode, DefaultConfig.DEBUG_MODE);
         parseProperty("view-auras-fp", Config::setViewAurasFP, DefaultConfig.VIEW_AURAS_FP);
-        parseProperty("display-greeting-screen", Config::setDisplayGreetingScreen, DefaultConfig.DISPLAY_GREETING_SCREEN);
         parseProperty("display-donation-toast", Config::setDisplayDonationToast, DefaultConfig.DISPLAY_DONATION_TOAST);
 
         biomeSettings = new HashMap<>();
@@ -254,13 +251,13 @@ public class Config {
         config.setProperty("view-auras-fp", Boolean.toString(value));
     }
 
-    public static boolean isAutoUpdate() {
-        return autoUpdate;
+    public static boolean shouldDisplayCosmetics() {
+        return displayCosmetics;
     }
 
-    public static void setAutoUpdate(boolean value) {
-        autoUpdate = value;
-        config.setProperty("auto-update", Boolean.toString(value));
+    public static void setDisplayCosmetics(boolean value) {
+        displayCosmetics = value;
+        config.setProperty("display-cosmetics", Boolean.toString(value));
     }
 
     public static boolean isDebugMode() {
@@ -272,16 +269,7 @@ public class Config {
         config.setProperty("debug-mode", Boolean.toString(value));
     }
 
-    public static boolean isDisplayGreetingScreen() {
-        return displayGreetingScreen;
-    }
-
-    public static void setDisplayGreetingScreen(boolean value) {
-        displayGreetingScreen = value;
-        config.setProperty("display-greeting-screen", Boolean.toString(value));
-    }
-
-    public static boolean isDisplayDonationToast() {
+    public static boolean shouldDisplayDonationToast() {
         return displayDonationToast;
     }
 

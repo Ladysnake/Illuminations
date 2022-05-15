@@ -28,7 +28,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (cosmeticData != null) {
             // player aura
             String playerAura = cosmeticData.getAura();
-            if (playerAura != null && Illuminations.AURAS_DATA.containsKey(playerAura)) {
+            if (Config.shouldDisplayCosmetics() && playerAura != null && Illuminations.AURAS_DATA.containsKey(playerAura)) {
                 // do not render in first person or if the player is invisible
                 // noinspection ConstantConditions
                 if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {
@@ -43,7 +43,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
             // player pet
             String playerPet = cosmeticData.getPet();
-            if (playerPet != null && Illuminations.PETS_DATA.containsKey(playerPet)) {
+            if (Config.shouldDisplayCosmetics() && playerPet != null && Illuminations.PETS_DATA.containsKey(playerPet)) {
                 // do not render in first person or if the player is invisible
                 //noinspection ConstantConditions
                 if (((Config.getViewAurasFP() || MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson()) || MinecraftClient.getInstance().player != (Object) this) && !this.isInvisible()) {

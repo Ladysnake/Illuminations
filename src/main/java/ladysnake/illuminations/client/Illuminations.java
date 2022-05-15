@@ -21,7 +21,6 @@ import ladysnake.illuminations.client.render.entity.model.hat.*;
 import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
 import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
 import ladysnake.illuminations.client.render.entity.model.pet.WillOWispModel;
-import ladysnake.illuminations.updater.IlluminationsUpdater;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -94,7 +93,7 @@ public class Illuminations implements ClientModInitializer {
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
     // illuminations cosmetics
-    private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
+    private static final String COSMETICS_URL = "https://doctor4t.uuid.gg/illuminations-data";
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
@@ -160,35 +159,35 @@ public class Illuminations implements ClientModInitializer {
     }
 
     public static void loadPlayerCosmetics() {
-        // get illuminations player cosmetics
-        CompletableFuture.supplyAsync(() -> {
-            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                if (Config.isDebugMode())
-                    logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
-                return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
-            } catch (MalformedURLException e) {
-                if (Config.isDebugMode())
-                    logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
-            } catch (IOException e) {
-                if (Config.isDebugMode())
-                    logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
-            }
+            // get illuminations player cosmetics
+            CompletableFuture.supplyAsync(() -> {
+                try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
+                    if (Config.isDebugMode())
+                        logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                    return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
+                } catch (MalformedURLException e) {
+                    if (Config.isDebugMode())
+                        logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+                } catch (IOException e) {
+                    if (Config.isDebugMode())
+                        logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+                }
 
-            return null;
-        }).exceptionally(throwable -> {
-            if (Config.isDebugMode())
-                logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
-            return null;
-        }).thenAcceptAsync(playerData -> {
-            if (playerData != null) {
-                PLAYER_COSMETICS = playerData;
-                if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
-            } else {
-                PLAYER_COSMETICS = Collections.emptyMap();
+                return null;
+            }).exceptionally(throwable -> {
                 if (Config.isDebugMode())
-                    logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
-            }
-        }, MinecraftClient.getInstance());
+                    logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+                return null;
+            }).thenAcceptAsync(playerData -> {
+                if (playerData != null) {
+                    PLAYER_COSMETICS = playerData;
+                    if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
+                } else {
+                    PLAYER_COSMETICS = Collections.emptyMap();
+                    if (Config.isDebugMode())
+                        logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+                }
+            }, MinecraftClient.getInstance());
     }
 
     public static boolean isNightTime(World world) {
@@ -202,11 +201,6 @@ public class Illuminations implements ClientModInitializer {
 
         // get illuminations player cosmetics
         loadPlayerCosmetics();
-
-        // auto-updater
-        if (!FabricLoader.getInstance().isDevelopmentEnvironment() && Config.isAutoUpdate()) {
-            IlluminationsUpdater.init();
-        }
 
         // load jeb shader
         if (FabricLoader.getInstance().isModLoaded("satin")) {
@@ -440,10 +434,10 @@ public class Illuminations implements ClientModInitializer {
         @Override
         public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
+            System.out.println(jsonObject);
             return new PlayerCosmeticData(jsonObject.get("aura")
                     , jsonObject.get("color")
                     , jsonObject.get("overhead")
-                    , jsonObject.get("drip")
                     , jsonObject.get("pet"));
         }
     }
