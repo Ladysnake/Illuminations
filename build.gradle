@@ -174,20 +174,6 @@ task checkGitStatus() {
     }
 }
 
-githubRelease {
-    repo "Illuminations"
-    token "${getProjectProperty('github_releases_token')}"
-    // default owner: last component of maven group
-    // default repo: name of the project
-    tagName = project.version
-    targetCommitish = { grgit.branch.current().name }
-    body = { project.getChangelogText() }
-
-    FilenameFilter filter = { dir, filename -> filename.contains(project.version) && !filename.contains('-dev.jar') }
-    releaseAssets = { jar.destinationDirectory.asFile.get().listFiles filter }
-}
-tasks.githubRelease.dependsOn(checkGitStatus)
-
 curseforge {
 
     if (project.getProjectProperty('curse_key') != null) {
@@ -260,7 +246,7 @@ curseforge {
 
 tasks.curseforge.dependsOn(checkGitStatus)
 
-task release(dependsOn: [tasks.githubRelease, tasks.curseforge]) {
+task release(dependsOn: [tasks.curseforge]) {
     group = 'publishing'
     description = 'Releases a new version to Github and Curseforge'
 }
