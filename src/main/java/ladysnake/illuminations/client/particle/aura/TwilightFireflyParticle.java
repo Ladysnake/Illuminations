@@ -43,7 +43,7 @@ public class TwilightFireflyParticle extends FireflyParticle {
         this.setPos(this.x + TwilightFireflyParticle.getWanderingDistance(this.random), this.y + random.nextFloat() * 2d, this.z + TwilightFireflyParticle.getWanderingDistance(this.random));
     }
 
-    public static double getWanderingDistance(Random random) {
+    public static double getWanderingDistance(net.minecraft.util.math.random.Random random) {
         return random.nextGaussian() / 5d;
     }
 

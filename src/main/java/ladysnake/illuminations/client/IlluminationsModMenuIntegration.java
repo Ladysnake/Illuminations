@@ -13,7 +13,6 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -34,7 +33,7 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             // create the config
             builder = ConfigBuilder.create()
                     .setParentScreen(parent)
-                    .setTitle(new TranslatableText("title.illuminations.config"));
+                    .setTitle(Text.translatable("title.illuminations.config"));
             builder.setSavingRunnable(Config::save);
 
             entryBuilder = builder.entryBuilder();
@@ -49,116 +48,116 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
     }
 
     private void GenerateGeneralSettings() {
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category.illuminations.general"));
+        ConfigCategory general = builder.getOrCreateCategory(Text.translatable("category.illuminations.general"));
 
         general.addEntry(entryBuilder
-                .startEnumSelector(new TranslatableText("option.illuminations.halloweenFeatures"), HalloweenFeatures.class, Config.getHalloweenFeatures())
+                .startEnumSelector(Text.translatable("option.illuminations.halloweenFeatures"), HalloweenFeatures.class, Config.getHalloweenFeatures())
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures"),
-                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.default"),
-                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.enable"),
-                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.disable"),
-                        new TranslatableText("option.tooltip.illuminations.halloweenFeatures.always"))
+                        Text.translatable("option.tooltip.illuminations.halloweenFeatures"),
+                        Text.translatable("option.tooltip.illuminations.halloweenFeatures.default"),
+                        Text.translatable("option.tooltip.illuminations.halloweenFeatures.enable"),
+                        Text.translatable("option.tooltip.illuminations.halloweenFeatures.disable"),
+                        Text.translatable("option.tooltip.illuminations.halloweenFeatures.always"))
                 .setSaveConsumer(Config::setHalloweenFeatures)
                 .setDefaultValue(DefaultConfig.HALLOWEEN_FEATURES)
                 .build());
 
         general.addEntry(entryBuilder
-                .startEnumSelector(new TranslatableText("option.illuminations.eyesInTheDarkSpawnRate"), EyesInTheDarkSpawnRate.class, Config.getEyesInTheDarkSpawnRate())
+                .startEnumSelector(Text.translatable("option.illuminations.eyesInTheDarkSpawnRate"), EyesInTheDarkSpawnRate.class, Config.getEyesInTheDarkSpawnRate())
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.default"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.low"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.medium"),
-                        new TranslatableText("option.tooltip.illuminations.eyesInTheDarkSpawnRate.high"))
+                        Text.translatable("option.tooltip.illuminations.eyesInTheDarkSpawnRate"),
+                        Text.translatable("option.tooltip.illuminations.eyesInTheDarkSpawnRate.default"),
+                        Text.translatable("option.tooltip.illuminations.eyesInTheDarkSpawnRate.low"),
+                        Text.translatable("option.tooltip.illuminations.eyesInTheDarkSpawnRate.medium"),
+                        Text.translatable("option.tooltip.illuminations.eyesInTheDarkSpawnRate.high"))
                 .setSaveConsumer(Config::setEyesInTheDarkSpawnRate)
                 .setDefaultValue(DefaultConfig.EYES_IN_THE_DARK_SPAWN_RATE)
                 .build());
 
         general.addEntry(entryBuilder
-                .startEnumSelector(new TranslatableText("option.illuminations.willOWispsSpawnRate"), WillOWispsSpawnRate.class, Config.getWillOWispsSpawnRate())
+                .startEnumSelector(Text.translatable("option.illuminations.willOWispsSpawnRate"), WillOWispsSpawnRate.class, Config.getWillOWispsSpawnRate())
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate"),
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.default"),
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.disable"),
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.low"),
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.medium"),
-                        new TranslatableText("option.tooltip.illuminations.willOWispsSpawnRate.high"))
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate"),
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate.default"),
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate.disable"),
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate.low"),
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate.medium"),
+                        Text.translatable("option.tooltip.illuminations.willOWispsSpawnRate.high"))
                 .setSaveConsumer(Config::setWillOWispsSpawnRate)
                 .setDefaultValue(DefaultConfig.WILL_O_WISPS_SPAWN_RATE)
                 .build());
 
         general.addEntry(entryBuilder
-                .startIntSlider(new TranslatableText("option.illuminations.chorusPetalsSpawnMultiplier"), Config.getChorusPetalsSpawnMultiplier(), 0, 10)
+                .startIntSlider(Text.translatable("option.illuminations.chorusPetalsSpawnMultiplier"), Config.getChorusPetalsSpawnMultiplier(), 0, 10)
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier"),
-                        new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.lowest"),
-                        new TranslatableText("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.highest"))
+                        Text.translatable("option.tooltip.illuminations.chorusPetalsSpawnMultiplier"),
+                        Text.translatable("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.lowest"),
+                        Text.translatable("option.tooltip.illuminations.chorusPetalsSpawnMultiplier.highest"))
                 .setSaveConsumer(Config::setChorusPetalsSpawnMultiplier)
                 .setDefaultValue(DefaultConfig.CHORUS_PETALS_SPAWN_MULTIPLIER)
                 .build());
 
         general.addEntry(entryBuilder
-                .startIntSlider(new TranslatableText("option.illuminations.density"), Config.getDensity(), 0, 1000)
+                .startIntSlider(Text.translatable("option.illuminations.density"), Config.getDensity(), 0, 1000)
                 .setTooltip(
-                        new TranslatableText("option.tooltip.illuminations.density"),
-                        new TranslatableText("option.tooltip.illuminations.density.lowest"),
-                        new TranslatableText("option.tooltip.illuminations.density.highest"))
+                        Text.translatable("option.tooltip.illuminations.density"),
+                        Text.translatable("option.tooltip.illuminations.density.lowest"),
+                        Text.translatable("option.tooltip.illuminations.density.highest"))
                 .setSaveConsumer(Config::setDensity)
                 .setDefaultValue(DefaultConfig.DENSITY)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnAlways"), Config.doesFireflySpawnAlways())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnAlways"))
+                .startBooleanToggle(Text.translatable("option.illuminations.fireflySpawnAlways"), Config.doesFireflySpawnAlways())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.fireflySpawnAlways"))
                 .setSaveConsumer(Config::setFireflySpawnAlways)
                 .setDefaultValue(DefaultConfig.FIREFLY_SPAWN_ALWAYS)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.fireflySpawnUnderground"), Config.doesFireflySpawnUnderground())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflySpawnUnderground"))
+                .startBooleanToggle(Text.translatable("option.illuminations.fireflySpawnUnderground"), Config.doesFireflySpawnUnderground())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.fireflySpawnUnderground"))
                 .setSaveConsumer(Config::setFireflySpawnUnderground)
                 .setDefaultValue(DefaultConfig.FIREFLY_SPAWN_UNDERGROUND)
                 .build());
 
         general.addEntry(entryBuilder
-                .startIntSlider(new TranslatableText("option.illuminations.fireflyWhiteAlpha"), Config.getFireflyWhiteAlpha(), 0, 100)
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflyWhiteAlpha"))
+                .startIntSlider(Text.translatable("option.illuminations.fireflyWhiteAlpha"), Config.getFireflyWhiteAlpha(), 0, 100)
+                .setTooltip(Text.translatable("option.tooltip.illuminations.fireflyWhiteAlpha"))
                 .setSaveConsumer(Config::setFireflyWhiteAlpha)
                 .setDefaultValue(DefaultConfig.FIREFLY_WHITE_ALPHA)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.fireflyRainbow"), Config.getFireflyRainbow())
+                .startBooleanToggle(Text.translatable("option.illuminations.fireflyRainbow"), Config.getFireflyRainbow())
                 .setSaveConsumer(Config::setFireflyRainbow)
                 .setDefaultValue(DefaultConfig.FIREFLY_RAINBOW)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.displayCosmetics"), Config.shouldDisplayCosmetics())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.displayCosmetics"))
+                .startBooleanToggle(Text.translatable("option.illuminations.displayCosmetics"), Config.shouldDisplayCosmetics())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.displayCosmetics"))
                 .setSaveConsumer(Config::setDisplayCosmetics)
                 .setDefaultValue(DefaultConfig.DISPLAY_COSMETICS)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.viewAurasFP"), Config.getViewAurasFP())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.viewAurasFP"))
+                .startBooleanToggle(Text.translatable("option.illuminations.viewAurasFP"), Config.getViewAurasFP())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.viewAurasFP"))
                 .setSaveConsumer(Config::setViewAurasFP)
                 .setDefaultValue(DefaultConfig.VIEW_AURAS_FP)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.displayDonationToast"), Config.shouldDisplayDonationToast())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.displayDonationToast"))
+                .startBooleanToggle(Text.translatable("option.illuminations.displayDonationToast"), Config.shouldDisplayDonationToast())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.displayDonationToast"))
                 .setSaveConsumer(Config::setDisplayDonationToast)
                 .setDefaultValue(DefaultConfig.DISPLAY_DONATION_TOAST)
                 .build());
 
         general.addEntry(entryBuilder
-                .startBooleanToggle(new TranslatableText("option.illuminations.debugMode"), Config.isDebugMode())
-                .setTooltip(new TranslatableText("option.tooltip.illuminations.debugMode"))
+                .startBooleanToggle(Text.translatable("option.illuminations.debugMode"), Config.isDebugMode())
+                .setTooltip(Text.translatable("option.tooltip.illuminations.debugMode"))
                 .setSaveConsumer(Config::setDebugMode)
                 .setDefaultValue(DefaultConfig.DEBUG_MODE)
                 .build());
@@ -168,8 +167,8 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
         HashMap<Identifier, ConfigCategory> biomeCategories = new HashMap<>();
         for (Identifier dimension : BiomeCategory.getDimensions()) {
             String name = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, dimension.getPath());
-            ConfigCategory category = builder.getOrCreateCategory(new TranslatableText("category.illuminations." + name));
-            category.setDescription(new StringVisitable[]{new TranslatableText("category.illuminations." + name + ".description")});
+            ConfigCategory category = builder.getOrCreateCategory(Text.translatable("category.illuminations." + name));
+            category.setDescription(new StringVisitable[]{Text.translatable("category.illuminations." + name + ".description")});
             biomeCategories.put(dimension, category);
         }
 
@@ -181,33 +180,33 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
 
             // Biome tooltip
             Text[] tooltip = new Text[biome.getBiomes().length + 1];
-            tooltip[0] = new TranslatableText("option.tooltip.illuminations.biome");
+            tooltip[0] = Text.translatable("option.tooltip.illuminations.biome");
             for (int i = 0; i < biome.getBiomes().length; i++) {
-                tooltip[i + 1] = new TranslatableText("biome.minecraft." + biome.getBiomes()[i].getPath());
+                tooltip[i + 1] = Text.translatable("biome.minecraft." + biome.getBiomes()[i].getPath());
             }
 
             // Biome sub category
             SubCategoryBuilder biomeCategoryBuilder = entryBuilder
-                    .startSubCategory(new TranslatableText("option.illuminations.biome." + name))
+                    .startSubCategory(Text.translatable("option.illuminations.biome." + name))
                     .setTooltip(tooltip);
 
             // Firefly spawn rate
             biomeCategoryBuilder.add(entryBuilder
-                    .startEnumSelector(new TranslatableText("option.illuminations.fireflySpawnRate"), FireflySpawnRate.class, settings.fireflySpawnRate())
+                    .startEnumSelector(Text.translatable("option.illuminations.fireflySpawnRate"), FireflySpawnRate.class, settings.fireflySpawnRate())
                     .setTooltip(
-                            new TranslatableText("option.tooltip.illuminations.fireflySpawnRate"),
-                            new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.disable"),
-                            new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.low"),
-                            new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.medium"),
-                            new TranslatableText("option.tooltip.illuminations.fireflySpawnRate.high"))
+                            Text.translatable("option.tooltip.illuminations.fireflySpawnRate"),
+                            Text.translatable("option.tooltip.illuminations.fireflySpawnRate.disable"),
+                            Text.translatable("option.tooltip.illuminations.fireflySpawnRate.low"),
+                            Text.translatable("option.tooltip.illuminations.fireflySpawnRate.medium"),
+                            Text.translatable("option.tooltip.illuminations.fireflySpawnRate.high"))
                     .setSaveConsumer(x -> Config.setFireflySettings(biome, x))
                     .setDefaultValue(defaultSettings.fireflySpawnRate())
                     .build());
 
             // Firefly color
             biomeCategoryBuilder.add(entryBuilder
-                    .startColorField(new TranslatableText("option.illuminations.fireflyColor"), settings.fireflyColor())
-                    .setTooltip(new TranslatableText("option.tooltip.illuminations.fireflyColor"))
+                    .startColorField(Text.translatable("option.illuminations.fireflyColor"), settings.fireflyColor())
+                    .setTooltip(Text.translatable("option.tooltip.illuminations.fireflyColor"))
                     .setSaveConsumer(x -> Config.setFireflyColorSettings(biome, x))
                     .setDefaultValue(defaultSettings.fireflyColor())
                     .build());
@@ -215,13 +214,13 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             // Glowworm spawn rate
             if (settings.glowwormSpawnRate() != null)
                 biomeCategoryBuilder.add(entryBuilder
-                        .startEnumSelector(new TranslatableText("option.illuminations.glowwormSpawnRate"), GlowwormSpawnRate.class, settings.glowwormSpawnRate())
+                        .startEnumSelector(Text.translatable("option.illuminations.glowwormSpawnRate"), GlowwormSpawnRate.class, settings.glowwormSpawnRate())
                         .setTooltip(
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.disable"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.low"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.medium"),
-                                new TranslatableText("option.tooltip.illuminations.glowwormSpawnRate.high"))
+                                Text.translatable("option.tooltip.illuminations.glowwormSpawnRate"),
+                                Text.translatable("option.tooltip.illuminations.glowwormSpawnRate.disable"),
+                                Text.translatable("option.tooltip.illuminations.glowwormSpawnRate.low"),
+                                Text.translatable("option.tooltip.illuminations.glowwormSpawnRate.medium"),
+                                Text.translatable("option.tooltip.illuminations.glowwormSpawnRate.high"))
                         .setSaveConsumer(x -> Config.setGlowwormSettings(biome, x))
                         .setDefaultValue(defaultSettings.glowwormSpawnRate())
                         .build());
@@ -229,13 +228,13 @@ public class IlluminationsModMenuIntegration implements ModMenuApi {
             // Plankton spawn rate
             if (settings.planktonSpawnRate() != null)
                 biomeCategoryBuilder.add(entryBuilder
-                        .startEnumSelector(new TranslatableText("option.illuminations.planktonSpawnRate"), PlanktonSpawnRate.class, settings.planktonSpawnRate())
+                        .startEnumSelector(Text.translatable("option.illuminations.planktonSpawnRate"), PlanktonSpawnRate.class, settings.planktonSpawnRate())
                         .setTooltip(
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.disable"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.low"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.medium"),
-                                new TranslatableText("option.tooltip.illuminations.planktonSpawnRate.high"))
+                                Text.translatable("option.tooltip.illuminations.planktonSpawnRate"),
+                                Text.translatable("option.tooltip.illuminations.planktonSpawnRate.disable"),
+                                Text.translatable("option.tooltip.illuminations.planktonSpawnRate.low"),
+                                Text.translatable("option.tooltip.illuminations.planktonSpawnRate.medium"),
+                                Text.translatable("option.tooltip.illuminations.planktonSpawnRate.high"))
                         .setSaveConsumer(x -> Config.setPlanktonSettings(biome, x))
                         .setDefaultValue(defaultSettings.planktonSpawnRate())
                         .build());

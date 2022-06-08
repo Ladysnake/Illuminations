@@ -1,9 +1,8 @@
 package ladysnake.illuminations.client.data;
 
-import ladysnake.illuminations.client.config.Config;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.util.math.random.Random;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public record AuraData(DefaultParticleType particle, Supplier<AuraSettings> auraSettingsSupplier) {

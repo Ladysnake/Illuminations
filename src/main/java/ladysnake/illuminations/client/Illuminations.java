@@ -25,8 +25,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -159,35 +159,35 @@ public class Illuminations implements ClientModInitializer {
     }
 
     public static void loadPlayerCosmetics() {
-            // get illuminations player cosmetics
-            CompletableFuture.supplyAsync(() -> {
-                try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
-                    if (Config.isDebugMode())
-                        logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
-                    return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
-                } catch (MalformedURLException e) {
-                    if (Config.isDebugMode())
-                        logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
-                } catch (IOException e) {
-                    if (Config.isDebugMode())
-                        logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
-                }
-
-                return null;
-            }).exceptionally(throwable -> {
+        // get illuminations player cosmetics
+        CompletableFuture.supplyAsync(() -> {
+            try (Reader reader = new InputStreamReader(new URL(COSMETICS_URL).openStream())) {
                 if (Config.isDebugMode())
-                    logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
-                return null;
-            }).thenAcceptAsync(playerData -> {
-                if (playerData != null) {
-                    PLAYER_COSMETICS = playerData;
-                    if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
-                } else {
-                    PLAYER_COSMETICS = Collections.emptyMap();
-                    if (Config.isDebugMode())
-                        logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
-                }
-            }, MinecraftClient.getInstance());
+                    logger.log(Level.INFO, "Retrieving Illuminations cosmetics from the dashboard...");
+                return COSMETICS_GSON.<Map<UUID, PlayerCosmeticData>>fromJson(reader, COSMETIC_SELECT_TYPE);
+            } catch (MalformedURLException e) {
+                if (Config.isDebugMode())
+                    logger.log(Level.ERROR, "Could not get player cosmetics because of malformed URL: " + e.getMessage());
+            } catch (IOException e) {
+                if (Config.isDebugMode())
+                    logger.log(Level.ERROR, "Could not get player cosmetics because of I/O Error: " + e.getMessage());
+            }
+
+            return null;
+        }).exceptionally(throwable -> {
+            if (Config.isDebugMode())
+                logger.log(Level.ERROR, "Could not get player cosmetics because wtf is happening", throwable);
+            return null;
+        }).thenAcceptAsync(playerData -> {
+            if (playerData != null) {
+                PLAYER_COSMETICS = playerData;
+                if (Config.isDebugMode()) logger.log(Level.INFO, "Player cosmetics successfully registered");
+            } else {
+                PLAYER_COSMETICS = Collections.emptyMap();
+                if (Config.isDebugMode())
+                    logger.log(Level.WARN, "Player cosmetics could not registered, cosmetics will be ignored");
+            }
+        }, MinecraftClient.getInstance());
     }
 
     public static boolean isNightTime(World world) {

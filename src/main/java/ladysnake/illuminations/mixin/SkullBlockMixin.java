@@ -18,7 +18,7 @@ import java.util.Random;
 @Mixin(SkullBlock.class)
 public abstract class SkullBlockMixin extends BlockMixin {
     @Override
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         if ((state.getBlock() == Blocks.SKELETON_SKULL || state.getBlock() == Blocks.SKELETON_WALL_SKULL) && Illuminations.isNightTime(world) && random.nextInt(100) == 0 && ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS)) {
             world.addParticle(Illuminations.POLTERGEIST, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0f, 0f, 0f);
         }

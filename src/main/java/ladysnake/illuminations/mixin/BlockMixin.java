@@ -20,7 +20,7 @@ public abstract class BlockMixin {
     public abstract BlockState getDefaultState();
 
     @Inject(method = "randomDisplayTick", at = @At("RETURN"))
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         if (this.getDefaultState().getBlock() == Blocks.SEA_LANTERN) {
             for (int i = 0; i < 10; i++) {
                 BlockPos blockPos = new BlockPos(pos.getX() + 0.5 + random.nextGaussian() * 15, pos.getY() + 0.5 + random.nextGaussian() * 15, pos.getZ() + 0.5 + random.nextGaussian() * 15);

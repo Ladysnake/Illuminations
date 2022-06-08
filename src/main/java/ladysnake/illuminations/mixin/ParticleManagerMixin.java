@@ -10,6 +10,7 @@ import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,18 +18,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Random;
-
 @Mixin(ParticleManager.class)
 public abstract class ParticleManagerMixin {
     @Shadow
     protected ClientWorld world;
-    @Shadow
-    @Final
-    private Random random;
 
     @Shadow
     public abstract Particle addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ);
+
+    @Shadow @Final private Random random;
 
     @Inject(method = "addBlockBreakParticles", at = @At(value = "RETURN"))
     public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {

@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.5 - 1.19
+- Update to Minecraft 1.19
+
 ### Illuminations 1.10.4 - 1.18.2
 - Fixed log spam
 

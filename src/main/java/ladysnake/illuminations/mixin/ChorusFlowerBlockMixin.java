@@ -14,7 +14,7 @@ import java.util.Random;
 @Mixin(ChorusFlowerBlock.class)
 public abstract class ChorusFlowerBlockMixin extends BlockMixin {
     @Override
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         for (int i = 0; i < (6 - state.get(ChorusFlowerBlock.AGE)) * Config.getChorusPetalsSpawnMultiplier(); i++) {
             world.addParticle(Illuminations.CHORUS_PETAL, true, pos.getX() + 0.5 + random.nextGaussian() * 5, pos.getY() + 0.5 + random.nextGaussian() * 5, pos.getZ() + 0.5 + random.nextGaussian() * 5, 0f, 0f, 0f);
         }

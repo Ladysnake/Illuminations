@@ -18,7 +18,7 @@ public class LivingEntityRendererMixin {
     protected void getRenderLayer(LivingEntity entity, boolean showBody, boolean translucent, boolean showOutline, CallbackInfoReturnable<RenderLayer> cir) {
         if (!(entity instanceof SheepEntity)) {
             RenderLayer baseLayer = cir.getReturnValue();
-            if (entity.hasCustomName() && "jeb_".equals(entity.getName().asString())) {
+            if (entity.hasCustomName() && "jeb_".equals(entity.getName().toString())) {
                 cir.setReturnValue(baseLayer == null ? null : Rainbowlluminations.RAINBOW_SHADER.getRenderLayer(baseLayer));
             }
         }

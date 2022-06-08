@@ -14,7 +14,7 @@ import java.util.Random;
 @Mixin(LanternBlock.class)
 public abstract class LanternBlockMixin extends BlockMixin {
     @Override
-    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
+    protected void illuminations$randomDisplayTick(BlockState state, World world, BlockPos pos, net.minecraft.util.math.random.Random random, CallbackInfo ci) {
         if (state.getBlock() == Blocks.SOUL_LANTERN && random.nextInt(100) == 0) {
             world.addParticle(Illuminations.WILL_O_WISP, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0f, 0f, 0f);
         }

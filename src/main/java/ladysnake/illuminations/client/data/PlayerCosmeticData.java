@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.data;
 
 import com.google.gson.JsonElement;
-import ladysnake.illuminations.client.config.Config;
 
 public class PlayerCosmeticData {
     private final int red;
