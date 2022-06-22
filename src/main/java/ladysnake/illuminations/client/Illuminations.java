@@ -11,7 +11,6 @@ import ladysnake.illuminations.client.data.AuraData;
 import ladysnake.illuminations.client.data.IlluminationData;
 import ladysnake.illuminations.client.data.OverheadData;
 import ladysnake.illuminations.client.data.PlayerCosmeticData;
-import ladysnake.illuminations.client.enums.BiomeCategory;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.particle.*;
 import ladysnake.illuminations.client.particle.aura.*;
@@ -82,11 +81,11 @@ public class Illuminations implements ClientModInitializer {
                 ? (block == Blocks.AIR || block == Blocks.VOID_AIR)
                 : block == Blocks.AIR
                 && (Config.doesFireflySpawnAlways() || Illuminations.isNightTime(world))
-                && (Config.doesFireflySpawnUnderground() || world.isSkyVisible(blockPos));
+                && (Config.doesFireflySpawnUnderground() || world.getBlockState(blockPos).isOf(Blocks.AIR));
     };
     public static final BiPredicate<World, BlockPos> GLOWWORM_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR;
     public static final BiPredicate<World, BlockPos> PLANKTON_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).getFluidState().isIn(FluidTags.WATER) && world.getLightLevel(blockPos) < 2;
-    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null && world.getRegistryKey().equals(World.OVERWORLD);
+    public static final BiPredicate<World, BlockPos> EYES_LOCATION_PREDICATE = (world, blockPos) -> ((Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER) || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS) && (world.getBlockState(blockPos).getBlock() == Blocks.AIR || world.getBlockState(blockPos).getBlock() == Blocks.CAVE_AIR) && world.getLightLevel(blockPos) <= 0 && world.getClosestPlayer(blockPos.getX(), blockPos.getY(), blockPos.getZ(), EYES_VANISHING_DISTANCE, false) == null;
     public static final BiPredicate<World, BlockPos> WISP_LOCATION_PREDICATE = (world, blockPos) -> world.getBlockState(blockPos).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS);
     // register overhead models
     public static final EntityModelLayer CROWN = new EntityModelLayer(new Identifier(MODID, "crown"), "main");
@@ -146,7 +145,7 @@ public class Illuminations implements ClientModInitializer {
     public static DefaultParticleType SOOTHING_LANTERN_PET;
     public static DefaultParticleType GENDERFLUID_PRIDE_PET;
     // spawn biome categories and biomes
-    public static ImmutableMap<BiomeCategory, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
+    public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOME_CATEGORIES;
     public static ImmutableMap<Identifier, ImmutableSet<IlluminationData>> ILLUMINATIONS_BIOMES;
     private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
 
@@ -345,7 +344,7 @@ public class Illuminations implements ClientModInitializer {
         /*
                 ADDING FIRFLY, GLOWWORM AND PLANKTON BIOMES SPAWN RATES
          */
-        ImmutableMap.Builder<BiomeCategory, ImmutableSet<IlluminationData>> biomeBuilder = ImmutableMap.builder();
+        ImmutableMap.Builder<Identifier, ImmutableSet<IlluminationData>> biomeBuilder = ImmutableMap.builder();
         Config.getBiomeSettings().forEach((biome, settings) -> {
             ImmutableSet.Builder<IlluminationData> illuminationDataBuilder = ImmutableSet.builder();
 

@@ -2,7 +2,6 @@ package ladysnake.illuminations.client.particle;
 
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
-import ladysnake.illuminations.client.enums.BiomeCategory;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -15,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.LightType;
 import net.minecraft.world.biome.Biome;
 
@@ -52,8 +52,7 @@ public class FireflyParticle extends SpriteBillboardParticle {
             // Get color for current biome
             RegistryEntry<Biome> b = world.getBiome(new BlockPos(x, y, z));
             Identifier biome = world.getRegistryManager().get(Registry.BIOME_KEY).getId(b.value());
-            BiomeCategory biomeCategory = BiomeCategory.find(biome, b.streamTags().findFirst().get());
-            int rgb = Config.getBiomeSettings(biomeCategory).fireflyColor();
+            int rgb = Config.getBiomeSettings(biome).fireflyColor();
             float[] hsb = Color.RGBtoHSB(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, null);
             // Shift hue by random ±30 deg angle
             hsb[0] += (random.nextFloat() - 0.5f) * 30 / 360f;

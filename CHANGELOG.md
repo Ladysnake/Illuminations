@@ -1,5 +1,11 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.6 - 1.19
+- Spooky eyes can now spawn in every dimension
+- Disabled Mod menu integration for the config, plankton and glowworms for the time being
+- Completely revamped and revisited the default config for firefly biome spawn rates and colors
+- Fixed fireflies not spawning on Vanilla servers
+
 ### Illuminations 1.10.5 - 1.19
 - Update to Minecraft 1.19
 

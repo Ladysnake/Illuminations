@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.data.IlluminationData;
-import ladysnake.illuminations.client.enums.BiomeCategory;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.Identifier;
@@ -40,12 +39,7 @@ public abstract class ClientWorldMixin extends World {
 
         RegistryEntry<Biome> b = this.getBiome(pos);
         Identifier biome = this.getRegistryManager().get(Registry.BIOME_KEY).getId(b.value());
-
-        // Main biome settings
-        b.streamTags().filter(biomeTagKey -> biomeTagKey.id().getNamespace().equals("c")).forEach(biomeTagKey -> {
-            BiomeCategory biomeCategory = BiomeCategory.find(biome, biomeTagKey); // Returns OTHER if no association for this biome was found.
-            spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biomeCategory));
-        });
+        spawnParticles(pos, Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biome));
 
         // Other miscellaneous biome settings
         if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
