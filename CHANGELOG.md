@@ -1,5 +1,10 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.8 - 1.19
+- Increased range at which Will o' Wisps spawn from soul lanterns by 50 horizontally and 25 vertically
+- Will o' Wisps now only spawn from soul lanterns if they have a soul fire base block below them like soul sand or soul soil
+- To compensate for that change, Will o' Wisps will now spawn twice as frequently from soul lanterns meeting the requirements
+
 ### Illuminations 1.10.7 - 1.19
 - Fixed a crash that would sometimes happen when playing on servers
 

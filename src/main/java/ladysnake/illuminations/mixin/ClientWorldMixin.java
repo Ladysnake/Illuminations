@@ -4,8 +4,10 @@ import com.google.common.collect.ImmutableSet;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import ladysnake.illuminations.client.data.IlluminationData;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -51,6 +53,11 @@ public abstract class ClientWorldMixin extends World {
         if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos)
                 && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate) {
             this.addParticle(Illuminations.EYES, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+        }
+
+        // soul lanterns on soul fire blocks
+        if (this.getBlockState(pos).getBlock() == Blocks.SOUL_LANTERN && this.getBlockState(pos.add(0, -1, 0)).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS) && random.nextInt(50) == 0) {
+            this.addParticle(Illuminations.WILL_O_WISP, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0f, 0f, 0f);
         }
     }
 

@@ -7,7 +7,6 @@
     "CarvedPumpkinBlockMixin",
     "ChorusFlowerBlockMixin",
     "ClientWorldMixin",
-    "LanternBlockMixin",
     "LivingEntityMixin",
     "ParticleManagerMixin",
     "PlayerEntityMixin",
