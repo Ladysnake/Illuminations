@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.9 - 1.19
+- Fixed fireflies not disappearing on daytime
+
 ### Illuminations 1.10.8 - 1.19
 - Increased range at which Will o' Wisps spawn from soul lanterns by 50 horizontally and 25 vertically
 - Will o' Wisps now only spawn from soul lanterns if they have a soul fire base block below them like soul sand or soul soil
