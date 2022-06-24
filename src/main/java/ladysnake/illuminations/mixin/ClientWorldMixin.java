@@ -55,10 +55,12 @@ public abstract class ClientWorldMixin extends World {
     }
 
     private void spawnParticles(BlockPos.Mutable pos, ImmutableSet<IlluminationData> illuminationDataSet) {
-        for (IlluminationData illuminationData : illuminationDataSet) {
-            if (illuminationData.locationSpawnPredicate().test(this, pos)
-                    && illuminationData.shouldAddParticle(this.random)) {
-                this.addParticle(illuminationData.illuminationType(), pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+        if (illuminationDataSet != null) {
+            for (IlluminationData illuminationData : illuminationDataSet) {
+                if (illuminationData.locationSpawnPredicate().test(this, pos)
+                        && illuminationData.shouldAddParticle(this.random)) {
+                    this.addParticle(illuminationData.illuminationType(), pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.7 - 1.19
+- Fixed a crash that would sometimes happen when playing on servers
+
 ### Illuminations 1.10.6 - 1.19
 - Spooky eyes can now spawn in every dimension
 - Disabled Mod menu integration for the config, plankton and glowworms for the time being
