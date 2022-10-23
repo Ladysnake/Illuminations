@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.10 - 1.19.2
+- Added a toast disclaimer indicating the incoming merge of Illuminations into Effective
+
 ### Illuminations 1.10.9 - 1.19
 - Fixed fireflies not disappearing on daytime
 

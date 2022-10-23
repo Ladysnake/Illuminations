@@ -16,6 +16,5 @@ public class Rainbowlluminations {
     public static void init() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> ticks++);
         EntitiesPreRenderCallback.EVENT.register((camera, frustum, tickDelta) -> uniformSTime.set((ticks + tickDelta) * 0.05f));
-
     }
 }
