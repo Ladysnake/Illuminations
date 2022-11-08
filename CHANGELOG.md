@@ -1,5 +1,8 @@
 # Illuminations - Changelog:
 
+### Illuminations 1.10.11 - 1.19.2
+- Disabled the Effective-Illuminations merge toast if Effective is installed
+
 ### Illuminations 1.10.10 - 1.19.2
 - Added a toast disclaimer indicating the incoming merge of Illuminations into Effective
 
