@@ -64,7 +64,7 @@ The spawn rate percentage multiplier. Does not affect eyes in the dark.
 
 **Overheads** are cosmetics that float above player heads. They are visible to other players with Illuminations installed (even on vanilla servers).
 
-Auras and overheads can be selected and changed via the [Illuminations dashboard](https://illuminations.uuid.gg/).
+Auras and overheads can be selected and changed via the [Illuminations dashboard](https://doctor4t.uuid.gg/).
 
 ### Twilight aura
 
@@ -96,7 +96,7 @@ The **Ghostly** aura emanates little ghosts that fly upward and gradually appear
 
 ### Pride (and trans pride) heart
 
-Available for free to anyone that registers for an Illuminations account. https://illuminations.uuid.gg/pride
+Available for free to anyone that registers for an Illuminations account. https://doctor4t.uuid.gg/pride
 
 ![illuminations-1.1](./README.assets/illuminations-1.1.png)
 
@@ -122,11 +122,11 @@ A happy jack o' lantern that lights up at night and in dark areas. Available to 
 
 #### How to get an aura or crown?
 
-**Auras are currently only available to donators**, [more information here](https://illuminations.uuid.gg/register).
+**Auras are currently only available to donators**, [more information here](https://doctor4t.uuid.gg/register).
 
 #### I want to change my cosmetics / the color of my prismatic auras / disable it, what do I do?
 
-If you have donated multiple times, you may have multiple auras and may want to select a specific one. Or you may just simply want to change your prismatic color or disable your aura. **You can do all this via the [Illuminations dashboard](https://illuminations.uuid.gg/)** with no restrictions whatsoever.
+If you have donated multiple times, you may have multiple auras and may want to select a specific one. Or you may just simply want to change your prismatic color or disable your aura. **You can do all this via the [Illuminations dashboard](https://doctor4t.uuid.gg/)** with no restrictions whatsoever.
 
 
 ###### Copyright (C) 2021 Ladysnake
