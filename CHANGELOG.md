@@ -90,7 +90,7 @@ All of this update was entirely made by a community member: Boerdereinar, so big
 
 ### Illuminations 1.4.9 - 1.16.5
 - Added the Lesbian, Bi, Ace, NB and Intersex pride free overheads thanks to JothGC
-Get them for free at https://illuminations.uuid.gg/pride
+Get them for free at https://doctor4t.uuid.gg/pride
 
 ### Illuminations 1.4.8 - 1.16.5
 - Fixed an issue that caused the prismatic color to not be retrieved from the dashboard
@@ -192,7 +192,7 @@ On an unrelated but still important note: the way donator rewards work has been 
 ### Illuminations 1.1 - 1.16.3 and 1.16.1
 - Introduced bugballs: get them from a full composter (up to four) and throw them around to spawn fireflies! (only available if Illuminations is installed on both server and clients)
 - Introduced overheads, a new type of cosmetic that can be equipped independently of auras and will float over your head
-    - Added the Pride and Trans Pride overheads, obtainable for free at https://illuminations.uuid.gg/pride
+    - Added the Pride and Trans Pride overheads, obtainable for free at https://doctor4t.uuid.gg/pride
 - Fixed an issue where server players using Illuminations would crash upon a player with an aura dying
 - Fixed an issue where players with an aura would crash upon dying in third person modes
 - Updated to Minecraft 1.16.3
