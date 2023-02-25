@@ -94,7 +94,7 @@ public class Illuminations implements ClientModInitializer {
     static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
     // illuminations cosmetics
-    private static final String COSMETICS_URL = "https://illuminations.uuid.gg/data";
+    private static final String COSMETICS_URL = "https://doctor4t.uuid.gg/data";
     public static ImmutableMap<String, AuraData> AURAS_DATA;
     public static ImmutableMap<String, DefaultParticleType> PETS_DATA;
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
