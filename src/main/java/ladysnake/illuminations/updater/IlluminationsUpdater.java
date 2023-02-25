@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class IlluminationsUpdater {
     static final ArrayList<String> UNINSTALLER_PARAMS = new ArrayList<>();
-    private static final String UPDATES_URL = "https://illuminations.uuid.gg/latest?version=";
+    private static final String UPDATES_URL = "https://doctor4t.uuid.gg/latest?version=";
     private static final String UNINSTALLER = "illuminations-uninstaller.jar";
     public static boolean NEW_UPDATE = false;
 
